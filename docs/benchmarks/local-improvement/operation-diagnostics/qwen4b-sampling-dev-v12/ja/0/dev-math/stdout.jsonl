@@ -1,0 +1,4 @@
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"3 足す 5 の答えは 8 です。","seconds":1.9081051830000002,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":999,"output":76,"cacheRead":11003,"cacheWrite":0,"reasoning":0,"totalTokens":12078,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

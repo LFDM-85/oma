@@ -1,0 +1,34 @@
+[
+  {
+    "language": "ja",
+    "id": "question",
+    "expected": "一と一を足した数だけを答えて。",
+    "sha256": "fe0281722277a060fdf25d96bcacb08051a22748b08db5aa86b7749fd75b7a63",
+    "actual": "一度一応出した数だけを答えて。",
+    "seconds": 1.5386497669969685
+  },
+  {
+    "language": "ja",
+    "id": "write",
+    "expected": "オマテキストに新しい文書を作って、明日の予定を確認します、と入力して。文章の最後に句点を一つ付けて、それ以外の文字や空白は入れないで。",
+    "sha256": "f2b4e51ecd0ed6772a4d025f647d7277523201037ac9214204b6bf65fbae5170",
+    "actual": "オマテキストに新しい文章を作って、明日の予定を確認します。と入力して、文章の最後に句点を一つ付けて、それ以外の文字や空白は入れないで。",
+    "seconds": 4.012608880002517
+  },
+  {
+    "language": "en",
+    "id": "question",
+    "expected": "Add one and one. Give only the number.",
+    "sha256": "e2f489ac72311a7df63b24ecf7cfd7c95ac4d4a1df3b46383d64282cb3d9494e",
+    "actual": "Add one and one. Give only the number.",
+    "seconds": 0.9802459590137005
+  },
+  {
+    "language": "en",
+    "id": "write",
+    "expected": "Create a fresh OmaText document containing Tomorrow is a new day. Use a capital T, one space between words and a final period. Include no other text.",
+    "sha256": "79020cc122488bd1bdba2ca20f9e1d782efb02f17199b91e91fac53bfa3c0120",
+    "actual": "Create a fresh OmaText document containing \"Tomorrow is a new day.\" Use a capital T, one space between words, and a final period. Include no other text.",
+    "seconds": 2.9752238289802335
+  }
+]

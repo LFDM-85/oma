@@ -1,0 +1,2 @@
+{"configuration":"baseline","worker_sha256":"70a4fe13ea6aa1072b76f9e3aa37b0feee82355f227df713bf6c6bbdf57946d2","peak_worker_rss_kib":2353824,"sample_rate":24000,"volume":1,"physical_speaker":false}
+{"configuration":"candidate","worker_sha256":"4eaa94d904eb1c84db58ec1025d8ee35fe43aa43c28c28430937ca0053f26f42","peak_worker_rss_kib":2321840,"sample_rate":24000,"volume":1,"physical_speaker":false}

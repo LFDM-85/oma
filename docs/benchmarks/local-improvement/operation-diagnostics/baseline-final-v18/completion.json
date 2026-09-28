@@ -1,0 +1,15 @@
+{
+  "original": "/tmp/oma-agent-final-baseline-v18",
+  "supplement": "/tmp/oma-agent-final-baseline-v18-remaining",
+  "repeat_offset": 4,
+  "policy": "replace not_run only; no rescoring or retries",
+  "command": [
+    "complete-agent-run.py",
+    "/tmp/oma-agent-final-baseline-v18",
+    "/tmp/oma-agent-final-baseline-v18-remaining",
+    "--repeat-offset",
+    "4",
+    "--output",
+    "docs/benchmarks/local-improvement/operation-diagnostics/baseline-final-v18"
+  ]
+}

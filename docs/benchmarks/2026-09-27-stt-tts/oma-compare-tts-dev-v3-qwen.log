@@ -1,0 +1,20 @@
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+
+********
+Warning: flash-attn is not installed. Will only run the manual PyTorch version. Please install flash-attn for faster inference.
+********
+ 
+{"id": "ja-dev-01", "language": "ja", "text": "設定画面を開いてください。", "frames": 72960, "nonfinite_samples": 0, "peak": 0.2789558470249176, "seconds": 7.824333461991046, "first_audio_seconds": 7.8241959330043755, "first_sound_seconds": 8.268445933004376, "duration": 3.04, "rtf": 2.5737939019707388, "chunks": [{"ready": 7.8241959330043755, "duration": 3.04}], "simulated_gap_seconds": 0, "sample_rate": 24000, "sha256": "1be160d48f55c8a55e0e81f3fb78fb725e779c475f4bf26f477021852627e77e"}
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+{"id": "en-dev-01", "language": "en", "text": "Open the settings screen.", "frames": 57600, "nonfinite_samples": 0, "peak": 0.46495720744132996, "seconds": 6.168333700974472, "first_audio_seconds": 6.168224379973253, "first_sound_seconds": 6.585932713306587, "duration": 2.4, "rtf": 2.5701390420726966, "chunks": [{"ready": 6.168224379973253, "duration": 2.4}], "simulated_gap_seconds": 0, "sample_rate": 24000, "sha256": "bbd1233f5392e0114972f1e1f1b75392049276798a7dae300ba6a4b9ab866092"}

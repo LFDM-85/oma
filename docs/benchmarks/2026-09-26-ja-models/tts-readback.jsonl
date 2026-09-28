@@ -1,0 +1,6 @@
+{"engine": "kokoro", "case": "document", "transcribed": "今日は今日の天気は雨です保存せずにファイルを閉じました", "seconds": 4.186372398980893}
+{"engine": "kokoro", "case": "greeting", "transcribed": "ご指示をお待ちしています。", "seconds": 3.9908683670219034}
+{"engine": "kokoro", "case": "numbers", "transcribed": "9月26日午後3時半です過去の会話を開きます合計は1234円です", "seconds": 4.047868315974483}
+{"engine": "qwen", "case": "document", "transcribed": "こんにちは。今日の天気は雨です。保存せずにファイルを閉じました。", "seconds": 4.034008699003607}
+{"engine": "qwen", "case": "greeting", "transcribed": "ご指示をお待ちしています", "seconds": 3.628374938009074}
+{"engine": "qwen", "case": "numbers", "transcribed": "9月26日、午後3時半です。過去の会話を開きます。合計は1234円です。", "seconds": 3.783750021015294}

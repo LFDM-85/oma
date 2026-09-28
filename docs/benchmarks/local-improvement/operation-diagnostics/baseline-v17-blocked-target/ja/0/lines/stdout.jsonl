@@ -1,0 +1,15 @@
+{"event":"tool_start","name":"new_text_document","args":{"text":"りんご\nみかん"}}
+{"event":"state","state":"working","taskStatus":"Working"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":false}
+{"event":"tool_end","name":"new_text_document","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"新しいファイルがオマテキストで開かれました。一行目に「りんご」、二行目に「みかん」と書かれています。","seconds":5.963431146,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"off","usage":{"input":164,"output":29,"cacheRead":11310,"cacheWrite":0,"reasoning":0,"totalTokens":11503,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.komagata.oma",
+  "name": "O.M.A.",
+  "version": "0.1.0",
+  "author": "komagata",
+  "license": "MIT",
+  "description": "A persistent voice assistant with a low-poly face, Pi and independent speech input/output.",
+  "kinds": [
+    "bar-widget",
+    "panel",
+    "service"
+  ],
+  "entryPoints": {
+    "barWidget": "builds/4349f28fea7dfbad/BarWidget.qml",
+    "service": "builds/4349f28fea7dfbad/Service.qml",
+    "panel": "builds/4349f28fea7dfbad/Overlay.qml"
+  },
+  "barWidget": {
+    "displayName": "O.M.A.",
+    "description": "A persistent voice assistant with a low-poly face, Pi and independent speech input/output.",
+    "category": "AI",
+    "allowMultiple": false,
+    "defaultSection": "center",
+    "defaults": {},
+    "schema": []
+  },
+  "keepLoaded": true
+}

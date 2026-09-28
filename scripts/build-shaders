@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+compiler="$(command -v qsb || true)"
+if [[ -z "$compiler" ]]; then compiler=/usr/lib/qt6/bin/qsb; fi
+"$compiler" --glsl '100 es,120,150' --hlsl 50 --msl 12 \
+  -o "$root/assets/crt.frag.qsb" "$root/assets/crt.frag"

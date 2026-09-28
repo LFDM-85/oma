@@ -1,0 +1,19 @@
+{
+  "8.txt": "FAIL OmaText has not become active and ready {\n  opened: true,\n  active: false,\n  editor: {\n    focus: true,\n    activeFocus: false,\n    enabled: true,\n    visible: true,\n    modalOpen: false,\n    actionsExpanded: false,\n    settingsOpen: false,\n    fontFamily: 'monospace',\n    fontSize: 16\n  },\n  length: 0,\n  url: '',\n  modified: false,\n  busy: false\n}\nREACTIVATED {\n  opened: true,\n  active: false,\n  editor: {\n    focus: true,\n    activeFocus: false,\n    enabled: true,\n    visible: true,\n    modalOpen: false,\n    actionsExpanded: false,\n    settingsOpen: false,\n    fontFamily: 'monospace',\n    fontSize: 16\n  },\n  length: 0,\n  url: '',\n  modified: false,\n  busy: false\n}\nMOTION_CLICK {\n  opened: true,\n  active: false,\n  editor: {\n    focus: true,\n    activeFocus: false,\n    enabled: true,\n    visible: true,\n    modalOpen: false,\n    actionsExpanded: false,\n    settingsOpen: false,\n    fontFamily: 'monospace',\n    fontSize: 16\n  },\n  length: 0,\n  url: '',\n  modified: false,\n  busy: false\n}\nMOTION_ONE_CLICK {\n  opened: true,\n  active: false,\n  editor: {\n    focus: true,\n    activeFocus: false,\n    enabled: true,\n    visible: true,\n    modalOpen: false,\n    actionsExpanded: false,\n    settingsOpen: false,\n    fontFamily: 'monospace',\n    fontSize: 16\n  },\n  length: 0,\n  url: '',\n  modified: false,\n  busy: false\n}\n",
+  "document-1790439991091062475.txt": "Activation probe.",
+  "7.txt": "RESULT {\n  created: true,\n  address: '0x61d1b4c64bc0',\n  unsaved: true,\n  textInserted: true,\n  insertedCharacters: 17\n}\n",
+  "document-1790439982408954130.txt": "Activation probe.",
+  "6.txt": "RESULT {\n  created: true,\n  address: '0x61d1b47174f0',\n  unsaved: true,\n  textInserted: true,\n  insertedCharacters: 17\n}\n",
+  "document-1790439973506556222.txt": "Activation probe.",
+  "5.txt": "RESULT {\n  created: true,\n  address: '0x61d1b4c64bc0',\n  unsaved: true,\n  textInserted: true,\n  insertedCharacters: 17\n}\n",
+  "document-1790439964686583336.txt": "Activation probe.",
+  "4.txt": "RESULT {\n  created: true,\n  address: '0x61d1b4c64bc0',\n  unsaved: true,\n  textInserted: true,\n  insertedCharacters: 17\n}\n",
+  "document-1790439955915438897.txt": "Activation probe.",
+  "3.txt": "RESULT {\n  created: true,\n  address: '0x61d1b4c64bc0',\n  unsaved: true,\n  textInserted: true,\n  insertedCharacters: 17\n}\n",
+  "document-1790439947063571972.txt": "Activation probe.",
+  "2.txt": "RESULT {\n  created: true,\n  address: '0x61d1b4c64bc0',\n  unsaved: true,\n  textInserted: true,\n  insertedCharacters: 17\n}\n",
+  "document-1790439938253069916.txt": "Activation probe.",
+  "1.txt": "RESULT {\n  created: true,\n  address: '0x61d1b4ade090',\n  unsaved: true,\n  textInserted: true,\n  insertedCharacters: 17\n}\n",
+  "document-1790439929534636995.txt": "Activation probe.",
+  "0.txt": "RESULT {\n  created: true,\n  address: '0x61d1b4ade090',\n  unsaved: true,\n  observations: [\n    '{\"frameId\":\"49e1763d-aab6-46da-b67d-04538c541ac5\",\"width\":1440,\"height\":810,\"monitor\":\"DP-3\",\"monitors\":[\"DP-3\"],\"activeWindow\":{\"class\":\"org.quickshell\",\"title\":\"● Untitled — OmaText\"}}'\n  ]\n}\n"
+}

@@ -1,0 +1,8 @@
+{"event":"tool_start","name":"write","args":{"input":{"content":"Development sample.","path":"/tmp/oma-agent-dev-candidate-v12/en/0/dev-write/note.txt"}}}
+{"event":"state","state":"working","taskStatus":"Writing a file"}
+{"event":"tool_end","name":"write","error":false}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"Done. The file `/tmp/oma-agent-dev-candidate-v12/en/0/dev-write/note.txt` has been created with the exact text \"Development sample.\" without a trailing newline.","seconds":3.8734941879999996,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":160,"output":59,"cacheRead":12015,"cacheWrite":0,"reasoning":0,"totalTokens":12234,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

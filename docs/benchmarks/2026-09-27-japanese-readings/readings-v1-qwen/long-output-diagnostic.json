@@ -1,0 +1,16 @@
+[
+  {
+    "voice": "Ryan",
+    "id": "ja-reading-19",
+    "language": "ja",
+    "text": "ランガナネコグラトリオンナパクドナナケンバイヤーラゴーストワニーマネコレダワウソウイツイクラウォー",
+    "scope": "Diagnostic only; not used for kana scoring"
+  },
+  {
+    "voice": "Uncle_Fu",
+    "id": "ja-reading-19",
+    "language": "ja",
+    "text": "温度は23.5度です",
+    "scope": "Diagnostic only; not used for kana scoring"
+  }
+]

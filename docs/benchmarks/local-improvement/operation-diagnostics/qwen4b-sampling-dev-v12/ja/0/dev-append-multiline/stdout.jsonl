@@ -1,0 +1,16 @@
+{"event":"tool_start","name":"read","args":{"path":"/tmp/oma-agent-dev-candidate-v12/ja/0/dev-append-multiline/note.txt"}}
+{"event":"state","state":"working","taskStatus":"Reading a file"}
+{"event":"tool_end","name":"read","error":false}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"tool_start","name":"write","args":{"input":{"content":"First.\nSecond?\n完了！","path":"/tmp/oma-agent-dev-candidate-v12/ja/0/dev-append-multiline/note.txt"}}}
+{"event":"state","state":"working","taskStatus":"Writing a file"}
+{"event":"tool_end","name":"write","error":false}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"tool_start","name":"read","args":{"path":"/tmp/oma-agent-dev-candidate-v12/ja/0/dev-append-multiline/note.txt"}}
+{"event":"state","state":"working","taskStatus":"Reading a file"}
+{"event":"tool_end","name":"read","error":false}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"完了しました。note.txt の末尾に「完了！」を追加しました。元の 2 行の内容と改行はすべて保持しています。","seconds":5.759905088,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":24,"output":51,"cacheRead":12332,"cacheWrite":0,"reasoning":0,"totalTokens":12407,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

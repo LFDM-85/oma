@@ -6,6 +6,16 @@ TestCase {
  when: windowShown
  width: 240; height: 280
  Oma.Face { id: face; width: 187; height: 240; active: false }
+ function test_open_serial_before_activation_runs_reverse_shutdown() {
+  face.active = false
+  face.shuttingDown = false
+  face.startupSerial++
+  face.active = true
+  wait(100)
+  verify(face.bootProgress < .5)
+  tryCompare(face, "bootProgress", 1, 2000)
+  face.active = false
+ }
  function test_shutdown_collapses_and_reopening_cancels_it() {
   face.active = true
   face.bootProgress = 1

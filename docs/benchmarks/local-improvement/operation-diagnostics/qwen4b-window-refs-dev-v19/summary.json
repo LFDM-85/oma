@@ -1,0 +1,147 @@
+{
+  "split": "dev",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": true,
+      "expected": 13,
+      "successes": 8,
+      "success_rate": 0.6153846153846154,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": false,
+      "successful_latency": {
+        "n": 8,
+        "median": 10.447252967001987,
+        "p95": 20.54167088298709,
+        "max": 20.54167088298709
+      },
+      "failed_duration": {
+        "n": 5,
+        "median": 9.210809420997975,
+        "p95": 150.8012578820053,
+        "max": 150.8012578820053
+      },
+      "failures": [
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-dictation",
+          "status": "failed",
+          "setup_seconds": 3.7794526949874125,
+          "passed": false,
+          "error": "Document differs: ''",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 16.4122477399942,
+          "seconds": 12.63279662799323
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-normal",
+          "status": "failed",
+          "setup_seconds": 4.020704018999822,
+          "passed": false,
+          "error": "['Agent operation timed out']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 154.82196089799982,
+          "seconds": 150.8012578820053
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-math",
+          "status": "failed",
+          "setup_seconds": 3.770342167990748,
+          "passed": false,
+          "error": "'三足す五（3＋5）の答えは **8** です。'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 6.449289009004133,
+          "seconds": 2.6789474520192016
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append",
+          "status": "failed",
+          "setup_seconds": 3.989966850989731,
+          "passed": false,
+          "error": "File differs: 'Plan: A!\\n火曜日'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 13.200775345001603,
+          "seconds": 9.210809420997975
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-goodbye",
+          "status": "failed",
+          "setup_seconds": 3.6659408770210575,
+          "passed": false,
+          "error": "",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 6.47929561501951,
+          "seconds": 2.813355463993503
+        }
+      ]
+    },
+    "en": {
+      "complete": true,
+      "expected": 13,
+      "successes": 11,
+      "success_rate": 0.8461538461538461,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": false,
+      "successful_latency": {
+        "n": 11,
+        "median": 4.825217405013973,
+        "p95": 11.993808619998163,
+        "max": 11.993808619998163
+      },
+      "failed_duration": {
+        "n": 2,
+        "median": 12.716315423997003,
+        "p95": 12.881526595010655,
+        "max": 12.881526595010655
+      },
+      "failures": [
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-dictation",
+          "status": "failed",
+          "setup_seconds": 3.701370472990675,
+          "passed": false,
+          "error": "Document differs: ''",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 16.58289641898591,
+          "seconds": 12.881526595010655
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-discard",
+          "status": "failed",
+          "setup_seconds": 4.633578499022406,
+          "passed": false,
+          "error": "['The follow-up requires a save/discard/cancel choice, but the assistant entered binary approval mode']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 17.184682222025003,
+          "seconds": 12.55110425298335
+        }
+      ]
+    }
+  }
+}

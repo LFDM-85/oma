@@ -1,0 +1,22 @@
+{
+  "split": "dev",
+  "source": "synthetic",
+  "stt": "qwen3-asr-1.7b",
+  "worker_sha256": "232e13399ce09df05d8972c9f2c28225ccec4c1d031fdcbe50369a0634c6f5ba",
+  "preview_seconds": 8,
+  "cancel_after_seconds": 0.8,
+  "repeat": 3,
+  "fixtures": {
+    "ja": {
+      "text": "オマテキストに新しい文書を作って、明日の予定を確認します、と入力して。文章の最後に句点を一つ付けて、それ以外の文字や空白は入れないで。",
+      "file": "write.wav",
+      "sha256": "f2b4e51ecd0ed6772a4d025f647d7277523201037ac9214204b6bf65fbae5170"
+    },
+    "en": {
+      "text": "Create a fresh OmaText document containing Tomorrow is a new day. Use a capital T, one space between words and a final period. Include no other text.",
+      "file": "write.wav",
+      "sha256": "79020cc122488bd1bdba2ca20f9e1d782efb02f17199b91e91fac53bfa3c0120"
+    }
+  },
+  "preparation_seconds": 3.658320267975796
+}

@@ -1,0 +1,155 @@
+ARTIFACTS /tmp/oma-voice-final-baseline-v50/trials/20260927-113153-107481
+SCENARIO local/ja/document/0
+PASS microphone ready (1.12s)
+PASS opening finished (10.48s)
+VOICE write
+PASS recognized write (4.41s)
+PASS document ready (14.88s)
+FAIL local/ja/document/0: Document differs: '\nこんにちは。今日の天気は雨です。こんにちはと今日の間は、全角スペース1つだけで区切って、区道店は文章の最後の丸だけに。'; expected 'こんにちは\u3000今日の天気は雨です。'
+SCENARIO local/ja/empty/0
+PASS microphone ready (1.2s)
+PASS opening finished (2.89s)
+VOICE new
+PASS recognized new (1.74s)
+PASS document ready (8.73s)
+VOICE close
+PASS recognized close (0.15s)
+PASS editor closed (9.13s)
+VOICE bye
+PASS recognized bye (0.18s)
+PASS farewell dismisses O.M.A. (6.02s)
+SCENARIO local/ja/modes/0
+PASS microphone ready (1.29s)
+PASS opening finished (3.29s)
+VOICE mini
+PASS recognized mini (1.31s)
+PASS mini mode (1.15s)
+VOICE question
+PASS recognized question (0.17s)
+PASS reply while mini (2.54s)
+VOICE normal
+PASS recognized normal (0.13s)
+PASS normal mode (2.55s)
+VOICE bye
+PASS recognized bye (0.17s)
+PASS farewell dismisses O.M.A. (10.46s)
+SCENARIO local/ja/logs/0
+PASS microphone ready (1.18s)
+PASS opening finished (2.86s)
+VOICE logs
+PASS recognized logs (1.01s)
+PASS log viewer (3.19s)
+VOICE close_logs
+PASS recognized close_logs (0.14s)
+PASS editor closed (8.2s)
+VOICE bye
+PASS recognized bye (0.18s)
+PASS farewell dismisses O.M.A. (4.63s)
+SCENARIO local/ja/quoted-goodbye/0
+PASS microphone ready (1.23s)
+PASS opening finished (3.3s)
+VOICE quoted_bye
+PASS recognized quoted_bye (2.19s)
+PASS translated farewell without ending (0.6s)
+VOICE question
+PASS recognized question (0.13s)
+PASS conversation continues after translation (2.87s)
+VOICE bye
+PASS recognized bye (0.12s)
+PASS farewell dismisses O.M.A. (15.25s)
+SCENARIO local/ja/interruption/0
+PASS microphone ready (1.23s)
+PASS opening finished (4.24s)
+VOICE long_reply
+PASS recognized long_reply (2.55s)
+PASS counting before interruption (5.07s)
+VOICE interrupt
+PASS recognized interrupt (0.15s)
+PASS answers the interruption (2.6s)
+VOICE bye
+PASS recognized bye (0.19s)
+PASS farewell dismisses O.M.A. (10.59s)
+SCENARIO local/ja/idle/0
+PASS microphone ready (0.75s)
+PASS opening finished (3.38s)
+PASS idle prompt and farewell (31.21s)
+SCENARIO local/ja/farewell/0
+PASS microphone ready (1.19s)
+PASS opening finished (3.35s)
+VOICE bye
+PASS recognized bye (0.93s)
+PASS farewell dismisses O.M.A. (5.1s)
+SCENARIO local/ja/retained-document/0
+PASS microphone ready (1.28s)
+PASS opening finished (3.41s)
+VOICE new
+PASS recognized new (1.75s)
+PASS document ready (6.27s)
+VOICE close
+PASS recognized close (0.16s)
+PASS editor closed (9.18s)
+VOICE bye
+PASS recognized bye (0.17s)
+PASS farewell dismisses O.M.A. (4.76s)
+SCENARIO local/ja/empty-with-neighbor/0
+PASS neighbor fixture visible (0.12s)
+PASS microphone ready (1.22s)
+PASS opening finished (3.33s)
+VOICE new
+PASS recognized new (1.73s)
+PASS document ready (6.22s)
+VOICE close
+PASS recognized close (0.18s)
+PASS editor closed (9.08s)
+VOICE bye
+PASS recognized bye (0.15s)
+PASS farewell dismisses O.M.A. (5.46s)
+SCENARIO local/ja/document/1
+PASS microphone ready (0.73s)
+PASS opening finished (4.46s)
+VOICE write
+PASS recognized write (4.64s)
+FAIL local/ja/document/1: Timed out: document ready
+SCENARIO local/ja/empty/1
+PASS microphone ready (0.73s)
+PASS opening finished (3.76s)
+VOICE new
+PASS recognized new (1.77s)
+PASS document ready (5.72s)
+VOICE close
+PASS recognized close (0.15s)
+PASS editor closed (9.29s)
+VOICE bye
+PASS recognized bye (0.13s)
+PASS farewell dismisses O.M.A. (5.11s)
+SCENARIO local/ja/modes/1
+PASS microphone ready (0.84s)
+PASS opening finished (4.69s)
+VOICE mini
+PASS recognized mini (0.97s)
+PASS mini mode (1.16s)
+VOICE question
+PASS recognized question (0.15s)
+PASS reply while mini (2.87s)
+VOICE normal
+PASS recognized normal (0.14s)
+PASS normal mode (3.08s)
+VOICE bye
+PASS recognized bye (0.13s)
+Traceback (most recent call last):
+  File "/tmp/oma-evaluation-candidate-v50-source/tests/voice/run.py", line 564, in <module>
+    main()
+    ~~~~^^
+  File "/tmp/oma-evaluation-candidate-v50-source/tests/voice/run.py", line 523, in main
+    scenario(name,h)
+    ~~~~~~~~^^^^^^^^
+  File "/tmp/oma-evaluation-candidate-v50-source/tests/voice/run.py", line 411, in scenario
+    h.goodbye()
+    ~~~~~~~~~^^
+  File "/tmp/oma-evaluation-candidate-v50-source/tests/voice/run.py", line 299, in goodbye
+    self.wait('farewell dismisses O.M.A.', lambda: not self.state()['panelOpened'] and not any(own(w) for w in clients()), 25, allow_closed=True)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/oma-evaluation-candidate-v50-source/tests/voice/run.py", line 147, in wait
+    time.sleep(.25)
+    ~~~~~~~~~~^^^^^
+KeyboardInterrupt

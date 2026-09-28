@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-# Reloading this plugin stops its Codex executor. Keep the complete installation
+# Reloading this plugin stops its voice worker. Keep the complete installation
 # and recovery outside that executor's process group.
 if [[ "${1:-}" != "--apply-independent" ]]; then
   exec systemd-run --user --wait --collect --service-type=exec --     "$root/scripts/install-local" --apply-independent
@@ -13,7 +13,7 @@ dest="${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/plugins/io.github.komagata.oma"
 python3 - "$root" "$dest" <<'PY'
 import sys,shutil,pathlib,hashlib,json,tempfile
 src,dst=map(pathlib.Path,sys.argv[1:]);dst.mkdir(parents=True,exist_ok=True)
-files=sorted([*src.glob('*.qml'),*src.glob('runtime/*.mjs'),*src.glob('runtime/*.py'),*src.glob('scripts/*'),*src.glob('native/*'),src/'runtime/oma-pointer',*src.glob('assets/*'),*src.glob('skills/*/SKILL.md'),*[p for p in (src/'vendor').rglob('*') if p.is_file()]])
+files=sorted([src/'package.json',src/'package-lock.json',src/'.npmrc',*src.glob('*.qml'),*src.glob('runtime/*.mjs'),*src.glob('runtime/*.py'),*src.glob('scripts/*'),*src.glob('native/*'),*src.glob('docs/*.md'),src/'runtime/oma-pointer',*src.glob('assets/*'),*src.glob('skills/*/SKILL.md'),*src.glob('skills/*/scripts/*.mjs')])
 h=hashlib.sha256()
 for p in files:h.update(str(p.relative_to(src)).encode());h.update(p.read_bytes())
 relative='builds/'+h.hexdigest()[:16];build=dst/relative
@@ -24,6 +24,10 @@ if not build.exists():
  try:
   for p in files:
    target=staging/p.relative_to(src);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,target)
+  if not (src/'node_modules/openai').exists():
+   raise SystemExit('Run npm ci --omit=dev --ignore-scripts before installing locally.')
+  import subprocess
+  subprocess.run(['npm','ci','--omit=dev','--ignore-scripts','--bin-links=false'],cwd=staging,check=True)
   build.parent.mkdir(parents=True,exist_ok=True);staging.rename(build)
  finally:shutil.rmtree(staging,ignore_errors=True)
 for name in ['README.md','LICENSE','package.json','package-lock.json']:
@@ -34,6 +38,7 @@ pending=dst/'manifest.json.pending'
 pending.write_text(json.dumps(manifest,indent=2)+'\n')
 pending.replace(dst/'manifest.json')
 PY
+"$root/scripts/install-cli"
 omarchy-shell shell rescanPlugins
 sleep 2
 python3 "$root/runtime/restart_oma.py"

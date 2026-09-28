@@ -1,0 +1,58 @@
+[
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "farewell",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 29.06
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "document",
+    "repeat": 0,
+    "passed": false,
+    "status": "failed",
+    "error": "Timed out: recognized write",
+    "critical_error": false
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "empty-with-neighbor",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 95.3
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "farewell",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 17.6
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "document",
+    "repeat": 0,
+    "passed": false,
+    "status": "failed",
+    "error": "Timed out: recognized write",
+    "critical_error": false
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty-with-neighbor",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 103.89
+  }
+]

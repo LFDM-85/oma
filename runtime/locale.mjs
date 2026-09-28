@@ -9,7 +9,7 @@ export function languageInstruction(locale){
  let language;
  try{language=locale&&new Intl.DisplayNames(['en'],{type:'language'}).of(locale);}catch{}
  return language
-  ? `The user's desktop locale is ${locale}. Reply in ${language}, including speech, greetings, subtitles and task reports, unless the user explicitly requests another language. English UI labels, old conversations and tool output do not change the response language.`
+  ? `The configured response language is ${locale}. Reply in ${language}, including speech, greetings, subtitles and task reports, unless the user explicitly requests another language. English UI labels, old conversations and tool output do not change the response language.`
   : "Reply in the user's language, unless they explicitly request another language. Do not infer English from UI labels or tool output.";
 }
 export const greetingSource='Awaiting your command.';
@@ -37,11 +37,23 @@ export function reconnectInstruction(locale){
 }
 
 
-// Realtime transcription is a separate model; response instructions do not
+// Speech recognition is a separate model; response instructions do not
 // configure its input language. Omit unknown/non-ISO-639-1 locales.
 export function transcriptionLanguage(locale){
  try{
   const language=new Intl.Locale(locale).language;
   return /^[a-z]{2}$/.test(language)?language:undefined;
  }catch{return undefined;}
+}
+
+// Menu labels stay English; this preference controls speech and its transcript.
+const responseLanguages='af ar hy az be bs bg ca zh hr cs da nl en et fi fr gl de el he hi hu is id it ja kn kk ko lv lt mk ms mr mi ne no fa pl pt ro ru sr sk sl es sw sv tl ta th tr uk ur vi cy'.split(' ');
+export function validateResponseLanguage(value){
+ if(typeof value!=='string'||(value!==''&&!responseLanguages.includes(value)))throw Error('Choose a response language.');
+ return value;
+}
+export function responseLocale(value,env=process.env){return value?validateResponseLanguage(value):resolveLocale(env);}
+export function languageOptions(env=process.env){
+ const names=new Intl.DisplayNames(['en'],{type:'language'}),locale=resolveLocale(env);
+ return [{value:'',label:locale?'System default ('+names.of(locale)+')':'System default'},...responseLanguages.map(value=>({value,label:names.of(value)})).sort((a,b)=>a.label.localeCompare(b.label,'en'))];
 }

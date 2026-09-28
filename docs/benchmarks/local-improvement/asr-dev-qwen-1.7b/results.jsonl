@@ -1,0 +1,20 @@
+{"id": "ja-dev-01", "language": "ja", "expected": "設定画面を開いてください。", "source": "synthetic", "condition": "quiet", "actual": "設定画面を開いてください。", "seconds": 2.445472791005159}
+{"id": "ja-dev-02", "language": "ja", "expected": "顔だけの表示にしてください。", "source": "synthetic", "condition": "noise", "actual": "顔だけの表示にしてください。", "seconds": 2.3846209250041284}
+{"id": "ja-dev-03", "language": "ja", "expected": "声の音量を少し下げてください。", "source": "synthetic", "condition": "clean", "actual": "声の音量を少し下げてください。", "seconds": 2.7523782459902577}
+{"id": "ja-dev-04", "language": "ja", "expected": "新しいメモを作ってください。", "source": "synthetic", "condition": "quiet", "actual": "新しいメモを作ってください。", "seconds": 2.0855128949915525}
+{"id": "ja-dev-05", "language": "ja", "expected": "保存せずに終了してください。", "source": "synthetic", "condition": "noise", "actual": "保存せずに終了してください。", "seconds": 2.2735842920083087}
+{"id": "ja-dev-06", "language": "ja", "expected": "今日は晴れています。", "source": "synthetic", "condition": "clean", "actual": "今日は晴れています。", "seconds": 1.7574817540007643}
+{"id": "ja-dev-07", "language": "ja", "expected": "計算をやめてください。", "source": "synthetic", "condition": "quiet", "actual": "計算をやめてください。", "seconds": 2.0174612879927736}
+{"id": "ja-dev-08", "language": "ja", "expected": "前の会話を検索してください。", "source": "synthetic", "condition": "noise", "actual": "前の会話を検索してください。", "seconds": 2.4069893110136036}
+{"id": "ja-dev-09", "language": "ja", "expected": "午後四時に会議があります。", "source": "synthetic", "condition": "clean", "actual": "午後四時に会議があります。", "seconds": 2.320710372994654}
+{"id": "ja-dev-10", "language": "ja", "expected": "また明日話しましょう。", "source": "synthetic", "condition": "quiet", "actual": "また明日話しましょう。", "seconds": 1.8503677260014229}
+{"id": "en-dev-01", "language": "en", "expected": "Open the settings screen.", "source": "synthetic", "condition": "quiet", "actual": "Open the settings screen.", "seconds": 1.8102015700133052}
+{"id": "en-dev-02", "language": "en", "expected": "Show only the face.", "source": "synthetic", "condition": "noise", "actual": "Show only the face.", "seconds": 1.796703528991202}
+{"id": "en-dev-03", "language": "en", "expected": "Turn the voice volume down a little.", "source": "synthetic", "condition": "clean", "actual": "Turn the voice volume down a little.", "seconds": 2.3209062360110693}
+{"id": "en-dev-04", "language": "en", "expected": "Create a new note.", "source": "synthetic", "condition": "quiet", "actual": "Create a new note.", "seconds": 1.769268728006864}
+{"id": "en-dev-05", "language": "en", "expected": "Exit without saving.", "source": "synthetic", "condition": "noise", "actual": "Exit without saving.", "seconds": 1.6028266950161196}
+{"id": "en-dev-06", "language": "en", "expected": "It is sunny today.", "source": "synthetic", "condition": "clean", "actual": "It is sunny today.", "seconds": 1.9168912449968047}
+{"id": "en-dev-07", "language": "en", "expected": "Stop the calculation.", "source": "synthetic", "condition": "quiet", "actual": "Stop the calculation.", "seconds": 1.6516754780022893}
+{"id": "en-dev-08", "language": "en", "expected": "Search the previous conversation.", "source": "synthetic", "condition": "noise", "actual": "Search the previous conversation.", "seconds": 1.9050007869955152}
+{"id": "en-dev-09", "language": "en", "expected": "There is a meeting at four in the afternoon.", "source": "synthetic", "condition": "clean", "actual": "There is a meeting at four in the afternoon.", "seconds": 2.636529822018929}
+{"id": "en-dev-10", "language": "en", "expected": "Let us talk again tomorrow.", "source": "synthetic", "condition": "quiet", "actual": "Let us talk again tomorrow.", "seconds": 2.0063027029973455}

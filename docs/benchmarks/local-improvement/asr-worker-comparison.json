@@ -1,0 +1,86 @@
+{
+  "ja": {
+    "baseline": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 751,
+      "edits": 59,
+      "cer": 0.07856191744340879,
+      "critical_count": 23,
+      "critical_accuracy": 0.8260869565217391,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 0.9694239450036548,
+        "p95": 1.0894212959974539,
+        "max": 1.193557877006242
+      }
+    },
+    "candidate": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 751,
+      "edits": 18,
+      "cer": 0.023968042609853527,
+      "critical_count": 23,
+      "critical_accuracy": 0.9130434782608695,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 2.585480726498645,
+        "p95": 3.576909696974326,
+        "max": 3.7392456230008975
+      }
+    },
+    "relative_cer_improvement": 0.6949152542372882,
+    "gate": true
+  },
+  "en": {
+    "baseline": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 1433,
+      "edits": 128,
+      "cer": 0.08932309839497557,
+      "critical_count": 23,
+      "critical_accuracy": 1.0,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 0.8737767170096049,
+        "p95": 0.9681980989989825,
+        "max": 0.9966754909837618
+      }
+    },
+    "candidate": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 1433,
+      "edits": 10,
+      "cer": 0.006978367062107467,
+      "critical_count": 23,
+      "critical_accuracy": 1.0,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 2.3267050970025593,
+        "p95": 2.931573506008135,
+        "max": 3.7408465030021034
+      }
+    },
+    "relative_cer_improvement": 0.921875,
+    "gate": true
+  }
+}

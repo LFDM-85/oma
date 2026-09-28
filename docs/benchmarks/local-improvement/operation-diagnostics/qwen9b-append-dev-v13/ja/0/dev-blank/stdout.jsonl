@@ -1,0 +1,13 @@
+{"event":"tool_start","name":"new_text_document","args":{"input":{"text":""}}}
+{"event":"state","state":"working","taskStatus":"Working"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":false}
+{"event":"tool_end","name":"new_text_document","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"OmaText で新しい空のメモを作成しました。","seconds":22.302011671999995,"model":"qwen3.5:9b","provider":"oma-local","thinkingLevel":"low","usage":{"input":117,"output":37,"cacheRead":12277,"cacheWrite":0,"reasoning":0,"totalTokens":12431,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

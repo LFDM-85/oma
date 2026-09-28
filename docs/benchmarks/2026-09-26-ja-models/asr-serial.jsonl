@@ -1,0 +1,48 @@
+{"model": "small", "load_seconds": 0.5409368609834928}
+{"model": "small", "case": "new", "expected": "OmaTextで空の新規ファイルを開いてください。", "actual": "OmaTextでからの新規ファイルを開いてください。", "seconds": 1.289, "edits": 2, "reference_chars": 23, "normalized_exact": false}
+{"model": "small", "case": "write", "expected": "OmaTextで空の新規ファイルを開いて、次の文章を書いてください。こんにちは、今日の天気は雨です。こんにちはと今日の間は全角スペース一つだけで区切って、句読点は文章の最後の丸だけにしてください。", "actual": "オーマーテクストでからの新規ファイルを開いて、次の文章を書いてください。こんにちは。今日の天気は雨です。こんにちはと今日の間は、全角スペース1つだけで区切って、駆動点は文章の最後の丸だけにしてください。", "seconds": 2.066, "edits": 8, "reference_chars": 91, "normalized_exact": false}
+{"model": "small", "case": "close", "expected": "今開いたOmaTextのファイルを閉じてください。", "actual": "今開いた OmaTextのファイルを閉じてください。", "seconds": 1.135, "edits": 0, "reference_chars": 23, "normalized_exact": true}
+{"model": "small", "case": "discard", "expected": "保存しないで閉じてください。テストなので、その文章は破棄して大丈夫です。", "actual": "保存しないで閉じてください。テストなので、その文章は吐きして大丈夫です。", "seconds": 1.349, "edits": 2, "reference_chars": 33, "normalized_exact": false}
+{"model": "small", "case": "bye", "expected": "バイバイ。", "actual": "Bye-bye.", "seconds": 0.898, "edits": 6, "reference_chars": 4, "normalized_exact": false}
+{"model": "small", "case": "mini", "expected": "ミニモードにして。", "actual": "ミニモードにして", "seconds": 0.956, "edits": 0, "reference_chars": 8, "normalized_exact": true}
+{"model": "small", "case": "normal", "expected": "ノーマルモードに戻して。", "actual": "ノーマルモードに戻して。", "seconds": 1.013, "edits": 0, "reference_chars": 11, "normalized_exact": true}
+{"model": "small", "case": "question", "expected": "一足す一の答えだけ教えてください。", "actual": "1たす1の答えだけ教えてください。", "seconds": 1.058, "edits": 3, "reference_chars": 16, "normalized_exact": false}
+{"model": "small", "case": "logs", "expected": "過去ログを見せて。", "actual": "加工ログを見せて。", "seconds": 0.907, "edits": 2, "reference_chars": 8, "normalized_exact": false}
+{"model": "small", "case": "close_logs", "expected": "今開いた過去ログのウィンドウを閉じて。", "actual": "今、開いた過去ロブのWindowsを閉じて。", "seconds": 1.144, "edits": 8, "reference_chars": 18, "normalized_exact": false}
+{"model": "small", "case": "quoted_bye", "expected": "バイバイという言葉を英語に訳してください。会話はまだ続けます。", "actual": "バイバイという言葉を英語に役してください 会話はまだ続けます", "seconds": 1.193, "edits": 1, "reference_chars": 29, "normalized_exact": false}
+{"model": "small", "case": "long_reply", "expected": "一から三十まで、ゆっくり数えてください。", "actual": "1から30までゆっくり数えてください。", "seconds": 1.01, "edits": 3, "reference_chars": 18, "normalized_exact": false}
+{"model": "small", "case": "interrupt", "expected": "数えるのをやめて、二足す二の答えだけ教えてください。", "actual": "数えるのをやめて、2たす2の答えだけ教えてください。", "seconds": 1.183, "edits": 3, "reference_chars": 24, "normalized_exact": false}
+{"model": "small", "case": "silence", "expected": "", "actual": "", "seconds": 0.006, "edits": 0, "reference_chars": 0, "normalized_exact": true}
+{"model": "small", "case": "quiet-noise", "expected": "", "actual": "", "seconds": 0.006, "edits": 0, "reference_chars": 0, "normalized_exact": true}
+{"model": "turbo", "load_seconds": 1.3533974089950789}
+{"model": "turbo", "case": "new", "expected": "OmaTextで空の新規ファイルを開いてください。", "actual": "OmaTextで空の新規ファイルを開いてください。", "seconds": 4.476, "edits": 0, "reference_chars": 23, "normalized_exact": true}
+{"model": "turbo", "case": "write", "expected": "OmaTextで空の新規ファイルを開いて、次の文章を書いてください。こんにちは、今日の天気は雨です。こんにちはと今日の間は全角スペース一つだけで区切って、句読点は文章の最後の丸だけにしてください。", "actual": "OmaTextで空の新規ファイルを開いて、次の文章を書いてください。こんにちは。今日の天気は雨です。こんにちはと今日の間は、全角スペース一つだけで区切って、駆動点は文章の最後の丸だけにしてください。", "seconds": 5.05, "edits": 2, "reference_chars": 91, "normalized_exact": false}
+{"model": "turbo", "case": "close", "expected": "今開いたOmaTextのファイルを閉じてください。", "actual": "今開いた OmaTextのファイルを閉じてください。", "seconds": 4.388, "edits": 0, "reference_chars": 23, "normalized_exact": true}
+{"model": "turbo", "case": "discard", "expected": "保存しないで閉じてください。テストなので、その文章は破棄して大丈夫です。", "actual": "保存しないで閉じてください。テストなので、その文章は破棄して大丈夫です。", "seconds": 4.424, "edits": 0, "reference_chars": 33, "normalized_exact": true}
+{"model": "turbo", "case": "bye", "expected": "バイバイ。", "actual": "Bye-bye.", "seconds": 4.236, "edits": 6, "reference_chars": 4, "normalized_exact": false}
+{"model": "turbo", "case": "mini", "expected": "ミニモードにして。", "actual": "ミニモードにして、", "seconds": 4.215, "edits": 0, "reference_chars": 8, "normalized_exact": true}
+{"model": "turbo", "case": "normal", "expected": "ノーマルモードに戻して。", "actual": "Normal modeに戻して", "seconds": 4.271, "edits": 10, "reference_chars": 11, "normalized_exact": false}
+{"model": "turbo", "case": "question", "expected": "一足す一の答えだけ教えてください。", "actual": "1たす1の答えだけ教えてください。", "seconds": 4.298, "edits": 3, "reference_chars": 16, "normalized_exact": false}
+{"model": "turbo", "case": "logs", "expected": "過去ログを見せて。", "actual": "加工ログを見せて。", "seconds": 4.263, "edits": 2, "reference_chars": 8, "normalized_exact": false}
+{"model": "turbo", "case": "close_logs", "expected": "今開いた過去ログのウィンドウを閉じて。", "actual": "今開いたカコロブのウィンドウを閉じて。", "seconds": 3.946, "edits": 3, "reference_chars": 18, "normalized_exact": false}
+{"model": "turbo", "case": "quoted_bye", "expected": "バイバイという言葉を英語に訳してください。会話はまだ続けます。", "actual": "バイバイという言葉を英語に訳してください。会話はまだ続けます。", "seconds": 3.819, "edits": 0, "reference_chars": 29, "normalized_exact": true}
+{"model": "turbo", "case": "long_reply", "expected": "一から三十まで、ゆっくり数えてください。", "actual": "1から30までゆっくり数えてください。", "seconds": 3.652, "edits": 3, "reference_chars": 18, "normalized_exact": false}
+{"model": "turbo", "case": "interrupt", "expected": "数えるのをやめて、二足す二の答えだけ教えてください。", "actual": "数えるのをやめて三たす二の答えだけ教えてください。", "seconds": 3.754, "edits": 2, "reference_chars": 24, "normalized_exact": false}
+{"model": "turbo", "case": "silence", "expected": "", "actual": "", "seconds": 0.006, "edits": 0, "reference_chars": 0, "normalized_exact": true}
+{"model": "turbo", "case": "quiet-noise", "expected": "", "actual": "", "seconds": 0.006, "edits": 0, "reference_chars": 0, "normalized_exact": true}
+{"model": "kotoba-v2", "load_seconds": 1.3686674229975324}
+{"model": "kotoba-v2", "case": "new", "expected": "OmaTextで空の新規ファイルを開いてください。", "actual": "オマテクストで空の新規ファイルを開いてください", "seconds": 3.71, "edits": 1, "reference_chars": 23, "normalized_exact": false}
+{"model": "kotoba-v2", "case": "write", "expected": "OmaTextで空の新規ファイルを開いて、次の文章を書いてください。こんにちは、今日の天気は雨です。こんにちはと今日の間は全角スペース一つだけで区切って、句読点は文章の最後の丸だけにしてください。", "actual": "オーマーテクトで空の新規ファイルを開いてくださいこんにちは今日は今日の天気は雨ですこんにちはと今日の間は全角スペース一つだけで区切って駆動点は文章の最後の丸だけにしてください", "seconds": 7.456, "edits": 17, "reference_chars": 91, "normalized_exact": false}
+{"model": "kotoba-v2", "case": "close", "expected": "今開いたOmaTextのファイルを閉じてください。", "actual": "今開いたオマテクストのファイルを閉じてください", "seconds": 3.617, "edits": 1, "reference_chars": 23, "normalized_exact": false}
+{"model": "kotoba-v2", "case": "discard", "expected": "保存しないで閉じてください。テストなので、その文章は破棄して大丈夫です。", "actual": "保存しないで閉じてくださいテストなのでその文章は破棄して大丈夫です", "seconds": 3.668, "edits": 0, "reference_chars": 33, "normalized_exact": true}
+{"model": "kotoba-v2", "case": "bye", "expected": "バイバイ。", "actual": "バイバイ", "seconds": 3.482, "edits": 0, "reference_chars": 4, "normalized_exact": true}
+{"model": "kotoba-v2", "case": "mini", "expected": "ミニモードにして。", "actual": "ミニモードにして", "seconds": 3.64, "edits": 0, "reference_chars": 8, "normalized_exact": true}
+{"model": "kotoba-v2", "case": "normal", "expected": "ノーマルモードに戻して。", "actual": "ノーマルモードに戻して", "seconds": 3.516, "edits": 0, "reference_chars": 11, "normalized_exact": true}
+{"model": "kotoba-v2", "case": "question", "expected": "一足す一の答えだけ教えてください。", "actual": "1たす1の答えだけ教えてください", "seconds": 3.609, "edits": 3, "reference_chars": 16, "normalized_exact": false}
+{"model": "kotoba-v2", "case": "logs", "expected": "過去ログを見せて。", "actual": "加工ログを見せて", "seconds": 3.609, "edits": 2, "reference_chars": 8, "normalized_exact": false}
+{"model": "kotoba-v2", "case": "close_logs", "expected": "今開いた過去ログのウィンドウを閉じて。", "actual": "今開いたカコロブのウィンドを閉じて", "seconds": 3.631, "edits": 4, "reference_chars": 18, "normalized_exact": false}
+{"model": "kotoba-v2", "case": "quoted_bye", "expected": "バイバイという言葉を英語に訳してください。会話はまだ続けます。", "actual": "バイバイという言葉を英語に訳してください会話はまだ続けます", "seconds": 3.636, "edits": 0, "reference_chars": 29, "normalized_exact": true}
+{"model": "kotoba-v2", "case": "long_reply", "expected": "一から三十まで、ゆっくり数えてください。", "actual": "1から30までゆっくり数えてください", "seconds": 3.55, "edits": 3, "reference_chars": 18, "normalized_exact": false}
+{"model": "kotoba-v2", "case": "interrupt", "expected": "数えるのをやめて、二足す二の答えだけ教えてください。", "actual": "数えるのをやめて2の答えだけ教えてください", "seconds": 3.641, "edits": 4, "reference_chars": 24, "normalized_exact": false}
+{"model": "kotoba-v2", "case": "silence", "expected": "", "actual": "", "seconds": 0.01, "edits": 0, "reference_chars": 0, "normalized_exact": true}
+{"model": "kotoba-v2", "case": "quiet-noise", "expected": "", "actual": "", "seconds": 0.006, "edits": 0, "reference_chars": 0, "normalized_exact": true}

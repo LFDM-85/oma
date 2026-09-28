@@ -1,0 +1,498 @@
+[
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "document",
+    "repeat": 0,
+    "passed": false,
+    "status": "failed",
+    "error": "Document differs: '\\nこんにちは。今日の天気は雨です。こんにちはと今日の間は、全角スペース1つだけで区切って、区道店は文章の最後の丸だけに。'; expected 'こんにちは\\u3000今日の天気は雨です。'",
+    "critical_error": false,
+    "seconds": 50.7
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "empty",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 44.93
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "modes",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 34.76
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "logs",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 33.06
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "quoted-goodbye",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 39.49
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "interruption",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 40.42
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "idle",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 36.44
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "farewell",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 13.35
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "retained-document",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 42.77
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "empty-with-neighbor",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 42.71
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "document",
+    "repeat": 1,
+    "passed": false,
+    "status": "failed",
+    "error": "Timed out: document ready",
+    "critical_error": false,
+    "seconds": 120.16
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "empty",
+    "repeat": 1,
+    "passed": true,
+    "status": "passed",
+    "seconds": 41.63
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "modes",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "logs",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "quoted-goodbye",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "interruption",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "idle",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "farewell",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "retained-document",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "empty-with-neighbor",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "document",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "empty",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "modes",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "logs",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "quoted-goodbye",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "interruption",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "idle",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "farewell",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "retained-document",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "empty-with-neighbor",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "document",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "modes",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "logs",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "quoted-goodbye",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "interruption",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "idle",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "farewell",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "retained-document",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty-with-neighbor",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "document",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "modes",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "logs",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "quoted-goodbye",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "interruption",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "idle",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "farewell",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "retained-document",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty-with-neighbor",
+    "repeat": 1,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "document",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "modes",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "logs",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "quoted-goodbye",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "interruption",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "idle",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "farewell",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "retained-document",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty-with-neighbor",
+    "repeat": 2,
+    "passed": null,
+    "status": "not_run"
+  }
+]

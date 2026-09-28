@@ -4,8 +4,13 @@ import json
 import os
 import shutil
 import subprocess
+from pathlib import Path
 
 missing = []
+try:
+    import numpy
+except ImportError:
+    missing.append("Python NumPy (voice effects)")
 try:
     major = int(subprocess.check_output(["node", "-p", "process.versions.node.split('.')[0]"],
                                       timeout=5, stderr=subprocess.DEVNULL).strip())
@@ -14,7 +19,7 @@ try:
 except (OSError, ValueError, subprocess.SubprocessError):
     missing.append("Node.js 24+")
 for command, label in [
-    ("codex", "Codex CLI"), ("pw-record", "PipeWire recording"),
+    ("pw-record", "PipeWire recording"),
     ("pw-play", "PipeWire playback"), ("pw-cli", "PipeWire tools"),
     ("wpctl", "WirePlumber"), ("grim", "Screenshots"),
     ("wtype", "Keyboard control"), ("hyprctl", "Hyprland"),
@@ -22,8 +27,13 @@ for command, label in [
 ]:
     if not shutil.which(command):
         missing.append(label)
-if not os.environ.get("OPENAI_API_KEY") and not shutil.which("secret-tool"):
-    missing.append("desktop key storage (run SET UP)")
+try:
+    subprocess.run(["node", "--input-type=module", "-e",
+                    "await import('openai/resources/live/ws')"],
+                   cwd=Path(__file__).resolve().parent.parent, timeout=15,
+                   check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+except (OSError, subprocess.SubprocessError):
+    missing.append("GPT-Live SDK (run SET UP)")
 print(json.dumps({"setupRequired": bool(missing),
                   "setupMessage": "Missing: " + ", ".join(missing) if missing else
                   "Runtime dependencies are available. Setup also configures optional features and secure key storage."}))

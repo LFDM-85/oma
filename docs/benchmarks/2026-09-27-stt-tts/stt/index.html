@@ -1,0 +1,1796 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>O.M.A. STT comparison</title><style>body{font:16px system-ui;max-width:1400px;margin:36px auto;padding:0 20px;color:#18352c;background:#f5f8f6}h1{font-size:28px}.table{overflow:auto}table{border-collapse:collapse;white-space:nowrap;background:white}th,td{padding:10px;border-bottom:1px solid #dce5df;text-align:right}th:first-child,td:first-child{text-align:left}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}details{padding:12px;background:white;margin:8px 0}p{max-width:900px;line-height:1.6}</style><h1>O.M.A. · STT comparison</h1><p>Independent recognition only. No LLM, TTS, desktop actions or production-setting changes. Lower CER/WER, latency and memory are better; higher critical phrase accuracy is better. RTF below 1 means faster than the recording duration.</p><p>Source types and conditions are scored separately in comparison.json. Synthetic audio cannot establish real microphone accuracy. This previously reused frozen set is a regression corpus, not an untouched holdout. Warmups are separate. CPU int8 Whisper and CPU float32 Qwen are execution configurations, not identical numerical precision. Latency excludes model loading and microphone end-of-speech detection.</p><div class="table"><table><thead><tr><th>Model</th><th>Language</th><th>Run</th><th>Coverage</th><th>CER</th><th>English WER</th><th>Critical</th><th>Noise errors</th><th>Median s</th><th>P95 s</th><th>RTF</th><th>Peak RSS GiB</th></tr></thead><tbody><tr><td>whisper-small</td><td>ja</td><td>1</td><td>complete</td><td>7.86%</td><td>—</td><td>82.61%</td><td>0</td><td>0.881</td><td>1.113</td><td>0.248</td><td>1.528</td></tr><tr><td>whisper-small</td><td>en</td><td>1</td><td>complete</td><td>8.93%</td><td>8.96%</td><td>100.00%</td><td>0</td><td>0.817</td><td>1.085</td><td>0.260</td><td>1.528</td></tr><tr><td>whisper-turbo</td><td>ja</td><td>1</td><td>complete</td><td>10.25%</td><td>—</td><td>69.57%</td><td>0</td><td>2.910</td><td>3.689</td><td>0.812</td><td>2.812</td></tr><tr><td>whisper-turbo</td><td>en</td><td>1</td><td>complete</td><td>8.72%</td><td>10.15%</td><td>100.00%</td><td>0</td><td>2.790</td><td>3.291</td><td>0.884</td><td>2.812</td></tr><tr><td>qwen-0.6b</td><td>ja</td><td>1</td><td>complete</td><td>3.46%</td><td>—</td><td>82.61%</td><td>0</td><td>0.897</td><td>1.354</td><td>0.260</td><td>4.863</td></tr><tr><td>qwen-0.6b</td><td>en</td><td>1</td><td>complete</td><td>0.07%</td><td>0.30%</td><td>100.00%</td><td>0</td><td>0.855</td><td>1.362</td><td>0.278</td><td>4.863</td></tr><tr><td>qwen-1.7b</td><td>ja</td><td>1</td><td>complete</td><td>2.40%</td><td>—</td><td>91.30%</td><td>0</td><td>2.362</td><td>3.248</td><td>0.634</td><td>11.875</td></tr><tr><td>qwen-1.7b</td><td>en</td><td>1</td><td>complete</td><td>0.70%</td><td>1.19%</td><td>100.00%</td><td>0</td><td>2.072</td><td>2.944</td><td>0.651</td><td>11.875</td></tr><tr><td>kotoba-v2</td><td>ja</td><td>1</td><td>complete</td><td>9.19%</td><td>—</td><td>69.57%</td><td>0</td><td>2.759</td><td>3.724</td><td>0.780</td><td>2.642</td></tr></tbody></table></div><h2>Errors and text differences</h2><details><summary>whisper-small · run 1</summary><pre>[
+  {
+    &quot;id&quot;: &quot;ja-final-01&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;OmaTextで空の新規ファイルを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.6,
+    &quot;actual&quot;: &quot;オマネクテソラの新規ファイルを開いてください。&quot;,
+    &quot;seconds&quot;: 0.9211755559954327
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-07&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;閉じないで、そのままにしてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.7,
+    &quot;actual&quot;: &quot;閉じないでそのままにしてください。&quot;,
+    &quot;seconds&quot;: 0.7147695060120896
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-08&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;バイバイ。またね。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.325,
+    &quot;actual&quot;: &quot;バイバイまたね。&quot;,
+    &quot;seconds&quot;: 0.7900833059975412
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-09&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;バイバイを英語に訳してください。会話は続けます。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.5,
+    &quot;actual&quot;: &quot;バイバイを英語に訳してください会話は続けます。&quot;,
+    &quot;seconds&quot;: 0.9301164489879739
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-10&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;一足す一の答えを教えてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.9,
+    &quot;actual&quot;: &quot;1足す1の答えを教えてください。&quot;,
+    &quot;seconds&quot;: 1.0235477160022128
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-13&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;こんにちはと今日の間に全角スペースを入れてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 5.425,
+    &quot;actual&quot;: &quot;こんにちは、今日の間に全角スペースを入れてください。&quot;,
+    &quot;seconds&quot;: 0.8652540660114028
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-14&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;文の最後に句点を付けてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.525,
+    &quot;actual&quot;: &quot;文の最後に句点をつけてください。&quot;,
+    &quot;seconds&quot;: 0.9045152500038967
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-15&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;その文字を消さずに改行してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.75,
+    &quot;actual&quot;: &quot;その文字を消さずに会議をしてください。&quot;,
+    &quot;seconds&quot;: 0.9292911569937132
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-16&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;九月二十六日の午後三時半です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;9月26日の午後3時半です。&quot;,
+    &quot;seconds&quot;: 0.8542426360072568
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-17&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;合計は千二百三十四円です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.8,
+    &quot;actual&quot;: &quot;合計は1234円です。&quot;,
+    &quot;seconds&quot;: 0.6879291119985282
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-18&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;電話番号は零三、一二三四、五六七八です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.9,
+    &quot;actual&quot;: &quot;電話番号は031-345678です。&quot;,
+    &quot;seconds&quot;: 0.9312504550034646
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-19&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;温度は二十三点五度です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.575,
+    &quot;actual&quot;: &quot;温度は23.5度です。&quot;,
+    &quot;seconds&quot;: 0.8925417069985997
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-20&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;残り時間は二分三十秒です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.625,
+    &quot;actual&quot;: &quot;残り時間は2分30秒です。&quot;,
+    &quot;seconds&quot;: 0.7333766030205879
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-24&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;コーヒーとパンを買いました。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.8,
+    &quot;actual&quot;: &quot;コーヒードパンを買いました。&quot;,
+    &quot;seconds&quot;: 0.7165473310160451
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-30&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;一つ前の指示は取り消します。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.125,
+    &quot;actual&quot;: &quot;1つ前の指示は取り消します。&quot;,
+    &quot;seconds&quot;: 0.9493075810023583
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-32&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;赤、いや、青と書いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.05,
+    &quot;actual&quot;: &quot;赤い青と書いてください。&quot;,
+    &quot;seconds&quot;: 0.9807256750063971
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-33&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;保存して、すみません、保存しないで閉じてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;保存してすみません保存しないで閉じてください。&quot;,
+    &quot;seconds&quot;: 0.8114121620019432
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-34&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;聞こえていますか。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 2.675,
+    &quot;actual&quot;: &quot;聞こえていますが&quot;,
+    &quot;seconds&quot;: 0.7478355810162611
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-38&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;数えるのをやめて、二足す二を計算してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.65,
+    &quot;actual&quot;: &quot;数えるのをやめてに二隅を計算してください。&quot;,
+    &quot;seconds&quot;: 1.3114521570096258
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-39&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;音量を二倍にしてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.15,
+    &quot;actual&quot;: &quot;音量を2倍にしてください。&quot;,
+    &quot;seconds&quot;: 0.752361971011851
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-44&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;文章は引用符の中だけを書いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.45,
+    &quot;actual&quot;: &quot;文章は、營業部の中だけを書いてください。&quot;,
+    &quot;seconds&quot;: 1.069999491010094
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-48&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;顔の大きさは変えないでください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.35,
+    &quot;actual&quot;: &quot;顔の大きさは買いないでください。&quot;,
+    &quot;seconds&quot;: 0.8297386399935931
+  },
+  {
+    &quot;id&quot;: &quot;en-final-08&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Goodbye. See you later.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.825,
+    &quot;actual&quot;: &quot;Goodbye, see you later.&quot;,
+    &quot;seconds&quot;: 0.8759765200084075
+  },
+  {
+    &quot;id&quot;: &quot;en-final-10&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Tell me the answer to one plus one.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.7,
+    &quot;actual&quot;: &quot;Tell me the answer to 1 plus 1.&quot;,
+    &quot;seconds&quot;: 0.8459800880227704
+  },
+  {
+    &quot;id&quot;: &quot;en-final-11&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Hello. It is raining today.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.75,
+    &quot;actual&quot;: &quot;Hello, it is raining today.&quot;,
+    &quot;seconds&quot;: 0.7944991110125557
+  },
+  {
+    &quot;id&quot;: &quot;en-final-16&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;It is half past three on September twenty sixth.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.4,
+    &quot;actual&quot;: &quot;It is half past three on September 26th.&quot;,
+    &quot;seconds&quot;: 0.6441025960084517
+  },
+  {
+    &quot;id&quot;: &quot;en-final-17&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The total is one thousand two hundred and thirty four yen.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;The total is 1,200 and 34 yen.&quot;,
+    &quot;seconds&quot;: 0.9909876550082117
+  },
+  {
+    &quot;id&quot;: &quot;en-final-18&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The phone number is zero three, one two three four, five six seven eight.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 5.575,
+    &quot;actual&quot;: &quot;The phone number is 03-1234-5678.&quot;,
+    &quot;seconds&quot;: 0.833024129999103
+  },
+  {
+    &quot;id&quot;: &quot;en-final-19&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The temperature is twenty three point five degrees.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.975,
+    &quot;actual&quot;: &quot;The temperature is 23.5 degrees.&quot;,
+    &quot;seconds&quot;: 0.8708585299900733
+  },
+  {
+    &quot;id&quot;: &quot;en-final-20&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;There are two minutes and thirty seconds left.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.8,
+    &quot;actual&quot;: &quot;There are two minutes and 30 seconds left.&quot;,
+    &quot;seconds&quot;: 1.0164534240029752
+  },
+  {
+    &quot;id&quot;: &quot;en-final-21&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The file name is shopping notes.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.525,
+    &quot;actual&quot;: &quot;The file name is Shopping Notes.&quot;,
+    &quot;seconds&quot;: 0.7961501439858694
+  },
+  {
+    &quot;id&quot;: &quot;en-final-22&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;I am travelling from Tokyo to Osaka.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.05,
+    &quot;actual&quot;: &quot;I am traveling from Tokyo to Osaka.&quot;,
+    &quot;seconds&quot;: 0.6651626769744325
+  },
+  {
+    &quot;id&quot;: &quot;en-final-23&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;I have an appointment with Ms Yamada.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.325,
+    &quot;actual&quot;: &quot;I have an appointment with MS Yamada.&quot;,
+    &quot;seconds&quot;: 0.6243550530052744
+  },
+  {
+    &quot;id&quot;: &quot;en-final-32&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Write red, no, write blue.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.85,
+    &quot;actual&quot;: &quot;Right red, no right blue.&quot;,
+    &quot;seconds&quot;: 0.732499370991718
+  },
+  {
+    &quot;id&quot;: &quot;en-final-33&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Save it, sorry, close it without saving.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.15,
+    &quot;actual&quot;: &quot;Save it sorry, close it without saving.&quot;,
+    &quot;seconds&quot;: 0.8619873709976673
+  },
+  {
+    &quot;id&quot;: &quot;en-final-37&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Thank you. That is all. Goodbye.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.175,
+    &quot;actual&quot;: &quot;Thank you, that is all. Goodbye.&quot;,
+    &quot;seconds&quot;: 0.9376261740108021
+  },
+  {
+    &quot;id&quot;: &quot;en-final-38&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Stop counting and calculate two plus two.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.775,
+    &quot;actual&quot;: &quot;Stop counting and calculate 2 plus 2.&quot;,
+    &quot;seconds&quot;: 1.0531490669818595
+  }
+]</pre></details><details><summary>whisper-turbo · run 1</summary><pre>[
+  {
+    &quot;id&quot;: &quot;ja-final-01&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;OmaTextで空の新規ファイルを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.6,
+    &quot;actual&quot;: &quot;おまでってそらの新規ファイルを開いてください。&quot;,
+    &quot;seconds&quot;: 3.4370677119877655
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-02&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ミニモードにしてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.925,
+    &quot;actual&quot;: &quot;Mini-Modeにしてください。&quot;,
+    &quot;seconds&quot;: 2.55930554002407
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-03&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ノーマルモードに戻してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.25,
+    &quot;actual&quot;: &quot;Normal modeに戻してください。&quot;,
+    &quot;seconds&quot;: 3.2236883910081815
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-07&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;閉じないで、そのままにしてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.7,
+    &quot;actual&quot;: &quot;閉じないでそのままにしてください。&quot;,
+    &quot;seconds&quot;: 2.9044428739871364
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-08&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;バイバイ。またね。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.325,
+    &quot;actual&quot;: &quot;バイバイまたね。&quot;,
+    &quot;seconds&quot;: 2.572592570009874
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-09&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;バイバイを英語に訳してください。会話は続けます。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.5,
+    &quot;actual&quot;: &quot;バイバイを英語に訳してください会話は続けます。&quot;,
+    &quot;seconds&quot;: 3.0936745070212055
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-10&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;一足す一の答えを教えてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.9,
+    &quot;actual&quot;: &quot;1たす1の答えを教えてください。&quot;,
+    &quot;seconds&quot;: 2.665165568992961
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-14&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;文の最後に句点を付けてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.525,
+    &quot;actual&quot;: &quot;文の最後に句点をつけてください。&quot;,
+    &quot;seconds&quot;: 3.0429099170141853
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-15&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;その文字を消さずに改行してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.75,
+    &quot;actual&quot;: &quot;その文字を消さずに開業してください。&quot;,
+    &quot;seconds&quot;: 2.921843306015944
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-16&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;九月二十六日の午後三時半です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;9月26日の午後3時半です。&quot;,
+    &quot;seconds&quot;: 2.502311139018275
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-17&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;合計は千二百三十四円です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.8,
+    &quot;actual&quot;: &quot;合計は1234円です。&quot;,
+    &quot;seconds&quot;: 3.2894346590037458
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-18&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;電話番号は零三、一二三四、五六七八です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.9,
+    &quot;actual&quot;: &quot;電話番号は0312-345678です。&quot;,
+    &quot;seconds&quot;: 2.749176526995143
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-19&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;温度は二十三点五度です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.575,
+    &quot;actual&quot;: &quot;温度は23.5度です。&quot;,
+    &quot;seconds&quot;: 2.6837344230152667
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-20&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;残り時間は二分三十秒です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.625,
+    &quot;actual&quot;: &quot;残り時間は2分30秒です。&quot;,
+    &quot;seconds&quot;: 2.5359673209895846
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-31&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;えっと、新しいファイルを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.15,
+    &quot;actual&quot;: &quot;エッド新しいファイルを開いてください。&quot;,
+    &quot;seconds&quot;: 2.8469838960154448
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-32&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;赤、いや、青と書いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.05,
+    &quot;actual&quot;: &quot;赤い青と書いてください。&quot;,
+    &quot;seconds&quot;: 2.840204956009984
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-33&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;保存して、すみません、保存しないで閉じてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;保存してすみません保存しないで閉じてください。&quot;,
+    &quot;seconds&quot;: 2.9286217690096237
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-34&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;聞こえていますか。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 2.675,
+    &quot;actual&quot;: &quot;聞こえていますが&quot;,
+    &quot;seconds&quot;: 2.7420019220153335
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-37&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ありがとう。もう大丈夫です。さようなら。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.075,
+    &quot;actual&quot;: &quot;ありがとう、もう大丈夫です。さようなら。&quot;,
+    &quot;seconds&quot;: 3.162421210989123
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-38&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;数えるのをやめて、二足す二を計算してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.65,
+    &quot;actual&quot;: &quot;数えるのをやめてに2隅を計算してください。&quot;,
+    &quot;seconds&quot;: 2.6778546849964187
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-39&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;音量を二倍にしてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.15,
+    &quot;actual&quot;: &quot;音量を2倍にしてください。&quot;,
+    &quot;seconds&quot;: 2.7835988479782827
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-42&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ブラウザーを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.85,
+    &quot;actual&quot;: &quot;ブラウザを開いてください。&quot;,
+    &quot;seconds&quot;: 2.745073197991587
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-44&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;文章は引用符の中だけを書いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.45,
+    &quot;actual&quot;: &quot;文章は陰陽譜の中だけを書いてください。&quot;,
+    &quot;seconds&quot;: 3.2600994230015203
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-48&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;顔の大きさは変えないでください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.35,
+    &quot;actual&quot;: &quot;顔の大きさは買えないでください。&quot;,
+    &quot;seconds&quot;: 2.6596923460019752
+  },
+  {
+    &quot;id&quot;: &quot;en-final-02&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Switch to mini mode.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.55,
+    &quot;actual&quot;: &quot;Switch to Mini Mode.&quot;,
+    &quot;seconds&quot;: 2.8319489340065047
+  },
+  {
+    &quot;id&quot;: &quot;en-final-03&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Switch back to normal mode.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.5,
+    &quot;actual&quot;: &quot;Switch back to Normal mode.&quot;,
+    &quot;seconds&quot;: 2.6923783649981488
+  },
+  {
+    &quot;id&quot;: &quot;en-final-08&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Goodbye. See you later.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.825,
+    &quot;actual&quot;: &quot;Goodbye, see you later.&quot;,
+    &quot;seconds&quot;: 2.6556912109954283
+  },
+  {
+    &quot;id&quot;: &quot;en-final-10&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Tell me the answer to one plus one.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.7,
+    &quot;actual&quot;: &quot;Tell me the answer to 1 plus 1.&quot;,
+    &quot;seconds&quot;: 2.7603759040066507
+  },
+  {
+    &quot;id&quot;: &quot;en-final-11&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Hello. It is raining today.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.75,
+    &quot;actual&quot;: &quot;Hello, it is raining today.&quot;,
+    &quot;seconds&quot;: 3.354140926996479
+  },
+  {
+    &quot;id&quot;: &quot;en-final-16&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;It is half past three on September twenty sixth.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.4,
+    &quot;actual&quot;: &quot;It is half past three on September 26.&quot;,
+    &quot;seconds&quot;: 2.5165186139929574
+  },
+  {
+    &quot;id&quot;: &quot;en-final-17&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The total is one thousand two hundred and thirty four yen.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;The total is 1,200 and 34 yen.&quot;,
+    &quot;seconds&quot;: 2.7261057720170356
+  },
+  {
+    &quot;id&quot;: &quot;en-final-18&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The phone number is zero three, one two three four, five six seven eight.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 5.575,
+    &quot;actual&quot;: &quot;The phone number is 03-123-45678.&quot;,
+    &quot;seconds&quot;: 3.1574642000196036
+  },
+  {
+    &quot;id&quot;: &quot;en-final-19&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The temperature is twenty three point five degrees.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.975,
+    &quot;actual&quot;: &quot;The temperature is 23.5 degrees.&quot;,
+    &quot;seconds&quot;: 2.8746878539968748
+  },
+  {
+    &quot;id&quot;: &quot;en-final-20&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;There are two minutes and thirty seconds left.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.8,
+    &quot;actual&quot;: &quot;There are two minutes and 30 seconds left.&quot;,
+    &quot;seconds&quot;: 2.8667710360023193
+  },
+  {
+    &quot;id&quot;: &quot;en-final-21&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The file name is shopping notes.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.525,
+    &quot;actual&quot;: &quot;The file name is ShoppingNotes.&quot;,
+    &quot;seconds&quot;: 2.68118385199341
+  },
+  {
+    &quot;id&quot;: &quot;en-final-22&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;I am travelling from Tokyo to Osaka.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.05,
+    &quot;actual&quot;: &quot;I am traveling from Tokyo to Osaka.&quot;,
+    &quot;seconds&quot;: 2.6178347110108007
+  },
+  {
+    &quot;id&quot;: &quot;en-final-23&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;I have an appointment with Ms Yamada.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.325,
+    &quot;actual&quot;: &quot;I have an appointment with Ms. Yamada.&quot;,
+    &quot;seconds&quot;: 2.750453014014056
+  },
+  {
+    &quot;id&quot;: &quot;en-final-25&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;It is the red button, not the blue button.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.525,
+    &quot;actual&quot;: &quot;It is the red button, not the blue buttons.&quot;,
+    &quot;seconds&quot;: 3.071120675012935
+  },
+  {
+    &quot;id&quot;: &quot;en-final-31&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Um, please open a new file.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.05,
+    &quot;actual&quot;: &quot;O.M.A., please open a new file.&quot;,
+    &quot;seconds&quot;: 2.590946577984141
+  },
+  {
+    &quot;id&quot;: &quot;en-final-32&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Write red, no, write blue.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.85,
+    &quot;actual&quot;: &quot;Write red, no. Write blue.&quot;,
+    &quot;seconds&quot;: 2.8031580010137986
+  },
+  {
+    &quot;id&quot;: &quot;en-final-33&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Save it, sorry, close it without saving.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.15,
+    &quot;actual&quot;: &quot;Save it, sorry. Close it without saving.&quot;,
+    &quot;seconds&quot;: 2.834021614980884
+  },
+  {
+    &quot;id&quot;: &quot;en-final-37&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Thank you. That is all. Goodbye.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.175,
+    &quot;actual&quot;: &quot;Thank you, that is all. Goodbye.&quot;,
+    &quot;seconds&quot;: 3.189535640005488
+  },
+  {
+    &quot;id&quot;: &quot;en-final-38&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Stop counting and calculate two plus two.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.775,
+    &quot;actual&quot;: &quot;Stop counting and calculate 2 plus 2.&quot;,
+    &quot;seconds&quot;: 2.845127777021844
+  }
+]</pre></details><details><summary>qwen-0.6b · run 1</summary><pre>[
+  {
+    &quot;id&quot;: &quot;ja-final-01&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;OmaTextで空の新規ファイルを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.6,
+    &quot;actual&quot;: &quot;オマでて空の新規ファイルを開いてください。&quot;,
+    &quot;seconds&quot;: 1.2682208960177377
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-07&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;閉じないで、そのままにしてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.7,
+    &quot;actual&quot;: &quot;閉じないでそのままにしてください。&quot;,
+    &quot;seconds&quot;: 0.8606707559956703
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-08&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;バイバイ。またね。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.325,
+    &quot;actual&quot;: &quot;バイバイまたね。&quot;,
+    &quot;seconds&quot;: 0.6172910220047925
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-10&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;一足す一の答えを教えてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.9,
+    &quot;actual&quot;: &quot;一足一の答えを教えてください。&quot;,
+    &quot;seconds&quot;: 0.8939786170085426
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-11&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;こんにちは。今日の天気は雨です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.425,
+    &quot;actual&quot;: &quot;こんにちは今日の天気は雨です。&quot;,
+    &quot;seconds&quot;: 0.8933227359957527
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-15&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;その文字を消さずに改行してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.75,
+    &quot;actual&quot;: &quot;その文字を消さずに開業してください。&quot;,
+    &quot;seconds&quot;: 1.024431124998955
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-18&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;電話番号は零三、一二三四、五六七八です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.9,
+    &quot;actual&quot;: &quot;電話番号は零三一二三四五六七八です。&quot;,
+    &quot;seconds&quot;: 1.2062499480089173
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-31&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;えっと、新しいファイルを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.15,
+    &quot;actual&quot;: &quot;エット新しいファイルを開いてください。&quot;,
+    &quot;seconds&quot;: 0.8713623269868549
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-32&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;赤、いや、青と書いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.05,
+    &quot;actual&quot;: &quot;赤い青と書いてください。&quot;,
+    &quot;seconds&quot;: 0.8259300109930336
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-33&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;保存して、すみません、保存しないで閉じてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;保存してすみません保存しないで閉じてください。&quot;,
+    &quot;seconds&quot;: 1.2115703040035442
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-34&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;聞こえていますか。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 2.675,
+    &quot;actual&quot;: &quot;聞こえていますが。&quot;,
+    &quot;seconds&quot;: 0.6223233680066187
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-36&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;今はまだ終了しないでください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.3,
+    &quot;actual&quot;: &quot;今まで終了しないでください。&quot;,
+    &quot;seconds&quot;: 0.9479552050179336
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-37&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ありがとう。もう大丈夫です。さようなら。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.075,
+    &quot;actual&quot;: &quot;ありがとうもう大丈夫ですさようなら。&quot;,
+    &quot;seconds&quot;: 1.083493611018639
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-38&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;数えるのをやめて、二足す二を計算してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.65,
+    &quot;actual&quot;: &quot;数えるのをやめてにダスミを計算してください。&quot;,
+    &quot;seconds&quot;: 1.5623681389843114
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-42&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ブラウザーを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.85,
+    &quot;actual&quot;: &quot;ブラウザを開いてください。&quot;,
+    &quot;seconds&quot;: 0.6829072920081671
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-44&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;文章は引用符の中だけを書いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.45,
+    &quot;actual&quot;: &quot;文章は陰陽符の中だけを書いてください。&quot;,
+    &quot;seconds&quot;: 1.0751489129906986
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-45&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;雨が降ったら傘を持っていきます。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.375,
+    &quot;actual&quot;: &quot;雨が降ったら傘を持って行きます。&quot;,
+    &quot;seconds&quot;: 1.0894777050125413
+  },
+  {
+    &quot;id&quot;: &quot;en-final-13&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Put one space between hello and today.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.425,
+    &quot;actual&quot;: &quot;Put one space between \&quot;hello\&quot; and \&quot;today.\&quot;&quot;,
+    &quot;seconds&quot;: 0.9565574940061197
+  },
+  {
+    &quot;id&quot;: &quot;en-final-16&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;It is half past three on September twenty sixth.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.4,
+    &quot;actual&quot;: &quot;It is half past three on September twenty-sixth.&quot;,
+    &quot;seconds&quot;: 1.357546450017253
+  },
+  {
+    &quot;id&quot;: &quot;en-final-17&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The total is one thousand two hundred and thirty four yen.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;The total is one thousand two hundred and thirty-four yen.&quot;,
+    &quot;seconds&quot;: 1.4846590789966285
+  },
+  {
+    &quot;id&quot;: &quot;en-final-18&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The phone number is zero three, one two three four, five six seven eight.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 5.575,
+    &quot;actual&quot;: &quot;The phone number is zero three one two three four five six seven eight.&quot;,
+    &quot;seconds&quot;: 1.3622554469911847
+  },
+  {
+    &quot;id&quot;: &quot;en-final-19&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The temperature is twenty three point five degrees.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.975,
+    &quot;actual&quot;: &quot;The temperature is twenty-three point five degrees.&quot;,
+    &quot;seconds&quot;: 0.8551328379835468
+  },
+  {
+    &quot;id&quot;: &quot;en-final-21&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The file name is shopping notes.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.525,
+    &quot;actual&quot;: &quot;The file name is Shopping Notes.&quot;,
+    &quot;seconds&quot;: 0.6474156389886048
+  },
+  {
+    &quot;id&quot;: &quot;en-final-22&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;I am travelling from Tokyo to Osaka.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.05,
+    &quot;actual&quot;: &quot;I am traveling from Tokyo to Osaka.&quot;,
+    &quot;seconds&quot;: 0.7957558300113305
+  },
+  {
+    &quot;id&quot;: &quot;en-final-23&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;I have an appointment with Ms Yamada.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.325,
+    &quot;actual&quot;: &quot;I have an appointment with Ms. Yamada.&quot;,
+    &quot;seconds&quot;: 0.965622837014962
+  },
+  {
+    &quot;id&quot;: &quot;en-final-32&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Write red, no, write blue.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.85,
+    &quot;actual&quot;: &quot;Write red. No, write blue.&quot;,
+    &quot;seconds&quot;: 0.8491396629833616
+  },
+  {
+    &quot;id&quot;: &quot;en-final-33&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Save it, sorry, close it without saving.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.15,
+    &quot;actual&quot;: &quot;Save it. Sorry, close it without saving.&quot;,
+    &quot;seconds&quot;: 0.8540343979839236
+  }
+]</pre></details><details><summary>qwen-1.7b · run 1</summary><pre>[
+  {
+    &quot;id&quot;: &quot;ja-final-01&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;OmaTextで空の新規ファイルを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.6,
+    &quot;actual&quot;: &quot;おまでって空の新規ファイルを開いてください。&quot;,
+    &quot;seconds&quot;: 3.2979426230012905
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-07&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;閉じないで、そのままにしてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.7,
+    &quot;actual&quot;: &quot;閉じないでそのままにしてください。&quot;,
+    &quot;seconds&quot;: 2.104805849987315
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-08&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;バイバイ。またね。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.325,
+    &quot;actual&quot;: &quot;バイバイまたね。&quot;,
+    &quot;seconds&quot;: 1.43695933802519
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-14&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;文の最後に句点を付けてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.525,
+    &quot;actual&quot;: &quot;文の最後に句点をつけてください。&quot;,
+    &quot;seconds&quot;: 2.3155466220050585
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-15&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;その文字を消さずに改行してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.75,
+    &quot;actual&quot;: &quot;その文字を消さずに開業してください。&quot;,
+    &quot;seconds&quot;: 2.3320764059899375
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-16&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;九月二十六日の午後三時半です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;9月26日の午後3時半です。&quot;,
+    &quot;seconds&quot;: 2.723740416986402
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-18&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;電話番号は零三、一二三四、五六七八です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.9,
+    &quot;actual&quot;: &quot;電話番号は零三一二三四五六七八です。&quot;,
+    &quot;seconds&quot;: 3.226317419001134
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-31&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;えっと、新しいファイルを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.15,
+    &quot;actual&quot;: &quot;えっと新しいファイルを開いてください。&quot;,
+    &quot;seconds&quot;: 2.15141111399862
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-32&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;赤、いや、青と書いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.05,
+    &quot;actual&quot;: &quot;赤い青と書いてください。&quot;,
+    &quot;seconds&quot;: 1.8204253269941546
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-33&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;保存して、すみません、保存しないで閉じてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;保存してすみません保存しないで閉じてください。&quot;,
+    &quot;seconds&quot;: 3.0514865489967633
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-34&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;聞こえていますか。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 2.675,
+    &quot;actual&quot;: &quot;聞こえていますが。&quot;,
+    &quot;seconds&quot;: 2.0511498849955387
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-37&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ありがとう。もう大丈夫です。さようなら。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.075,
+    &quot;actual&quot;: &quot;ありがとうもう大丈夫ですさようなら。&quot;,
+    &quot;seconds&quot;: 2.266868656006409
+  },
+  {
+    &quot;id&quot;: &quot;en-final-16&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;It is half past three on September twenty sixth.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.4,
+    &quot;actual&quot;: &quot;It is half past three on September twenty-sixth.&quot;,
+    &quot;seconds&quot;: 2.9033541629905812
+  },
+  {
+    &quot;id&quot;: &quot;en-final-17&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The total is one thousand two hundred and thirty four yen.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;The total is one thousand two hundred and thirty-four yen.&quot;,
+    &quot;seconds&quot;: 2.9443448839883786
+  },
+  {
+    &quot;id&quot;: &quot;en-final-18&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The phone number is zero three, one two three four, five six seven eight.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 5.575,
+    &quot;actual&quot;: &quot;The phone number is zero three one two three four five six seven eight.&quot;,
+    &quot;seconds&quot;: 3.6806979830143973
+  },
+  {
+    &quot;id&quot;: &quot;en-final-19&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;The temperature is twenty three point five degrees.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.975,
+    &quot;actual&quot;: &quot;The temperature is twenty-three point five degrees.&quot;,
+    &quot;seconds&quot;: 2.359080397989601
+  },
+  {
+    &quot;id&quot;: &quot;en-final-22&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;I am travelling from Tokyo to Osaka.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.05,
+    &quot;actual&quot;: &quot;I am traveling from Tokyo to Osaka.&quot;,
+    &quot;seconds&quot;: 2.059018809988629
+  },
+  {
+    &quot;id&quot;: &quot;en-final-23&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;I have an appointment with Ms Yamada.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.325,
+    &quot;actual&quot;: &quot;I have an appointment with Ms. Yamada.&quot;,
+    &quot;seconds&quot;: 2.3656565429992042
+  },
+  {
+    &quot;id&quot;: &quot;en-final-25&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;It is the red button, not the blue button.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.525,
+    &quot;actual&quot;: &quot;It is the red button, not the blue buttons.&quot;,
+    &quot;seconds&quot;: 2.47146924000117
+  },
+  {
+    &quot;id&quot;: &quot;en-final-31&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Um, please open a new file.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.05,
+    &quot;actual&quot;: &quot;Um. Please open a new file.&quot;,
+    &quot;seconds&quot;: 2.1583558789861854
+  },
+  {
+    &quot;id&quot;: &quot;en-final-32&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Write red, no, write blue.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.85,
+    &quot;actual&quot;: &quot;Right red, no right blue.&quot;,
+    &quot;seconds&quot;: 1.9670647530001588
+  },
+  {
+    &quot;id&quot;: &quot;en-final-33&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;expected&quot;: &quot;Save it, sorry, close it without saving.&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.15,
+    &quot;actual&quot;: &quot;Save it. Sorry, close it without saving.&quot;,
+    &quot;seconds&quot;: 2.023126537009375
+  }
+]</pre></details><details><summary>kotoba-v2 · run 1</summary><pre>[
+  {
+    &quot;id&quot;: &quot;ja-final-01&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;OmaTextで空の新規ファイルを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.6,
+    &quot;actual&quot;: &quot;おまでって空の新規ファイルを開いてください&quot;,
+    &quot;seconds&quot;: 3.0152936629892793
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-02&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ミニモードにしてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.925,
+    &quot;actual&quot;: &quot;ミニモードにしてください&quot;,
+    &quot;seconds&quot;: 2.9959594960091636
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-03&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ノーマルモードに戻してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.25,
+    &quot;actual&quot;: &quot;ノーマルモードに戻してください&quot;,
+    &quot;seconds&quot;: 2.670838268008083
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-04&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;過去の会話を見せてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.575,
+    &quot;actual&quot;: &quot;過去の会話を見せてください&quot;,
+    &quot;seconds&quot;: 2.7780733270046767
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-05&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;今開いたファイルを閉じてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.625,
+    &quot;actual&quot;: &quot;今開いたファイルを閉じてください&quot;,
+    &quot;seconds&quot;: 2.61447171898908
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-06&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;保存しないで閉じてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.925,
+    &quot;actual&quot;: &quot;保存しないで閉じてください&quot;,
+    &quot;seconds&quot;: 2.543478530977154
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-07&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;閉じないで、そのままにしてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.7,
+    &quot;actual&quot;: &quot;閉じないでそのままにしてください&quot;,
+    &quot;seconds&quot;: 2.935096463013906
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-08&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;バイバイ。またね。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 2.325,
+    &quot;actual&quot;: &quot;バイバイまたね&quot;,
+    &quot;seconds&quot;: 2.845391553011723
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-09&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;バイバイを英語に訳してください。会話は続けます。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.5,
+    &quot;actual&quot;: &quot;バイバイを英語に訳してください会話は続けます&quot;,
+    &quot;seconds&quot;: 2.771561911999015
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-10&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;一足す一の答えを教えてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.9,
+    &quot;actual&quot;: &quot;1たす1の答えを教えてください&quot;,
+    &quot;seconds&quot;: 3.7240022260230035
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-11&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;こんにちは。今日の天気は雨です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.425,
+    &quot;actual&quot;: &quot;こんにちは&quot;,
+    &quot;seconds&quot;: 2.714536820014473
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-12&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;明日の天気は曇りの予報です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.475,
+    &quot;actual&quot;: &quot;明日の天気は曇りの予報です&quot;,
+    &quot;seconds&quot;: 2.448511529015377
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-13&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;こんにちはと今日の間に全角スペースを入れてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 5.425,
+    &quot;actual&quot;: &quot;こんにちはと今日の間に全角スペースを入れてください&quot;,
+    &quot;seconds&quot;: 2.8228091740165837
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-14&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;文の最後に句点を付けてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.525,
+    &quot;actual&quot;: &quot;分の最後に苦点をつけてください&quot;,
+    &quot;seconds&quot;: 2.7602096530026756
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-15&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;その文字を消さずに改行してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.75,
+    &quot;actual&quot;: &quot;その文字を消さずに開業してください&quot;,
+    &quot;seconds&quot;: 2.649265236017527
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-16&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;九月二十六日の午後三時半です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;9月26日の午後3時半です&quot;,
+    &quot;seconds&quot;: 2.7567941049928777
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-17&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;合計は千二百三十四円です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.8,
+    &quot;actual&quot;: &quot;合計は1234円です&quot;,
+    &quot;seconds&quot;: 2.6691560330218635
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-18&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;電話番号は零三、一二三四、五六七八です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.9,
+    &quot;actual&quot;: &quot;電話番号は0312345678です&quot;,
+    &quot;seconds&quot;: 2.6441465840034653
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-19&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;温度は二十三点五度です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.575,
+    &quot;actual&quot;: &quot;温度は23.5度です&quot;,
+    &quot;seconds&quot;: 2.772431797988247
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-20&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;残り時間は二分三十秒です。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.625,
+    &quot;actual&quot;: &quot;残り時間は2分30秒です&quot;,
+    &quot;seconds&quot;: 2.58773965400178
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-21&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ファイル名は買い物メモです。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.975,
+    &quot;actual&quot;: &quot;ファイル名は買い物メモです&quot;,
+    &quot;seconds&quot;: 2.479476998996688
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-22&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;東京から大阪まで移動します。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.95,
+    &quot;actual&quot;: &quot;東京から大阪まで移動します&quot;,
+    &quot;seconds&quot;: 2.885922143002972
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-23&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;山田さんに会う予定があります。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.425,
+    &quot;actual&quot;: &quot;山田さんに会う予定があります&quot;,
+    &quot;seconds&quot;: 3.357515807991149
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-24&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;コーヒーとパンを買いました。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.8,
+    &quot;actual&quot;: &quot;コーヒーとパンを買いました&quot;,
+    &quot;seconds&quot;: 2.6756439890014008
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-25&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;青いボタンではなく赤いボタンです。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.8,
+    &quot;actual&quot;: &quot;青いボタンではなく赤いボタンです&quot;,
+    &quot;seconds&quot;: 2.5801655090181157
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-26&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;右のウィンドウだけを閉じてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.575,
+    &quot;actual&quot;: &quot;右のウィンドを閉じてください&quot;,
+    &quot;seconds&quot;: 2.74075893801637
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-27&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;左のウィンドウは閉じないでください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.5,
+    &quot;actual&quot;: &quot;左のウィンドーは閉じないでください&quot;,
+    &quot;seconds&quot;: 2.7562470700067934
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-28&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;開いたばかりのアプリに切り替えてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.9,
+    &quot;actual&quot;: &quot;開いたばかりのアプリに切り替えてください&quot;,
+    &quot;seconds&quot;: 2.6557544470124412
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-29&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;今の操作を中止してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.575,
+    &quot;actual&quot;: &quot;今の操作を中止してください&quot;,
+    &quot;seconds&quot;: 2.741006413998548
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-30&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;一つ前の指示は取り消します。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.125,
+    &quot;actual&quot;: &quot;1つ前の指示は取り消します&quot;,
+    &quot;seconds&quot;: 3.103286162018776
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-31&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;えっと、新しいファイルを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.15,
+    &quot;actual&quot;: &quot;えっと新しいファイルを開いてください&quot;,
+    &quot;seconds&quot;: 2.5110553660197183
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-32&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;赤、いや、青と書いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.05,
+    &quot;actual&quot;: &quot;赤い青と書いてください&quot;,
+    &quot;seconds&quot;: 3.1265132899861783
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-33&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;保存して、すみません、保存しないで閉じてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 4.35,
+    &quot;actual&quot;: &quot;保存してすみません保存しないで閉じてください&quot;,
+    &quot;seconds&quot;: 5.125121337012388
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-34&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;聞こえていますか。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 2.675,
+    &quot;actual&quot;: &quot;聞こえていますが&quot;,
+    &quot;seconds&quot;: 4.592678438988514
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-35&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;もう一度ゆっくり説明してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.7,
+    &quot;actual&quot;: &quot;もう一度ゆっくり説明してください&quot;,
+    &quot;seconds&quot;: 2.8160158389946446
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-36&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;今はまだ終了しないでください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.3,
+    &quot;actual&quot;: &quot;今はまだ終了しないでください&quot;,
+    &quot;seconds&quot;: 2.809136502997717
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-37&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ありがとう。もう大丈夫です。さようなら。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.075,
+    &quot;actual&quot;: &quot;ありがとうもう大丈夫ですさようなら&quot;,
+    &quot;seconds&quot;: 2.8990145990101155
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-38&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;数えるのをやめて、二足す二を計算してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.65,
+    &quot;actual&quot;: &quot;数えるのをやめてに足すぎを計算してください&quot;,
+    &quot;seconds&quot;: 2.6687219599843957
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-39&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;音量を二倍にしてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.15,
+    &quot;actual&quot;: &quot;音量を2倍にしてください&quot;,
+    &quot;seconds&quot;: 3.0441356360097416
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-40&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;マイクを変更したいです。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.1,
+    &quot;actual&quot;: &quot;マイクを変更したいです&quot;,
+    &quot;seconds&quot;: 2.597541541006649
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-41&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;日本語で返事してください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.35,
+    &quot;actual&quot;: &quot;日本語で返事してください&quot;,
+    &quot;seconds&quot;: 2.4382583080150653
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-42&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;ブラウザーを開いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 2.85,
+    &quot;actual&quot;: &quot;ブラウザーを開いてください&quot;,
+    &quot;seconds&quot;: 2.6998658000084106
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-43&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;設定は変更せずに見せてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.175,
+    &quot;actual&quot;: &quot;設定は変更せずに見せてください&quot;,
+    &quot;seconds&quot;: 2.591740022005979
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-44&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;文章は引用符の中だけを書いてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 4.45,
+    &quot;actual&quot;: &quot;文章は飲料婦の中だけを書いてください&quot;,
+    &quot;seconds&quot;: 2.9773192210122943
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-45&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;雨が降ったら傘を持っていきます。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.375,
+    &quot;actual&quot;: &quot;雨が降ったら傘を持っていきます&quot;,
+    &quot;seconds&quot;: 2.853670812997734
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-46&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;このメモは保存しておきたいです。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 3.725,
+    &quot;actual&quot;: &quot;このメモは保存しておきたいです&quot;,
+    &quot;seconds&quot;: 3.052845336991595
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-47&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;画面の下に戻ってください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.4,
+    &quot;actual&quot;: &quot;画面の下に戻ってください&quot;,
+    &quot;seconds&quot;: 2.7797992739942856
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-48&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;顔の大きさは変えないでください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;clean&quot;,
+    &quot;duration&quot;: 3.35,
+    &quot;actual&quot;: &quot;顔の大きさは買いないでください&quot;,
+    &quot;seconds&quot;: 2.6253408390039112
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-49&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;今何を実行しているのか教えてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;quiet&quot;,
+    &quot;duration&quot;: 4.45,
+    &quot;actual&quot;: &quot;今何を実行しているのか教えてください&quot;,
+    &quot;seconds&quot;: 2.447848541982239
+  },
+  {
+    &quot;id&quot;: &quot;ja-final-50&quot;,
+    &quot;language&quot;: &quot;ja&quot;,
+    &quot;expected&quot;: &quot;終わったら短く知らせてください。&quot;,
+    &quot;source&quot;: &quot;synthetic&quot;,
+    &quot;condition&quot;: &quot;noise&quot;,
+    &quot;duration&quot;: 3.75,
+    &quot;actual&quot;: &quot;終わったら短く知らせてください&quot;,
+    &quot;seconds&quot;: 2.960554632009007
+  }
+]</pre></details></html>

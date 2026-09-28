@@ -1,0 +1,1009 @@
+{
+  "config": {
+    "agent_module": null,
+    "filesystem": "read-only root, writable case directory and private tmp",
+    "timing": "seconds excludes fixture setup; total_seconds includes it",
+    "model": "qwen3.5:4b",
+    "thinking": "low",
+    "split": "dev",
+    "repeat": 1,
+    "languages": [
+      "ja",
+      "en"
+    ],
+    "cases": [
+      {
+        "id": "dev-blank",
+        "ja": "OmaTextで新しい空のメモを用意して。",
+        "en": "Create an empty note using OmaText.",
+        "check": "blank"
+      },
+      {
+        "id": "dev-dictation",
+        "ja": "OmaTextの新しい文書に「月曜日の予定です。」と書いて。引用符は入れないで。",
+        "en": "Create a new OmaText document containing exactly Plans for Monday. without quotation marks.",
+        "check": "document",
+        "expected": {
+          "ja": "月曜日の予定です。",
+          "en": "Plans for Monday."
+        }
+      },
+      {
+        "id": "dev-mini",
+        "ja": "顔だけの小さい表示に変えてください。",
+        "en": "Use the small face-only view.",
+        "check": "mini"
+      },
+      {
+        "id": "dev-normal",
+        "setup": "mini",
+        "ja": "普通の大きさの表示に戻してください。",
+        "en": "Return to the regular display mode.",
+        "check": "normal"
+      },
+      {
+        "id": "dev-write",
+        "ja": "{path}/note.txtに「調整用です。」だけを書いて保存してください。改行は不要です。",
+        "en": "Save exactly Development sample. in {path}/note.txt without a trailing newline.",
+        "check": "file",
+        "expected": {
+          "ja": "調整用です。",
+          "en": "Development sample."
+        }
+      },
+      {
+        "id": "dev-math",
+        "ja": "三足す五の答えだけ教えてください。",
+        "en": "What is three plus five? Give only the answer.",
+        "check": "math",
+        "answers": [
+          "8",
+          "八",
+          "eight"
+        ]
+      }
+    ]
+  },
+  "results": [
+    {
+      "language": "ja",
+      "repeat": 0,
+      "id": "dev-blank",
+      "status": "passed",
+      "setup_seconds": 2.5510714589909185,
+      "passed": true,
+      "total_seconds": 13.281657757004723,
+      "seconds": 10.730587643018225
+    },
+    {
+      "language": "ja",
+      "repeat": 0,
+      "id": "dev-dictation",
+      "status": "passed",
+      "setup_seconds": 2.5888590140093584,
+      "passed": true,
+      "total_seconds": 10.667727963998914,
+      "seconds": 8.078869716002373
+    },
+    {
+      "language": "ja",
+      "repeat": 0,
+      "id": "dev-mini",
+      "status": "passed",
+      "setup_seconds": 2.912026047008112,
+      "passed": true,
+      "total_seconds": 5.963966251001693,
+      "seconds": 3.051940878998721
+    },
+    {
+      "language": "ja",
+      "repeat": 0,
+      "id": "dev-normal",
+      "status": "passed",
+      "setup_seconds": 2.667244986980222,
+      "passed": true,
+      "total_seconds": 5.793490294978255,
+      "seconds": 3.1262457109987736
+    },
+    {
+      "language": "ja",
+      "repeat": 0,
+      "id": "dev-write",
+      "status": "passed",
+      "setup_seconds": 2.4767725050041918,
+      "passed": true,
+      "total_seconds": 7.787434116995428,
+      "seconds": 5.310662178002531
+    },
+    {
+      "language": "ja",
+      "repeat": 0,
+      "id": "dev-math",
+      "status": "failed",
+      "setup_seconds": 2.540027115988778,
+      "passed": false,
+      "error": "'三足す五（3＋5）の答えは **8** です。'",
+      "critical_error": false,
+      "total_seconds": 4.688171540008625,
+      "seconds": 2.1481449700077064
+    },
+    {
+      "language": "en",
+      "repeat": 0,
+      "id": "dev-blank",
+      "status": "passed",
+      "setup_seconds": 2.4879727069928776,
+      "passed": true,
+      "total_seconds": 12.916467142000329,
+      "seconds": 10.428495127998758
+    },
+    {
+      "language": "en",
+      "repeat": 0,
+      "id": "dev-dictation",
+      "status": "passed",
+      "setup_seconds": 2.5503469390096143,
+      "passed": true,
+      "total_seconds": 11.560288223001407,
+      "seconds": 9.00994170998456
+    },
+    {
+      "language": "en",
+      "repeat": 0,
+      "id": "dev-mini",
+      "status": "passed",
+      "setup_seconds": 2.9651289529865608,
+      "passed": true,
+      "total_seconds": 6.5604567419795785,
+      "seconds": 3.595328163995873
+    },
+    {
+      "language": "en",
+      "repeat": 0,
+      "id": "dev-normal",
+      "status": "passed",
+      "setup_seconds": 2.721119624999119,
+      "passed": true,
+      "total_seconds": 6.126429874973837,
+      "seconds": 3.4053108239895664
+    },
+    {
+      "language": "en",
+      "repeat": 0,
+      "id": "dev-write",
+      "status": "passed",
+      "setup_seconds": 2.5516477169876453,
+      "passed": true,
+      "total_seconds": 6.773706664011115,
+      "seconds": 4.222059551015263
+    },
+    {
+      "language": "en",
+      "repeat": 0,
+      "id": "dev-math",
+      "status": "passed",
+      "setup_seconds": 2.3889998689992353,
+      "passed": true,
+      "total_seconds": 4.4992408829857595,
+      "seconds": 2.1102416589856148
+    }
+  ],
+  "events": {
+    "en/0/dev-math": [
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "8",
+        "seconds": 1.455993986,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 1005,
+          "output": 49,
+          "cacheRead": 10401,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11455,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "en/0/dev-write": [
+      {
+        "event": "tool_start",
+        "name": "write",
+        "args": {
+          "input": {
+            "content": "Development sample.",
+            "path": "/tmp/oma-agent-eval-4b-low-structured/en/0/dev-write/note.txt"
+          }
+        }
+      },
+      {
+        "event": "state",
+        "state": "working",
+        "taskStatus": "Writing a file"
+      },
+      {
+        "event": "tool_end",
+        "name": "write",
+        "error": false
+      },
+      {
+        "event": "state",
+        "taskStatus": "",
+        "state": "thinking"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "Done. Saved \"Development sample.\" to note.txt without a trailing newline.",
+        "seconds": 3.6159361970000004,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 165,
+          "output": 41,
+          "cacheRead": 11421,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11627,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "en/0/dev-normal": [
+      {
+        "event": "tool_start",
+        "name": "set_view_mode",
+        "args": {
+          "mode": "normal"
+        }
+      },
+      {
+        "event": "state",
+        "state": "working",
+        "taskStatus": "Restoring normal mode"
+      },
+      {
+        "event": "state",
+        "viewMode": "normal"
+      },
+      {
+        "event": "tool_end",
+        "name": "set_view_mode",
+        "error": false
+      },
+      {
+        "event": "state",
+        "taskStatus": "",
+        "state": "thinking"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "Done! I've returned to normal display mode. Your face is now shown in its full form instead of just the animated face.",
+        "seconds": 2.7762883990000002,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 22,
+          "output": 49,
+          "cacheRead": 11471,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11542,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "en/0/dev-mini": [
+      {
+        "event": "tool_start",
+        "name": "set_view_mode",
+        "args": {
+          "mode": "mini"
+        }
+      },
+      {
+        "event": "state",
+        "state": "working",
+        "taskStatus": "Switching to mini mode"
+      },
+      {
+        "event": "state",
+        "viewMode": "mini"
+      },
+      {
+        "event": "tool_end",
+        "name": "set_view_mode",
+        "error": false
+      },
+      {
+        "event": "state",
+        "taskStatus": "",
+        "state": "thinking"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "I've switched to mini mode - now you'll see just my animated face in a small window. Let me know if you'd like anything else!",
+        "seconds": 2.8675947619999995,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 22,
+          "output": 60,
+          "cacheRead": 11464,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11546,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "en/0/dev-dictation": [
+      {
+        "event": "tool_start",
+        "name": "new_text_document",
+        "args": {
+          "input": {
+            "text": "Plans for Monday."
+          }
+        }
+      },
+      {
+        "event": "state",
+        "state": "working",
+        "taskStatus": "Working"
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": true
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": true
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "tool_end",
+        "name": "new_text_document",
+        "error": false
+      },
+      {
+        "event": "state",
+        "taskStatus": "",
+        "state": "thinking"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "Done! I've created a new OmaText document containing exactly \"Plans for Monday.\" The document is currently unsaved and open in your editor.",
+        "seconds": 7.995597253,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 240,
+          "output": 93,
+          "cacheRead": 11409,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11742,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "en/0/dev-blank": [
+      {
+        "event": "tool_start",
+        "name": "new_text_document",
+        "args": {
+          "input": {
+            "text": ""
+          }
+        }
+      },
+      {
+        "event": "state",
+        "state": "working",
+        "taskStatus": "Working"
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": true
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "tool_end",
+        "name": "new_text_document",
+        "error": false
+      },
+      {
+        "event": "state",
+        "taskStatus": "",
+        "state": "thinking"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "Done! I've created an empty note in OmaText. It's currently untitled and blank, ready for you to type your content.",
+        "seconds": 9.541085144999998,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 193,
+          "output": 67,
+          "cacheRead": 11399,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11659,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "ja/0/dev-math": [
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "三足す五（3＋5）の答えは **8** です。",
+        "seconds": 1.56871021,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 997,
+          "output": 58,
+          "cacheRead": 10409,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11464,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "ja/0/dev-write": [
+      {
+        "event": "tool_start",
+        "name": "write",
+        "args": {
+          "input": {
+            "content": "調整用です。",
+            "path": "note.txt"
+          }
+        }
+      },
+      {
+        "event": "state",
+        "state": "working",
+        "taskStatus": "Writing a file"
+      },
+      {
+        "event": "tool_end",
+        "name": "write",
+        "error": false
+      },
+      {
+        "event": "state",
+        "taskStatus": "",
+        "state": "thinking"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "完了しました。「調整用です。」を note.txt に保存しました。",
+        "seconds": 4.495706708000001,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 196,
+          "output": 43,
+          "cacheRead": 11429,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11668,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "ja/0/dev-normal": [
+      {
+        "event": "tool_start",
+        "name": "set_view_mode",
+        "args": {
+          "mode": "normal"
+        }
+      },
+      {
+        "event": "state",
+        "state": "working",
+        "taskStatus": "Restoring normal mode"
+      },
+      {
+        "event": "state",
+        "viewMode": "normal"
+      },
+      {
+        "event": "tool_end",
+        "name": "set_view_mode",
+        "error": false
+      },
+      {
+        "event": "state",
+        "taskStatus": "",
+        "state": "thinking"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "ノーマルモードに戻しました。",
+        "seconds": 2.304966413,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 22,
+          "output": 31,
+          "cacheRead": 11460,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11513,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "ja/0/dev-mini": [
+      {
+        "event": "tool_start",
+        "name": "set_view_mode",
+        "args": {
+          "mode": "mini"
+        }
+      },
+      {
+        "event": "state",
+        "state": "working",
+        "taskStatus": "Switching to mini mode"
+      },
+      {
+        "event": "state",
+        "viewMode": "mini"
+      },
+      {
+        "event": "tool_end",
+        "name": "set_view_mode",
+        "error": false
+      },
+      {
+        "event": "state",
+        "taskStatus": "",
+        "state": "thinking"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "ミニモードに変更しました。顔だけの小さい表示になりました。",
+        "seconds": 2.294193275,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 22,
+          "output": 30,
+          "cacheRead": 11462,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11514,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "ja/0/dev-dictation": [
+      {
+        "event": "tool_start",
+        "name": "new_text_document",
+        "args": {
+          "input": {
+            "text": "月曜日の予定です。"
+          }
+        }
+      },
+      {
+        "event": "state",
+        "state": "working",
+        "taskStatus": "Working"
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": true
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": true
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "tool_end",
+        "name": "new_text_document",
+        "error": false
+      },
+      {
+        "event": "state",
+        "taskStatus": "",
+        "state": "thinking"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "O.M.A.\n\n新しい文書に「月曜日の予定です。」と書いておきました。",
+        "seconds": 7.035455665,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 217,
+          "output": 55,
+          "cacheRead": 11419,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11691,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ],
+    "ja/0/dev-blank": [
+      {
+        "event": "tool_start",
+        "name": "new_text_document",
+        "args": {
+          "input": {
+            "text": ""
+          }
+        }
+      },
+      {
+        "event": "state",
+        "state": "working",
+        "taskStatus": "Working"
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": true
+      },
+      {
+        "event": "state",
+        "computerUsing": true,
+        "taskStatus": "Viewing desktop"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "tool_end",
+        "name": "new_text_document",
+        "error": false
+      },
+      {
+        "event": "state",
+        "taskStatus": "",
+        "state": "thinking"
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      },
+      {
+        "event": "answer",
+        "text": "はい、新しい空のメモを作成します。新しい空のメモを作成しました。OmaText が起動し、空白の状態になっています。",
+        "seconds": 9.946977423,
+        "model": "qwen3.5:4b",
+        "provider": "oma-local",
+        "thinkingLevel": "low",
+        "usage": {
+          "input": 217,
+          "output": 58,
+          "cacheRead": 11404,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 11679,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "stop"
+      },
+      {
+        "event": "result",
+        "facts": []
+      },
+      {
+        "event": "state",
+        "computerUsing": false
+      }
+    ]
+  }
+}

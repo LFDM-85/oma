@@ -1,0 +1,82 @@
+{
+  "split": "dev",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": true,
+      "expected": 13,
+      "successes": 12,
+      "success_rate": 0.9230769230769231,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": true,
+      "successful_latency": {
+        "n": 12,
+        "median": 25.528142185503384,
+        "p95": 96.14791853399947,
+        "max": 96.14791853399947
+      },
+      "failed_duration": {
+        "n": 1,
+        "median": 150.84729162501753,
+        "p95": 150.84729162501753,
+        "max": 150.84729162501753
+      },
+      "failures": [
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-cancel-close",
+          "status": "failed",
+          "setup_seconds": 4.81007595200208,
+          "passed": false,
+          "error": "['Agent operation timed out']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 155.657366836007,
+          "seconds": 150.84729162501753
+        }
+      ]
+    },
+    "en": {
+      "complete": true,
+      "expected": 13,
+      "successes": 12,
+      "success_rate": 0.9230769230769231,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": true,
+      "successful_latency": {
+        "n": 12,
+        "median": 25.708513829507865,
+        "p95": 51.63719636699534,
+        "max": 51.63719636699534
+      },
+      "failed_duration": {
+        "n": 1,
+        "median": 150.79865560200415,
+        "p95": 150.79865560200415,
+        "max": 150.79865560200415
+      },
+      "failures": [
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-discard",
+          "status": "failed",
+          "setup_seconds": 4.828322592016775,
+          "passed": false,
+          "error": "['Agent operation timed out']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 155.62697746400954,
+          "seconds": 150.79865560200415
+        }
+      ]
+    }
+  }
+}

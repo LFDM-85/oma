@@ -1,0 +1,19 @@
+{
+  "samples": 155,
+  "errors": 0,
+  "sampled_span_seconds": 315.92306447029114,
+  "peak_runner_rss_kib": 4671740,
+  "peak_whole_device_vram_mib": 6809,
+  "models": {
+    "qwen3.5:4b": {
+      "digest": "2a654d98e6fba55d452b7043684e9b57a947e393bbffa62485a7aac05ee4eefd",
+      "samples": 155,
+      "peak_allocation_bytes": 4197596527,
+      "peak_vram_allocation_bytes": 4197596527,
+      "context_lengths": [
+        32768
+      ]
+    }
+  },
+  "limitation": "Sampled peaks only. Unsampled startup is not inferred. Whole-device VRAM includes desktop and other processes; model allocation is a separate server estimate."
+}

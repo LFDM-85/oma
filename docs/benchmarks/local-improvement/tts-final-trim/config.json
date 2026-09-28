@@ -1,0 +1,11 @@
+{
+  "worker_sha256": "4eaa94d904eb1c84db58ec1025d8ee35fe43aa43c28c28430937ca0053f26f42",
+  "corpus_sha256": "9c87e5f2d64376f58853b4b5c1ad089d96845a37ae1d574d5c696fe2062b63d9",
+  "split": "final",
+  "source": "synthetic",
+  "voices": {
+    "ja": "jm_kumo",
+    "en": "am_michael"
+  },
+  "timing": "PCM availability plus leading silence, simulated immediate playback; not measured speaker output"
+}

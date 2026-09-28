@@ -1,0 +1,6 @@
+{"trial":0,"mode":"sequential","lastSpeechToAudioMs":5165,"recognitionMs":797,"modelFirstTextMs":2895,"speechFirstAudioMs":388,"releaseToAudioMs":4164}
+{"trial":0,"mode":"overlap","lastSpeechToAudioMs":3739,"transcriptionOverlapMs":701,"recognitionMs":0,"modelFirstTextMs":2082,"speechFirstAudioMs":595,"releaseToAudioMs":2738}
+{"trial":1,"mode":"overlap","lastSpeechToAudioMs":2948,"transcriptionOverlapMs":701,"recognitionMs":0,"modelFirstTextMs":1420,"speechFirstAudioMs":505,"releaseToAudioMs":1945}
+{"trial":1,"mode":"sequential","lastSpeechToAudioMs":3589,"recognitionMs":561,"modelFirstTextMs":1378,"speechFirstAudioMs":555,"releaseToAudioMs":2588}
+{"trial":2,"mode":"sequential","lastSpeechToAudioMs":3430,"recognitionMs":607,"modelFirstTextMs":1210,"speechFirstAudioMs":518,"releaseToAudioMs":2429}
+{"trial":2,"mode":"overlap","lastSpeechToAudioMs":4571,"transcriptionOverlapMs":701,"recognitionMs":0,"modelFirstTextMs":2946,"speechFirstAudioMs":614,"releaseToAudioMs":3568}

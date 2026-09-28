@@ -1,0 +1,7 @@
+{
+  "model": "qwen3.5:4b-q8_0",
+  "log": "/tmp/oma-evaluation-ollama.log",
+  "line": 211769,
+  "message": "load_tensors: offloaded 25/34 layers to GPU",
+  "model_digest": "8722f47c2791e6554c3244d2444b433c6241eed92d2093b53ef105626a6dcb36"
+}

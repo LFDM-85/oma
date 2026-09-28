@@ -1,0 +1,81 @@
+{
+  "split": "dev",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": true,
+      "expected": 13,
+      "successes": 11,
+      "success_rate": 0.8461538461538461,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": false,
+      "successful_latency": {
+        "n": 11,
+        "median": 4.980411183991237,
+        "p95": 18.32637552797678,
+        "max": 18.32637552797678
+      },
+      "failed_duration": {
+        "n": 2,
+        "median": 7.70865648551262,
+        "p95": 7.879596016020514,
+        "max": 7.879596016020514
+      },
+      "failures": [
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-blank",
+          "status": "failed",
+          "setup_seconds": 3.7544454419985414,
+          "passed": false,
+          "error": "{'opened': False, 'active': False, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': False, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 0, 'url': '', 'modified': False, 'busy': False}",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 11.292161428020336,
+          "seconds": 7.537716955004726
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append",
+          "status": "failed",
+          "setup_seconds": 4.057976649986813,
+          "passed": false,
+          "error": "File differs: 'Plan: A!\\n火曜日'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 11.937572164984886,
+          "seconds": 7.879596016020514
+        }
+      ]
+    },
+    "en": {
+      "complete": true,
+      "expected": 13,
+      "successes": 13,
+      "success_rate": 1.0,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": true,
+      "successful_latency": {
+        "n": 13,
+        "median": 5.807080066006165,
+        "p95": 18.139173628005665,
+        "max": 18.139173628005665
+      },
+      "failed_duration": {
+        "n": 0,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "failures": []
+    }
+  }
+}

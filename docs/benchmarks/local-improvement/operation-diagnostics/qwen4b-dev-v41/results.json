@@ -1,0 +1,311 @@
+[
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-blank",
+    "status": "passed",
+    "setup_seconds": 3.6902366559952497,
+    "passed": true,
+    "total_seconds": 14.670357021008385,
+    "seconds": 10.980121302010957
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-dictation",
+    "status": "passed",
+    "setup_seconds": 3.582660340005532,
+    "passed": true,
+    "total_seconds": 11.849627537012566,
+    "seconds": 8.26696792599978
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-mini",
+    "status": "passed",
+    "setup_seconds": 3.7027802400116343,
+    "passed": true,
+    "total_seconds": 6.900096368015511,
+    "seconds": 3.197316643985687
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-normal",
+    "status": "passed",
+    "setup_seconds": 3.8388485359901097,
+    "passed": true,
+    "total_seconds": 6.829575234994991,
+    "seconds": 2.990727237018291
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-write",
+    "status": "passed",
+    "setup_seconds": 3.5886245330038946,
+    "passed": true,
+    "total_seconds": 7.3938667949987575,
+    "seconds": 3.8052429239905905
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-math",
+    "status": "passed",
+    "setup_seconds": 3.5619436019915156,
+    "passed": true,
+    "total_seconds": 6.091369550995296,
+    "seconds": 2.529426669003442
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-discard",
+    "status": "passed",
+    "setup_seconds": 4.568273791985121,
+    "passed": true,
+    "total_seconds": 26.809464707999723,
+    "seconds": 22.241191350010922
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-cancel-close",
+    "status": "passed",
+    "setup_seconds": 4.587532106001163,
+    "passed": true,
+    "total_seconds": 16.26710819499567,
+    "seconds": 11.679576468013693
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-append",
+    "status": "failed",
+    "setup_seconds": 3.8512258020055015,
+    "passed": false,
+    "error": "File differs: 'Plan: A!\\n火曜日'",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 12.148532110004453,
+    "seconds": 8.297306856984505
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-append-multiline",
+    "status": "passed",
+    "setup_seconds": 3.6256061460007913,
+    "passed": true,
+    "total_seconds": 8.599811521999072,
+    "seconds": 4.974205811013235
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-rename",
+    "status": "passed",
+    "setup_seconds": 3.6967220089863986,
+    "passed": true,
+    "total_seconds": 7.614617140992777,
+    "seconds": 3.91789596399758
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-replace",
+    "status": "failed",
+    "setup_seconds": 3.701942790998146,
+    "passed": false,
+    "error": "['The same tool action failed three times without progress. The operation is incomplete.']",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 21.634364266996272,
+    "seconds": 17.93242206799914
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-remember",
+    "status": "passed",
+    "setup_seconds": 3.620258326001931,
+    "passed": true,
+    "total_seconds": 7.093741488002706,
+    "seconds": 3.473483766982099
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-goodbye",
+    "status": "passed",
+    "setup_seconds": 3.6545172349724453,
+    "passed": true,
+    "total_seconds": 11.318494631996145,
+    "seconds": 7.663977780001005
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-keep-editing",
+    "status": "passed",
+    "setup_seconds": 3.3154878130008,
+    "passed": true,
+    "total_seconds": 14.543547503009904,
+    "seconds": 11.228060505003668
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-blank",
+    "status": "passed",
+    "setup_seconds": 3.742040270997677,
+    "passed": true,
+    "total_seconds": 15.076599168998655,
+    "seconds": 11.3345597559819
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-dictation",
+    "status": "passed",
+    "setup_seconds": 3.6172058299998753,
+    "passed": true,
+    "total_seconds": 12.60256025698618,
+    "seconds": 8.985354862001259
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-mini",
+    "status": "passed",
+    "setup_seconds": 3.8881771310116164,
+    "passed": true,
+    "total_seconds": 7.31222980300663,
+    "seconds": 3.4240530769748148
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-normal",
+    "status": "passed",
+    "setup_seconds": 3.818320890015457,
+    "passed": true,
+    "total_seconds": 7.055590657022549,
+    "seconds": 3.237270196987083
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-write",
+    "status": "passed",
+    "setup_seconds": 3.545895693008788,
+    "passed": true,
+    "total_seconds": 8.762925315008033,
+    "seconds": 5.217030011990573
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-math",
+    "status": "passed",
+    "setup_seconds": 3.700374562002253,
+    "passed": true,
+    "total_seconds": 6.217113124002935,
+    "seconds": 2.5167391250142828
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-discard",
+    "status": "failed",
+    "setup_seconds": 4.762954834004631,
+    "passed": false,
+    "error": "{'document': {'opened': True, 'active': False, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': False, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 19, 'url': '', 'modified': True, 'busy': False}, 'panelOpened': True}",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 98.3318817600084,
+    "seconds": 93.56892747600796
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-cancel-close",
+    "status": "passed",
+    "setup_seconds": 4.885239865019685,
+    "passed": true,
+    "total_seconds": 16.721478943014517,
+    "seconds": 11.836239650001517
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-append",
+    "status": "passed",
+    "setup_seconds": 3.8000810249941424,
+    "passed": true,
+    "total_seconds": 8.30224660699605,
+    "seconds": 4.502166361024138
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-append-multiline",
+    "status": "passed",
+    "setup_seconds": 3.666645838995464,
+    "passed": true,
+    "total_seconds": 7.693133282009512,
+    "seconds": 4.026487873023143
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-rename",
+    "status": "passed",
+    "setup_seconds": 3.6796696039964445,
+    "passed": true,
+    "total_seconds": 9.763583036983619,
+    "seconds": 6.083914221992018
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-replace",
+    "status": "passed",
+    "setup_seconds": 3.720153725997079,
+    "passed": true,
+    "total_seconds": 13.103218964010011,
+    "seconds": 9.383065945003182
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-remember",
+    "status": "passed",
+    "setup_seconds": 3.753003293008078,
+    "passed": true,
+    "total_seconds": 7.19125184402219,
+    "seconds": 3.4382490369898733
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-goodbye",
+    "status": "passed",
+    "setup_seconds": 3.5153315930219833,
+    "passed": true,
+    "total_seconds": 11.055025516019668,
+    "seconds": 7.539694555976894
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-keep-editing",
+    "status": "passed",
+    "setup_seconds": 3.36475294502452,
+    "passed": true,
+    "total_seconds": 14.663114180002594,
+    "seconds": 11.298362056986662
+  }
+]

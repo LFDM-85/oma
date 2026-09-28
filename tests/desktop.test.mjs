@@ -29,3 +29,46 @@ test('desktop actions require a fresh screenshot and reject unsupported input',a
  desktop.cancel();
  await assert.rejects(desktop.call('desktop_screenshot',{}),/cancel/i);
 });
+test('modifier spelling is case insensitive without allowing unknown modifiers',async()=>{
+ const monitor={name:'test',x:0,y:0,width:1280,height:720,scale:1,transform:0};
+ const calls=[];
+ const d=new mod.Desktop({emit(){},run:async(command,args)=>{
+  if(command==='wtype'){calls.push(args);return Buffer.alloc(0)}
+  return Buffer.from(JSON.stringify(args.includes('monitors')?[monitor]:{address:'0x20'}));
+ }});
+ d.begin();d.screenshot=async()=>[];
+ const observe=()=>{d.frame={id:'f',time:Date.now(),monitor:'test',monitorBounds:mod.monitorRect(monitor),active:'0x20'}};
+ observe();await d.call('desktop_key',{frameId:'f',key:'ctrl+a'});
+ assert.ok(calls[0].includes('ctrl'));
+ observe();await assert.rejects(d.call('desktop_key',{frameId:'f',key:'unknown+a'}),/Invalid shortcut/);
+ assert.equal(calls.length,1);
+});
+test('hides the floating assistant before checking focus and sending a shortcut',async()=>{
+ let hidden=false,sent=false;
+ const monitor={name:'test',x:0,y:0,width:1280,height:720,scale:1,transform:0};
+ const d=new mod.Desktop({emit:p=>{if(p.computerUsing)hidden=true},run:async(cmd,args)=>{
+  if(cmd==='wtype'){assert.equal(hidden,true);sent=true;return Buffer.alloc(0)}
+  return Buffer.from(JSON.stringify(args.includes('monitors')?[monitor]:{address:hidden?'0x20':'0x10'}));
+ }});
+ d.begin();d.screenshot=async()=>[];
+ d.frame={id:'f',time:Date.now(),monitor:'test',monitorBounds:mod.monitorRect(monitor),active:'0x20'};
+ await d.call('desktop_key',{frameId:'f',key:'CTRL+n'});assert.equal(sent,true);
+});
+
+test('window listing exposes exact targets without requiring screenshots or focus inference',async()=>{
+ const desktop=new mod.Desktop({emit(){},async run(){return Buffer.from(JSON.stringify([
+  {address:'0x12',title:'notes — OmaText',class:'app',mapped:true,hidden:false,workspace:{id:2},irrelevant:'large data'},
+  {address:'0x13',title:'hidden',mapped:true,hidden:true,workspace:{id:3}}
+ ]))}});desktop.begin();
+ const result=await desktop.call('list_windows',{});
+ assert.deepEqual(JSON.parse(result[0].text),{windows:[{address:'0x12',title:'notes — OmaText',application:'app',workspace:2}]});
+});
+
+test('command abort completes even when a launcher exited but a descendant holds its pipes',async()=>{
+ const controller=new AbortController();
+ const started=Date.now();
+ const command=mod.runDesktopCommand(process.execPath,['-e',"require('child_process').spawn(process.execPath,['-e','setTimeout(()=>{},1500)'],{stdio:['ignore',1,2]}).unref()"],{signal:controller.signal});
+ const timer=setTimeout(()=>controller.abort(),200);
+ try{await assert.rejects(command,/abort/i);assert.ok(Date.now()-started<1200,'Cancellation waited for the launched application');}
+ finally{clearTimeout(timer)}
+});

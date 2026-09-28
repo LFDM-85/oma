@@ -1,0 +1,16 @@
+{"model": "qwen-asr-0.6b-vad", "load_seconds": 1.2067402900138404}
+{"model": "qwen-asr-0.6b-vad", "case": "new", "expected": "OmaTextで空の新規ファイルを開いてください。", "actual": "オマテクトで空の新規ファイルを開いてください。", "seconds": 2.049}
+{"model": "qwen-asr-0.6b-vad", "case": "write", "expected": "OmaTextで空の新規ファイルを開いて、次の文章を書いてください。こんにちは、今日の天気は雨です。こんにちはと今日の間は全角スペース一つだけで区切って、句読点は文章の最後の丸だけにしてください。", "actual": "OmaText で空の新規ファイルを開いて次の文章を書いてください。こんにちは。今日の天気は雨です。こんにちはと今日の間は全角スペース一つだけで区切って、句読点は文章の最後の丸だけにしてください。", "seconds": 5.357}
+{"model": "qwen-asr-0.6b-vad", "case": "close", "expected": "今開いたOmaTextのファイルを閉じてください。", "actual": "今開いたオマテクトのファイルを閉じてください。", "seconds": 1.603}
+{"model": "qwen-asr-0.6b-vad", "case": "discard", "expected": "保存しないで閉じてください。テストなので、その文章は破棄して大丈夫です。", "actual": "保存しないで閉じてください。テストなのでその文章は破棄して大丈夫です。", "seconds": 2.194}
+{"model": "qwen-asr-0.6b-vad", "case": "bye", "expected": "バイバイ。", "actual": "バイバイ。", "seconds": 0.622}
+{"model": "qwen-asr-0.6b-vad", "case": "mini", "expected": "ミニモードにして。", "actual": "ミニモードにして。", "seconds": 0.751}
+{"model": "qwen-asr-0.6b-vad", "case": "normal", "expected": "ノーマルモードに戻して。", "actual": "ノーマルモードに戻して。", "seconds": 1.103}
+{"model": "qwen-asr-0.6b-vad", "case": "question", "expected": "一足す一の答えだけ教えてください。", "actual": "一足一の答えだけ教えてください。", "seconds": 1.226}
+{"model": "qwen-asr-0.6b-vad", "case": "logs", "expected": "過去ログを見せて。", "actual": "過去ログを見せて。", "seconds": 0.774}
+{"model": "qwen-asr-0.6b-vad", "case": "close_logs", "expected": "今開いた過去ログのウィンドウを閉じて。", "actual": "今開いたカコンログのウィンドウを閉じて。", "seconds": 1.57}
+{"model": "qwen-asr-0.6b-vad", "case": "quoted_bye", "expected": "バイバイという言葉を英語に訳してください。会話はまだ続けます。", "actual": "バイバイという言葉を英語に訳してください。会話はまだ続けます。", "seconds": 2.085}
+{"model": "qwen-asr-0.6b-vad", "case": "long_reply", "expected": "一から三十まで、ゆっくり数えてください。", "actual": "一から三十までゆっくり数えてください。", "seconds": 1.213}
+{"model": "qwen-asr-0.6b-vad", "case": "interrupt", "expected": "数えるのをやめて、二足す二の答えだけ教えてください。", "actual": "数えるのをやめて、みたすぐの答えだけ教えてください。", "seconds": 1.773}
+{"model": "qwen-asr-0.6b-vad", "case": "silence", "expected": "", "actual": "", "seconds": 0.126}
+{"model": "qwen-asr-0.6b-vad", "case": "quiet-noise", "expected": "", "actual": "", "seconds": 0.119}

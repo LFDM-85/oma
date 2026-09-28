@@ -1,0 +1,81 @@
+{
+  "split": "dev",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": true,
+      "expected": 13,
+      "successes": 13,
+      "success_rate": 1.0,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": true,
+      "successful_latency": {
+        "n": 13,
+        "median": 26.52949564199662,
+        "p95": 83.06975957399118,
+        "max": 83.06975957399118
+      },
+      "failed_duration": {
+        "n": 0,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "failures": []
+    },
+    "en": {
+      "complete": true,
+      "expected": 13,
+      "successes": 11,
+      "success_rate": 0.8461538461538461,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": false,
+      "successful_latency": {
+        "n": 11,
+        "median": 23.740069915016647,
+        "p95": 47.71517275899532,
+        "max": 47.71517275899532
+      },
+      "failed_duration": {
+        "n": 2,
+        "median": 83.21030621051614,
+        "p95": 150.93173547301558,
+        "max": 150.93173547301558
+      },
+      "failures": [
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-discard",
+          "status": "failed",
+          "setup_seconds": 4.864806044002762,
+          "passed": false,
+          "error": "['Agent operation timed out']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 155.79654083799687,
+          "seconds": 150.93173547301558
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-goodbye",
+          "status": "failed",
+          "setup_seconds": 3.6550137650046963,
+          "passed": false,
+          "error": "",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 19.14389026002027,
+          "seconds": 15.488876948016696
+        }
+      ]
+    }
+  }
+}

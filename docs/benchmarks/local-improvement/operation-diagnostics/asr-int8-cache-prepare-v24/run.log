@@ -1,0 +1,12 @@
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  51%|█████▏    | 363/707 [00:00<00:00, 3628.06it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 979.91it/s] 
+/home/komagata/Projects/komagata/oma/tests/voice/evaluation/asr-int8-cache.py:30: DeprecationWarning: torch.ao.quantization is deprecated and will be removed in 2.10. 
+For migrations of users: 
+1. Eager mode quantization (torch.ao.quantization.quantize, torch.ao.quantization.quantize_dynamic), please migrate to use torchao eager mode quantize_ API instead 
+2. FX graph mode quantization (torch.ao.quantization.quantize_fx.prepare_fx,torch.ao.quantization.quantize_fx.convert_fx, please migrate to use torchao pt2e quantization API instead (prepare_pt2e, convert_pt2e) 
+3. pt2e quantization has been migrated to torchao (https://github.com/pytorch/ao/tree/main/torchao/quantization/pt2e) 
+see https://github.com/pytorch/ao/issues/2259 for more details
+  model=torch.ao.quantization.quantize_dynamic(engine.asr_model,{torch.nn.Linear},dtype=torch.qint8,inplace=True)
+{"language": "ja", "id": "question", "expected": "一と一を足した数だけを答えて。", "sha256": "fe0281722277a060fdf25d96bcacb08051a22748b08db5aa86b7749fd75b7a63", "actual": "一度一度お出した数だけをこたえて。", "seconds": 1.3342365230200812}
+{"language": "ja", "id": "write", "expected": "オマテキストに新しい文書を作って、明日の予定を確認します、と入力して。文章の最後に句点を一つ付けて、それ以外の文字や空白は入れないで。", "sha256": "f2b4e51ecd0ed6772a4d025f647d7277523201037ac9214204b6bf65fbae5170", "actual": "オマテキストに新しい文章を作って、明日の予定を確認します。と入力して、文章の最後に句点を1つつけて、それ以外の文字や空白は入れないで。", "seconds": 4.250329776987201}
+{"language": "en", "id": "question", "expected": "Add one and one. Give only the number.", "sha256": "e2f489ac72311a7df63b24ecf7cfd7c95ac4d4a1df3b46383d64282cb3d9494e", "actual": "Add one and one. Give only the number.", "seconds": 1.222691284987377}
+{"language": "en", "id": "write", "expected": "Create a fresh OmaText document containing Tomorrow is a new day. Use a capital T, one space between words and a final period. Include no other text.", "sha256": "79020cc122488bd1bdba2ca20f9e1d782efb02f17199b91e91fac53bfa3c0120", "actual": "Create a fresh OmaText document containing \"Tomorrow is a new day.\" Use a capital T, one space between words, and a final period. Include no other text.", "seconds": 4.671057011990342}

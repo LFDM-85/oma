@@ -1,20 +1,21 @@
-import {loadApiKey} from '../runtime/credentials.mjs';
-// Opt-in integration check. Fictional data only; bills a short API response.
-import {mkdtempSync,rmSync,writeFileSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';
-import {Memory} from '../runtime/memory.mjs';import {Oma} from '../runtime/oma.mjs';import {Codex} from '../runtime/codex.mjs';
-const key=await loadApiKey();
-const dir=mkdtempSync(join(tmpdir(),'oma-live-'));const memory=new Memory(join(dir,'memory.sqlite'));const pcm=[];const events=[];
-const audio={played:0,pumping:false,enqueue(b){pcm.push(b)},finish(){},stop(){},stopRecording:async()=>{},close:async()=>{}};
-const emit=e=>{events.push(e);if(e.error)console.log('ERROR:',e.error);};
-const codex=new Codex({home:join(dir,'codex'),cwd:dir,key,memory,emit});const oma=new Oma({key,memory,emit,audio,codex});
-let passed=false;
-const timer=setTimeout(()=>{console.error('TIMEOUT');process.exit(1)},120000);
+// Opt-in: real model and speech APIs, fictional data in a disposable workspace.
+import assert from 'node:assert/strict';
+import {mkdtempSync,rmSync,readFileSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';
+import {loadApiKey} from '../runtime/credentials.mjs';import {Memory} from '../runtime/memory.mjs';import {PiAgent} from '../runtime/pi.mjs';import {Speech} from '../runtime/speech.mjs';import {Oma} from '../runtime/oma.mjs';
+const key=await loadApiKey();if(!key)throw Error('No configured speech API key.');
+const dir=mkdtempSync(join(tmpdir(),'oma-pi-live-'));const memory=new Memory(join(dir,'memory.sqlite'));
+const options={home:join(dir,'pi'),cwd:dir,memory,locale:'ja-JP',emit(p){if(p.error)throw Error(p.error)}};
+let agent=new PiAgent(options);const speech=new Speech({key,locale:'ja-JP',env:{}});let firstAudio;const pcm=[],events=[];
+const audio={played:0,pumping:false,stop(){},async stopRecording(){},async close(){},record(fn){this.input=fn},enqueue(b){firstAudio??=performance.now();pcm.push(b)},finish(){}};
+let oma=new Oma({agent,speech,memory,audio,emit:p=>events.push(p),locale:'ja-JP'});
 try{
- await oma.text('Say exactly: Systems online. I am O.M.A.');
- for(let n=0;n<400;n++){await new Promise(r=>setTimeout(r,50));if(pcm.length&&!oma.active)break;}
- if(!pcm.length)throw Error('No audio received');console.log('Realtime audio bytes:',Buffer.concat(pcm).length);console.log('Realtime transcript:',events.filter(e=>e.assistantText).at(-1)?.assistantText);
- writeFileSync('/tmp/oma-voice-preview.pcm',Buffer.concat(pcm));
- const result=await codex.run('Do not use tools. Reply exactly OMA_READY.');console.log('Codex:',result);
- if(!result.includes('OMA_READY'))throw Error('Codex response missing');
- console.log('LIVE PASS');passed=true;
-}finally{clearTimeout(timer);await oma.close();setTimeout(()=>{memory.close();rmSync(dir,{recursive:true,force:true});process.exit(passed?0:1)},500);}
+ const started=performance.now();await oma.text('日本語で「準備できました」とだけ答えてください。');
+ assert.ok(pcm.length);assert.ok(!events.some(e=>e.error),JSON.stringify(events.filter(e=>e.error)));
+ console.log('Pi -> speech first audio ms:',Math.round(firstAudio-started));
+ const recognized=await speech.transcribe(Buffer.concat(pcm));assert.match(recognized,/準備/);console.log('Japanese speech round trip: PASS');
+ await agent.run('このテスト専用の好みをrememberで保存してください。keyはtest-color、valueはfictional emerald greenです。');assert.ok(memory.facts().some(f=>f.value.includes('emerald')));
+ await agent.run('現在の作業ディレクトリにoma-test.txtを作成して、内容をOMA_PI_OKだけにしてください。作成したファイルを読み返して確認してください。');assert.equal(readFileSync(join(dir,'oma-test.txt'),'utf8').trim(),'OMA_PI_OK');console.log('Pi real file action: PASS');
+ await agent.close();agent=new PiAgent(options);const recall=await agent.run('保存したテスト専用の好きな色を英語で答えてください。');assert.match(recall,/emerald/i);console.log('Pi restart + durable recall: PASS');
+ await agent.run('forgetツールを使ってemeraldを含むテストの記憶を忘れてください。');assert.equal(memory.search('emerald').length,0);console.log('Pi forget + session reset: PASS');
+ console.log('LIVE PASS');
+}finally{await agent.close();await oma.close();memory.close();rmSync(dir,{recursive:true,force:true});}

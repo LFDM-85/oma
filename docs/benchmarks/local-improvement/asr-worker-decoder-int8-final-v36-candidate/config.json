@@ -1,0 +1,20 @@
+{
+  "model": "qwen3-asr-1.7b",
+  "worker_sha256": "84cf5960553a7af972ad0157295d937e290153877545c4d6d3ca2bdb0feb6ed3",
+  "corpus_sha256": "9c87e5f2d64376f58853b4b5c1ad089d96845a37ae1d574d5c696fe2062b63d9",
+  "split": "final",
+  "path": "JSON IPC, 24k PCM, scipy resample_poly",
+  "warmups": [
+    {
+      "language": "ja",
+      "seconds": 9.827163236011984,
+      "error": null
+    },
+    {
+      "language": "en",
+      "seconds": 0.827578608004842,
+      "error": null
+    }
+  ],
+  "peak_worker_rss_kib": 6626660
+}

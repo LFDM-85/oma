@@ -1,0 +1,15 @@
+{"event":"tool_start","name":"new_text_document","args":{"text":"こんにちは　今日の天気は雨です。"}}
+{"event":"state","state":"working","taskStatus":"Working"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":false}
+{"event":"tool_end","name":"new_text_document","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"新しいファイルが作成されました。OmaText で「こんにちは　今日の天気は雨です。」という文字が入力された状態になっています。","seconds":6.1506492029999995,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"off","usage":{"input":163,"output":28,"cacheRead":11308,"cacheWrite":0,"reasoning":0,"totalTokens":11499,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

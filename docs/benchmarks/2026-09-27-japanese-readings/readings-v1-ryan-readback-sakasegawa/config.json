@@ -1,0 +1,133 @@
+{
+  "corpus_sha256": "3fafbe184411fbb267b230efeab702fe343f0e91125c45777135ca0e8f45e2a0",
+  "environment": {
+    "system": "Linux",
+    "node": "siro",
+    "release": "7.2.5-3-omarchy",
+    "version": "#1 SMP PREEMPT_DYNAMIC Mon, 14 Sep 2026 19:55:01 +0000",
+    "machine": "x86_64",
+    "processor": ""
+  },
+  "threads": 8,
+  "seed": 0,
+  "versions": {
+    "torch": "2.8.0+cpu",
+    "transformers": "5.17.0",
+    "numpy": "2.5.3",
+    "soundfile": "0.14.0"
+  },
+  "listening": "pending",
+  "model": "sakasegawa/japanese-wav2vec2-large-hiragana-ctc",
+  "weights": {
+    "resolved_path": "/home/komagata/.local/share/oma/local/huggingface/hub/models--sakasegawa--japanese-wav2vec2-large-hiragana-ctc/snapshots/d30d246cd24a225821d03d183de7bb2e769e18df",
+    "files": {
+      "README.md": {
+        "bytes": 4381,
+        "sha256": "cbb06c874dbde5afb8da724eb9ad04d70b47ac96453daa31dc0a0f73aa1eadb6"
+      },
+      "best-medium-ep5-inference.pt": {
+        "bytes": 631542555,
+        "sha256": "1c8d97f2c01560da21df4095cea800f0b6f12dd1269c8e2233e6db659b502e14"
+      }
+    }
+  },
+  "encoder_config": {
+    "resolved_path": "/home/komagata/.local/share/oma/local/huggingface/hub/models--reazon-research--japanese-wav2vec2-large/snapshots/55969d3700533972fcc4ff0e3747f0bc3c21e4c1",
+    "files": {
+      "config.json": {
+        "bytes": 2044,
+        "sha256": "d629fa61c03867a32667073d781b6ef1cd3fb08afe667affdfa8fc92ed330792"
+      },
+      "preprocessor_config.json": {
+        "bytes": 214,
+        "sha256": "60ca5a31e13f69ee2fbf147504c8676db5f6398fd7a6b12294341dff838edfcf"
+      }
+    }
+  },
+  "decoder": "Greedy kana CTC; encoder and kana head strict-loaded; phoneme auxiliary head unused",
+  "kana_vocabulary": {
+    "0": "<blank>",
+    "1": "あ",
+    "2": "い",
+    "3": "う",
+    "4": "え",
+    "5": "お",
+    "6": "か",
+    "7": "き",
+    "8": "く",
+    "9": "け",
+    "10": "こ",
+    "11": "さ",
+    "12": "し",
+    "13": "す",
+    "14": "せ",
+    "15": "そ",
+    "16": "た",
+    "17": "ち",
+    "18": "つ",
+    "19": "て",
+    "20": "と",
+    "21": "な",
+    "22": "に",
+    "23": "ぬ",
+    "24": "ね",
+    "25": "の",
+    "26": "は",
+    "27": "ひ",
+    "28": "ふ",
+    "29": "へ",
+    "30": "ほ",
+    "31": "ま",
+    "32": "み",
+    "33": "む",
+    "34": "め",
+    "35": "も",
+    "36": "や",
+    "37": "ゆ",
+    "38": "よ",
+    "39": "ら",
+    "40": "り",
+    "41": "る",
+    "42": "れ",
+    "43": "ろ",
+    "44": "わ",
+    "45": "を",
+    "46": "ん",
+    "47": "が",
+    "48": "ぎ",
+    "49": "ぐ",
+    "50": "げ",
+    "51": "ご",
+    "52": "ざ",
+    "53": "じ",
+    "54": "ず",
+    "55": "ぜ",
+    "56": "ぞ",
+    "57": "だ",
+    "58": "ぢ",
+    "59": "づ",
+    "60": "で",
+    "61": "ど",
+    "62": "ば",
+    "63": "び",
+    "64": "ぶ",
+    "65": "べ",
+    "66": "ぼ",
+    "67": "ぱ",
+    "68": "ぴ",
+    "69": "ぷ",
+    "70": "ぺ",
+    "71": "ぽ",
+    "72": "ぁ",
+    "73": "ぃ",
+    "74": "ぅ",
+    "75": "ぇ",
+    "76": "ぉ",
+    "77": "っ",
+    "78": "ゃ",
+    "79": "ゅ",
+    "80": "ょ",
+    "81": "ゎ",
+    "82": "ー"
+  }
+}

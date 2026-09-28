@@ -1,0 +1,2028 @@
+{
+  "scorer_sha256": "3d6ba35dac7ff3f4d2c9a3a0aaa81ed3b876ca394f0cef183c7e49b854620716",
+  "metrics_sha256": "1e16984fba1cf0d620fe0a60449dda9f6e02323c4f9849915bb96b3275ac77f4",
+  "pyopenjtalk_version": "0.4.1",
+  "scope": "Japanese reading, 32 fixed cases; kana ASR proxies, human listening pending",
+  "voices": {
+    "jm_kumo": {
+      "1": {
+        "complete": true,
+        "missing": [],
+        "errors": [],
+        "expected": 32,
+        "observed": 32,
+        "exact": 9,
+        "kana_error_rate": 0.15616438356164383,
+        "scores": [
+          {
+            "id": "ja-reading-01",
+            "reference": "にんきのみせです",
+            "actual": "にんきのみせです",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-02",
+            "reference": "ひとけのないみちです",
+            "actual": "にんきのまえみちです",
+            "edits": 5,
+            "reference_chars": 10,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-03",
+            "reference": "せいぶつのじゅぎょうです",
+            "actual": "せーぶつのじゅーぎょーです",
+            "edits": 3,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-04",
+            "reference": "なまものなのでれいぞうしてください",
+            "actual": "せーぶつなのでれーぞーしてください",
+            "edits": 6,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-05",
+            "reference": "いちばでやさいをかいます",
+            "actual": "ひじょーでやさいをかえます",
+            "edits": 5,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-06",
+            "reference": "かぶしきしじょうがひらきます",
+            "actual": "かぶしきしじょーがひらきます",
+            "edits": 1,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-07",
+            "reference": "じょうずなえんそうです",
+            "actual": "じょーずえんそーです",
+            "edits": 3,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-08",
+            "reference": "ぶたいのかみてからとうじょうします",
+            "actual": "ぶたいのかみてからとーじょーします",
+            "edits": 2,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-09",
+            "reference": "いちにちじゅうやすみます",
+            "actual": "いちにちじゅやすみます",
+            "edits": 1,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-10",
+            "reference": "しがつついたちです",
+            "actual": "よがずずいたちです",
+            "edits": 3,
+            "reference_chars": 9,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-11",
+            "reference": "ひとりでまちます",
+            "actual": "ひとりでまちます",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-12",
+            "reference": "ふたりではなします",
+            "actual": "ふたりではなします",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-13",
+            "reference": "さんぼんあります",
+            "actual": "さんぽあります",
+            "edits": 2,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-14",
+            "reference": "ろっぽんあります",
+            "actual": "ろっぽんあります",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-15",
+            "reference": "じっぽんあります",
+            "actual": "じっぽんあります",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-16",
+            "reference": "にじゅっさいになりました",
+            "actual": "にじゅっさいになりました",
+            "edits": 0,
+            "reference_chars": 12,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-17",
+            "reference": "くがつはつかです",
+            "actual": "きゅーがつはつかです",
+            "edits": 3,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-18",
+            "reference": "ごごよじです",
+            "actual": "ごごしじです",
+            "edits": 1,
+            "reference_chars": 6,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-19",
+            "reference": "おんどわにじゅうさんてんごどです",
+            "actual": "おんどわにじゅーさんてんごどです",
+            "edits": 1,
+            "reference_chars": 16,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-20",
+            "reference": "せんにひゃくさんじゅうよんえんです",
+            "actual": "にくさんじゅーよんえんです",
+            "edits": 5,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-21",
+            "reference": "かいぎょうしてください",
+            "actual": "かいぎょーしてください",
+            "edits": 1,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-22",
+            "reference": "ぎょうかんをひろげてください",
+            "actual": "よーかんをひろげてください",
+            "edits": 3,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-23",
+            "reference": "くてんをつけてください",
+            "actual": "くてんをつけてください",
+            "edits": 0,
+            "reference_chars": 11,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-24",
+            "reference": "とうてんをつけてください",
+            "actual": "どーてんをつけてください",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-25",
+            "reference": "ほぞんしてとじてください",
+            "actual": "ほぞんしてとりじてください",
+            "edits": 1,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-26",
+            "reference": "よみあげをとめてください",
+            "actual": "よみあげをとめてください",
+            "edits": 0,
+            "reference_chars": 12,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-27",
+            "reference": "りれきをひらいてください",
+            "actual": "れきをひらいてください",
+            "edits": 1,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-28",
+            "reference": "しんきさくせいしてください",
+            "actual": "しんきさくせーしてください",
+            "edits": 1,
+            "reference_chars": 13,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-29",
+            "reference": "とうきょうとちよだくです",
+            "actual": "どーきょーとちおだくです",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-30",
+            "reference": "おおさかふひらかたしです",
+            "actual": "おーさかふらかたしです",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-31",
+            "reference": "いばらきけんみとしです",
+            "actual": "いばらきけんみとしです",
+            "edits": 0,
+            "reference_chars": 11,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-32",
+            "reference": "やまのてせんにのります",
+            "actual": "やまてせんにのります",
+            "edits": 1,
+            "reference_chars": 11,
+            "exact": false
+          }
+        ],
+        "interpretation": "Acoustic kana-ASR proxy, not confirmed pronunciation accuracy",
+        "target_matches": 10,
+        "phonetic_target_matches": 16,
+        "unscorable": 0,
+        "phonetic_target_match_rate": 0.5,
+        "kana_target_match_rate": 0.3125,
+        "categories": {
+          "commands": {
+            "count": 8,
+            "target_matches": 2,
+            "phonetic_target_matches": 4
+          },
+          "context": {
+            "count": 8,
+            "target_matches": 2,
+            "phonetic_target_matches": 5
+          },
+          "names": {
+            "count": 4,
+            "target_matches": 1,
+            "phonetic_target_matches": 1
+          },
+          "numbers": {
+            "count": 12,
+            "target_matches": 5,
+            "phonetic_target_matches": 6
+          }
+        }
+      },
+      "1.2": {
+        "complete": true,
+        "missing": [],
+        "errors": [],
+        "expected": 32,
+        "observed": 32,
+        "exact": 5,
+        "kana_error_rate": 0.2273972602739726,
+        "scores": [
+          {
+            "id": "ja-reading-01",
+            "reference": "にんきのみせです",
+            "actual": "んきのみです",
+            "edits": 2,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-02",
+            "reference": "ひとけのないみちです",
+            "actual": "んきのまえちです",
+            "edits": 6,
+            "reference_chars": 10,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-03",
+            "reference": "せいぶつのじゅぎょうです",
+            "actual": "せぶつのじゅーぎょーです",
+            "edits": 3,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-04",
+            "reference": "なまものなのでれいぞうしてください",
+            "actual": "せぶつなもでれーぞーしてください",
+            "edits": 7,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-05",
+            "reference": "いちばでやさいおかいます",
+            "actual": "ひどでやさおかえます",
+            "edits": 5,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-06",
+            "reference": "かぶしきしじょうがひらきます",
+            "actual": "ぶすきしじょーがひらきます",
+            "edits": 3,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-07",
+            "reference": "じょうずなえんそうです",
+            "actual": "ょーずえんそーです",
+            "edits": 4,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-08",
+            "reference": "ぶたいのかみてからとうじょうします",
+            "actual": "うたいのかみてからとーじょーします",
+            "edits": 3,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-09",
+            "reference": "いちにちじゅうやすみます",
+            "actual": "いちにちじゅやすみます",
+            "edits": 1,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-10",
+            "reference": "しがつついたちです",
+            "actual": "よいたちです",
+            "edits": 4,
+            "reference_chars": 9,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-11",
+            "reference": "ひとりでまちます",
+            "actual": "りでまちます",
+            "edits": 2,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-12",
+            "reference": "ふたりではなします",
+            "actual": "ふたりではなします",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-13",
+            "reference": "さんぼんあります",
+            "actual": "さんぽあります",
+            "edits": 2,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-14",
+            "reference": "ろっぽんあります",
+            "actual": "ろっぽんあります",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-15",
+            "reference": "じっぽんあります",
+            "actual": "じっぽんあります",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-16",
+            "reference": "にじゅっさいになりました",
+            "actual": "にじゅっさいになりました",
+            "edits": 0,
+            "reference_chars": 12,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-17",
+            "reference": "くがつはつかです",
+            "actual": "きゅがつはつかです",
+            "edits": 2,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-18",
+            "reference": "ごごよじです",
+            "actual": "ごごしじです",
+            "edits": 1,
+            "reference_chars": 6,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-19",
+            "reference": "おんどわにじゅうさんてんごどです",
+            "actual": "おんどわにじゅーさんてんごどです",
+            "edits": 1,
+            "reference_chars": 16,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-20",
+            "reference": "せんにひゃくさんじゅうよんえんです",
+            "actual": "にはくさんじゅーよんえんです",
+            "edits": 5,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-21",
+            "reference": "かいぎょうしてください",
+            "actual": "かぎしてください",
+            "edits": 3,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-22",
+            "reference": "ぎょうかんをひろげてください",
+            "actual": "よかんをひろげてください",
+            "edits": 3,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-23",
+            "reference": "くてんをつけてください",
+            "actual": "てつけてください",
+            "edits": 3,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-24",
+            "reference": "とうてんをつけてください",
+            "actual": "どでつけてください",
+            "edits": 5,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-25",
+            "reference": "ほぞんしてとじてください",
+            "actual": "ほぞんしてとりでください",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-26",
+            "reference": "よみあげをとめてください",
+            "actual": "よみあげをとめてください",
+            "edits": 0,
+            "reference_chars": 12,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-27",
+            "reference": "りれきをひらいてください",
+            "actual": "れきをひらいてください",
+            "edits": 1,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-28",
+            "reference": "しんきさくせいしてください",
+            "actual": "ひんさくせーしてください",
+            "edits": 3,
+            "reference_chars": 13,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-29",
+            "reference": "とうきょうとちよだくです",
+            "actual": "どきょーとちだくです",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-30",
+            "reference": "おおさかふひらかたしです",
+            "actual": "おさかふらかです",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-31",
+            "reference": "いばらきけんみとしです",
+            "actual": "ばきけんみとしです",
+            "edits": 2,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-32",
+            "reference": "やまのてせんにのります",
+            "actual": "やまてんにのります",
+            "edits": 2,
+            "reference_chars": 11,
+            "exact": false
+          }
+        ],
+        "interpretation": "Acoustic kana-ASR proxy, not confirmed pronunciation accuracy",
+        "target_matches": 6,
+        "phonetic_target_matches": 8,
+        "unscorable": 0,
+        "phonetic_target_match_rate": 0.25,
+        "kana_target_match_rate": 0.1875,
+        "categories": {
+          "commands": {
+            "count": 8,
+            "target_matches": 1,
+            "phonetic_target_matches": 1
+          },
+          "context": {
+            "count": 8,
+            "target_matches": 1,
+            "phonetic_target_matches": 2
+          },
+          "names": {
+            "count": 4,
+            "target_matches": 0,
+            "phonetic_target_matches": 0
+          },
+          "numbers": {
+            "count": 12,
+            "target_matches": 4,
+            "phonetic_target_matches": 5
+          }
+        }
+      }
+    },
+    "Ryan": {
+      "1": {
+        "complete": true,
+        "missing": [],
+        "errors": [],
+        "expected": 32,
+        "observed": 32,
+        "exact": 8,
+        "kana_error_rate": 0.30327868852459017,
+        "scores": [
+          {
+            "id": "ja-reading-01",
+            "reference": "にんきのみせです",
+            "actual": "にんきのみせです",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-02",
+            "reference": "ひとけのないみちです",
+            "actual": "みんきのないみちですす",
+            "edits": 4,
+            "reference_chars": 10,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-03",
+            "reference": "せいぶつのじゅぎょうです",
+            "actual": "せーぶつのじゅぎょーです",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-04",
+            "reference": "なまものなのでれいぞうしてください",
+            "actual": "せーぶつなのでれーぞーしてください",
+            "edits": 6,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-05",
+            "reference": "いちばでやさいをかいます",
+            "actual": "しじょーでやさいをかえます",
+            "edits": 5,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-06",
+            "reference": "かぶしきしじょうがひらきます",
+            "actual": "かぶしきしじょーがひらきます",
+            "edits": 1,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-07",
+            "reference": "じょうずなえんそうです",
+            "actual": "じょーずえんそーです",
+            "edits": 3,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-08",
+            "reference": "ぶたいのかみてからとうじょうします",
+            "actual": "ぶたいのじょーずからとーじょーします",
+            "edits": 6,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-09",
+            "reference": "いちにちじゅうやすみます",
+            "actual": "いちにちじゅやすみます",
+            "edits": 1,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-10",
+            "reference": "しがつついたちです",
+            "actual": "しがつついたちです",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-11",
+            "reference": "ひとりでまちます",
+            "actual": "ひとりでまちます",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-12",
+            "reference": "ふたりではなします",
+            "actual": "ふたりではなします",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-13",
+            "reference": "さんぼんあります",
+            "actual": "さんぼんあります",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-14",
+            "reference": "ろっぽんあります",
+            "actual": "ろっぽんあります",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-15",
+            "reference": "じゅっぽんあります",
+            "actual": "じゅっぽんあります",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-16",
+            "reference": "にじゅっさいになりました",
+            "actual": "ああねえんなほーいいあみあった",
+            "edits": 13,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-17",
+            "reference": "くがつはつかです",
+            "actual": "くがつはつかで",
+            "edits": 1,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-18",
+            "reference": "ごごよじです",
+            "actual": "ごごよじです",
+            "edits": 0,
+            "reference_chars": 6,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-19",
+            "reference": "おんどわにじゅうさんてんごどです",
+            "actual": "なぐなねぐわどりんなぱくどななけんばいやらだごすっとわにまねこれだわをいついくがおぼー",
+            "edits": 39,
+            "reference_chars": 16,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-20",
+            "reference": "せんにひゃくさんじゅうよんえんです",
+            "actual": "せんにひゃくさんじゅーよんえんです",
+            "edits": 1,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-21",
+            "reference": "かいぎょうしてください",
+            "actual": "かいこしてください",
+            "edits": 3,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-22",
+            "reference": "ぎょうかんをひろげてください",
+            "actual": "ぎょーかんをひろげてください",
+            "edits": 1,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-23",
+            "reference": "くてんをつけてください",
+            "actual": "くてをつけてください",
+            "edits": 1,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-24",
+            "reference": "とうてんをつけてください",
+            "actual": "りだんつけてください",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-25",
+            "reference": "ほぞんしてとじてください",
+            "actual": "ほぞんしてとちてくださ",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-26",
+            "reference": "よみあげをとめてください",
+            "actual": "みあげをとめてくださ",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-27",
+            "reference": "りれきをひらいてください",
+            "actual": "みきをひらいてください",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-28",
+            "reference": "しんきさくせいしてください",
+            "actual": "しんきさせーしてください",
+            "edits": 2,
+            "reference_chars": 13,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-29",
+            "reference": "とうきょうとちよだくです",
+            "actual": "とーきょーとじーだくです",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-30",
+            "reference": "おおさかふひらかたしです",
+            "actual": "おーさかふまいかたしです",
+            "edits": 3,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-31",
+            "reference": "いばらきけんみとしです",
+            "actual": "いばらぎけんないどしです",
+            "edits": 4,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-32",
+            "reference": "やまのてせんにのります",
+            "actual": "やまてせんにのります",
+            "edits": 1,
+            "reference_chars": 11,
+            "exact": false
+          }
+        ],
+        "interpretation": "Acoustic kana-ASR proxy, not confirmed pronunciation accuracy",
+        "target_matches": 9,
+        "phonetic_target_matches": 14,
+        "unscorable": 0,
+        "phonetic_target_match_rate": 0.4375,
+        "kana_target_match_rate": 0.28125,
+        "categories": {
+          "commands": {
+            "count": 8,
+            "target_matches": 0,
+            "phonetic_target_matches": 1
+          },
+          "context": {
+            "count": 8,
+            "target_matches": 1,
+            "phonetic_target_matches": 4
+          },
+          "names": {
+            "count": 4,
+            "target_matches": 0,
+            "phonetic_target_matches": 0
+          },
+          "numbers": {
+            "count": 12,
+            "target_matches": 8,
+            "phonetic_target_matches": 9
+          }
+        }
+      },
+      "1.2": {
+        "complete": true,
+        "missing": [],
+        "errors": [],
+        "expected": 32,
+        "observed": 32,
+        "exact": 10,
+        "kana_error_rate": 0.2786885245901639,
+        "scores": [
+          {
+            "id": "ja-reading-01",
+            "reference": "にんきのみせです",
+            "actual": "にんきのみせです",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-02",
+            "reference": "ひとけのないみちです",
+            "actual": "にんきのないみちです",
+            "edits": 3,
+            "reference_chars": 10,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-03",
+            "reference": "せいぶつのじゅぎょうです",
+            "actual": "せーぶつのじゅぎょーです",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-04",
+            "reference": "なまものなのでれいぞうしてください",
+            "actual": "せーぶつなのでれーぞーをしてください",
+            "edits": 7,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-05",
+            "reference": "いちばでやさいをかいます",
+            "actual": "しじょーでやさいをかえます",
+            "edits": 5,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-06",
+            "reference": "かぶしきしじょうがひらきます",
+            "actual": "かぶしきしじょーがらきます",
+            "edits": 2,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-07",
+            "reference": "じょうずなえんそうです",
+            "actual": "じょーずのえーそーです",
+            "edits": 4,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-08",
+            "reference": "ぶたいのかみてからとうじょうします",
+            "actual": "ぶたいのじょーずからとーじょーします",
+            "edits": 6,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-09",
+            "reference": "いちにちじゅうやすみます",
+            "actual": "いちにちじゅやすみます",
+            "edits": 1,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-10",
+            "reference": "しがつついたちです",
+            "actual": "しがつついたちです",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-11",
+            "reference": "ひとりでまちます",
+            "actual": "ひとりでまちます",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-12",
+            "reference": "ふたりではなします",
+            "actual": "ふたりではなします",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-13",
+            "reference": "さんぼんあります",
+            "actual": "さんぼんあります",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-14",
+            "reference": "ろっぽんあります",
+            "actual": "ろっぽんあります",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-15",
+            "reference": "じゅっぽんあります",
+            "actual": "じゅっぽんあります",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-16",
+            "reference": "にじゅっさいになりました",
+            "actual": "ねえんなほいいあみあすた",
+            "edits": 10,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-17",
+            "reference": "くがつはつかです",
+            "actual": "くがつはつかです",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-18",
+            "reference": "ごごよじです",
+            "actual": "ごごよじです",
+            "edits": 0,
+            "reference_chars": 6,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-19",
+            "reference": "おんどはにじゅうさんてんごどです",
+            "actual": "ななねぐどなばくどななけんばいらごーすっとわにまねこれだばをいついくがぼー",
+            "edits": 34,
+            "reference_chars": 16,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-20",
+            "reference": "せんにひゃくさんじゅうよんえんです",
+            "actual": "せんにひゃくさんじゅーよんえんです",
+            "edits": 1,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-21",
+            "reference": "かいぎょうしてください",
+            "actual": "かいこんしてください",
+            "edits": 3,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-22",
+            "reference": "ぎょうかんをひろげてください",
+            "actual": "ぎょーかんをひろげてください",
+            "edits": 1,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-23",
+            "reference": "くてんをつけてください",
+            "actual": "くてをつけてください",
+            "edits": 1,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-24",
+            "reference": "とうてんをつけてください",
+            "actual": "るだんつけてください",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-25",
+            "reference": "ほぞんしてとじてください",
+            "actual": "ほぞんしてとちてくださ",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-26",
+            "reference": "よみあげをとめてください",
+            "actual": "よみあげをとめてくださ",
+            "edits": 1,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-27",
+            "reference": "りれきをひらいてください",
+            "actual": "りれきをひらいてください",
+            "edits": 0,
+            "reference_chars": 12,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-28",
+            "reference": "しんきさくせいしてください",
+            "actual": "しんきさせーしてください",
+            "edits": 2,
+            "reference_chars": 13,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-29",
+            "reference": "とうきょうとちよだくです",
+            "actual": "とーきょーとじーだくです",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-30",
+            "reference": "おおさかふひらかたしです",
+            "actual": "おーさかふまえいかたしです",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-31",
+            "reference": "いばらきけんみとしです",
+            "actual": "いばらぎけんないどしです",
+            "edits": 4,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-32",
+            "reference": "やまのてせんにのります",
+            "actual": "やまてせんにのります",
+            "edits": 1,
+            "reference_chars": 11,
+            "exact": false
+          }
+        ],
+        "interpretation": "Acoustic kana-ASR proxy, not confirmed pronunciation accuracy",
+        "target_matches": 11,
+        "phonetic_target_matches": 15,
+        "unscorable": 0,
+        "phonetic_target_match_rate": 0.46875,
+        "kana_target_match_rate": 0.34375,
+        "categories": {
+          "commands": {
+            "count": 8,
+            "target_matches": 2,
+            "phonetic_target_matches": 3
+          },
+          "context": {
+            "count": 8,
+            "target_matches": 1,
+            "phonetic_target_matches": 4
+          },
+          "names": {
+            "count": 4,
+            "target_matches": 0,
+            "phonetic_target_matches": 0
+          },
+          "numbers": {
+            "count": 12,
+            "target_matches": 8,
+            "phonetic_target_matches": 8
+          }
+        }
+      }
+    },
+    "Uncle_Fu": {
+      "1": {
+        "complete": true,
+        "missing": [],
+        "errors": [],
+        "expected": 32,
+        "observed": 32,
+        "exact": 9,
+        "kana_error_rate": 0.1878453038674033,
+        "scores": [
+          {
+            "id": "ja-reading-01",
+            "reference": "にんきのみせです",
+            "actual": "にんきのみせです",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-02",
+            "reference": "ひとけのないみちです",
+            "actual": "にんきのないみちです",
+            "edits": 3,
+            "reference_chars": 10,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-03",
+            "reference": "せいぶつのじゅぎょうです",
+            "actual": "せーぶつのじゅぎょーです",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-04",
+            "reference": "なまものなのでれいぞうしてください",
+            "actual": "せーぶつなのでれーぞをしてください",
+            "edits": 6,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-05",
+            "reference": "いちばでやさいをかいます",
+            "actual": "しじょーでやさいをかえます",
+            "edits": 5,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-06",
+            "reference": "かぶしきしじょうがひらきます",
+            "actual": "かぶしきしじょーがひらきます",
+            "edits": 1,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-07",
+            "reference": "じょうずなえんそうです",
+            "actual": "じょーずなえんそーです",
+            "edits": 2,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-08",
+            "reference": "ぶたいのかみてからとうじょうします",
+            "actual": "ぶたいのじょーずからとーじょーします",
+            "edits": 6,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-09",
+            "reference": "いちにちじゅうやすみます",
+            "actual": "いちにちじゅーすみます",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-10",
+            "reference": "しがつついたちです",
+            "actual": "しがつついたちです",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-11",
+            "reference": "ひとりでまちます",
+            "actual": "ひとりでまちます",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-12",
+            "reference": "ふたりではなします",
+            "actual": "ふたりではなします",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-13",
+            "reference": "さんぼんあります",
+            "actual": "さんぼあります",
+            "edits": 1,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-14",
+            "reference": "ろっぽんあります",
+            "actual": "ろっぽんあります",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-15",
+            "reference": "じっぽんあります",
+            "actual": "っぽあります",
+            "edits": 2,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-16",
+            "reference": "はたちになりました",
+            "actual": "はたちになりました",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-17",
+            "reference": "くがつはつかです",
+            "actual": "くがつはつかです",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-18",
+            "reference": "ごごよじです",
+            "actual": "ごごよじです",
+            "edits": 0,
+            "reference_chars": 6,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-19",
+            "reference": "おんどわにじゅうさんてんごどです",
+            "actual": "おんどわにじゅーさんてんごどです",
+            "edits": 1,
+            "reference_chars": 16,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-20",
+            "reference": "せんにひゃくさんじゅうよんえんです",
+            "actual": "せんにひゃくさんじゅーよんえんです",
+            "edits": 1,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-21",
+            "reference": "かいぎょうしてください",
+            "actual": "かいごーをしてください",
+            "edits": 3,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-22",
+            "reference": "ぎょうかんをひろげてください",
+            "actual": "ょーかんをひろげてください",
+            "edits": 2,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-23",
+            "reference": "くてんをつけてください",
+            "actual": "てんをつけてください",
+            "edits": 1,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-24",
+            "reference": "とうてんをつけてください",
+            "actual": "たいでたいこさ",
+            "edits": 11,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-25",
+            "reference": "ほぞんしてとじてください",
+            "actual": "ほぞんしてとじてください",
+            "edits": 0,
+            "reference_chars": 12,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-26",
+            "reference": "よみあげをとめてください",
+            "actual": "よみげをとめてください",
+            "edits": 1,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-27",
+            "reference": "りれきをひらいてください",
+            "actual": "きをいてください",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-28",
+            "reference": "しんきさくせいしてください",
+            "actual": "しんきさくせーしてください",
+            "edits": 1,
+            "reference_chars": 13,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-29",
+            "reference": "とうきょうとちよだくです",
+            "actual": "とーきょーとつよだくです",
+            "edits": 3,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-30",
+            "reference": "おおさかふひらかたしです",
+            "actual": "おーさかふまえいかたしです",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-31",
+            "reference": "いばらきけんみとしです",
+            "actual": "ばらきけみーどしです",
+            "edits": 4,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-32",
+            "reference": "やまのてせんにのります",
+            "actual": "やまてせんにります",
+            "edits": 2,
+            "reference_chars": 11,
+            "exact": false
+          }
+        ],
+        "interpretation": "Acoustic kana-ASR proxy, not confirmed pronunciation accuracy",
+        "target_matches": 9,
+        "phonetic_target_matches": 15,
+        "unscorable": 0,
+        "phonetic_target_match_rate": 0.46875,
+        "kana_target_match_rate": 0.28125,
+        "categories": {
+          "commands": {
+            "count": 8,
+            "target_matches": 1,
+            "phonetic_target_matches": 2
+          },
+          "context": {
+            "count": 8,
+            "target_matches": 1,
+            "phonetic_target_matches": 4
+          },
+          "names": {
+            "count": 4,
+            "target_matches": 0,
+            "phonetic_target_matches": 0
+          },
+          "numbers": {
+            "count": 12,
+            "target_matches": 7,
+            "phonetic_target_matches": 9
+          }
+        }
+      },
+      "1.2": {
+        "complete": true,
+        "missing": [],
+        "errors": [],
+        "expected": 32,
+        "observed": 32,
+        "exact": 10,
+        "kana_error_rate": 0.20165745856353592,
+        "scores": [
+          {
+            "id": "ja-reading-01",
+            "reference": "にんきのみせです",
+            "actual": "にんきのみせです",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-02",
+            "reference": "ひとけのないみちです",
+            "actual": "にんきのないみちです",
+            "edits": 3,
+            "reference_chars": 10,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-03",
+            "reference": "せいぶつのじゅぎょうです",
+            "actual": "せーぶつのじゅぎょーです",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-04",
+            "reference": "なまものなのでれいぞうしてください",
+            "actual": "せーぶつなのでれーぞをしてください",
+            "edits": 6,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-05",
+            "reference": "いちばでやさいをかいます",
+            "actual": "しじょーでやさいをおかえます",
+            "edits": 6,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-06",
+            "reference": "かぶしきしじょうがひらきます",
+            "actual": "かぶしきしじょーがひらきます",
+            "edits": 1,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-07",
+            "reference": "じょうずなえんそうです",
+            "actual": "じょーずのえんそーです",
+            "edits": 3,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-08",
+            "reference": "ぶたいのかみてからとうじょうします",
+            "actual": "ぶたいのじょーずからとーじょーします",
+            "edits": 6,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-09",
+            "reference": "いちにちじゅうやすみます",
+            "actual": "いちにちじゅーやすみます",
+            "edits": 1,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-10",
+            "reference": "しがつついたちです",
+            "actual": "しがつついたちです",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-11",
+            "reference": "ひとりでまちます",
+            "actual": "ひとりでまちます",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-12",
+            "reference": "ふたりではなします",
+            "actual": "ふたりではなします",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-13",
+            "reference": "さんぼんあります",
+            "actual": "さんぼーあります",
+            "edits": 1,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-14",
+            "reference": "ろっぽんあります",
+            "actual": "ろっぽんあります",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-15",
+            "reference": "じっぽんあります",
+            "actual": "るっぽーがあります",
+            "edits": 3,
+            "reference_chars": 8,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-16",
+            "reference": "はたちになりました",
+            "actual": "はたちになりました",
+            "edits": 0,
+            "reference_chars": 9,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-17",
+            "reference": "くがつはつかです",
+            "actual": "くがつはつかです",
+            "edits": 0,
+            "reference_chars": 8,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-18",
+            "reference": "ごごよじです",
+            "actual": "ごごよじです",
+            "edits": 0,
+            "reference_chars": 6,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-19",
+            "reference": "おんどわにじゅうさんてんごどです",
+            "actual": "おんどわにじゅーさんてんごどです",
+            "edits": 1,
+            "reference_chars": 16,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-20",
+            "reference": "せんにひゃくさんじゅうよんえんです",
+            "actual": "せんにひゃくさんじゅーよんえんです",
+            "edits": 1,
+            "reference_chars": 17,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-21",
+            "reference": "かいぎょうしてください",
+            "actual": "いごしてください",
+            "edits": 4,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-22",
+            "reference": "ぎょうかんをひろげてください",
+            "actual": "ぐょーかひろげてください",
+            "edits": 4,
+            "reference_chars": 14,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-23",
+            "reference": "くてんをつけてください",
+            "actual": "てんをつけてください",
+            "edits": 1,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-24",
+            "reference": "とうてんをつけてください",
+            "actual": "どでたいこた",
+            "edits": 12,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-25",
+            "reference": "ほぞんしてとじてください",
+            "actual": "ほぞんしてとじてください",
+            "edits": 0,
+            "reference_chars": 12,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-26",
+            "reference": "よみあげをとめてください",
+            "actual": "よみあげをとめてください",
+            "edits": 0,
+            "reference_chars": 12,
+            "exact": true
+          },
+          {
+            "id": "ja-reading-27",
+            "reference": "りれきをひらいてください",
+            "actual": "れきをひいてください",
+            "edits": 2,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-28",
+            "reference": "しんきさくせいしてください",
+            "actual": "しんきくせーしてください",
+            "edits": 2,
+            "reference_chars": 13,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-29",
+            "reference": "とうきょうとちよだくです",
+            "actual": "とーきょーとつよだです",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-30",
+            "reference": "おおさかふひらかたしです",
+            "actual": "おーさかふまえかたです",
+            "edits": 4,
+            "reference_chars": 12,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-31",
+            "reference": "いばらきけんみとしです",
+            "actual": "ばらきけみーどしです",
+            "edits": 4,
+            "reference_chars": 11,
+            "exact": false
+          },
+          {
+            "id": "ja-reading-32",
+            "reference": "やまのてせんにのります",
+            "actual": "やまてせんにもります",
+            "edits": 2,
+            "reference_chars": 11,
+            "exact": false
+          }
+        ],
+        "interpretation": "Acoustic kana-ASR proxy, not confirmed pronunciation accuracy",
+        "target_matches": 10,
+        "phonetic_target_matches": 15,
+        "unscorable": 0,
+        "phonetic_target_match_rate": 0.46875,
+        "kana_target_match_rate": 0.3125,
+        "categories": {
+          "commands": {
+            "count": 8,
+            "target_matches": 2,
+            "phonetic_target_matches": 2
+          },
+          "context": {
+            "count": 8,
+            "target_matches": 1,
+            "phonetic_target_matches": 4
+          },
+          "names": {
+            "count": 4,
+            "target_matches": 0,
+            "phonetic_target_matches": 0
+          },
+          "numbers": {
+            "count": 12,
+            "target_matches": 7,
+            "phonetic_target_matches": 9
+          }
+        }
+      }
+    }
+  },
+  "controls": [
+    {
+      "voice": "jm_kumo",
+      "variant": "1",
+      "id": "control-good",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": false,
+      "control_pass": false,
+      "actual": "ひとのまいみちです",
+      "error": null
+    },
+    {
+      "voice": "jm_kumo",
+      "variant": "1",
+      "id": "control-wrong",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "にんきのまえみちです",
+      "error": null
+    },
+    {
+      "voice": "jm_kumo",
+      "variant": "1",
+      "id": "control-good2",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": true,
+      "control_pass": true,
+      "actual": "かいぎょーしてください",
+      "error": null
+    },
+    {
+      "voice": "jm_kumo",
+      "variant": "1",
+      "id": "control-wrong2",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "かごーしでください",
+      "error": null
+    },
+    {
+      "voice": "jm_kumo",
+      "variant": "1.2",
+      "id": "control-good",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": false,
+      "control_pass": false,
+      "actual": "いちです",
+      "error": null
+    },
+    {
+      "voice": "jm_kumo",
+      "variant": "1.2",
+      "id": "control-wrong",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "んきのまえちです",
+      "error": null
+    },
+    {
+      "voice": "jm_kumo",
+      "variant": "1.2",
+      "id": "control-good2",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": false,
+      "control_pass": false,
+      "actual": "かぎょーしてください",
+      "error": null
+    },
+    {
+      "voice": "jm_kumo",
+      "variant": "1.2",
+      "id": "control-wrong2",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "かごーしてください",
+      "error": null
+    },
+    {
+      "voice": "Ryan",
+      "variant": "1",
+      "id": "control-good",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": true,
+      "control_pass": true,
+      "actual": "ひとけのないみちです",
+      "error": null
+    },
+    {
+      "voice": "Ryan",
+      "variant": "1",
+      "id": "control-wrong",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "みんきのないみちです",
+      "error": null
+    },
+    {
+      "voice": "Ryan",
+      "variant": "1",
+      "id": "control-good2",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": false,
+      "control_pass": false,
+      "actual": "かいぎーしてくださ",
+      "error": null
+    },
+    {
+      "voice": "Ryan",
+      "variant": "1",
+      "id": "control-wrong2",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "かいごーしてください",
+      "error": null
+    },
+    {
+      "voice": "Ryan",
+      "variant": "1.2",
+      "id": "control-good",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": true,
+      "control_pass": true,
+      "actual": "ひとけのないみちです",
+      "error": null
+    },
+    {
+      "voice": "Ryan",
+      "variant": "1.2",
+      "id": "control-wrong",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "きのないみちです",
+      "error": null
+    },
+    {
+      "voice": "Ryan",
+      "variant": "1.2",
+      "id": "control-good2",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": false,
+      "control_pass": false,
+      "actual": "かいーしてくださ",
+      "error": null
+    },
+    {
+      "voice": "Ryan",
+      "variant": "1.2",
+      "id": "control-wrong2",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "かいごーしてください",
+      "error": null
+    },
+    {
+      "voice": "Uncle_Fu",
+      "variant": "1",
+      "id": "control-good",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": false,
+      "control_pass": false,
+      "actual": "ふてけのないみちです",
+      "error": null
+    },
+    {
+      "voice": "Uncle_Fu",
+      "variant": "1",
+      "id": "control-wrong",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "うんきのないみちです",
+      "error": null
+    },
+    {
+      "voice": "Uncle_Fu",
+      "variant": "1",
+      "id": "control-good2",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": true,
+      "control_pass": true,
+      "actual": "かいぎょーしてください",
+      "error": null
+    },
+    {
+      "voice": "Uncle_Fu",
+      "variant": "1",
+      "id": "control-wrong2",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "かいごーしてください",
+      "error": null
+    },
+    {
+      "voice": "Uncle_Fu",
+      "variant": "1.2",
+      "id": "control-good",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": false,
+      "control_pass": false,
+      "actual": "けのないみちです",
+      "error": null
+    },
+    {
+      "voice": "Uncle_Fu",
+      "variant": "1.2",
+      "id": "control-wrong",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "にんきのないみちです",
+      "error": null
+    },
+    {
+      "voice": "Uncle_Fu",
+      "variant": "1.2",
+      "id": "control-good2",
+      "purpose": "Correct kana input; expected positive",
+      "target_matched": true,
+      "control_pass": true,
+      "actual": "かいぎょーしてください",
+      "error": null
+    },
+    {
+      "voice": "Uncle_Fu",
+      "variant": "1.2",
+      "id": "control-wrong2",
+      "purpose": "Intentional wrong reading; expected negative",
+      "target_matched": false,
+      "control_pass": true,
+      "actual": "いごーしてください",
+      "error": null
+    }
+  ],
+  "readback_model": "sakasegawa/japanese-wav2vec2-large-hiragana-ctc",
+  "speed_note": "Kokoro native synthesis speed; Qwen 0.6B ffmpeg atempo after generation. No latency ranking."
+}

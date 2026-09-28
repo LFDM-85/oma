@@ -4,10 +4,11 @@ import {existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {runDesktopCommand} from './desktop.mjs';
-export async function microphoneAvailable(){
+import {microphoneNode} from './microphones.mjs';
+export async function microphoneAvailable(inputTarget=null){
  try{
   const [volume,lock]=await Promise.all([
-   runDesktopCommand('wpctl',['get-volume','@DEFAULT_AUDIO_SOURCE@']),
+   runDesktopCommand('wpctl',['get-volume',await microphoneNode(inputTarget)]),
    runDesktopCommand('loginctl',['show-session',process.env.XDG_SESSION_ID||'self','-p','LockedHint','--value'])
   ]);
   return !volume.toString().includes('[MUTED]')&&lock.toString().trim()==='no';
@@ -15,7 +16,7 @@ export async function microphoneAvailable(){
 }
 export function wakeReason(s){
  if(!s.enabled)return 'Voice wake is off';
- if(!s.key)return 'Add an API key first';
+ if(!s.key)return 'Complete voice setup first';
  if(!s.available)return 'Voice wake model is not installed';
  if(!s.idle)return 'Paused during conversation';
  if(s.locked===null||s.muted===null)return 'Paused: microphone status unavailable';
@@ -24,7 +25,7 @@ export function wakeReason(s){
  return 'Listening for Hey O.M.A.';
 }
 export class WakeListener {
- constructor({data,enabled,ready,emit,onWake}){Object.assign(this,{data,enabled,ready,emit,onWake});this.running=false;this.closed=false;this.polling=false;this.cooldown=0;}
+ constructor({data,enabled,ready,emit,onWake,inputTarget=null}){Object.assign(this,{data,enabled,ready,emit,onWake,inputTarget});this.running=false;this.closed=false;this.polling=false;this.cooldown=0;}
  start(){this.timer=setInterval(()=>this.poll(),1000);this.poll();}
  async poll(){
   if(this.closed||this.polling)return;this.polling=true;
@@ -34,7 +35,7 @@ export class WakeListener {
    if(s.enabled&&s.available&&s.key&&s.idle){
     try{
      const [volume,lock]=await Promise.all([
-      runDesktopCommand('wpctl',['get-volume','@DEFAULT_AUDIO_SOURCE@']),
+      runDesktopCommand('wpctl',['get-volume',await microphoneNode(this.inputTarget)]),
       runDesktopCommand('loginctl',['show-session',process.env.XDG_SESSION_ID||'self','-p','LockedHint','--value'])
      ]);
      s.muted=volume.toString().includes('[MUTED]');
@@ -54,7 +55,7 @@ export class WakeListener {
     if(!this.running||this.recognizer!==recognizer)return;
     try{const event=JSON.parse(line);
      if(event.ready){
-      this.recorder=spawn('pw-record',['--raw','--rate','16000','--channels','1','--format','s16','-P','{"node.name":"oma-wake","application.name":"O.M.A. Voice Wake"}','-'],{stdio:['ignore','pipe','ignore']});
+      this.recorder=spawn('pw-record',[...(this.inputTarget?['--target',this.inputTarget]:[]),'--raw','--rate','16000','--channels','1','--format','s16','-P','{"node.name":"oma-wake","application.name":"O.M.A. Voice Wake"}','-'],{stdio:['ignore','pipe','ignore']});
       this.recorder.stdout.pipe(recognizer.stdin);this.recorder.on('error',()=>this.failed());
       this.recorder.on('exit',()=>{if(this.recognizer===recognizer)this.failed()});
      }
@@ -69,9 +70,9 @@ export class WakeListener {
  close(){this.closed=true;clearInterval(this.timer);this.pause();}
 }
 export class HandsFreeTurn {
- constructor({release,cancel,silenceMs=5000,speechRms=120}){Object.assign(this,{release,cancel,silenceMs,speechRms});}
- start(){this.stop();this.began=Date.now();this.lastVoice=0;this.timer=setInterval(()=>this.tick(),100);}
- level(rms){if(this.timer&&rms>this.speechRms)this.lastVoice=Date.now();}
- tick(){const now=Date.now();if(this.lastVoice&&now-this.lastVoice>this.silenceMs||now-this.began>90000){this.stop();this.release();}else if(!this.lastVoice&&now-this.began>8000){this.stop();this.cancel();}}
+ constructor({release,cancel,silenceMs=1000,speechRms=120,onPause=()=>{},onResume=()=>{},prepareMs=300}){Object.assign(this,{release,cancel,silenceMs,speechRms,onPause,onResume,prepareMs});}
+ start(){this.stop();this.began=Date.now();this.lastVoice=0;this.preparing=false;this.timer=setInterval(()=>this.tick(),100);}
+ level(rms){if(this.timer&&rms>this.speechRms){this.lastVoice=Date.now();if(this.preparing){this.preparing=false;this.onResume();}}}
+ tick(){const now=Date.now();if(this.lastVoice&&!this.preparing&&now-this.lastVoice>=this.prepareMs){this.preparing=true;this.onPause();}if(this.lastVoice&&now-this.lastVoice>this.silenceMs||now-this.began>90000){this.stop();this.release();}else if(!this.lastVoice&&now-this.began>8000){this.stop();this.cancel();}}
  stop(){clearInterval(this.timer);this.timer=null;}
 }

@@ -1,0 +1,40 @@
+{
+  "ja": {
+    "complete": true,
+    "missing": [],
+    "failed": [],
+    "speech_count": 50,
+    "noise_count": 20,
+    "reference_chars": 751,
+    "edits": 18,
+    "cer": 0.023968042609853527,
+    "critical_count": 23,
+    "critical_accuracy": 0.9130434782608695,
+    "false_activations": 0,
+    "latency": {
+      "n": 50,
+      "median": 2.361788672991679,
+      "p95": 3.2476859890157357,
+      "max": 3.5439077709743287
+    }
+  },
+  "en": {
+    "complete": true,
+    "missing": [],
+    "failed": [],
+    "speech_count": 50,
+    "noise_count": 20,
+    "reference_chars": 1433,
+    "edits": 10,
+    "cer": 0.006978367062107467,
+    "critical_count": 23,
+    "critical_accuracy": 1.0,
+    "false_activations": 0,
+    "latency": {
+      "n": 50,
+      "median": 2.07238541499828,
+      "p95": 2.9443448839883786,
+      "max": 3.6806979830143973
+    }
+  }
+}

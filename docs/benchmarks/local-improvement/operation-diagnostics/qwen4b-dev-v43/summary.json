@@ -1,0 +1,82 @@
+{
+  "split": "dev",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": true,
+      "expected": 15,
+      "successes": 14,
+      "success_rate": 0.9333333333333333,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": true,
+      "successful_latency": {
+        "n": 14,
+        "median": 6.261863359002746,
+        "p95": 19.420459113986,
+        "max": 19.420459113986
+      },
+      "failed_duration": {
+        "n": 1,
+        "median": 6.730470233014785,
+        "p95": 6.730470233014785,
+        "max": 6.730470233014785
+      },
+      "failures": [
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append-multiline",
+          "status": "failed",
+          "setup_seconds": 3.6159165450080764,
+          "passed": false,
+          "error": "File differs: 'First.\\nSecond?\\n完了！'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 10.346386185003212,
+          "seconds": 6.730470233014785
+        }
+      ]
+    },
+    "en": {
+      "complete": true,
+      "expected": 15,
+      "successes": 14,
+      "success_rate": 0.9333333333333333,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": true,
+      "successful_latency": {
+        "n": 14,
+        "median": 4.636794270001701,
+        "p95": 17.567824644997017,
+        "max": 17.567824644997017
+      },
+      "failed_duration": {
+        "n": 1,
+        "median": 9.359101192007074,
+        "p95": 9.359101192007074,
+        "max": 9.359101192007074
+      },
+      "failures": [
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-discard",
+          "status": "failed",
+          "setup_seconds": 4.723038349999115,
+          "passed": false,
+          "error": "['The follow-up requires a save/discard/cancel choice, but the assistant entered binary approval mode']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 14.082139073987491,
+          "seconds": 9.359101192007074
+        }
+      ]
+    }
+  }
+}

@@ -6,6 +6,14 @@ import {join} from 'node:path';
 const module = await import('../runtime/memory.mjs').catch(() => ({}));
 const Memory = module.Memory;
 function fixture(t) { const dir=mkdtempSync(join(tmpdir(),'oma-test-')); t.after(()=>rmSync(dir,{recursive:true,force:true})); return join(dir,'memory.sqlite'); }
+test('forget reports actual deletions and does not claim a mismatched query succeeded',t=>{
+ const m=new Memory(fixture(t));t.after(()=>m.close());
+ m.remember('drink','green tea');m.remember('food','rice');m.add('user','green tea please');
+ assert.equal(m.forget('drink, tea'),0);
+ assert.equal(m.facts().length,2);
+ assert.equal(m.forget('green tea'),2);
+ assert.deepEqual(m.facts().map(f=>f.key),['food']);
+});
 test('URLs remain exact and searchable after compaction and restart', async t => {
  assert.equal(typeof Memory,'function','Memory store is not implemented');
  const path=fixture(t); let m=new Memory(path);
@@ -40,4 +48,12 @@ test('unfinished task and progress survive restart and are visible without a sea
  m.close();m=new Memory(path);
  assert.match(m.context(),/capture verification still pending/);
  m.forget('microphone');assert.equal(m.get('taskCheckpoint'),'');m.close();
+});
+
+test('remember returns the exact persisted fact, including storage bounds',t=>{
+ const m=new Memory(fixture(t));t.after(()=>m.close());
+ const result=m.remember('key'.repeat(100),'文'.repeat(1500));
+ const stored=m.facts()[0];
+ assert.deepEqual(result,{key:stored.key,value:stored.value});
+ assert.ok(Buffer.byteLength(result.key)<=200);assert.ok(Buffer.byteLength(result.value)<=3000);
 });

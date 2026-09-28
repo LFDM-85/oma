@@ -1,0 +1,9 @@
+{
+  "action": "probe",
+  "setup_seconds": 22.051413756009424,
+  "cache": "/tmp/oma-asr-int8-cache-v24",
+  "state_sha256": "a301f95c375823822f4c861f63c6f3d816a87a68296b8965bfa788341d5a70d0",
+  "split": "dev",
+  "source": "synthetic",
+  "worker_sha256": "59a19be843bc91fdb5b6abe6dd95b68d47ab663856e60c95574fe4b1603a9471"
+}

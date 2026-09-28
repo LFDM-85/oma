@@ -1,0 +1,6 @@
+{
+  "voiceProvider": "gpt-live",
+  "responseLanguage": "",
+  "microphoneTarget": "alsa_input.usb-Yamaha_Corporation_Yamaha_AG03MK2-00.analog-stereo",
+  "viewMode": "normal"
+}

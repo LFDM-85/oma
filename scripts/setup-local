@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+set -euo pipefail
+umask 077
+stt=''
+while (( $# )); do
+  case "$1" in
+    --help|-h) echo 'Usage: setup-local [--stt whisper-small|qwen3-asr-1.7b]'; exit 0 ;;
+    --stt)
+      [[ $# -ge 2 ]] || { echo '--stt requires a model.' >&2; exit 2; }
+      case "$2" in whisper-small|qwen3-asr-1.7b) stt=$2 ;; *) echo 'Unknown STT model.' >&2; exit 2 ;; esac
+      shift 2 ;;
+    *) echo "Unknown option: $1" >&2; exit 2 ;;
+  esac
+done
+data=${OMA_DATA_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/oma}
+local_home="$data/local"
+mkdir -p "$local_home/downloads" "$local_home/ollama"
+echo 'Preparing Python for local speech…'
+if [[ ! -x "$local_home/venv/bin/python" ]]; then
+  command -v mise >/dev/null || { echo 'Install mise to prepare Python 3.12.' >&2; exit 1; }
+  mise install python@3.12.14 >&2
+  "$(mise where python@3.12.14)/bin/python" -m venv "$local_home/venv"
+fi
+python="$local_home/venv/bin/python"
+if [[ -z "$stt" && -f "$local_home/speech.json" ]]; then
+  stt=$("$python" -c 'import json,sys; print(json.load(open(sys.argv[1])).get("stt", "whisper-small"))' "$local_home/speech.json")
+fi
+stt=${stt:-whisper-small}
+case "$stt" in whisper-small|qwen3-asr-1.7b) ;; *) echo 'Unknown saved STT model.' >&2; exit 2 ;; esac
+"$python" -m pip install 'torch==2.8.0' --index-url https://download.pytorch.org/whl/cpu >&2
+"$python" -m pip install 'faster-whisper==1.2.1' 'kokoro==0.9.4' 'misaki[ja,zh]==0.9.4' scipy soundfile >&2
+if [[ "$stt" == qwen3-asr-1.7b ]]; then
+  "$python" -m pip install 'transformers==5.17.0' >&2
+fi
+if ! "$python" -c 'import unidic,pathlib; assert (pathlib.Path(unidic.DICDIR)/"sys.dic").is_file()' 2>/dev/null; then
+  echo 'Downloading the Japanese pronunciation dictionary…'
+  "$python" -m unidic download >&2
+fi
+if ! "$python" -c 'import spacy; spacy.load("en_core_web_sm")' 2>/dev/null; then
+  "$python" -m spacy download en_core_web_sm >&2
+fi
+echo 'Downloading speech models…'
+export HF_HOME="$local_home/huggingface"
+"$python" - "$local_home" "$stt" <<'PY'
+import sys
+from pathlib import Path
+from faster_whisper.utils import download_model
+from huggingface_hub import snapshot_download
+home = Path(sys.argv[1])
+download_model('small', output_dir=str(home / 'whisper'))
+snapshot_download('hexgrad/Kokoro-82M', allow_patterns=['config.json', 'kokoro-v1_0.pth', 'voices/*.pt'])
+if sys.argv[2] == 'qwen3-asr-1.7b':
+    snapshot_download('Qwen/Qwen3-ASR-1.7B-hf', revision='bcd2b5b7f32b480ab5790554cfa8347f246a14f3')
+PY
+if [[ ! -x "$local_home/ollama/bin/ollama" ]]; then
+  [[ $(uname -m) == x86_64 ]] || { echo 'Automatic Ollama setup currently requires x86_64 Linux.' >&2; exit 1; }
+  echo 'Downloading Ollama…'
+  archive="$local_home/downloads/ollama-v0.34.4.tar.zst"
+  curl -fL --retry 3 -o "$archive" https://github.com/ollama/ollama/releases/download/v0.34.4/ollama-linux-amd64.tar.zst >&2
+  printf '%s  %s\n' c238986e61d40c0cc5f4a9b9e40b9eea104350b77efa34741fc134e105cb9533 "$archive" | sha256sum -c - >&2
+  tar --zstd -xf "$archive" -C "$local_home/ollama"
+fi
+export OLLAMA_HOST=127.0.0.1:11435 OLLAMA_MODELS="$local_home/ollama-models" OLLAMA_NO_CLOUD=1 OLLAMA_CONTEXT_LENGTH=32768
+server_pid=''
+cleanup() { if [[ -n "$server_pid" ]]; then kill "$server_pid" 2>/dev/null || true; fi; }
+trap cleanup EXIT
+if ! curl -fsS http://127.0.0.1:11435/api/version >/dev/null; then
+  "$local_home/ollama/bin/ollama" serve >&2 & server_pid=$!
+  for attempt in {1..40}; do
+    if curl -fsS http://127.0.0.1:11435/api/version >/dev/null 2>&1; then break; fi
+    sleep .25
+  done
+fi
+echo 'Downloading Qwen3.5 4B…'
+"$local_home/ollama/bin/ollama" pull qwen3.5:4b >&2
+"$python" - "$local_home" "$stt" <<'PY'
+import json,sys
+from pathlib import Path
+home=Path(sys.argv[1]);path=home/'speech.json'
+config=json.loads(path.read_text()) if path.exists() else {}
+config['stt']=sys.argv[2]
+path.write_text(json.dumps(config)+'\n')
+(home/'ready.json').write_text(json.dumps({'version':1,'stt':sys.argv[2],'tts':'kokoro-82m','model':'qwen3.5:4b'})+'\n')
+PY
+echo 'Local models are ready.'

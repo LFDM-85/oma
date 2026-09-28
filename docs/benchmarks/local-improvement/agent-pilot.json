@@ -1,0 +1,32 @@
+[
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "blank",
+    "status": "failed",
+    "passed": false,
+    "error": "",
+    "seconds": 41.049837758007925,
+    "interpretation": "Harness failure: empty-selection copy retained stale clipboard; fixed with native length check; not an acceptance observation.",
+    "stage": "harness-development"
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "mini",
+    "status": "passed",
+    "passed": true,
+    "seconds": 19.73942247600644,
+    "stage": "harness-development"
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "math",
+    "status": "failed",
+    "passed": false,
+    "error": "'一足す一の答えは **0** です。\\n\\n1 - 1 = 0'",
+    "seconds": 16.713773574010702,
+    "stage": "harness-development"
+  }
+]

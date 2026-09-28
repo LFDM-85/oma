@@ -1,0 +1,95 @@
+[
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-blank",
+    "status": "passed",
+    "setup_seconds": 3.754432210000232,
+    "passed": true,
+    "total_seconds": 14.57450246400549,
+    "seconds": 10.8200716249994
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dev-dictation",
+    "status": "passed",
+    "setup_seconds": 3.7432123920007143,
+    "passed": true,
+    "total_seconds": 12.032568027003435,
+    "seconds": 8.289356491004582
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "dev-blank",
+    "status": "passed",
+    "setup_seconds": 3.682693377020769,
+    "passed": true,
+    "total_seconds": 10.924645102000795,
+    "seconds": 7.241952404991025
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "dev-dictation",
+    "status": "failed",
+    "setup_seconds": 3.690137710014824,
+    "passed": false,
+    "error": "Command '('wl-paste', '--no-newline')' returned non-zero exit status 1.",
+    "critical_error": false,
+    "total_seconds": 23.248572557000443,
+    "seconds": 19.558435290004127
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "dev-blank",
+    "status": "interrupted",
+    "setup_seconds": 3.6953791810083203,
+    "passed": false,
+    "error": "Evaluation interrupted"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "dev-dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dev-dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "dev-blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "dev-dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "dev-blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "dev-dictation",
+    "status": "not_run"
+  }
+]

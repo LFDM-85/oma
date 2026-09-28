@@ -1,0 +1,12 @@
+{"event":"tool_start","name":"append_text_file","args":{"input":{"path":"/tmp/oma-agent-dev-4b-v16-targeted/en/2/dev-append-multiline/note.txt","text":"Done!"}}}
+{"event":"state","state":"working","taskStatus":"Appending to a file"}
+{"event":"tool_end","name":"append_text_file","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"tool_start","name":"read","args":{"path":"/tmp/oma-agent-dev-4b-v16-targeted/en/2/dev-append-multiline/note.txt"}}
+{"event":"state","state":"working","taskStatus":"Reading a file"}
+{"event":"tool_end","name":"read","error":false}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"Done! Added to the end of note.txt.","seconds":6.359720691,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":23,"output":42,"cacheRead":12929,"cacheWrite":0,"reasoning":0,"totalTokens":12994,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

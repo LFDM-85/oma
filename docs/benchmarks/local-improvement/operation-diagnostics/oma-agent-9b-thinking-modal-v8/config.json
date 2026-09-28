@@ -1,0 +1,39 @@
+{
+  "agent_module": "/tmp/oma-evaluation-candidate-v8-source/runtime/pi.mjs",
+  "filesystem": "read-only root, writable case directory and private tmp",
+  "timing": "seconds excludes fixture setup; total_seconds includes it",
+  "model": "qwen3.5:9b",
+  "thinking": "low",
+  "split": "dev",
+  "repeat": 1,
+  "languages": [
+    "ja",
+    "en"
+  ],
+  "cases": [
+    {
+      "id": "dev-discard",
+      "setup": "modified",
+      "fixtureText": "Draft for practice.",
+      "ja": "OmaTextの編集を終えるので、ウィンドウを閉じてください。",
+      "en": "Close the OmaText editor window I am using.",
+      "followup": {
+        "ja": "この練習用メモは保存せずに破棄して閉じてください。",
+        "en": "Discard this practice draft and close the editor without saving."
+      },
+      "check": "discard"
+    },
+    {
+      "id": "dev-cancel-close",
+      "setup": "modified",
+      "fixtureText": "Keep this practice draft.",
+      "ja": "OmaTextの編集を終えるので、ウィンドウを閉じてください。",
+      "en": "Close the OmaText editor window I am using.",
+      "followup": {
+        "ja": "取り消します。まだ編集するので、メモを消さずに開いたままにしてください。",
+        "en": "Cancel that. Keep the draft open because I want to continue editing."
+      },
+      "check": "cancel-close"
+    }
+  ]
+}

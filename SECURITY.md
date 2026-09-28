@@ -8,7 +8,7 @@ Report sensitive vulnerabilities through GitHub's private vulnerability reportin
 for this repository. Do not post credentials, personal data, exploit details that
 expose users, or unredacted conversation logs in public issues.
 
-Include the affected commit, Omarchy and Codex versions, minimal reproduction,
+Include the affected commit, Omarchy, OpenAI SDK and model versions, minimal reproduction,
 expected behavior, and impact. Use fictional inputs and redact screenshots.
 
 No formal security audit has been performed. The automated checks are limited

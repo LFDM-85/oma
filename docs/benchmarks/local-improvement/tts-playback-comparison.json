@@ -1,0 +1,26 @@
+{
+  "ja": {
+    "baseline_median_ms": 1103.9892995000027,
+    "candidate_median_ms": 802.5246700000134,
+    "relative_improvement": 0.2730684343014219,
+    "baseline_p95_ms": 1463.6210009999995,
+    "candidate_p95_ms": 1058.9958639999968,
+    "baseline_max_ms": 1469.165857999993,
+    "candidate_max_ms": 1101.4208410000138,
+    "baseline_count": 20,
+    "candidate_count": 20,
+    "errors": []
+  },
+  "en": {
+    "baseline_median_ms": 1144.2010710000031,
+    "candidate_median_ms": 763.0218489999825,
+    "relative_improvement": 0.3331400674768461,
+    "baseline_p95_ms": 1550.1892910000024,
+    "candidate_p95_ms": 1176.0400989999762,
+    "baseline_max_ms": 1714.154149000009,
+    "candidate_max_ms": 1581.5279549999977,
+    "baseline_count": 20,
+    "candidate_count": 20,
+    "errors": []
+  }
+}

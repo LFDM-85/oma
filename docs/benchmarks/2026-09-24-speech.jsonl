@@ -1,0 +1,12 @@
+{"kind":"stt","model":"gpt-4o-transcribe","ms":1163,"source":"オーマ、こんにちは。短く自己紹介してください。","transcript":"オーマ、こんにちは。短く自己紹介してください。"}
+{"kind":"stt","model":"gpt-4o-mini-transcribe","ms":1258,"source":"オーマ、こんにちは。短く自己紹介してください。","transcript":"オーマ、こんにちは。短く自己紹介してください。"}
+{"kind":"stt","model":"gpt-4o-transcribe","ms":486,"source":"明日の午後三時に、会議の資料を確認します。","transcript":"明日の午後三時に会議の資料を確認します。"}
+{"kind":"stt","model":"gpt-4o-mini-transcribe","ms":554,"source":"明日の午後三時に、会議の資料を確認します。","transcript":"明日の午後3時に会議の資料を確認します。"}
+{"kind":"stt","model":"gpt-4o-transcribe","ms":860,"source":"そのファイルは削除しないでください。","transcript":"そのファイルは削除しないでください。"}
+{"kind":"stt","model":"gpt-4o-mini-transcribe","ms":483,"source":"そのファイルは削除しないでください。","transcript":"そのファイルは削除しないでください。"}
+{"kind":"tts","model":"gpt-4o-mini-tts","trial":0,"firstMs":405,"totalMs":1166,"audioMs":3800}
+{"kind":"tts","model":"tts-1","trial":0,"firstMs":1016,"totalMs":1244,"audioMs":3025}
+{"kind":"tts","model":"gpt-4o-mini-tts","trial":1,"firstMs":532,"totalMs":1403,"audioMs":3850}
+{"kind":"tts","model":"tts-1","trial":1,"firstMs":1188,"totalMs":1664,"audioMs":2875}
+{"kind":"tts","model":"gpt-4o-mini-tts","trial":2,"firstMs":1349,"totalMs":2060,"audioMs":4600}
+{"kind":"tts","model":"tts-1","trial":2,"firstMs":1485,"totalMs":1867,"audioMs":2838}

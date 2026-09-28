@@ -1,0 +1,214 @@
+[
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "blank",
+    "status": "passed",
+    "setup_seconds": 3.8290026410249993,
+    "passed": true,
+    "total_seconds": 9.87336793000577,
+    "seconds": 6.044366819987772
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dictation",
+    "status": "passed",
+    "setup_seconds": 3.658866563986521,
+    "passed": true,
+    "total_seconds": 10.951050825009588,
+    "seconds": 7.292185107013211
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "lines",
+    "status": "passed",
+    "setup_seconds": 3.837639842007775,
+    "passed": true,
+    "total_seconds": 10.69330486599938,
+    "seconds": 6.855665537994355
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "punctuation",
+    "status": "failed",
+    "setup_seconds": 3.836225912993541,
+    "passed": false,
+    "error": "Document differs: '\\nRed, blue. Green!'",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 10.635876088985242,
+    "seconds": 6.799650738015771
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "close",
+    "status": "passed",
+    "setup_seconds": 4.409469097998226,
+    "passed": true,
+    "total_seconds": 7.719063298020046,
+    "seconds": 3.309594703023322
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "discard",
+    "status": "failed",
+    "setup_seconds": 4.61731787698227,
+    "passed": false,
+    "error": "{'document': {'opened': True, 'active': False, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': True, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 13, 'url': '', 'modified': True, 'busy': False}, 'panelOpened': True}",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 33.12637152598472,
+    "seconds": 28.509054299996933
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "cancel-close",
+    "status": "failed",
+    "setup_seconds": 5.560985424002865,
+    "passed": false,
+    "error": "{'opened': True, 'active': True, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': True, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 13, 'url': '', 'modified': True, 'busy': False}",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 13.288166913000168,
+    "seconds": 7.727182015019935
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "mini",
+    "status": "passed",
+    "setup_seconds": 4.6362340489868075,
+    "passed": true,
+    "total_seconds": 7.2135341789980885,
+    "seconds": 2.5773006190138403
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "normal",
+    "status": "passed",
+    "setup_seconds": 3.869348780979635,
+    "passed": true,
+    "total_seconds": 6.1052417529863305,
+    "seconds": 2.2358934470103122
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "quoted-goodbye",
+    "status": "passed",
+    "setup_seconds": 3.582842300005723,
+    "passed": true,
+    "total_seconds": 6.891000984003767,
+    "seconds": 3.308159482985502
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "math",
+    "status": "passed",
+    "setup_seconds": 3.612459199008299,
+    "passed": true,
+    "total_seconds": 5.167839751025895,
+    "seconds": 1.555380976991728
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "remember",
+    "status": "passed",
+    "setup_seconds": 3.6564284350024536,
+    "passed": true,
+    "total_seconds": 6.23817506301566,
+    "seconds": 2.5817473680072
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "recall",
+    "status": "passed",
+    "setup_seconds": 3.612203602999216,
+    "passed": true,
+    "total_seconds": 5.802778401994146,
+    "seconds": 2.1905752579914406
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "forget",
+    "status": "passed",
+    "setup_seconds": 3.7231471730046906,
+    "passed": true,
+    "total_seconds": 6.174315551004838,
+    "seconds": 2.4511690880171955
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "write-file",
+    "status": "passed",
+    "setup_seconds": 3.775943357992219,
+    "passed": true,
+    "total_seconds": 6.471405614982359,
+    "seconds": 2.6954627920058556
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "append-file",
+    "status": "failed",
+    "setup_seconds": 3.6550745329877827,
+    "passed": false,
+    "error": "File differs: 'Seed.\\nMore.'",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 7.655122213007417,
+    "seconds": 4.0000482100003865
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "replace-file",
+    "status": "passed",
+    "setup_seconds": 3.79285865399288,
+    "passed": true,
+    "total_seconds": 7.719816602009814,
+    "seconds": 3.9269583850109484
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "rename-file",
+    "status": "passed",
+    "setup_seconds": 3.643638320005266,
+    "passed": true,
+    "total_seconds": 7.2836383859976195,
+    "seconds": 3.6400011270015966
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "read-file",
+    "status": "passed",
+    "setup_seconds": 3.753472863987554,
+    "passed": true,
+    "total_seconds": 6.072032753989333,
+    "seconds": 2.3185606060142163
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "goodbye",
+    "status": "passed",
+    "setup_seconds": 3.654536576999817,
+    "passed": true,
+    "total_seconds": 6.726441633014474,
+    "seconds": 3.0719054870132823
+  }
+]

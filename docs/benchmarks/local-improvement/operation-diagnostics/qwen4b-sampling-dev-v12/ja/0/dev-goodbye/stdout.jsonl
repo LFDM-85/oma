@@ -1,0 +1,8 @@
+{"event":"tool_start","name":"end_conversation","args":{}}
+{"event":"state","state":"working","taskStatus":"Ending the conversation"}
+{"event":"tool_end","name":"end_conversation","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"はい、ありがとうございます！O.M.A.もまたね。\n\n（少し待ってから）\n\nご来訪ありがとうございました！いつでもまたお会いしましょう。👋","seconds":7.953966466,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":8914,"output":124,"cacheRead":0,"cacheWrite":0,"reasoning":0,"totalTokens":9038,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

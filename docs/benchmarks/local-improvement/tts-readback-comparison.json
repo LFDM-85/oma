@@ -1,0 +1,59 @@
+{
+  "ja": {
+    "tts-final-baseline": {
+      "count": 20,
+      "edits": 42,
+      "reference_chars": 303
+    },
+    "tts-final-trim": {
+      "count": 20,
+      "edits": 42,
+      "reference_chars": 303
+    },
+    "changed_transcriptions": [
+      {
+        "id": "ja-final-01",
+        "baseline": "お待てで空の新規ファイルを開いてください。",
+        "candidate": "おまでで空の新規ファイルを開いてください。"
+      },
+      {
+        "id": "ja-final-04",
+        "baseline": "過去の会話を見せてください",
+        "candidate": "過去の会話を見せてください。"
+      },
+      {
+        "id": "ja-final-06",
+        "baseline": "保存しないで閉じてください",
+        "candidate": "保存しないで閉じてください。"
+      },
+      {
+        "id": "ja-final-12",
+        "baseline": "明日の天気は曇りの予報です",
+        "candidate": "明日の天気は曇りの予報です。"
+      },
+      {
+        "id": "ja-final-17",
+        "baseline": "合計は1234円です。",
+        "candidate": "合計は1,234円です。"
+      },
+      {
+        "id": "ja-final-18",
+        "baseline": "電話番号は0312-345678です",
+        "candidate": "電話番号は、0312-345678です。"
+      }
+    ]
+  },
+  "en": {
+    "tts-final-baseline": {
+      "count": 20,
+      "edits": 121,
+      "reference_chars": 633
+    },
+    "tts-final-trim": {
+      "count": 20,
+      "edits": 121,
+      "reference_chars": 633
+    },
+    "changed_transcriptions": []
+  }
+}

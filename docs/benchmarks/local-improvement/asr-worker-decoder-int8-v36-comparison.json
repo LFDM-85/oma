@@ -1,0 +1,86 @@
+{
+  "ja": {
+    "baseline": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 751,
+      "edits": 59,
+      "cer": 0.07856191744340879,
+      "critical_count": 23,
+      "critical_accuracy": 0.8260869565217391,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 0.9460292425064836,
+        "p95": 1.0251444460009225,
+        "max": 1.078600368986372
+      }
+    },
+    "candidate": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 751,
+      "edits": 35,
+      "cer": 0.04660452729693742,
+      "critical_count": 23,
+      "critical_accuracy": 0.7391304347826086,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 1.2048484804836335,
+        "p95": 1.8227712450025138,
+        "max": 1.994806636008434
+      }
+    },
+    "relative_cer_improvement": 0.4067796610169492,
+    "gate": false
+  },
+  "en": {
+    "baseline": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 1433,
+      "edits": 128,
+      "cer": 0.08932309839497557,
+      "critical_count": 23,
+      "critical_accuracy": 1.0,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 0.8804681420006091,
+        "p95": 0.9602110069827177,
+        "max": 1.011472785990918
+      }
+    },
+    "candidate": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 1433,
+      "edits": 29,
+      "cer": 0.020237264480111653,
+      "critical_count": 23,
+      "critical_accuracy": 1.0,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 1.025720227495185,
+        "p95": 1.5322509950201493,
+        "max": 1.6199821119953413
+      }
+    },
+    "relative_cer_improvement": 0.7734375,
+    "gate": true
+  }
+}

@@ -1,0 +1,21 @@
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+
+********
+Warning: flash-attn is not installed. Will only run the manual PyTorch version. Please install flash-attn for faster inference.
+********
+ 
+{"id": "ja-dev-01", "language": "ja", "text": "設定画面を開いてください。", "error": "No audible speech", "seconds": 46.602836870995816}
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+{"id": "en-dev-01", "language": "en", "text": "Open the settings screen.", "seconds": 5.565350090007996, "first_audio_seconds": 5.565247426013229, "first_sound_seconds": 6.000830759346563, "duration": 2.24, "rtf": 2.484531290182141, "chunks": [{"ready": 5.565247426013229, "duration": 2.24}], "simulated_gap_seconds": 0, "frames": 53760, "sample_rate": 24000, "sha256": "99ce89948bbdba62b7e65e1799efde47d712bcde62f29a9174df5b1eaea3b3d3"}

@@ -1,0 +1,11 @@
+{
+  "engine": "qwen",
+  "model": "Qwen/Qwen3-ASR-0.6B-hf",
+  "corpus_sha256": "9c87e5f2d64376f58853b4b5c1ad089d96845a37ae1d574d5c696fe2062b63d9",
+  "load_seconds": 3.3462249990261625,
+  "threads": 4,
+  "context": "Voice commands to the O.M.A. desktop assistant. Applications, documents, conversation history. O.M.A., OmaText.",
+  "split": "dev",
+  "beams": 1,
+  "normalize_quiet_speech": true
+}

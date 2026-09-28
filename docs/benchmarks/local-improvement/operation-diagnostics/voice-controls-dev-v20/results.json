@@ -1,0 +1,37 @@
+[
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "farewell",
+    "repeat": 0,
+    "passed": false,
+    "status": "cleanup_failed",
+    "error": "Timed out: farewell dismisses O.M.A.",
+    "critical_error": false,
+    "cleanup_error": "Command '('pactl', 'unload-module', '536870918')' timed out after 20 seconds"
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "modes",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "farewell",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "modes",
+    "repeat": 0,
+    "passed": null,
+    "status": "not_run"
+  }
+]

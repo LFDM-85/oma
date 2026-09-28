@@ -1,0 +1,41 @@
+[
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "document",
+    "repeat": 0,
+    "passed": false,
+    "status": "failed",
+    "error": "Timed out: recognized write",
+    "critical_error": false
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "modes",
+    "repeat": 0,
+    "passed": false,
+    "status": "failed",
+    "error": "Timed out: reply while mini",
+    "critical_error": false
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "document",
+    "repeat": 0,
+    "passed": false,
+    "status": "failed",
+    "error": "Timed out: recognized write",
+    "critical_error": false
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "modes",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 56.99
+  }
+]

@@ -1,0 +1,86 @@
+ARTIFACTS /tmp/oma-e2e-dev-v20-controls/trials/20260927-061221-2394850
+SCENARIO local/ja/farewell/0
+PASS microphone ready (0.74s)
+PASS opening finished (14.33s)
+VOICE bye
+PASS recognized bye (4.22s)
+FAIL local/ja/farewell/0: Timed out: farewell dismisses O.M.A.
+Retrying original microphone restoration after device startup failure
+Retrying original microphone restoration after device startup failure
+CLEANUP FAILED local/ja/farewell/0: Command '('pactl', 'unload-module', '536870918')' timed out after 20 seconds
+Traceback (most recent call last):
+  File "/home/komagata/Projects/komagata/oma/tests/voice/run.py", line 359, in finish
+    restore_microphone(self.microphone)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/komagata/Projects/komagata/oma/tests/voice/run.py", line 452, in restore_microphone
+    wait_setting('microphoneTarget',target)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/komagata/Projects/komagata/oma/tests/voice/run.py", line 443, in wait_setting
+    raise AssertionError('Setting did not become ready: '+key+'='+str(value))
+AssertionError: Setting did not become ready: microphoneTarget=alsa_input.usb-Yamaha_Corporation_Yamaha_AG03MK2-00.analog-stereo
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/komagata/Projects/komagata/oma/tests/voice/run.py", line 363, in finish
+    run('pactl', 'unload-module', self.source_module)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/komagata/Projects/komagata/oma/tests/voice/run.py", line 49, in run
+    return subprocess.check_output(args, timeout=20).decode()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 473, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               **kwargs).stdout
+               ^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 2154, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1268, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '('pactl', 'unload-module', '536870919')' timed out after 20 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/komagata/Projects/komagata/oma/tests/voice/run.py", line 556, in <module>
+    main()
+    ~~~~^^
+  File "/home/komagata/Projects/komagata/oma/tests/voice/run.py", line 534, in main
+    raise failure
+  File "/home/komagata/Projects/komagata/oma/tests/voice/run.py", line 525, in main
+    h.finish()
+    ~~~~~~~~^^
+  File "/home/komagata/Projects/komagata/oma/tests/voice/run.py", line 369, in finish
+    run('pactl', 'unload-module', self.module)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/komagata/Projects/komagata/oma/tests/voice/run.py", line 49, in run
+    return subprocess.check_output(args, timeout=20).decode()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 473, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               **kwargs).stdout
+               ^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 2154, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1268, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '('pactl', 'unload-module', '536870918')' timed out after 20 seconds

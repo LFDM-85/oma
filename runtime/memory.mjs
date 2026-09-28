@@ -1,6 +1,7 @@
+import {transcriptSchema} from './transcript.mjs';
 import { DatabaseSync } from 'node:sqlite';
-import { mkdirSync, chmodSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { mkdirSync, chmodSync, unlinkSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 export function bounded(text, bytes) {
  let out=''; let used=0;
  for(const ch of String(text)){const n=Buffer.byteLength(ch); if(used+n>bytes)break;out+=ch;used+=n;}
@@ -8,8 +9,10 @@ export function bounded(text, bytes) {
 }
 export class Memory {
  constructor(path){
+  this.directory=dirname(path);
   mkdirSync(dirname(path),{recursive:true,mode:0o700});
   this.db=new DatabaseSync(path); chmodSync(path,0o600); this.revision=0;this.compacting=false;
+  this.db.exec(transcriptSchema);
   this.db.exec(`PRAGMA journal_mode=WAL; PRAGMA secure_delete=ON;
    CREATE TABLE IF NOT EXISTS events(id INTEGER PRIMARY KEY,at TEXT NOT NULL,role TEXT NOT NULL,body TEXT NOT NULL);
    CREATE TABLE IF NOT EXISTS facts(key TEXT PRIMARY KEY,value TEXT NOT NULL,at TEXT NOT NULL);
@@ -21,7 +24,7 @@ export class Memory {
  add(role,body){if(!body)return;this.db.prepare('INSERT INTO events(at,role,body) VALUES(?,?,?)').run(new Date().toISOString(),role,bounded(body,24000));}
  action(kind,body,status){this.db.prepare('INSERT INTO actions(at,kind,body,status) VALUES(?,?,?,?)').run(new Date().toISOString(),kind,JSON.stringify(body),status);}
  lastUrl(){const row=this.db.prepare("SELECT * FROM actions WHERE kind='open_url' AND status='completed' ORDER BY id DESC LIMIT 1").get();return row?{...JSON.parse(row.body),at:row.at}:null;}
- remember(key,value){if(!key?.trim()||!value?.trim())throw Error('Both key and value are required');this.db.prepare('INSERT OR REPLACE INTO facts VALUES(?,?,?)').run(bounded(key,200),bounded(value,3000),new Date().toISOString());this.revision++;this.set('summary','');}
+ remember(key,value){if(!key?.trim()||!value?.trim())throw Error('Both key and value are required');const fact={key:bounded(key,200),value:bounded(value,3000)};this.db.prepare('INSERT OR REPLACE INTO facts VALUES(?,?,?)').run(fact.key,fact.value,new Date().toISOString());this.revision++;this.set('summary','');return fact;}
  facts(){return this.db.prepare('SELECT * FROM facts ORDER BY at DESC LIMIT 100').all();}
  search(query){const q='%'+String(query).replaceAll('\\','\\\\').replaceAll('%','\\%').replaceAll('_','\\_')+'%';
   const e=this.db.prepare("SELECT at,role,body FROM events WHERE body LIKE ? ESCAPE '\\' ORDER BY id DESC LIMIT 8").all(q);
@@ -30,11 +33,13 @@ export class Memory {
   return [...f,...a,...e];
  }
  forget(query){if(!query?.trim())throw Error('Specify what to forget');const q='%'+query.replaceAll('\\','\\\\').replaceAll('%','\\%').replaceAll('_','\\_')+'%';this.revision++;
-  this.db.exec('BEGIN');try{
-   for(const table of ['events','actions'])this.db.prepare(`DELETE FROM ${table} WHERE body LIKE ? ESCAPE '\\'`).run(q);
-   this.db.prepare("DELETE FROM facts WHERE key LIKE ? ESCAPE '\\' OR value LIKE ? ESCAPE '\\'").run(q,q);
+  this.db.exec('BEGIN');let removed=0;try{
+   for(const table of ['events','actions','transcript_entries'])removed+=Number(this.db.prepare(`DELETE FROM ${table} WHERE body LIKE ? ESCAPE '\\'`).run(q).changes);
+   removed+=Number(this.db.prepare("DELETE FROM facts WHERE key LIKE ? ESCAPE '\\' OR value LIKE ? ESCAPE '\\'").run(q,q).changes);
    this.set('taskCheckpoint','');this.set('summary','');this.set('summaryThrough',0);this.set('thread','');this.db.exec('COMMIT');this.db.exec('PRAGMA wal_checkpoint(TRUNCATE)');
+   for(const name of ['latest.txt','today.txt']){try{unlinkSync(join(this.directory,'transcripts',name))}catch{}};
   }catch(e){this.db.exec('ROLLBACK');throw e;}
+  return removed;
  }
  context(query='',budget=18000){
   const recent=this.db.prepare('SELECT at,role,body FROM events ORDER BY id DESC LIMIT 12').all();

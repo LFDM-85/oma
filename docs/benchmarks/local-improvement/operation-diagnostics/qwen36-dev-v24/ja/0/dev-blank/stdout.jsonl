@@ -1,0 +1,21 @@
+{"event":"tool_start","name":"new_text_document","args":{"input":{"text":""}}}
+{"event":"state","state":"working","taskStatus":"Working"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":false}
+{"event":"tool_end","name":"new_text_document","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"tool_start","name":"list_windows","args":{}}
+{"event":"state","state":"working","taskStatus":"Working"}
+{"event":"tool_end","name":"list_windows","error":false,"details":{"windowReferences":[{"windowId":"w1","address":"0x61d1b5b0aa60"},{"windowId":"w2","address":"0x61d1b59e88e0"}]}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"tool_start","name":"accompany_window","args":{"windowId":"w2"}}
+{"event":"state","state":"working","taskStatus":"Moving beside the application"}
+{"event":"tool_end","name":"accompany_window","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"OmaTextで新しい空のメモを用意しました。右側のウィンドウに空白のバッファが開いていますので、そのまま書き始めてください。","seconds":59.30213183200001,"model":"qwen3.6:35b","provider":"oma-local","thinkingLevel":"low","usage":{"input":38,"output":65,"cacheRead":12890,"cacheWrite":0,"reasoning":0,"totalTokens":12993,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

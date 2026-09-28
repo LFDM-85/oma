@@ -1,0 +1,29 @@
+{
+  "model": "qwen3.5:9b",
+  "thinking": {
+    "values": [
+      false,
+      true
+    ],
+    "default": true
+  },
+  "capabilities": [
+    "completion",
+    "vision",
+    "tools",
+    "thinking"
+  ],
+  "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen35",
+    "families": [
+      "qwen35"
+    ],
+    "parameter_size": "9.7B",
+    "quantization_level": "Q4_K_M"
+  },
+  "ollama": {
+    "version": "0.34.4"
+  }
+}

@@ -1,0 +1,15 @@
+{"event":"tool_start","name":"new_text_document","args":{"input":{"text":"月曜日の予定です。"}}}
+{"event":"state","state":"working","taskStatus":"Working"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":false}
+{"event":"tool_end","name":"new_text_document","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"OmaText の新しい文書を作成しました。「月曜日の予定です。」と表示されています。","seconds":25.851572174,"model":"qwen3.5:9b","provider":"oma-local","thinkingLevel":"low","usage":{"input":137,"output":47,"cacheRead":12292,"cacheWrite":0,"reasoning":0,"totalTokens":12476,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

@@ -1,0 +1,16 @@
+{
+  "ja": {
+    "all_median_seconds": 8.639789045002544,
+    "physical_p_median_seconds": 7.085503491980489,
+    "relative_reduction": 0.17989855364826182,
+    "all_final_transcripts_equal": true,
+    "trials_per_configuration": 3
+  },
+  "en": {
+    "all_median_seconds": 7.785116744984407,
+    "physical_p_median_seconds": 6.078590567020001,
+    "relative_reduction": 0.2192036720661694,
+    "all_final_transcripts_equal": true,
+    "trials_per_configuration": 3
+  }
+}

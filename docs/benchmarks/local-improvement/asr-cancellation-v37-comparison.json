@@ -1,0 +1,16 @@
+{
+  "ja": {
+    "baseline_median_seconds": 13.838686040020548,
+    "candidate_median_seconds": 9.349164455983555,
+    "relative_reduction": 0.32441819772871494,
+    "all_final_transcripts_equal": true,
+    "trials_per_configuration": 3
+  },
+  "en": {
+    "baseline_median_seconds": 12.098024584993254,
+    "candidate_median_seconds": 7.275983398023527,
+    "relative_reduction": 0.39858087186821634,
+    "all_final_transcripts_equal": true,
+    "trials_per_configuration": 3
+  }
+}

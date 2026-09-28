@@ -8,27 +8,47 @@ Item {
     property var shell: null
     property var manifest: null
     property color accentColor: Color.accent
-    Connections { target: Color; function onAccentChanged() { root.accentColor = Color.accent; borderProbe.running = true } }
-    Timer { interval: 500; running: true; repeat: true; triggeredOnStart: true; onTriggered: if (!borderProbe.running) borderProbe.running = true }
-    Process {
-        id: borderProbe
-        command: ["hyprctl", "-j", "getoption", "general:col.active_border"]
-        stdout: StdioCollector { onStreamFinished: {
-            try {
-                const gradient = JSON.parse(text).gradient || ""
-                const first = gradient.split(/\s+/)[0]
-                if (/^[0-9a-fA-F]{8}$/.test(first)) root.accentColor = "#" + first.slice(2)
-            } catch (e) {}
-        } }
-    }
     property bool setupRequired: true
     property string setupMessage: "Checking runtime dependencies…"
-    function setup() { setupTerminal.running = true }
+    property string setupLaunchError: ""
+    property bool setupBusy: modelTerminal.running || setupTerminal.running
+    property var responseLanguages: []
+    property string responseLanguage: ""
+    property string languageError: ""
+    function setResponseLanguage(value) { command({action: "setResponseLanguage", value: value}) }
+    property var microphones: []
+    property string microphoneTarget: ""
+    property bool microphoneBusy: false
+    property string microphoneError: ""
+    function refreshMicrophones() { command({action: "refreshMicrophones"}) }
+    function setMicrophone(target) { command({action: "setMicrophone", target: target}) }
+    property var latency: ({})
+    property bool connectionTesting: false
+    property bool connectionTestPassed: false
+    property string connectionTestError: ""
+    function testConnection() { command({action: "testConnection"}) }
+    function modelSetup() { setupLaunchError = ""; modelTerminal.running = true }
+    Process {
+        id: modelTerminal
+        onStarted: if (root.shell) root.shell.hide("io.github.komagata.oma")
+        onExited: (exitCode, exitStatus) => root.setupExited(exitCode)
+        command: ["systemd-run", "--user", "--collect", "--wait", "--service-type=exec", "--property=ExitType=cgroup", "--quiet", "--", "xdg-terminal-exec", "bash", Qt.resolvedUrl("scripts/configure-pi").toString().replace(/^file:\/\//, "")]
+    }
+    function setup() { setupLaunchError = ""; setupTerminal.running = true }
+    function setupExited(exitCode) {
+        if (exitCode !== 0) setupLaunchError = "Setup is incomplete. Open setup again to continue."
+        checkSetup()
+        if (worker.running) command({action: "refreshConnections"})
+        settings()
+    }
     function checkSetup() { if (!setupProbe.running) setupProbe.running = true }
     Process {
         id: setupTerminal
-        command: ["omarchy", "launch", "terminal", "bash", Qt.resolvedUrl("scripts/setup").toString().replace(/^file:\/\//, "")]
+        onStarted: if (root.shell) root.shell.hide("io.github.komagata.oma")
+        onExited: (exitCode, exitStatus) => root.setupExited(exitCode)
+        command: ["systemd-run", "--user", "--collect", "--wait", "--service-type=exec", "--property=ExitType=cgroup", "--quiet", "--", "xdg-terminal-exec", "bash", Qt.resolvedUrl("scripts/setup").toString().replace(/^file:\/\//, "")]
     }
+    Timer { interval: 2500; repeat: true; running: root.setupBusy; onTriggered: root.checkSetup() }
     Process {
         id: setupProbe
         command: ["python3", Qt.resolvedUrl("scripts/check-setup.py").toString().replace(/^file:\/\//, "")]
@@ -59,6 +79,25 @@ Item {
     property var question: null
     property bool wakeEnabled: false
     property string wakeStatus: "Starting voice wake…"
+    property var backendStatus: ({})
+    property bool taskBusy: false
+    property bool docked: false
+    property string floatingViewMode: "normal"
+    onDockedChanged: { if (docked) floatingViewMode = viewMode; else viewMode = floatingViewMode }
+    property string viewMode: "normal"
+    readonly property bool miniMode: viewMode === "mini" && !approval && !question && !error
+    function setViewMode(mode) { if (mode === "mini" || mode === "normal") viewMode = mode }
+    property string voiceProvider: "gpt-live"
+    property bool providerChanging: false
+    property bool localSetupBusy: false
+    property string localSetupMessage: ""
+    function setVoiceProvider(value) { providerChanging = true; command({action: "setVoiceProvider", value: value}) }
+    function localSetup() { command({action: "localSetup"}) }
+    property bool modelReady: false
+    property bool speechReady: false
+    property bool omarchySkillLoaded: false
+    property string modelProvider: ""
+    property string modelName: ""
     property bool keyConfigured: false
     property bool keySaving: false
     property string keyError: ""
@@ -86,7 +125,7 @@ Item {
     function restoreWelcome() { command({action: "restoreGreet"}) }
     signal dismissRequested()
     function presentation(active) { command({action: "presentation", active: active}) }
-    function press() { if (!keyConfigured) { settings(); return }; show(false); command({action: "press"}) }
+    function press() { if (!keyConfigured) { settings(); return }; show(true); command({action: "press"}) }
     function release() { if (keyConfigured) command({action: "release"}) }
     function stop() { command({action: "stop"}) }
     function approve(allow) { if (approval) command({action: "approve", id: approval.id, allow: allow}) }
@@ -96,12 +135,14 @@ Item {
         if (!alive || line.length > 65536) return
         try {
             const d = JSON.parse(line)
-            for (const k of ["cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
+            for (const k of ["taskBusy", "backendStatus", "docked", "viewMode", "providerChanging", "localSetupBusy", "localSetupMessage"])
+                if (d[k] !== undefined) root[k] = d[k]
+            for (const k of ["responseLanguages", "responseLanguage", "languageError", "microphones", "microphoneTarget", "microphoneBusy", "microphoneError", "voiceProvider", "latency", "connectionTesting", "connectionTestPassed", "connectionTestError", "modelReady", "speechReady", "omarchySkillLoaded", "modelProvider", "modelName", "cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
                 if (d[k] !== undefined) root[k] = d[k]
             if (d.dismiss === true) dismissRequested()
-            if (d.wakeDetected === true) show(false, true)
+            if (d.wakeDetected === true) show(true, true)
             root.revision++
-            if (d.keySaved === true) { worker.running = false; restartWorker.start() }
+            if (d.keySaved === true || d.restartWorker === true) { worker.running = false; restartWorker.start() }
         } catch (e) { root.error = "Invalid response from O.M.A." }
     }
     Timer { id: restartWorker; interval: 300; onTriggered: worker.running = true }
@@ -121,9 +162,18 @@ Item {
         function stop(): void { root.stop(); if (root.shell) root.shell.hide("io.github.komagata.oma") }
         function open(): void { root.show() }
         function retry(): void { root.retry() }
-        function send(text: string): void { root.show(false); root.command({action: "text", text: text}) }
+        function send(text: string): void { if (!root.panelOpened) root.show(false); root.command({action: "text", text: text}) }
+        function computerUse(active: bool): void { root.computerUsing = active }
+        function setup(): void { root.setup() }
+        function testConnection(): void { root.testConnection() }
         function settings(): void { root.settings() }
         function demo(): void { root.show(false); root.command({action: "demo"}) }
-        function status(): string { return JSON.stringify({panelOpened: root.panelOpened, accentColor: String(root.accentColor), state: root.state, listeningReady: root.listeningReady, error: root.error, level: root.level, inputLevel: root.inputLevel, keyConfigured: root.keyConfigured, wakeEnabled: root.wakeEnabled, wakeStatus: root.wakeStatus, approvalListening: root.approvalListening}) }
+        function accompany(address: string): void { root.command({action: "accompanyWindow", address: address}) }
+        function restoreFloating(): void { root.command({action: "restoreFloating"}) }
+        function viewMode(mode: string): void { root.setViewMode(mode) }
+        function voiceProvider(value: string): void { root.setVoiceProvider(value) }
+        function responseLanguage(value: string): void { root.setResponseLanguage(value) }
+        function microphone(value: string): void { root.setMicrophone(value) }
+        function status(): string { return JSON.stringify({modelProvider: root.modelProvider, modelName: root.modelName, taskStatus: root.taskStatus, taskBusy: root.taskBusy, backendStatus: root.backendStatus, docked: root.docked, viewMode: root.viewMode, responseLanguage: root.responseLanguage, languageError: root.languageError, microphoneTarget: root.microphoneTarget, microphoneBusy: root.microphoneBusy, microphoneError: root.microphoneError, onboardingVersion: 2, voiceProvider: root.voiceProvider, latency: root.latency, setupBusy: root.setupBusy, setupRequired: root.setupRequired, modelReady: root.modelReady, speechReady: root.speechReady, connectionTestPassed: root.connectionTestPassed, panelOpened: root.panelOpened, accentColor: String(root.accentColor), state: root.state, listeningReady: root.listeningReady, error: root.error, level: root.level, inputLevel: root.inputLevel, keyConfigured: root.keyConfigured, wakeEnabled: root.wakeEnabled, wakeStatus: root.wakeStatus, approvalListening: root.approvalListening}) }
     }
 }

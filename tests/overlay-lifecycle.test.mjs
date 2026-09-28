@@ -15,3 +15,12 @@ test('resolving a closed overlay never cancels the incoming wake greeting',()=>{
  ctx.opened=true;vm.runInNewContext('resolveService()',ctx);
  assert.deepEqual(patches,['presentation','greeting']);
 });
+test('desktop observation keeps a docked window mapped so its tile survives',()=>{
+ const qml=readFileSync(new URL('../Overlay.qml',import.meta.url),'utf8');
+ const expression=qml.match(/^        visible: (.+)$/m)[1];
+ const root={opened:true,docked:true,service:{computerUsing:true}};
+ assert.equal(vm.runInNewContext(expression,{root}),true);
+ root.docked=false;assert.equal(vm.runInNewContext(expression,{root}),false);
+ root.service.computerUsing=false;assert.equal(vm.runInNewContext(expression,{root}),true);
+ root.opened=false;assert.equal(vm.runInNewContext(expression,{root}),false);
+});

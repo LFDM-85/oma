@@ -1,0 +1,9 @@
+{"event":"tool_start","name":"set_view_mode","args":{"mode":"mini"}}
+{"event":"state","state":"working","taskStatus":"Switching to mini mode"}
+{"event":"state","viewMode":"mini"}
+{"event":"tool_end","name":"set_view_mode","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"ミニモードに変更しました。顔だけの小さい表示になりました。","seconds":2.4410624280000004,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":22,"output":33,"cacheRead":12591,"cacheWrite":0,"reasoning":0,"totalTokens":12646,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

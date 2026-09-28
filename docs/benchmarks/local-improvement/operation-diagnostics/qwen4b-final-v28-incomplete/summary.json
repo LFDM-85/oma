@@ -1,0 +1,1026 @@
+{
+  "split": "final",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": true,
+      "expected": 100,
+      "successes": 89,
+      "success_rate": 0.89,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": false,
+      "successful_latency": {
+        "n": 89,
+        "median": 5.16480161700747,
+        "p95": 18.060287708009128,
+        "max": 37.99912647699239
+      },
+      "failed_duration": {
+        "n": 11,
+        "median": 8.496540963998996,
+        "p95": 151.25595548099955,
+        "max": 151.25595548099955
+      },
+      "failures": [
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dictation",
+          "status": "failed",
+          "setup_seconds": 3.7529147129971534,
+          "passed": false,
+          "error": "Document differs: ''",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 16.10712346000946,
+          "seconds": 12.354209812008776
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "punctuation",
+          "status": "failed",
+          "setup_seconds": 3.720564685005229,
+          "passed": false,
+          "error": "Document differs: ''",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 15.789539114019135,
+          "seconds": 12.068974855006672
+        },
+        {
+          "language": "ja",
+          "repeat": 1,
+          "id": "discard",
+          "status": "failed",
+          "setup_seconds": 4.804790802008938,
+          "passed": false,
+          "error": "['This operation was aborted']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 156.06074542799615,
+          "seconds": 151.25595548099955
+        },
+        {
+          "language": "ja",
+          "repeat": 1,
+          "id": "goodbye",
+          "status": "failed",
+          "setup_seconds": 3.8129360190068837,
+          "passed": false,
+          "error": "",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 5.930245631025173,
+          "seconds": 2.1173101250024047
+        },
+        {
+          "language": "ja",
+          "repeat": 2,
+          "id": "recall",
+          "status": "failed",
+          "setup_seconds": 3.577054331981344,
+          "passed": false,
+          "error": "['Agent operation timed out']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 154.40997859300114,
+          "seconds": 150.83292495200294
+        },
+        {
+          "language": "ja",
+          "repeat": 2,
+          "id": "rename-file",
+          "status": "failed",
+          "setup_seconds": 3.788351736991899,
+          "passed": false,
+          "error": "",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 11.861601060983958,
+          "seconds": 8.07324983298895
+        },
+        {
+          "language": "ja",
+          "repeat": 3,
+          "id": "lines",
+          "status": "failed",
+          "setup_seconds": 3.8144591150048655,
+          "passed": false,
+          "error": "Document differs: ''",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 29.314918647985905,
+          "seconds": 25.500460433977423
+        },
+        {
+          "language": "ja",
+          "repeat": 3,
+          "id": "goodbye",
+          "status": "failed",
+          "setup_seconds": 3.7668114300176967,
+          "passed": false,
+          "error": "",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 5.874603976000799,
+          "seconds": 2.1077931670006365
+        },
+        {
+          "language": "ja",
+          "repeat": 4,
+          "id": "dictation",
+          "status": "failed",
+          "setup_seconds": 3.788434635993326,
+          "passed": false,
+          "error": "Document differs: ''",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 12.284975044982275,
+          "seconds": 8.496540963998996
+        },
+        {
+          "language": "ja",
+          "repeat": 4,
+          "id": "math",
+          "status": "failed",
+          "setup_seconds": 3.827330787986284,
+          "passed": false,
+          "error": "'一足す一の答えは 2 です。'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 5.988757484999951,
+          "seconds": 2.161427515995456
+        },
+        {
+          "language": "ja",
+          "repeat": 4,
+          "id": "goodbye",
+          "status": "failed",
+          "setup_seconds": 3.6708319120225497,
+          "passed": false,
+          "error": "",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 5.8851394960074686,
+          "seconds": 2.214308029972017
+        }
+      ]
+    },
+    "en": {
+      "complete": false,
+      "expected": 100,
+      "successes": 18,
+      "success_rate": 0.18,
+      "missing": [
+        {
+          "id": "append-file",
+          "repeat": 1
+        },
+        {
+          "id": "append-file",
+          "repeat": 2
+        },
+        {
+          "id": "append-file",
+          "repeat": 3
+        },
+        {
+          "id": "append-file",
+          "repeat": 4
+        },
+        {
+          "id": "blank",
+          "repeat": 1
+        },
+        {
+          "id": "blank",
+          "repeat": 2
+        },
+        {
+          "id": "blank",
+          "repeat": 3
+        },
+        {
+          "id": "blank",
+          "repeat": 4
+        },
+        {
+          "id": "cancel-close",
+          "repeat": 1
+        },
+        {
+          "id": "cancel-close",
+          "repeat": 2
+        },
+        {
+          "id": "cancel-close",
+          "repeat": 3
+        },
+        {
+          "id": "cancel-close",
+          "repeat": 4
+        },
+        {
+          "id": "close",
+          "repeat": 1
+        },
+        {
+          "id": "close",
+          "repeat": 2
+        },
+        {
+          "id": "close",
+          "repeat": 3
+        },
+        {
+          "id": "close",
+          "repeat": 4
+        },
+        {
+          "id": "dictation",
+          "repeat": 1
+        },
+        {
+          "id": "dictation",
+          "repeat": 2
+        },
+        {
+          "id": "dictation",
+          "repeat": 3
+        },
+        {
+          "id": "dictation",
+          "repeat": 4
+        },
+        {
+          "id": "discard",
+          "repeat": 1
+        },
+        {
+          "id": "discard",
+          "repeat": 2
+        },
+        {
+          "id": "discard",
+          "repeat": 3
+        },
+        {
+          "id": "discard",
+          "repeat": 4
+        },
+        {
+          "id": "forget",
+          "repeat": 1
+        },
+        {
+          "id": "forget",
+          "repeat": 2
+        },
+        {
+          "id": "forget",
+          "repeat": 3
+        },
+        {
+          "id": "forget",
+          "repeat": 4
+        },
+        {
+          "id": "goodbye",
+          "repeat": 1
+        },
+        {
+          "id": "goodbye",
+          "repeat": 2
+        },
+        {
+          "id": "goodbye",
+          "repeat": 3
+        },
+        {
+          "id": "goodbye",
+          "repeat": 4
+        },
+        {
+          "id": "lines",
+          "repeat": 1
+        },
+        {
+          "id": "lines",
+          "repeat": 2
+        },
+        {
+          "id": "lines",
+          "repeat": 3
+        },
+        {
+          "id": "lines",
+          "repeat": 4
+        },
+        {
+          "id": "math",
+          "repeat": 1
+        },
+        {
+          "id": "math",
+          "repeat": 2
+        },
+        {
+          "id": "math",
+          "repeat": 3
+        },
+        {
+          "id": "math",
+          "repeat": 4
+        },
+        {
+          "id": "mini",
+          "repeat": 1
+        },
+        {
+          "id": "mini",
+          "repeat": 2
+        },
+        {
+          "id": "mini",
+          "repeat": 3
+        },
+        {
+          "id": "mini",
+          "repeat": 4
+        },
+        {
+          "id": "normal",
+          "repeat": 1
+        },
+        {
+          "id": "normal",
+          "repeat": 2
+        },
+        {
+          "id": "normal",
+          "repeat": 3
+        },
+        {
+          "id": "normal",
+          "repeat": 4
+        },
+        {
+          "id": "punctuation",
+          "repeat": 1
+        },
+        {
+          "id": "punctuation",
+          "repeat": 2
+        },
+        {
+          "id": "punctuation",
+          "repeat": 3
+        },
+        {
+          "id": "punctuation",
+          "repeat": 4
+        },
+        {
+          "id": "quoted-goodbye",
+          "repeat": 1
+        },
+        {
+          "id": "quoted-goodbye",
+          "repeat": 2
+        },
+        {
+          "id": "quoted-goodbye",
+          "repeat": 3
+        },
+        {
+          "id": "quoted-goodbye",
+          "repeat": 4
+        },
+        {
+          "id": "read-file",
+          "repeat": 1
+        },
+        {
+          "id": "read-file",
+          "repeat": 2
+        },
+        {
+          "id": "read-file",
+          "repeat": 3
+        },
+        {
+          "id": "read-file",
+          "repeat": 4
+        },
+        {
+          "id": "recall",
+          "repeat": 1
+        },
+        {
+          "id": "recall",
+          "repeat": 2
+        },
+        {
+          "id": "recall",
+          "repeat": 3
+        },
+        {
+          "id": "recall",
+          "repeat": 4
+        },
+        {
+          "id": "remember",
+          "repeat": 1
+        },
+        {
+          "id": "remember",
+          "repeat": 2
+        },
+        {
+          "id": "remember",
+          "repeat": 3
+        },
+        {
+          "id": "remember",
+          "repeat": 4
+        },
+        {
+          "id": "rename-file",
+          "repeat": 1
+        },
+        {
+          "id": "rename-file",
+          "repeat": 2
+        },
+        {
+          "id": "rename-file",
+          "repeat": 3
+        },
+        {
+          "id": "rename-file",
+          "repeat": 4
+        },
+        {
+          "id": "replace-file",
+          "repeat": 1
+        },
+        {
+          "id": "replace-file",
+          "repeat": 2
+        },
+        {
+          "id": "replace-file",
+          "repeat": 3
+        },
+        {
+          "id": "replace-file",
+          "repeat": 4
+        },
+        {
+          "id": "write-file",
+          "repeat": 1
+        },
+        {
+          "id": "write-file",
+          "repeat": 2
+        },
+        {
+          "id": "write-file",
+          "repeat": 3
+        },
+        {
+          "id": "write-file",
+          "repeat": 4
+        }
+      ],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": false,
+      "successful_latency": {
+        "n": 18,
+        "median": 5.723981235496467,
+        "p95": 14.668600425007753,
+        "max": 14.668600425007753
+      },
+      "failed_duration": {
+        "n": 2,
+        "median": 6.021731288506999,
+        "p95": 8.75523143899045,
+        "max": 8.75523143899045
+      },
+      "failures": [
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "discard",
+          "status": "failed",
+          "setup_seconds": 4.715354168001795,
+          "passed": false,
+          "error": "['The follow-up requires a save/discard/cancel choice, but the assistant entered binary approval mode']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 13.470585156988818,
+          "seconds": 8.75523143899045
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "append-file",
+          "status": "failed",
+          "setup_seconds": 3.655852033989504,
+          "passed": false,
+          "error": "File differs: 'Seed.'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 6.944082675006939,
+          "seconds": 3.288231138023548
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "blank",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "dictation",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "lines",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "punctuation",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "close",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "discard",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "cancel-close",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "mini",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "normal",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "quoted-goodbye",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "math",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "remember",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "recall",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "forget",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "write-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "append-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "replace-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "rename-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "read-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "goodbye",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "blank",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "dictation",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "lines",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "punctuation",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "close",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "discard",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "cancel-close",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "mini",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "normal",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "quoted-goodbye",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "math",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "remember",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "recall",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "forget",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "write-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "append-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "replace-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "rename-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "read-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 2,
+          "id": "goodbye",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "blank",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "dictation",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "lines",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "punctuation",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "close",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "discard",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "cancel-close",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "mini",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "normal",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "quoted-goodbye",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "math",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "remember",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "recall",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "forget",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "write-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "append-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "replace-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "rename-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "read-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 3,
+          "id": "goodbye",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "blank",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "dictation",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "lines",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "punctuation",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "close",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "discard",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "cancel-close",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "mini",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "normal",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "quoted-goodbye",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "math",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "remember",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "recall",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "forget",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "write-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "append-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "replace-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "rename-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "read-file",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 4,
+          "id": "goodbye",
+          "status": "not_run"
+        }
+      ]
+    }
+  }
+}

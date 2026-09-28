@@ -1,0 +1,27 @@
+{
+  "ja": {
+    "baseline_edits": 43,
+    "candidate_edits": 43,
+    "reference_chars": 303,
+    "changed_transcripts": [
+      "ja-final-01",
+      "ja-final-04",
+      "ja-final-06",
+      "ja-final-11",
+      "ja-final-16",
+      "ja-final-18"
+    ],
+    "worse_cases": [],
+    "interpretation": "independent ASR proxy, not human listening"
+  },
+  "en": {
+    "baseline_edits": 121,
+    "candidate_edits": 121,
+    "reference_chars": 633,
+    "changed_transcripts": [
+      "en-final-01"
+    ],
+    "worse_cases": [],
+    "interpretation": "independent ASR proxy, not human listening"
+  }
+}

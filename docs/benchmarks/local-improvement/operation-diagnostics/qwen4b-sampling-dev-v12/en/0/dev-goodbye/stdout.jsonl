@@ -1,0 +1,8 @@
+{"event":"tool_start","name":"end_conversation","args":{}}
+{"event":"state","state":"working","taskStatus":"Ending the conversation"}
+{"event":"tool_end","name":"end_conversation","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"I'll wrap up this session for you. The farewell has been processed and I'll close the conversation after a brief moment. Have a great day!","seconds":6.319654017,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":8856,"output":68,"cacheRead":0,"cacheWrite":0,"reasoning":0,"totalTokens":8924,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

@@ -20,17 +20,21 @@ Canvas {
     property bool shuttingDown: false
     onShuttingDownChanged: { if (shuttingDown) { boot.stop(); shutdown.restart() } else shutdown.stop() }
     property real bootProgress: 1
-    function powerOn() { shutdown.stop(); boot.restart() }
+    property int animatedStartupSerial: -1
+    function powerOn() { animatedStartupSerial = startupSerial; shutdown.stop(); boot.restart() }
     onStartupSerialChanged: { if (active) powerOn() }
-    onActiveChanged: { if (!active) { boot.stop(); shutdown.stop(); bootProgress = 1 } }
+    onActiveChanged: {
+        if (!active) { boot.stop(); shutdown.stop(); bootProgress = 1 }
+        else if (animatedStartupSerial !== startupSerial) powerOn()
+    }
     onBootProgressChanged: requestPaint()
     NumberAnimation { id: shutdown; target: root; property: "bootProgress"; from: 1; to: 0; duration: 1230; easing.type: Easing.Linear }
     NumberAnimation { id: boot; target: root; property: "bootProgress"; from: 0; to: 1; duration: 1230; easing.type: Easing.Linear }
     property real motionStrength: status === "speaking" ? 1 : status === "listening" ? .70 : .65
-    property real turn: (Math.sin(elapsed*.91)*.075 + Math.sin(elapsed*1.37)*.022) * motionStrength
-    property real nod: (Math.sin(elapsed*1.73+.6)*.030 + Math.sin(elapsed*.67)*.014) * motionStrength
-    property real tilt: Math.sin(elapsed*.73+.3)*.039 * motionStrength
-    property real hover: Math.sin(elapsed * .85) * 1.4
+    property real turn: (Math.sin(elapsed*.91)*.150 + Math.sin(elapsed*1.37)*.044) * motionStrength
+    property real nod: (Math.sin(elapsed*1.73+.6)*.060 + Math.sin(elapsed*.67)*.028) * motionStrength
+    property real tilt: Math.sin(elapsed*.73+.3)*.078 * motionStrength
+    property real hover: Math.sin(elapsed * .85) * 4.2
     onHoverChanged: requestPaint()
     FrameAnimation { running: root.active && root.visible; onTriggered: root.elapsed += Math.min(frameTime, .05) }
     Behavior on motionStrength { NumberAnimation { duration: 600; easing.type: Easing.InOutSine } }

@@ -1,0 +1,169 @@
+{
+  "split": "dev",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": true,
+      "expected": 13,
+      "successes": 9,
+      "success_rate": 0.6923076923076923,
+      "missing": [],
+      "critical_errors": 0,
+      "gate": false,
+      "successful_latency": {
+        "n": 9,
+        "median": 24.712796386011178,
+        "p95": 83.87482754298253,
+        "max": 83.87482754298253
+      },
+      "failed_duration": {
+        "n": 4,
+        "median": 33.09948170250573,
+        "p95": 43.261952519009355,
+        "max": 43.261952519009355
+      },
+      "failures": [
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-cancel-close",
+          "status": "failed",
+          "setup_seconds": 4.683503943000687,
+          "passed": false,
+          "error": "{'opened': True, 'active': True, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': True, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 25, 'url': '', 'modified': True, 'busy': False}",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 47.94545552300406,
+          "seconds": 43.261952519009355
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append-multiline",
+          "status": "failed",
+          "setup_seconds": 3.739030366006773,
+          "passed": false,
+          "error": "['Stream ended without finish_reason']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 33.7181410480116,
+          "seconds": 29.97911146900151
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-remember",
+          "status": "failed",
+          "setup_seconds": 3.785719492996577,
+          "passed": false,
+          "error": "[]",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 17.741304171999218,
+          "seconds": 13.955585285002599
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-keep-editing",
+          "status": "failed",
+          "setup_seconds": 3.4352287559886463,
+          "passed": false,
+          "error": "{'opened': True, 'active': True, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': True, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 20, 'url': '', 'modified': True, 'busy': False}",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 39.655080019991146,
+          "seconds": 36.219851936009945
+        }
+      ]
+    },
+    "en": {
+      "complete": true,
+      "expected": 13,
+      "successes": 8,
+      "success_rate": 0.6153846153846154,
+      "missing": [],
+      "critical_errors": 0,
+      "gate": false,
+      "successful_latency": {
+        "n": 8,
+        "median": 24.176114240501192,
+        "p95": 96.5867992049898,
+        "max": 96.5867992049898
+      },
+      "failed_duration": {
+        "n": 5,
+        "median": 19.660443900997052,
+        "p95": 36.26695495200693,
+        "max": 36.26695495200693
+      },
+      "failures": [
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-write",
+          "status": "failed",
+          "setup_seconds": 3.804404416005127,
+          "passed": false,
+          "error": "['Stream ended without finish_reason']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 23.418571588990744,
+          "seconds": 19.6141682099842
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-append",
+          "status": "failed",
+          "setup_seconds": 3.88559842898394,
+          "passed": false,
+          "error": "['Stream ended without finish_reason']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 23.546041383000556,
+          "seconds": 19.660443900997052
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-append-multiline",
+          "status": "failed",
+          "setup_seconds": 3.8755237279983703,
+          "passed": false,
+          "error": "['Stream ended without finish_reason']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 25.142026418994647,
+          "seconds": 21.266503397986526
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-goodbye",
+          "status": "failed",
+          "setup_seconds": 3.8017037830140907,
+          "passed": false,
+          "error": "",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 18.514434248994803,
+          "seconds": 14.71273144200677
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-keep-editing",
+          "status": "failed",
+          "setup_seconds": 4.72691533897887,
+          "passed": false,
+          "error": "{'opened': True, 'active': True, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': True, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 20, 'url': '', 'modified': True, 'busy': False}",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 40.99386974898516,
+          "seconds": 36.26695495200693
+        }
+      ]
+    }
+  }
+}

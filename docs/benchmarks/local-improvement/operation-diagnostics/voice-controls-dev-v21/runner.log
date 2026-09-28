@@ -1,0 +1,37 @@
+ARTIFACTS /tmp/oma-e2e-dev-v21-controls/trials/20260927-062154-2416430
+SCENARIO local/ja/farewell/0
+PASS microphone ready (1.18s)
+PASS opening finished (14.76s)
+VOICE bye
+PASS recognized bye (3.56s)
+PASS farewell dismisses O.M.A. (7.61s)
+SCENARIO local/ja/modes/0
+PASS microphone ready (0.86s)
+PASS opening finished (6.54s)
+VOICE mini
+PASS recognized mini (2.71s)
+PASS mini mode (16.95s)
+VOICE question
+PASS recognized question (0.12s)
+FAIL local/ja/modes/0: Timed out: reply while mini
+SCENARIO local/en/farewell/0
+PASS microphone ready (0.82s)
+PASS opening finished (10.17s)
+VOICE bye
+PASS recognized bye (0.96s)
+FAIL local/en/farewell/0: Timed out: farewell dismisses O.M.A.
+SCENARIO local/en/modes/0
+PASS microphone ready (1.14s)
+PASS opening finished (5.36s)
+VOICE mini
+PASS recognized mini (2.2s)
+PASS mini mode (17.24s)
+VOICE question
+PASS recognized question (0.15s)
+PASS reply while mini (12.58s)
+VOICE normal
+PASS recognized normal (0.14s)
+PASS normal mode (11.99s)
+VOICE bye
+PASS recognized bye (0.16s)
+FAIL local/en/modes/0: Timed out: farewell dismisses O.M.A.

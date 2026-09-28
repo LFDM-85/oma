@@ -1,0 +1,5 @@
+{
+  "reason": "Japanese final gate failed at 89/100; stop obsolete candidate after the first complete English repetition. A separate revised candidate must rerun all 200 slots. No successes are transferred and all remaining slots stay not_run.",
+  "signal": "SIGINT",
+  "target_pid": 2779524
+}

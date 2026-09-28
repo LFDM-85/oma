@@ -1,0 +1,130 @@
+{
+  "split": "dev",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": true,
+      "expected": 13,
+      "successes": 8,
+      "success_rate": 0.6153846153846154,
+      "missing": [],
+      "critical_errors": 0,
+      "gate": false,
+      "successful_latency": {
+        "n": 8,
+        "median": 6.797095333997277,
+        "p95": 13.027373463002732,
+        "max": 13.027373463002732
+      },
+      "failed_duration": {
+        "n": 5,
+        "median": 8.569782638020115,
+        "p95": 80.3704800499836,
+        "max": 80.3704800499836
+      },
+      "failures": [
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-blank",
+          "status": "failed",
+          "setup_seconds": 3.7915195200184826,
+          "passed": false,
+          "error": "['Stream ended without finish_reason']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 11.47455216801609,
+          "seconds": 7.6830341659951955
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-math",
+          "status": "failed",
+          "setup_seconds": 3.7361545950116124,
+          "passed": false,
+          "error": "'三足す五（3＋5）の答えは **8** です。'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 6.6201514130225405,
+          "seconds": 2.8839974000002258
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-discard",
+          "status": "failed",
+          "setup_seconds": 4.816444994008634,
+          "passed": false,
+          "error": "{'document': {'opened': True, 'active': False, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': False, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 19, 'url': '', 'modified': True, 'busy': False}, 'panelOpened': True}",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 85.18692428499344,
+          "seconds": 80.3704800499836
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append",
+          "status": "failed",
+          "setup_seconds": 4.16186798500712,
+          "passed": false,
+          "error": "File differs: 'Plan: A!\\n火曜日'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 14.23988161899615,
+          "seconds": 10.07801461199415
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append-multiline",
+          "status": "failed",
+          "setup_seconds": 3.7843887500057463,
+          "passed": false,
+          "error": "['The same tool action failed three times without progress. The operation is incomplete.']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 12.354170607024571,
+          "seconds": 8.569782638020115
+        }
+      ]
+    },
+    "en": {
+      "complete": true,
+      "expected": 13,
+      "successes": 12,
+      "success_rate": 0.9230769230769231,
+      "missing": [],
+      "critical_errors": 0,
+      "gate": true,
+      "successful_latency": {
+        "n": 12,
+        "median": 8.383197902992833,
+        "p95": 19.657722375006415,
+        "max": 19.657722375006415
+      },
+      "failed_duration": {
+        "n": 1,
+        "median": 13.682155691989465,
+        "p95": 13.682155691989465,
+        "max": 13.682155691989465
+      },
+      "failures": [
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-append-multiline",
+          "status": "failed",
+          "setup_seconds": 3.7588985030015465,
+          "passed": false,
+          "error": "['The same tool action failed three times without progress. The operation is incomplete.']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 17.441053143003955,
+          "seconds": 13.682155691989465
+        }
+      ]
+    }
+  }
+}

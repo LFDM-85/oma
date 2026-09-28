@@ -1,0 +1,15 @@
+{"event":"tool_start","name":"new_text_document","args":{"input":{"text":"月曜日の予定です。"}}}
+{"event":"state","state":"working","taskStatus":"Working"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":false}
+{"event":"tool_end","name":"new_text_document","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"OmaTextで新しい文書が作成されました。「月曜日の予定です。」が記述されました。\n\nこの文書は未保存の状態です。保存、削除、キャンセルのいずれを希望しますか？","seconds":7.782331742,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":147,"output":76,"cacheRead":12292,"cacheWrite":0,"reasoning":0,"totalTokens":12515,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

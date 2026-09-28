@@ -7,6 +7,7 @@ const text=value=>({type:'inputText',text:JSON.stringify(value)});
 const field=type=>({type});
 const spec=(name,description,properties,required=Object.keys(properties))=>({type:'function',name,description,deferLoading:false,inputSchema:{type:'object',properties,required,additionalProperties:false}});
 export const desktopTools=[
+ spec('list_windows','List visible application windows with exact addresses and titles. Use this to identify the requested window before accompanying or closing it; never infer the target from focus.',{}),
  spec('restart_assistant','Restart only O.M.A. when the user asks to restart yourself to check changes. Never restarts the desktop bar.',{},[]),
  spec('camera_list','List connected cameras without taking a picture. Prefer color cameras over infrared.',{},[]),
  spec('camera_snapshot','Capture one fresh camera frame to inspect physical objects, scenes or text at the user request. Returns an image. Empty device selects the first color camera.',{device:field('string')}),
@@ -22,15 +23,24 @@ export function screenPoint(frame,x,y){
 }
 export function runDesktopCommand(command,args,{signal,input}={}){
  return new Promise((resolve,reject)=>{
-  const child=spawn(command,args,{signal,stdio:['pipe','pipe','pipe']});let chunks=[],size=0,errors='';
-  const timer=setTimeout(()=>child.kill('SIGKILL'),10000);
-  child.stdout.on('data',b=>{size+=b.length;if(size>16*1024*1024)child.kill('SIGKILL');else chunks.push(b)});
+  signal?.throwIfAborted();
+  const child=spawn(command,args,{stdio:['pipe','pipe','pipe']});let chunks=[],size=0,errors='',settled=false;
+  const finish=(error,value)=>{
+   if(settled)return;settled=true;clearTimeout(timer);signal?.removeEventListener('abort',abort);
+   if(error){child.kill('SIGKILL');child.stdin.destroy();child.stdout.destroy();child.stderr.destroy();reject(error);}
+   else resolve(value);
+  };
+  const abort=()=>finish(signal.reason||new Error('Command aborted'));
+  const timer=setTimeout(()=>finish(Error(`${command} timed out`)),10000);
+  signal?.addEventListener('abort',abort,{once:true});
+  child.stdout.on('data',b=>{size+=b.length;if(size>16*1024*1024)finish(Error('Command output exceeded limit'));else chunks.push(b)});
   child.stderr.on('data',b=>{errors=(errors+b.toString()).slice(-1000)});
-  child.on('error',e=>{clearTimeout(timer);reject(e)});
-  child.on('close',code=>{clearTimeout(timer);code===0?resolve(Buffer.concat(chunks)):reject(Error(`${command} failed: ${errors||code}`))});
+  child.on('error',e=>finish(e));
+  child.on('close',code=>finish(code===0?null:Error(`${command} failed: ${errors||code}`),Buffer.concat(chunks)));
   child.stdin.on('error',()=>{});child.stdin.end(input);
  });
 }
+
 export class Desktop {
  constructor({emit,run=runDesktopCommand,windowTitle=null}){this.windowTitle=windowTitle;this.emit=emit;this.run=run;this.camera=new Camera({emit,run});this.cancelled=true;}
  begin(){this.controller=new AbortController();this.cancelled=false;this.frame=null;}
@@ -54,18 +64,21 @@ export class Desktop {
   const capture=this.windowTitle?['-g',`${rect.x},${rect.y} ${rect.width}x${rect.height}`]:['-o',m.name];
   const png=await this.command('grim',[...capture,'-s',String(scale),'-']);
   if(png.length<24||png.toString('hex',0,8)!=='89504e470d0a1a0a')throw Error('Invalid screenshot');
-  this.frame={id:randomUUID(),monitor:m.name,monitorBounds,rect,width:png.readUInt32BE(16),height:png.readUInt32BE(20),time:Date.now(),active:active.address};
+  this.frame={image:{mimeType:'image/png',data:png.toString('base64')},id:randomUUID(),monitor:m.name,monitorBounds,rect,width:png.readUInt32BE(16),height:png.readUInt32BE(20),time:Date.now(),active:active.address};
   return [text({frameId:this.frame.id,width:this.frame.width,height:this.frame.height,monitor:m.name,monitors:monitors.map(m=>m.name),activeWindow:{class:active.class,title:active.title}}),{type:'inputImage',imageUrl:'data:image/png;base64,'+png.toString('base64')}];
  }
  async call(name,args){
   this.check();if(!desktopTools.some(t=>t.name===name))throw Error('Unknown computer tool');
   if(!args||typeof args!=='object'||Array.isArray(args))throw Error('Invalid arguments');
   if(name==='restart_assistant')return [text(await restartAssistant((cmd,args)=>this.command(cmd,args)))];
+  if(name==='list_windows')return [text({windows:(await this.json(['clients'])).filter(w=>w.mapped&&!w.hidden).map(w=>({address:w.address,title:w.title,application:w.class,workspace:w.workspace.id}))})];
   if(name==='camera_list')return [text({cameras:await this.camera.list(this.controller.signal)})];
   if(name==='camera_snapshot'){if(typeof args.device!=='string')throw Error('Camera device must be a string');return this.camera.snapshot(args.device,this.controller.signal);}
   if(name==='desktop_screenshot')return this.screenshot(typeof args.monitor==='string'?args.monitor:'');
   const frame=this.frame;
   if(!frame||args.frameId!==frame.id||Date.now()-frame.time>60000)throw Error('Take a fresh screenshot before acting');
+  // Hide the floating assistant before input, not only before the following capture.
+  this.emit({computerUsing:true});await new Promise(r=>setTimeout(r,150));this.check();
   const monitors=await this.json(['monitors']);const m=monitors.find(m=>m.name===frame.monitor);
   if(!m||JSON.stringify(monitorRect(m))!==JSON.stringify(frame.monitorBounds))throw Error('Monitor layout changed; take a fresh screenshot');
   if(this.windowTitle){
@@ -91,9 +104,11 @@ export class Desktop {
     await this.command('wtype',['-'],args.text);
    }else{
     if(typeof args.key!=='string'||args.key.length>100)throw Error('Invalid key');
-    const parts=args.key.split('+'),key=parts.pop();const mods={CTRL:'ctrl',ALT:'alt',SHIFT:'shift',SUPER:'logo'};
+    const keys=args.key.split('+'),key=keys.pop(),parts=keys.map(p=>p.toUpperCase());const mods={CTRL:'ctrl',ALT:'alt',SHIFT:'shift',SUPER:'logo'};
     if(!/^[A-Za-z0-9_]+$/.test(key)||parts.some(p=>!mods[p]))throw Error('Invalid shortcut');
-    await this.command('wtype',[...parts.flatMap(p=>['-M',mods[p]]),'-k',key,...parts.reverse().flatMap(p=>['-m',mods[p]])]);
+    // Let Wayland/Qt process modifier transitions before and after the key.
+    // Back-to-back events can lose shortcuts while the animated assistant is visible.
+    await this.command('wtype',[...parts.flatMap(p=>['-M',mods[p]]),...(parts.length?['-s','100']:[]),'-k',key,...(parts.length?['-s','100']:[]),...parts.reverse().flatMap(p=>['-m',mods[p]])]);
    }
   }
   return this.screenshot(frame.monitor);

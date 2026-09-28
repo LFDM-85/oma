@@ -1,0 +1,91 @@
+ARTIFACTS /tmp/oma-voice-dev-v46/trials/20260927-111842-57572
+SCENARIO local/ja/document/0
+PASS microphone ready (1.15s)
+PASS opening finished (7.61s)
+VOICE write
+PASS recognized write (7.25s)
+PASS document ready (12.26s)
+VOICE close
+PASS recognized close (0.27s)
+PASS unsaved content retained for a choice (4.73s)
+VOICE discard
+PASS recognized discard (0.24s)
+PASS editor closed (15.63s)
+FAIL local/ja/document/0: 
+SCENARIO local/ja/modes/0
+PASS microphone ready (0.78s)
+PASS opening finished (3.85s)
+VOICE mini
+PASS recognized mini (1.76s)
+PASS mini mode (1.54s)
+VOICE question
+PASS recognized question (0.16s)
+FAIL local/ja/modes/0: Timed out: reply while mini
+SCENARIO local/ja/farewell/0
+PASS microphone ready (1.29s)
+PASS opening finished (4.17s)
+VOICE bye
+PASS recognized bye (0.76s)
+PASS farewell dismisses O.M.A. (5.6s)
+SCENARIO local/ja/empty-with-neighbor/0
+PASS neighbor fixture visible (0.13s)
+PASS microphone ready (0.83s)
+PASS opening finished (2.96s)
+VOICE new
+PASS recognized new (1.86s)
+PASS document ready (6.99s)
+VOICE close
+PASS recognized close (0.15s)
+PASS editor closed (12.3s)
+VOICE bye
+PASS recognized bye (0.24s)
+PASS farewell dismisses O.M.A. (6.9s)
+SCENARIO local/en/document/0
+PASS microphone ready (1.25s)
+PASS opening finished (2.86s)
+VOICE write
+PASS recognized write (6.29s)
+PASS document ready (14.45s)
+VOICE close
+PASS recognized close (0.28s)
+PASS unsaved content retained for a choice (3.82s)
+VOICE discard
+PASS recognized discard (0.25s)
+PASS editor closed (15.17s)
+VOICE bye
+PASS recognized bye (0.12s)
+PASS farewell dismisses O.M.A. (12.27s)
+SCENARIO local/en/modes/0
+PASS microphone ready (0.85s)
+PASS opening finished (2.85s)
+VOICE mini
+PASS recognized mini (1.23s)
+PASS mini mode (1.61s)
+VOICE question
+PASS recognized question (0.18s)
+PASS reply while mini (6.98s)
+VOICE normal
+PASS recognized normal (0.13s)
+PASS normal mode (6.32s)
+VOICE bye
+PASS recognized bye (0.14s)
+PASS farewell dismisses O.M.A. (12.2s)
+SCENARIO local/en/farewell/0
+PASS microphone ready (0.76s)
+PASS opening finished (2.98s)
+VOICE bye
+PASS recognized bye (0.71s)
+PASS farewell dismisses O.M.A. (4.72s)
+SCENARIO local/en/empty-with-neighbor/0
+PASS neighbor fixture visible (0.11s)
+PASS microphone ready (0.85s)
+PASS opening finished (2.93s)
+VOICE new
+PASS recognized new (1.81s)
+PASS document ready (6.44s)
+VOICE close
+PASS recognized close (0.28s)
+PASS editor closed (6.03s)
+VOICE bye
+PASS recognized bye (0.28s)
+PASS farewell dismisses O.M.A. (6.58s)

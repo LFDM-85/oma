@@ -23,6 +23,14 @@ dependency.
 
 ## Runtime and protocol dependencies
 
-The vendored ws WebSocket library is MIT-licensed; its license and version are
-in `vendor/ws/LICENSE` and `vendor/README.md`. The Wayland virtual-pointer protocol
+The Pi SDK is MIT-licensed. npm dependencies retain their upstream licenses
+in their installed packages; exact versions are recorded in `package-lock.json`.
+The Wayland virtual-pointer protocol
 retains its upstream copyright and license in `native/wlr-virtual-pointer-unstable-v1.xml`.
+
+## CRT glass shader
+
+`crt.frag` is original O.M.A. code under the repository MIT license.
+`crt.frag.qsb` is the bundled Qt shader package. Regenerate it with
+`scripts/build-shaders` using Qt Shader Tools; runtime installation does not
+require the compiler.

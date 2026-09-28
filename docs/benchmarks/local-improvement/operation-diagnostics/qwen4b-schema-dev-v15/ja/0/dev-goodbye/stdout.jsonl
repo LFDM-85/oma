@@ -1,0 +1,8 @@
+{"event":"tool_start","name":"end_conversation","args":{}}
+{"event":"state","state":"working","taskStatus":"Ending the conversation"}
+{"event":"tool_end","name":"end_conversation","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"お疲れ様でした！またのご利用をお待ちしています。","seconds":6.341390220999999,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":9044,"output":50,"cacheRead":0,"cacheWrite":0,"reasoning":0,"totalTokens":9094,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

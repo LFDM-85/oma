@@ -1,99 +1,154 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls
+import qs.Ui as Ui
 Item {
     id: root
     property var service: null
     property color accentColor: service && service.accentColor !== undefined ? service.accentColor : "#cacccc"
-    OmaPalette { id: ink; accent: root.accentColor }
     property bool opened: false
+    property bool started: false
     property bool needsSetup: service && service.setupRequired === true
+    property bool modelReady: service && service.modelReady === true
+    property bool speechReady: service && service.speechReady === true
+    property bool liveMode: !service || service.voiceProvider !== "pipeline"
+    property bool localMode: service && service.voiceProvider === "local"
+    property bool ready: !needsSetup && modelReady && speechReady
+    property bool busy: service && (service.setupBusy === true || service.keySaving === true || service.connectionTesting === true || service.providerChanging === true || service.localSetupBusy === true)
+    property string step: !started && !ready ? "welcome" : needsSetup ? "device" : !modelReady && !liveMode ? "model" : !speechReady ? "voice" : "ready"
+    readonly property color primaryText: ink.mix("#ececec", ink.accent, .08)
+    readonly property color secondaryText: ink.mix("#949494", ink.accent, .06)
     signal dismiss()
     signal back()
-    onOpenedChanged: { keyInput.clear(); if (opened) keyInput.forceActiveFocus() }
-    Keys.onEscapePressed: dismiss()
-    PanelBackdrop { tint: ink.surface; anchors.fill: parent; anchors.margins: -56 }
-    Flickable {
-        anchors.fill: parent; anchors.margins: 32
-        clip: true; contentHeight: settingsColumn.height
-        boundsBehavior: Flickable.StopAtBounds
-        ScrollBar.vertical: ScrollBar {}
-    Column {
-        id: settingsColumn
-        x: (parent.width - width) / 2
-        width: Math.min(520, parent.width); spacing: 16
-        Text { text: root.service && root.service.keyConfigured ? "O.M.A. / SETTINGS" : "WELCOME TO O.M.A."; color: ink.accent; font.pixelSize: 20; font.letterSpacing: 3 }
-        Text { text: root.needsSetup ? "STEP 1 · SET UP YOUR COMPUTER" : root.service && root.service.keyConfigured ? "OPENAI API KEY" : "ADD YOUR API KEY TO BEGIN"; color: ink.text; font.pixelSize: 13; font.letterSpacing: 2 }
-        Text { width: parent.width; text: root.needsSetup ? "A few dependencies are missing. Click SET UP below, follow the wizard, then return here to add your API key." : root.service && root.service.keyConfigured ? "A key is configured. Enter a new key to replace it for O.M.A." : "O.M.A. needs your OpenAI API key before it can speak or operate your PC. Paste your key below to get started."; textFormat: Text.PlainText; color: ink.text; wrapMode: Text.Wrap; font.pixelSize: 16 }
-        Text {
-            width: parent.width; visible: root.needsSetup
-            text: root.service && root.service.setupMessage !== undefined ? root.service.setupMessage : ""
-            textFormat: Text.PlainText; color: ink.text; wrapMode: Text.Wrap; font.pixelSize: 14
-        }
-        Text {
-            width: parent.width
-            text: "First time here? SET UP opens a guided terminal wizard for dependencies, F8, mouse control and voice wake."
-            color: ink.secondary; wrapMode: Text.Wrap; font.pixelSize: 13
-        }
-        Row {
-            spacing: 16
-            Button {
-                id: setupButton; objectName: "setupButton"; text: "SET UP"
-                onClicked: if (root.service && root.service.setup) { root.service.setup(); root.dismiss() }
-                background: Rectangle { color: ink.selected; border.color: ink.muted }
-                contentItem: Text { text: setupButton.text; color: ink.text; font.pixelSize: 14 }
-            }
-            Button {
-                id: checkSetupButton; objectName: "checkSetupButton"; text: "CHECK AGAIN"
-                onClicked: if (root.service && root.service.checkSetup) root.service.checkSetup()
-                background: Rectangle { color: ink.field; border.color: ink.border }
-                contentItem: Text { text: checkSetupButton.text; color: ink.secondary; font.pixelSize: 14 }
-            }
-        }
-        TextField {
-            id: keyInput; objectName: "apiKeyInput"; width: parent.width; height: 48
-            echoMode: TextInput.Password; placeholderText: "sk-…"
-            selectByMouse: true; color: ink.text; font.pixelSize: 16
-            inputMethodHints: Qt.ImhHiddenText | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
-            enabled: !root.needsSetup && (!root.service || !root.service.keySaving)
-            background: Rectangle { color: ink.field; border.color: keyInput.activeFocus ? ink.muted : ink.border }
-        }
-        Text { width: parent.width; text: "Your key is stored securely in your desktop keyring. OpenAI API usage is billed to your OpenAI account."; color: ink.secondary; wrapMode: Text.Wrap; font.pixelSize: 13 }
-        Text {
-            text: "GET AN OPENAI API KEY ↗"; color: ink.accent; font.pixelSize: 14
-            MouseArea { anchors.fill: parent; anchors.margins: -8; onClicked: Qt.openUrlExternally("https://platform.openai.com/api-keys") }
-        }
-        Text { width: parent.width; visible: text.length > 0; text: root.service ? root.service.keyError || (root.service.keySaved ? "Key saved. O.M.A. is ready." : "") : ""; textFormat: Text.PlainText; color: ink.text; wrapMode: Text.Wrap; font.pixelSize: 14 }
-        CheckBox {
-            id: wakeSwitch; visible: root.service && root.service.keyConfigured; height: 32; text: "VOICE WAKE · HEY O.M.A."
-            checked: root.service ? root.service.wakeEnabled : false
-            onClicked: if (root.service) root.service.setWake(checked)
-            indicator: Rectangle {
-                width: 22; height: 22; y: (parent.height - height) / 2
-                color: ink.field; border.color: ink.muted
-                Rectangle { anchors.centerIn: parent; width: 12; height: 12; color: ink.accent; visible: wakeSwitch.checked }
-            }
-            contentItem: Text { text: wakeSwitch.text; color: ink.text; font.pixelSize: 14; leftPadding: 30; verticalAlignment: Text.AlignVCenter }
-        }
-        Text { width: parent.width; visible: wakeSwitch.visible; text: root.service ? root.service.wakeStatus : ""; textFormat: Text.PlainText; color: ink.secondary; font.pixelSize: 13; wrapMode: Text.Wrap }
-        Text { width: parent.width; visible: wakeSwitch.visible; text: "Wake detection stays on this PC. Pauses when muted or locked. Screen recording can share the microphone."; color: ink.secondary; font.pixelSize: 13; wrapMode: Text.Wrap }
-        Row {
-            spacing: 16
-            Button {
-                id: saveButton
-                text: root.service && root.service.keySaving ? "SAVING…" : "SAVE KEY"
-                enabled: !root.needsSetup && root.service && !root.service.keySaving && keyInput.text.trim().length > 0
-                onClicked: { root.service.saveKey(keyInput.text); keyInput.clear() }
-                background: Rectangle { color: ink.selected; border.color: ink.muted }
-                contentItem: Text { text: saveButton.text; color: ink.text; font.pixelSize: 14; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
-            }
-            Button {
-                id: backButton
-                text: root.service && root.service.keySaved ? "START O.M.A." : "BACK"; visible: root.service && root.service.keyConfigured; onClicked: { keyInput.clear(); root.back() }
-                background: Rectangle { color: ink.field; border.color: ink.border }
-                contentItem: Text { text: backButton.text; color: ink.secondary; font.pixelSize: 14; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
-            }
+    onOpenedChanged: {
+        keyInput.clear()
+        if (opened) Qt.callLater(() => viewport.contentY = 0)
+        if (opened && service) {
+            if (service.checkSetup) service.checkSetup()
+            if (service.refreshMicrophones) service.refreshMicrophones()
         }
     }
+    Keys.onEscapePressed: dismiss()
+    OmaPalette { id: ink; accent: root.accentColor }
+    PanelBackdrop { tint: ink.surface; anchors.fill: parent }
+    component Action: Ui.Button {
+        focusable: true; bordered: true
+        foreground: root.primaryText; accent: ink.accent
+        opacity: enabled ? 1 : .35
+    }
+    component Copy: Text {
+        width: parent.width; color: root.secondaryText; font.pixelSize: 13
+        wrapMode: Text.Wrap; textFormat: Text.PlainText; lineHeight: 1.25
+    }
+    component Section: Column {
+        property string title: ""
+        width: parent.width; spacing: 12
+        Text { text: parent.title; textFormat: Text.PlainText; color: root.primaryText; font.pixelSize: 14; font.weight: Font.Medium }
+    }
+    component Rule: Rectangle { width: parent.width; height: 1; color: ink.border; opacity: .4 }
+    Flickable {
+        id: viewport
+        anchors.fill: parent; anchors.margins: root.width < 500 ? 12 : 28
+        clip: true; contentHeight: content.height + 20
+        boundsBehavior: Flickable.StopAtBounds
+        ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded }
+        Column {
+            id: content
+            width: Math.min(560, viewport.width - 8); anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 24
+            Text { objectName: "setupHeading"; text: "Settings"; textFormat: Text.PlainText; color: root.primaryText; font.pixelSize: 26; font.weight: Font.DemiBold }
+            Ui.Dropdown {
+                id: providerSelect; objectName: "providerSelect"
+                width: parent.width; label: "Voice engine"
+                foreground: root.primaryText; accent: ink.accent; background: ink.field
+                options: [{value: "gpt-live", label: "GPT-Live · OpenAI"}, {value: "local", label: "Local · Offline"}]
+                value: root.service ? root.service.voiceProvider : "gpt-live"
+                enabled: !root.busy && !root.needsSetup
+                onChanged: value => {
+                    root.service.setVoiceProvider(value)
+                    providerSelect.value = Qt.binding(() => root.service ? root.service.voiceProvider : "gpt-live")
+                }
+            }
+            Column {
+                width: parent.width; spacing: 12; visible: root.localMode
+                Copy { text: "Whisper · Qwen · Kokoro" }
+                Action { objectName: "localSetupButton"; visible: !root.ready; text: root.service && root.service.localSetupBusy ? "Installing…" : "Set up local models"; enabled: !root.busy && !root.needsSetup; onClicked: root.service.localSetup() }
+                Copy { visible: text.length > 0; text: root.service ? root.service.localSetupMessage : "" }
+            }
+            Column {
+                width: parent.width; spacing: 12; visible: !root.ready && (!root.localMode || root.needsSetup)
+                Copy { font.pixelSize: 16; color: root.primaryText; text: root.step === "welcome" ? "Get connected" : root.step === "device" ? "Prepare this computer" : root.step === "model" ? "Connect your AI" : "Connect to GPT-Live" }
+                Copy { text: root.step === "welcome" ? "Add an API key to start talking." : root.step === "device" ? "Install the required components." : root.step === "model" ? "Sign in to your AI provider." : "Enter your OpenAI API key below." }
+                Action { objectName: "beginSetupButton"; visible: root.step === "welcome"; text: "Get started"; onClicked: { root.started = true; if (root.service) root.service.checkSetup() } }
+                Copy { visible: root.step === "device"; text: root.service ? root.service.setupMessage : "" }
+                Action { objectName: "setupButton"; visible: root.step === "device"; text: root.busy ? "Opening setup…" : "Set up this computer"; enabled: !root.busy; onClicked: if (root.service) root.service.setup() }
+                Action { objectName: "modelSetupButton"; visible: root.step === "model"; text: root.busy ? "Connecting…" : "Connect AI provider"; enabled: !root.busy; onClicked: if (root.service) root.service.modelSetup() }
+            }
+            Section {
+                title: "OpenAI API key"
+                visible: !root.localMode && (root.step === "voice" || root.ready)
+                Ui.TextField {
+                    id: keyInput; objectName: "apiKeyInput"; width: parent.width; height: 44
+                    enabled: !root.needsSetup && !root.busy
+                    password: true; placeholderText: root.service && root.service.keyConfigured ? "Key saved · enter a new key to replace" : "Paste your OpenAI API key"
+                    foreground: root.primaryText; accent: ink.accent; selectByMouse: true
+                    inputMethodHints: Qt.ImhHiddenText | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
+                }
+                Row {
+                    spacing: 10
+                    Action { objectName: "saveApiKeyButton"; text: root.service && root.service.keySaving ? "Saving…" : root.service && root.service.keyConfigured ? "Update key" : "Save key"; enabled: keyInput.enabled && keyInput.text.trim().length > 0; onClicked: { root.service.saveKey(keyInput.text); keyInput.clear() } }
+                    Action { text: "Get a key ↗"; bordered: false; foreground: root.secondaryText; onClicked: Qt.openUrlExternally("https://platform.openai.com/api-keys") }
+                }
+            }
+            Rule { visible: root.localMode || root.step === "voice" || root.ready }
+            Section {
+                title: "Audio"
+                visible: (root.localMode || root.liveMode && root.step !== "welcome") && !root.needsSetup
+                Ui.Dropdown {
+                    id: microphoneSelect; objectName: "microphoneSelect"
+                    width: parent.width; label: "Microphone"
+                    foreground: root.primaryText; accent: ink.accent; background: ink.field
+                    options: root.service ? root.service.microphones : []
+                    value: root.service ? root.service.microphoneTarget : ""
+                    enabled: !root.busy && !!root.service && !root.service.microphoneBusy && options.length > 0
+                    onChanged: value => {
+                        root.service.setMicrophone(value)
+                        microphoneSelect.value = Qt.binding(() => root.service ? root.service.microphoneTarget : "")
+                    }
+                }
+                Ui.Dropdown {
+                    id: languageSelect; objectName: "languageSelect"
+                    width: parent.width; label: "Spoken language"
+                    foreground: root.primaryText; accent: ink.accent; background: ink.field
+                    options: root.service ? root.service.responseLanguages : []
+                    value: root.service ? root.service.responseLanguage : ""
+                    enabled: !root.busy && !!root.service && options.length > 0
+                    onChanged: value => {
+                        root.service.setResponseLanguage(value)
+                        languageSelect.value = Qt.binding(() => root.service ? root.service.responseLanguage : "")
+                    }
+                }
+                Copy { visible: text.length > 0; text: root.service ? root.service.languageError : ""; color: ink.accent }
+                Row {
+                    spacing: 10
+                    Action { objectName: "testConnectionButton"; visible: root.ready; text: root.service && root.service.connectionTesting ? "Playing…" : "Test voice"; enabled: !root.busy; onClicked: if (root.service) root.service.testConnection() }
+                    Action { text: "Refresh devices"; bordered: false; foreground: root.secondaryText; enabled: !root.busy && !!root.service && !root.service.microphoneBusy; onClicked: root.service.refreshMicrophones() }
+                }
+                Copy { visible: root.service && root.service.connectionTestPassed; text: "Voice test passed."; font.pixelSize: 12 }
+                Copy { visible: text.length > 0; text: root.service ? root.service.microphoneError : ""; color: ink.accent }
+            }
+            Rule { visible: root.ready }
+            Section {
+                title: "Preferences"; visible: root.ready
+                Ui.Toggle { objectName: "wakeToggle"; width: parent.width; label: "Wake on ‘Hey O.M.A.’"; foreground: root.primaryText; accent: ink.accent; checked: !!(root.service && root.service.wakeEnabled); enabled: root.ready; onClicked: if (root.service) root.service.setWake(!checked) }
+            }
+            Copy { visible: text.length > 0; color: ink.accent; text: root.service ? (root.service.setupLaunchError || root.service.keyError || root.service.connectionTestError || "") : "" }
+            Row {
+                spacing: 10
+                Action { objectName: "startConversationButton"; visible: root.ready && root.service && root.service.connectionTestPassed === true; text: "Start talking"; onClicked: root.back() }
+                Action { visible: root.ready; text: "Done"; bordered: false; onClicked: root.back() }
+            }
+
+        }
     }
 }

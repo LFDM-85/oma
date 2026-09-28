@@ -1,0 +1,8 @@
+{"event":"tool_start","name":"write","args":{"input":{"content":"調整用です。","path":"note.txt"}}}
+{"event":"state","state":"working","taskStatus":"Writing a file"}
+{"event":"tool_end","name":"write","error":false}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"保存しました。`note.txt` に「調整用です。」を記述しました。","seconds":3.096978494,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":116,"output":37,"cacheRead":12469,"cacheWrite":0,"reasoning":0,"totalTokens":12622,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

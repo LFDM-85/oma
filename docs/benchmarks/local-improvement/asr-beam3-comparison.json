@@ -1,0 +1,86 @@
+{
+  "ja": {
+    "baseline": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 751,
+      "edits": 53,
+      "cer": 0.07057256990679095,
+      "critical_count": 23,
+      "critical_accuracy": 0.8695652173913043,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 0.9923831589985639,
+        "p95": 1.0379632900003344,
+        "max": 1.0611453099991195
+      }
+    },
+    "candidate": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 751,
+      "edits": 26,
+      "cer": 0.03462050599201065,
+      "critical_count": 23,
+      "critical_accuracy": 0.8260869565217391,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 2.2024494515062543,
+        "p95": 2.8847389470029157,
+        "max": 2.9802717909915373
+      }
+    },
+    "relative_cer_improvement": 0.509433962264151,
+    "gate": false
+  },
+  "en": {
+    "baseline": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 1433,
+      "edits": 122,
+      "cer": 0.0851360781577111,
+      "critical_count": 23,
+      "critical_accuracy": 1.0,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 0.941820578998886,
+        "p95": 0.9941778169886675,
+        "max": 1.0493340930261184
+      }
+    },
+    "candidate": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "speech_count": 50,
+      "noise_count": 20,
+      "reference_chars": 1433,
+      "edits": 1,
+      "cer": 0.0006978367062107466,
+      "critical_count": 23,
+      "critical_accuracy": 1.0,
+      "false_activations": 0,
+      "latency": {
+        "n": 50,
+        "median": 2.120482232494396,
+        "p95": 3.53288009899552,
+        "max": 4.258688230998814
+      }
+    },
+    "relative_cer_improvement": 0.9918032786885246,
+    "gate": true
+  }
+}

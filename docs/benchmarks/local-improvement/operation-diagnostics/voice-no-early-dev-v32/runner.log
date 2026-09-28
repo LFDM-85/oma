@@ -1,0 +1,11 @@
+ARTIFACTS /tmp/oma-voice-no-early-dev-v32/trials/20260927-082743-3187837
+SCENARIO local/ja/document/0
+PASS microphone ready (1.21s)
+PASS opening finished (7.88s)
+VOICE write
+FAIL local/ja/document/0: Timed out: recognized write
+SCENARIO local/en/document/0
+PASS microphone ready (1.29s)
+PASS opening finished (3.32s)
+VOICE write
+FAIL local/en/document/0: Timed out: recognized write

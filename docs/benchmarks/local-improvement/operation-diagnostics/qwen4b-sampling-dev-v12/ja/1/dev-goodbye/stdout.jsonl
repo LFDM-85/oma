@@ -1,0 +1,8 @@
+{"event":"tool_start","name":"end_conversation","args":{}}
+{"event":"state","state":"working","taskStatus":"Ending the conversation"}
+{"event":"tool_end","name":"end_conversation","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"さようなら。次の会話ではまたお会いできるのを楽しみにしています。","seconds":3.841838385,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":987,"output":65,"cacheRead":7890,"cacheWrite":0,"reasoning":0,"totalTokens":8942,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

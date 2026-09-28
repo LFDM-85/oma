@@ -1,0 +1,1094 @@
+[
+  {
+    "id": "ja-reading-01",
+    "text": "人気の店です。",
+    "reading": "ニンキノミセデス*",
+    "parts": [
+      {
+        "text": "人気",
+        "reading": "ニンキ"
+      },
+      {
+        "text": "の",
+        "reading": "ノ"
+      },
+      {
+        "text": "店",
+        "reading": "ミセ"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ɲiŋkʲi no mʲise desɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-02",
+    "text": "人気のない道です。",
+    "reading": "ニンキノナイミチデス*",
+    "parts": [
+      {
+        "text": "人気",
+        "reading": "ニンキ"
+      },
+      {
+        "text": "の",
+        "reading": "ノ"
+      },
+      {
+        "text": "ない",
+        "reading": "ナイ"
+      },
+      {
+        "text": "道",
+        "reading": "ミチ"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ɲiŋkʲi no nai mʲiʨi desɨ",
+    "target_match": false,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-03",
+    "text": "生物の授業です。",
+    "reading": "セーブツノジュギョーデス*",
+    "parts": [
+      {
+        "text": "生物",
+        "reading": "セーブツ"
+      },
+      {
+        "text": "の",
+        "reading": "ノ"
+      },
+      {
+        "text": "授業",
+        "reading": "ジュギョー"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "seːbɯʦɨ no ʥɨɡʲoː desɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-04",
+    "text": "生物なので冷蔵してください。",
+    "reading": "セーブツナノデレーゾーシテクダサイ*",
+    "parts": [
+      {
+        "text": "生物",
+        "reading": "セーブツ"
+      },
+      {
+        "text": "な",
+        "reading": "ナ"
+      },
+      {
+        "text": "の",
+        "reading": "ノ"
+      },
+      {
+        "text": "で",
+        "reading": "デ"
+      },
+      {
+        "text": "冷蔵",
+        "reading": "レーゾー"
+      },
+      {
+        "text": "し",
+        "reading": "シ"
+      },
+      {
+        "text": "て",
+        "reading": "テ"
+      },
+      {
+        "text": "ください",
+        "reading": "クダサイ"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "seːbɯʦɨ na no de ɾeːʣoː ɕite kɯdasai",
+    "target_match": false,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-05",
+    "text": "市場で野菜を買います。",
+    "reading": "シジョーデヤサイオカイマス*",
+    "parts": [
+      {
+        "text": "市場",
+        "reading": "シジョー"
+      },
+      {
+        "text": "で",
+        "reading": "デ"
+      },
+      {
+        "text": "野菜",
+        "reading": "ヤサイ"
+      },
+      {
+        "text": "を",
+        "reading": "オ"
+      },
+      {
+        "text": "買い",
+        "reading": "カイ"
+      },
+      {
+        "text": "ます",
+        "reading": "マス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ɕiʥoː de jasai o kaimasɨ",
+    "target_match": false,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-06",
+    "text": "株式市場が開きます。",
+    "reading": "カブシキシジョーガヒラキマス*",
+    "parts": [
+      {
+        "text": "株式",
+        "reading": "カブシキ"
+      },
+      {
+        "text": "市場",
+        "reading": "シジョー"
+      },
+      {
+        "text": "が",
+        "reading": "ガ"
+      },
+      {
+        "text": "開き",
+        "reading": "ヒラキ"
+      },
+      {
+        "text": "ます",
+        "reading": "マス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "kabɯɕikʲi ɕiʥoː ɡa çiɾakʲimasɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-07",
+    "text": "上手な演奏です。",
+    "reading": "ジョーズナエンソーデス*",
+    "parts": [
+      {
+        "text": "上手",
+        "reading": "ジョーズ"
+      },
+      {
+        "text": "な",
+        "reading": "ナ"
+      },
+      {
+        "text": "演奏",
+        "reading": "エンソー"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ʥoːzɨna eɴsoː desɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-08",
+    "text": "舞台の上手から登場します。",
+    "reading": "ブタイノカミテカラトージョーシマス*",
+    "parts": [
+      {
+        "text": "舞台",
+        "reading": "ブタイ"
+      },
+      {
+        "text": "の",
+        "reading": "ノ"
+      },
+      {
+        "text": "上手",
+        "reading": "カミテ"
+      },
+      {
+        "text": "から",
+        "reading": "カラ"
+      },
+      {
+        "text": "登場",
+        "reading": "トージョー"
+      },
+      {
+        "text": "し",
+        "reading": "シ"
+      },
+      {
+        "text": "ます",
+        "reading": "マス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "bɯtai no kamʲite kaɾa toːʥoː ɕi masɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-09",
+    "text": "一日中休みます。",
+    "reading": "イチニチジューヤスミマス*",
+    "parts": [
+      {
+        "text": "一",
+        "reading": "イチ"
+      },
+      {
+        "text": "日",
+        "reading": "ニチ"
+      },
+      {
+        "text": "中",
+        "reading": "ジュー"
+      },
+      {
+        "text": "休み",
+        "reading": "ヤスミ"
+      },
+      {
+        "text": "ます",
+        "reading": "マス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "iʨiɲiʨi ʥɨː jasɨmʲi masɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-10",
+    "text": "四月一日です。",
+    "reading": "ヨンガツツイタチデス*",
+    "parts": [
+      {
+        "text": "四",
+        "reading": "ヨン"
+      },
+      {
+        "text": "月",
+        "reading": "ガツ"
+      },
+      {
+        "text": "一日",
+        "reading": "ツイタチ"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "joŋɡaʦɨ ʦɨitaʨi desɨ",
+    "target_match": false,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-11",
+    "text": "一人で待ちます。",
+    "reading": "ヒトリデマチマス*",
+    "parts": [
+      {
+        "text": "一人",
+        "reading": "ヒトリ"
+      },
+      {
+        "text": "で",
+        "reading": "デ"
+      },
+      {
+        "text": "待ち",
+        "reading": "マチ"
+      },
+      {
+        "text": "ます",
+        "reading": "マス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "çitoɾʲi de maʨimasɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-12",
+    "text": "二人で話します。",
+    "reading": "フタリデハナシマス*",
+    "parts": [
+      {
+        "text": "二人",
+        "reading": "フタリ"
+      },
+      {
+        "text": "で",
+        "reading": "デ"
+      },
+      {
+        "text": "話し",
+        "reading": "ハナシ"
+      },
+      {
+        "text": "ます",
+        "reading": "マス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ɸɯtaɾʲi de hanaɕimasɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-13",
+    "text": "三本あります。",
+    "reading": "サンポンアリマス*",
+    "parts": [
+      {
+        "text": "三",
+        "reading": "サン"
+      },
+      {
+        "text": "本",
+        "reading": "ポン"
+      },
+      {
+        "text": "あり",
+        "reading": "アリ"
+      },
+      {
+        "text": "ます",
+        "reading": "マス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "saɴ poɴ aɾʲimasɨ",
+    "target_match": false,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-14",
+    "text": "六本あります。",
+    "reading": "ロッポンアリマス*",
+    "parts": [
+      {
+        "text": "六",
+        "reading": "ロッ"
+      },
+      {
+        "text": "本",
+        "reading": "ポン"
+      },
+      {
+        "text": "あり",
+        "reading": "アリ"
+      },
+      {
+        "text": "ます",
+        "reading": "マス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ɾoʔpoɴ aɾʲimasɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-15",
+    "text": "十本あります。",
+    "reading": "ジッポンアリマス*",
+    "parts": [
+      {
+        "text": "十",
+        "reading": "ジッ"
+      },
+      {
+        "text": "本",
+        "reading": "ポン"
+      },
+      {
+        "text": "あり",
+        "reading": "アリ"
+      },
+      {
+        "text": "ます",
+        "reading": "マス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ʥiʔpoɴ aɾʲimasɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-16",
+    "text": "二十歳になりました。",
+    "reading": "ニジッサイニナリマシタ*",
+    "parts": [
+      {
+        "text": "二十",
+        "reading": "ニジッ"
+      },
+      {
+        "text": "歳",
+        "reading": "サイ"
+      },
+      {
+        "text": "に",
+        "reading": "ニ"
+      },
+      {
+        "text": "なり",
+        "reading": "ナリ"
+      },
+      {
+        "text": "まし",
+        "reading": "マシ"
+      },
+      {
+        "text": "た",
+        "reading": "タ"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ɲiʥiʔsai ɲi naɾʲi maɕita",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-17",
+    "text": "九月二十日です。",
+    "reading": "キューガツハツカデス*",
+    "parts": [
+      {
+        "text": "九",
+        "reading": "キュー"
+      },
+      {
+        "text": "月",
+        "reading": "ガツ"
+      },
+      {
+        "text": "二十",
+        "reading": "ハツ"
+      },
+      {
+        "text": "日",
+        "reading": "カ"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "kʲɨːɡaʦɨ haʦɨka desɨ",
+    "target_match": false,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-18",
+    "text": "午後四時です。",
+    "reading": "ゴゴシジデス*",
+    "parts": [
+      {
+        "text": "午後",
+        "reading": "ゴゴ"
+      },
+      {
+        "text": "四",
+        "reading": "シ"
+      },
+      {
+        "text": "時",
+        "reading": "ジ"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ɡoɡo ɕiʥi desɨ",
+    "target_match": false,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-19",
+    "text": "温度は二十三点五度です。",
+    "reading": "オンドワニジューサンテンゴドデス*",
+    "parts": [
+      {
+        "text": "温度",
+        "reading": "オンド"
+      },
+      {
+        "text": "は",
+        "reading": "ワ"
+      },
+      {
+        "text": "二十",
+        "reading": "ニジュー"
+      },
+      {
+        "text": "三",
+        "reading": "サン"
+      },
+      {
+        "text": "点",
+        "reading": "テン"
+      },
+      {
+        "text": "五",
+        "reading": "ゴ"
+      },
+      {
+        "text": "度",
+        "reading": "ド"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ondo βa ɲiʥɨːsaɴ teɴ ɡo do desɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-20",
+    "text": "千二百三十四円です。",
+    "reading": "センニヒャクサンジューヨンエンデス*",
+    "parts": [
+      {
+        "text": "千",
+        "reading": "セン"
+      },
+      {
+        "text": "二百",
+        "reading": "ニヒャク"
+      },
+      {
+        "text": "三十",
+        "reading": "サンジュー"
+      },
+      {
+        "text": "四",
+        "reading": "ヨン"
+      },
+      {
+        "text": "円",
+        "reading": "エン"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "seɴ ɲiçakɯ saɲʥɨːjoɴ eɴ desɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-21",
+    "text": "改行してください。",
+    "reading": "カイギョーシテクダサイ*",
+    "parts": [
+      {
+        "text": "改行",
+        "reading": "カイギョー"
+      },
+      {
+        "text": "し",
+        "reading": "シ"
+      },
+      {
+        "text": "て",
+        "reading": "テ"
+      },
+      {
+        "text": "ください",
+        "reading": "クダサイ"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "kaiɡʲoː ɕite kɯdasai",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-22",
+    "text": "行間を広げてください。",
+    "reading": "ギョーカンオヒロゲテクダサイ*",
+    "parts": [
+      {
+        "text": "行間",
+        "reading": "ギョーカン"
+      },
+      {
+        "text": "を",
+        "reading": "オ"
+      },
+      {
+        "text": "広げ",
+        "reading": "ヒロゲ"
+      },
+      {
+        "text": "て",
+        "reading": "テ"
+      },
+      {
+        "text": "ください",
+        "reading": "クダサイ"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ɡʲoːkaɴ o çiɾoɡe te kɯdasai",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-23",
+    "text": "句点を付けてください。",
+    "reading": "クテンオツケテクダサイ*",
+    "parts": [
+      {
+        "text": "句点",
+        "reading": "クテン"
+      },
+      {
+        "text": "を",
+        "reading": "オ"
+      },
+      {
+        "text": "付け",
+        "reading": "ツケ"
+      },
+      {
+        "text": "て",
+        "reading": "テ"
+      },
+      {
+        "text": "ください",
+        "reading": "クダサイ"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "kɯteɴ o ʦɨkete kɯdasai",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-24",
+    "text": "読点を付けてください。",
+    "reading": "トーテンオツケテクダサイ*",
+    "parts": [
+      {
+        "text": "読点",
+        "reading": "トーテン"
+      },
+      {
+        "text": "を",
+        "reading": "オ"
+      },
+      {
+        "text": "付け",
+        "reading": "ツケ"
+      },
+      {
+        "text": "て",
+        "reading": "テ"
+      },
+      {
+        "text": "ください",
+        "reading": "クダサイ"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "toːteɴ o ʦɨkete kɯdasai",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-25",
+    "text": "保存して閉じてください。",
+    "reading": "ホゾンシテトジテクダサイ*",
+    "parts": [
+      {
+        "text": "保存",
+        "reading": "ホゾン"
+      },
+      {
+        "text": "し",
+        "reading": "シ"
+      },
+      {
+        "text": "て",
+        "reading": "テ"
+      },
+      {
+        "text": "閉じ",
+        "reading": "トジ"
+      },
+      {
+        "text": "て",
+        "reading": "テ"
+      },
+      {
+        "text": "ください",
+        "reading": "クダサイ"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "hoʣoɴ ɕite toʥite kɯdasai",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-26",
+    "text": "読み上げを止めてください。",
+    "reading": "ヨミアゲオトメテクダサイ*",
+    "parts": [
+      {
+        "text": "読み上げ",
+        "reading": "ヨミアゲ"
+      },
+      {
+        "text": "を",
+        "reading": "オ"
+      },
+      {
+        "text": "止め",
+        "reading": "トメ"
+      },
+      {
+        "text": "て",
+        "reading": "テ"
+      },
+      {
+        "text": "ください",
+        "reading": "クダサイ"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "jomʲiaɡe o tomete kɯdasai",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-27",
+    "text": "履歴を開いてください。",
+    "reading": "リレキオヒライテクダサイ*",
+    "parts": [
+      {
+        "text": "履歴",
+        "reading": "リレキ"
+      },
+      {
+        "text": "を",
+        "reading": "オ"
+      },
+      {
+        "text": "開い",
+        "reading": "ヒライ"
+      },
+      {
+        "text": "て",
+        "reading": "テ"
+      },
+      {
+        "text": "ください",
+        "reading": "クダサイ"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ɾʲiɾekʲi o çiɾaite kɯdasai",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-28",
+    "text": "新規作成してください。",
+    "reading": "シンキサクセーシテクダサイ*",
+    "parts": [
+      {
+        "text": "新規",
+        "reading": "シンキ"
+      },
+      {
+        "text": "作成",
+        "reading": "サクセー"
+      },
+      {
+        "text": "し",
+        "reading": "シ"
+      },
+      {
+        "text": "て",
+        "reading": "テ"
+      },
+      {
+        "text": "ください",
+        "reading": "クダサイ"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ɕiŋkʲi sakɯseː ɕite kɯdasai",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-29",
+    "text": "東京都千代田区です。",
+    "reading": "トーキョートチヨダクデス*",
+    "parts": [
+      {
+        "text": "東京",
+        "reading": "トーキョー"
+      },
+      {
+        "text": "都",
+        "reading": "ト"
+      },
+      {
+        "text": "千代田",
+        "reading": "チヨダ"
+      },
+      {
+        "text": "区",
+        "reading": "ク"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "toːkʲoːto ʨijoda kɯ desɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-30",
+    "text": "大阪府枚方市です。",
+    "reading": "オーサカフヒラカタシデス*",
+    "parts": [
+      {
+        "text": "大阪",
+        "reading": "オーサカ"
+      },
+      {
+        "text": "府",
+        "reading": "フ"
+      },
+      {
+        "text": "枚方",
+        "reading": "ヒラカタ"
+      },
+      {
+        "text": "市",
+        "reading": "シ"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "oːsakaɸɯ çiɾakata ɕi desɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-31",
+    "text": "茨城県水戸市です。",
+    "reading": "イバラキケンミトシデス*",
+    "parts": [
+      {
+        "text": "茨城",
+        "reading": "イバラキ"
+      },
+      {
+        "text": "県",
+        "reading": "ケン"
+      },
+      {
+        "text": "水戸",
+        "reading": "ミト"
+      },
+      {
+        "text": "市",
+        "reading": "シ"
+      },
+      {
+        "text": "です",
+        "reading": "デス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "ibaɾakʲikeɴ mʲito ɕi desɨ",
+    "target_match": true,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  },
+  {
+    "id": "ja-reading-32",
+    "text": "山手線に乗ります。",
+    "reading": "ヤマテセンニノリマス*",
+    "parts": [
+      {
+        "text": "山手",
+        "reading": "ヤマテ"
+      },
+      {
+        "text": "線",
+        "reading": "セン"
+      },
+      {
+        "text": "に",
+        "reading": "ニ"
+      },
+      {
+        "text": "乗り",
+        "reading": "ノリ"
+      },
+      {
+        "text": "ます",
+        "reading": "マス"
+      },
+      {
+        "text": "。",
+        "reading": "*"
+      }
+    ],
+    "phonemes": "jamate seɴ ɲi noɾʲimasɨ",
+    "target_match": false,
+    "interpretation": "Kokoro frontend decision, not acoustic listening"
+  }
+]

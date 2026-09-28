@@ -1,0 +1,72 @@
+{
+  "corpus_sha256": "9c87e5f2d64376f58853b4b5c1ad089d96845a37ae1d574d5c696fe2062b63d9",
+  "results_sha256": "92987cac8c8eb5233bd2516816e48ef0c2883504b0ab9586d2536fd3f5cd165c",
+  "languages": {
+    "ja": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "keyword_count": 32,
+      "matched_keywords": 28,
+      "keyword_accuracy": 0.875,
+      "phrase_accuracy": 0.8260869565217391,
+      "failures": [
+        {
+          "id": "ja-final-01",
+          "expected": "OmaTextで空の新規ファイルを開いてください。",
+          "actual": "オマネクテソラの新規ファイルを開いてください。",
+          "missing_groups": [
+            [
+              "omatext",
+              "オマテキスト",
+              "オーマテキスト"
+            ]
+          ]
+        },
+        {
+          "id": "ja-final-15",
+          "expected": "その文字を消さずに改行してください。",
+          "actual": "その文字を消さずに会議をしてください。",
+          "missing_groups": [
+            [
+              "改行"
+            ]
+          ]
+        },
+        {
+          "id": "ja-final-38",
+          "expected": "数えるのをやめて、二足す二を計算してください。",
+          "actual": "数えるのをやめてに二隅を計算してください。",
+          "missing_groups": [
+            [
+              "二足す二",
+              "2足す2"
+            ]
+          ]
+        },
+        {
+          "id": "ja-final-48",
+          "expected": "顔の大きさは変えないでください。",
+          "actual": "顔の大きさは買いないでください。",
+          "missing_groups": [
+            [
+              "変えない"
+            ]
+          ]
+        }
+      ],
+      "limitation": "Lexical groups from the frozen corpus, not semantic intent classification."
+    },
+    "en": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "keyword_count": 31,
+      "matched_keywords": 31,
+      "keyword_accuracy": 1.0,
+      "phrase_accuracy": 1.0,
+      "failures": [],
+      "limitation": "Lexical groups from the frozen corpus, not semantic intent classification."
+    }
+  }
+}

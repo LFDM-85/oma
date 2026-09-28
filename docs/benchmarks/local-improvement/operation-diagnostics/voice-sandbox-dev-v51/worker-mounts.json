@@ -1,0 +1,21 @@
+{
+  "pid": 180129,
+  "mounts": [
+    {
+      "mount": "/",
+      "options": "ro,nosuid,nodev,relatime"
+    },
+    {
+      "mount": "/tmp",
+      "options": "ro,nosuid,nodev"
+    },
+    {
+      "mount": "/tmp",
+      "options": "rw,nosuid,nodev,relatime"
+    },
+    {
+      "mount": "/home/komagata/.local/share/oma/evaluation/voice-sandbox-dev-v51",
+      "options": "rw,nosuid,nodev,relatime"
+    }
+  ]
+}

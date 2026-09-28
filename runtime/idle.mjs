@@ -5,7 +5,7 @@ export function idleInstruction(locale,farewell=false){
 }
 // Time counts only when the conversation panel is open and ready for input.
 export class IdleConversation {
- constructor({ready,speak,dismiss,now=Date.now,promptAfter=15000,closeAfter=20000}){Object.assign(this,{ready,speak,dismiss,now,promptAfter,closeAfter});this.active=false;this.reset();}
+ constructor({ready,speak,dismiss,now=Date.now,promptAfter=10000,closeAfter=10000}){Object.assign(this,{ready,speak,dismiss,now,promptAfter,closeAfter});this.active=false;this.reset();}
  reset(){this.epoch=(this.epoch||0)+1;this.stage='waiting';this.since=this.now();this.pending=false;}
  show(active){if(this.active===active)return;this.active=active;this.reset();}
  activity(){this.reset();}

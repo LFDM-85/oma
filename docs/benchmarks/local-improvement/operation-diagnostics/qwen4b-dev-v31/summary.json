@@ -1,0 +1,108 @@
+{
+  "split": "dev",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": true,
+      "expected": 13,
+      "successes": 10,
+      "success_rate": 0.7692307692307693,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": false,
+      "successful_latency": {
+        "n": 10,
+        "median": 6.176659440490766,
+        "p95": 12.041113806015346,
+        "max": 12.041113806015346
+      },
+      "failed_duration": {
+        "n": 3,
+        "median": 8.679142064996995,
+        "p95": 8.818434949993389,
+        "max": 8.818434949993389
+      },
+      "failures": [
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-discard",
+          "status": "failed",
+          "setup_seconds": 4.776093496999238,
+          "passed": false,
+          "error": "['The follow-up requires a save/discard/cancel choice, but the assistant entered binary approval mode']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 13.594527855981141,
+          "seconds": 8.818434949993389
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append",
+          "status": "failed",
+          "setup_seconds": 3.9536202419840265,
+          "passed": false,
+          "error": "File differs: 'Plan: A!\\n火曜日'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 12.632761442975607,
+          "seconds": 8.679142064996995
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append-multiline",
+          "status": "failed",
+          "setup_seconds": 3.768523572012782,
+          "passed": false,
+          "error": "File differs: 'First.\\nSecond?\\n完了！'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 11.491922184010036,
+          "seconds": 7.723399459995562
+        }
+      ]
+    },
+    "en": {
+      "complete": true,
+      "expected": 13,
+      "successes": 12,
+      "success_rate": 0.9230769230769231,
+      "missing": [],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": true,
+      "successful_latency": {
+        "n": 12,
+        "median": 5.100562276507844,
+        "p95": 14.568543750006938,
+        "max": 14.568543750006938
+      },
+      "failed_duration": {
+        "n": 1,
+        "median": 9.2229815509927,
+        "p95": 9.2229815509927,
+        "max": 9.2229815509927
+      },
+      "failures": [
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-discard",
+          "status": "failed",
+          "setup_seconds": 4.765212565020192,
+          "passed": false,
+          "error": "['The follow-up requires a save/discard/cancel choice, but the assistant entered binary approval mode']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 13.988193090015557,
+          "seconds": 9.2229815509927
+        }
+      ]
+    }
+  }
+}

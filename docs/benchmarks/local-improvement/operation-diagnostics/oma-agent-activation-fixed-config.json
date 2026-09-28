@@ -1,0 +1,31 @@
+{
+  "agent_module": null,
+  "filesystem": "read-only root, writable case directory and private tmp",
+  "timing": "seconds excludes fixture setup; total_seconds includes it",
+  "model": "qwen3.5:4b",
+  "thinking": "low",
+  "split": "dev",
+  "repeat": 3,
+  "languages": [
+    "ja",
+    "en"
+  ],
+  "cases": [
+    {
+      "id": "dev-blank",
+      "ja": "OmaTextで新しい空のメモを用意して。",
+      "en": "Create an empty note using OmaText.",
+      "check": "blank"
+    },
+    {
+      "id": "dev-dictation",
+      "ja": "OmaTextの新しい文書に「月曜日の予定です。」と書いて。引用符は入れないで。",
+      "en": "Create a new OmaText document containing exactly Plans for Monday. without quotation marks.",
+      "check": "document",
+      "expected": {
+        "ja": "月曜日の予定です。",
+        "en": "Plans for Monday."
+      }
+    }
+  ]
+}

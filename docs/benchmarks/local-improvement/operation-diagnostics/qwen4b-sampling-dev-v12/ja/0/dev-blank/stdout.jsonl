@@ -1,0 +1,13 @@
+{"event":"tool_start","name":"new_text_document","args":{"input":{"text":""}}}
+{"event":"state","state":"working","taskStatus":"Working"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":true}
+{"event":"state","computerUsing":true,"taskStatus":"Viewing desktop"}
+{"event":"state","computerUsing":false}
+{"event":"tool_end","name":"new_text_document","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"O.M.A. として、OmaText で新しい空のメモを開きます。新しい空のメモが O.M.A. で開かれました。\n\nOmaText は未保存の状態（unsaved: true）で、空の文書（insertedCharacters: 0）として起動しました。\n\n何か書き込みたいことがあれば、いつでも話しかけてください。","seconds":11.520753466999999,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":172,"output":89,"cacheRead":12000,"cacheWrite":0,"reasoning":0,"totalTokens":12261,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

@@ -1,0 +1,9 @@
+{"event":"tool_start","name":"set_view_mode","args":{"mode":"normal"}}
+{"event":"state","state":"working","taskStatus":"Restoring normal mode"}
+{"event":"state","viewMode":"normal"}
+{"event":"tool_end","name":"set_view_mode","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"I've returned you to normal display mode. The full interface is now visible instead of the compact mini view.","seconds":2.9095602,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":22,"output":51,"cacheRead":12073,"cacheWrite":0,"reasoning":0,"totalTokens":12146,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

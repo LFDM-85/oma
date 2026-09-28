@@ -1,0 +1,51 @@
+{
+  "corpus_sha256": "9c87e5f2d64376f58853b4b5c1ad089d96845a37ae1d574d5c696fe2062b63d9",
+  "results_sha256": "c9414d84034f2763342146a51fda9537a5a5eb8e36246774ea2f8e49045f55a1",
+  "languages": {
+    "ja": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "keyword_count": 32,
+      "matched_keywords": 30,
+      "keyword_accuracy": 0.9375,
+      "phrase_accuracy": 0.9130434782608695,
+      "failures": [
+        {
+          "id": "ja-final-01",
+          "expected": "OmaTextで空の新規ファイルを開いてください。",
+          "actual": "おまでって空の新規ファイルを開いてください。",
+          "missing_groups": [
+            [
+              "omatext",
+              "オマテキスト",
+              "オーマテキスト"
+            ]
+          ]
+        },
+        {
+          "id": "ja-final-15",
+          "expected": "その文字を消さずに改行してください。",
+          "actual": "その文字を消さずに開業してください。",
+          "missing_groups": [
+            [
+              "改行"
+            ]
+          ]
+        }
+      ],
+      "limitation": "Lexical groups from the frozen corpus, not semantic intent classification."
+    },
+    "en": {
+      "complete": true,
+      "missing": [],
+      "failed": [],
+      "keyword_count": 31,
+      "matched_keywords": 31,
+      "keyword_accuracy": 1.0,
+      "phrase_accuracy": 1.0,
+      "failures": [],
+      "limitation": "Lexical groups from the frozen corpus, not semantic intent classification."
+    }
+  }
+}

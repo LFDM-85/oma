@@ -1,0 +1,208 @@
+{
+  "split": "dev",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": true,
+      "expected": 26,
+      "successes": 20,
+      "success_rate": 0.7692307692307693,
+      "missing": [],
+      "critical_errors": 0,
+      "gate": false,
+      "successful_latency": {
+        "n": 20,
+        "median": 5.5798296485008905,
+        "p95": 20.413194943015696,
+        "max": 22.469020329997875
+      },
+      "failed_duration": {
+        "n": 6,
+        "median": 6.905555586490664,
+        "p95": 9.660691423981916,
+        "max": 9.660691423981916
+      },
+      "failures": [
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-math",
+          "status": "failed",
+          "setup_seconds": 3.789078261004761,
+          "passed": false,
+          "error": "'3 足す 5 の答えは 8 です。'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 6.404877068998758,
+          "seconds": 2.6157992189982906
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append",
+          "status": "failed",
+          "setup_seconds": 3.8880052549939137,
+          "passed": false,
+          "error": "File differs: 'Plan: A!\\n火曜日'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 11.160756599972956,
+          "seconds": 7.2727518169849645
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append-multiline",
+          "status": "failed",
+          "setup_seconds": 3.720156135997968,
+          "passed": false,
+          "error": "File differs: 'First.\\nSecond?\\n完了！'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 10.258514907996869,
+          "seconds": 6.538359355996363
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-keep-editing",
+          "status": "failed",
+          "setup_seconds": 3.4607436300138943,
+          "passed": false,
+          "error": "{'opened': True, 'active': True, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': True, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 20, 'url': '', 'modified': True, 'busy': False}",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 13.121434399014106,
+          "seconds": 9.660691423981916
+        },
+        {
+          "language": "ja",
+          "repeat": 1,
+          "id": "dev-append-multiline",
+          "status": "failed",
+          "setup_seconds": 3.780691994004883,
+          "passed": false,
+          "error": "File differs: 'First.\\nSecond?\\n完了！'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 9.402527692000149,
+          "seconds": 5.621836403006455
+        },
+        {
+          "language": "ja",
+          "repeat": 1,
+          "id": "dev-keep-editing",
+          "status": "failed",
+          "setup_seconds": 3.530951933003962,
+          "passed": false,
+          "error": "{'opened': True, 'active': True, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': True, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 20, 'url': '', 'modified': True, 'busy': False}",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 12.322871007985668,
+          "seconds": 8.79191993799759
+        }
+      ]
+    },
+    "en": {
+      "complete": true,
+      "expected": 26,
+      "successes": 20,
+      "success_rate": 0.7692307692307693,
+      "missing": [],
+      "critical_errors": 0,
+      "gate": false,
+      "successful_latency": {
+        "n": 20,
+        "median": 4.92237035400467,
+        "p95": 22.07437698400463,
+        "max": 23.54236843599938
+      },
+      "failed_duration": {
+        "n": 6,
+        "median": 7.443316563992994,
+        "p95": 9.79338873398956,
+        "max": 9.79338873398956
+      },
+      "failures": [
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-cancel-close",
+          "status": "failed",
+          "setup_seconds": 4.757433455000864,
+          "passed": false,
+          "error": "{'opened': True, 'active': True, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': True, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 25, 'url': '', 'modified': True, 'busy': False}",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 14.55082169600064,
+          "seconds": 9.79338873398956
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-append-multiline",
+          "status": "failed",
+          "setup_seconds": 3.8981552989862394,
+          "passed": false,
+          "error": "File differs: 'First.\\nSecond?\\nDone!'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 9.667396368982736,
+          "seconds": 5.769241841015173
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "dev-dictation",
+          "status": "failed",
+          "setup_seconds": 3.7245283570082393,
+          "passed": false,
+          "error": "{'opened': False, 'active': False, 'editor': {'focus': True, 'activeFocus': False, 'enabled': True, 'visible': True, 'modalOpen': False, 'actionsExpanded': False, 'settingsOpen': False, 'fontFamily': 'monospace', 'fontSize': 16}, 'length': 0, 'url': '', 'modified': False, 'busy': False}",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 7.318875735014444,
+          "seconds": 3.5943477989931125
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "dev-discard",
+          "status": "failed",
+          "setup_seconds": 4.703664756001672,
+          "passed": false,
+          "error": "['The follow-up requires a save/discard/cancel choice, but the assistant entered binary approval mode']",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 14.300421314983396,
+          "seconds": 9.596756994986208
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "dev-append",
+          "status": "failed",
+          "setup_seconds": 3.884858854988124,
+          "passed": false,
+          "error": "File differs: 'Plan: A!Tuesday\\n'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 11.336976902995957,
+          "seconds": 7.452118899003835
+        },
+        {
+          "language": "en",
+          "repeat": 1,
+          "id": "dev-append-multiline",
+          "status": "failed",
+          "setup_seconds": 3.7473681319970638,
+          "passed": false,
+          "error": "File differs: 'First.\\nSecond?\\nDone!'",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 11.181881755997892,
+          "seconds": 7.434514228982152
+        }
+      ]
+    }
+  }
+}

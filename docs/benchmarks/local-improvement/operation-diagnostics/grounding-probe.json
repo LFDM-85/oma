@@ -1,0 +1,38 @@
+[
+  {
+    "space": "pixel",
+    "label": "Don't Save",
+    "text": "```json\n[\n\t{\"point_2d\": [463, 539], \"label\": \"button labeled \\\"Don't Save\\\"\"}\n]\n```",
+    "seconds": 4.606974052992882
+  },
+  {
+    "space": "pixel",
+    "label": "Cancel",
+    "text": "```json\n[\n\t{\"point_2d\": [430, 536], \"label\": \"button labeled 'Cancel'\"}\n]\n```",
+    "seconds": 4.301590793009382
+  },
+  {
+    "space": "pixel",
+    "label": "Save",
+    "text": "```json\n[\n\t{\"point_2d\": [493, 536], \"label\": \"button labeled 'Save'\"}\n]\n```",
+    "seconds": 4.238087813020684
+  },
+  {
+    "space": "normalized",
+    "label": "Don't Save",
+    "text": "```json\n[\n\t{\"point_2d\": [463, 539], \"label\": \"button labeled \\\"Don't Save\\\"\"}\n]\n```",
+    "seconds": 4.309593966027023
+  },
+  {
+    "space": "normalized",
+    "label": "Cancel",
+    "text": "```json\n[\n\t{\"point_2d\": [435, 536], \"label\": \"button labeled 'Cancel'\"}\n]\n```",
+    "seconds": 4.182807620993117
+  },
+  {
+    "space": "normalized",
+    "label": "Save",
+    "text": "```json\n[\n\t{\"point_2d\": [493, 538], \"label\": \"button labeled 'Save'\"}\n]\n```",
+    "seconds": 4.238290826993762
+  }
+]

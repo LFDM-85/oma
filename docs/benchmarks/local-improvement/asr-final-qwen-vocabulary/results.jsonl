@@ -1,0 +1,140 @@
+{"id": "ja-final-01", "language": "ja", "expected": "OmaTextで空の新規ファイルを開いてください。", "source": "synthetic", "condition": "quiet", "actual": "オマデって空の新規ファイルを開いてください。", "seconds": 1.6996769820107147}
+{"id": "ja-final-02", "language": "ja", "expected": "ミニモードにしてください。", "source": "synthetic", "condition": "noise", "actual": "ミニモードにしてください。", "seconds": 0.8801425829879008}
+{"id": "ja-final-03", "language": "ja", "expected": "ノーマルモードに戻してください。", "source": "synthetic", "condition": "clean", "actual": "ノーマルモードに戻してください。", "seconds": 1.1248853219731245}
+{"id": "ja-final-04", "language": "ja", "expected": "過去の会話を見せてください。", "source": "synthetic", "condition": "quiet", "actual": "過去の会話を見せてください。", "seconds": 1.0594825890148059}
+{"id": "ja-final-05", "language": "ja", "expected": "今開いたファイルを閉じてください。", "source": "synthetic", "condition": "noise", "actual": "今開いたファイルを閉じてください。", "seconds": 1.2166369540209416}
+{"id": "ja-final-06", "language": "ja", "expected": "保存しないで閉じてください。", "source": "synthetic", "condition": "clean", "actual": "保存しないで閉じてください。", "seconds": 1.0058950080128852}
+{"id": "ja-final-07", "language": "ja", "expected": "閉じないで、そのままにしてください。", "source": "synthetic", "condition": "quiet", "actual": "閉じないでそのままにしてください。", "seconds": 1.0985163889999967}
+{"id": "ja-final-08", "language": "ja", "expected": "バイバイ。またね。", "source": "synthetic", "condition": "noise", "actual": "バイバイまたね。", "seconds": 0.8039636769972276}
+{"id": "ja-final-09", "language": "ja", "expected": "バイバイを英語に訳してください。会話は続けます。", "source": "synthetic", "condition": "clean", "actual": "バイバイを英語に訳してください。会話は続けます。", "seconds": 1.7043203239736613}
+{"id": "ja-final-10", "language": "ja", "expected": "一足す一の答えを教えてください。", "source": "synthetic", "condition": "quiet", "actual": "一足一の答えを教えてください。", "seconds": 1.111729385011131}
+{"id": "ja-final-11", "language": "ja", "expected": "こんにちは。今日の天気は雨です。", "source": "synthetic", "condition": "noise", "actual": "こんにちは今日の天気は雨です。", "seconds": 1.1305858549894765}
+{"id": "ja-final-12", "language": "ja", "expected": "明日の天気は曇りの予報です。", "source": "synthetic", "condition": "clean", "actual": "明日の天気は曇りの予報です。", "seconds": 1.3791773899865802}
+{"id": "ja-final-13", "language": "ja", "expected": "こんにちはと今日の間に全角スペースを入れてください。", "source": "synthetic", "condition": "quiet", "actual": "こんにちはと今日の間に全角スペースを入れてください。", "seconds": 1.4185705429990776}
+{"id": "ja-final-14", "language": "ja", "expected": "文の最後に句点を付けてください。", "source": "synthetic", "condition": "noise", "actual": "文の最後に句点を付けてください。", "seconds": 1.2655488119926304}
+{"id": "ja-final-15", "language": "ja", "expected": "その文字を消さずに改行してください。", "source": "synthetic", "condition": "clean", "actual": "その文字を消さずに開業してください。", "seconds": 1.2194702130218502}
+{"id": "ja-final-16", "language": "ja", "expected": "九月二十六日の午後三時半です。", "source": "synthetic", "condition": "quiet", "actual": "九月二十六日の午後三時半です。", "seconds": 1.4036682590085547}
+{"id": "ja-final-17", "language": "ja", "expected": "合計は千二百三十四円です。", "source": "synthetic", "condition": "noise", "actual": "合計は千二百三十四円です。", "seconds": 1.2439034419949166}
+{"id": "ja-final-18", "language": "ja", "expected": "電話番号は零三、一二三四、五六七八です。", "source": "synthetic", "condition": "clean", "actual": "電話番号は零三一二三四五六七八です。", "seconds": 1.390925165003864}
+{"id": "ja-final-19", "language": "ja", "expected": "温度は二十三点五度です。", "source": "synthetic", "condition": "quiet", "actual": "温度は二十三点五度です。", "seconds": 1.1303831200057175}
+{"id": "ja-final-20", "language": "ja", "expected": "残り時間は二分三十秒です。", "source": "synthetic", "condition": "noise", "actual": "残り時間は二分三十秒です。", "seconds": 1.2144916190009099}
+{"id": "ja-final-21", "language": "ja", "expected": "ファイル名は買い物メモです。", "source": "synthetic", "condition": "clean", "actual": "ファイル名は買い物メモです。", "seconds": 1.0391907939920202}
+{"id": "ja-final-22", "language": "ja", "expected": "東京から大阪まで移動します。", "source": "synthetic", "condition": "quiet", "actual": "東京から大阪まで移動します。", "seconds": 1.2143032920139376}
+{"id": "ja-final-23", "language": "ja", "expected": "山田さんに会う予定があります。", "source": "synthetic", "condition": "noise", "actual": "山田さんに会う予定があります。", "seconds": 1.1650971840135753}
+{"id": "ja-final-24", "language": "ja", "expected": "コーヒーとパンを買いました。", "source": "synthetic", "condition": "clean", "actual": "コーヒーとパンを買いました。", "seconds": 0.9656485209998209}
+{"id": "ja-final-25", "language": "ja", "expected": "青いボタンではなく赤いボタンです。", "source": "synthetic", "condition": "quiet", "actual": "青いボタンではなく赤いボタンです。", "seconds": 1.2957688030146528}
+{"id": "ja-final-26", "language": "ja", "expected": "右のウィンドウだけを閉じてください。", "source": "synthetic", "condition": "noise", "actual": "右のウィンドウだけを閉じてください。", "seconds": 1.309405615000287}
+{"id": "ja-final-27", "language": "ja", "expected": "左のウィンドウは閉じないでください。", "source": "synthetic", "condition": "clean", "actual": "左のウィンドウは閉じないでください。", "seconds": 1.3100412309868261}
+{"id": "ja-final-28", "language": "ja", "expected": "開いたばかりのアプリに切り替えてください。", "source": "synthetic", "condition": "quiet", "actual": "開いたばかりのアプリに切り替えてください。", "seconds": 1.3502740589901805}
+{"id": "ja-final-29", "language": "ja", "expected": "今の操作を中止してください。", "source": "synthetic", "condition": "noise", "actual": "今の操作を中止してください。", "seconds": 1.0277458159835078}
+{"id": "ja-final-30", "language": "ja", "expected": "一つ前の指示は取り消します。", "source": "synthetic", "condition": "clean", "actual": "一つ前の指示は取り消します。", "seconds": 1.0605702689790633}
+{"id": "ja-final-31", "language": "ja", "expected": "えっと、新しいファイルを開いてください。", "source": "synthetic", "condition": "quiet", "actual": "エット新しいファイルを開いてください。", "seconds": 1.1169877009815536}
+{"id": "ja-final-32", "language": "ja", "expected": "赤、いや、青と書いてください。", "source": "synthetic", "condition": "noise", "actual": "赤い青と書いてください。", "seconds": 0.961198863980826}
+{"id": "ja-final-33", "language": "ja", "expected": "保存して、すみません、保存しないで閉じてください。", "source": "synthetic", "condition": "clean", "actual": "保存してすみません保存しないで閉じてください。", "seconds": 1.4677151700016111}
+{"id": "ja-final-34", "language": "ja", "expected": "聞こえていますか。", "source": "synthetic", "condition": "quiet", "actual": "聞こえていますが。", "seconds": 0.863623959972756}
+{"id": "ja-final-35", "language": "ja", "expected": "もう一度ゆっくり説明してください。", "source": "synthetic", "condition": "noise", "actual": "もう一度ゆっくり説明してください。", "seconds": 1.09656422198168}
+{"id": "ja-final-36", "language": "ja", "expected": "今はまだ終了しないでください。", "source": "synthetic", "condition": "clean", "actual": "今まで終了しないでください。", "seconds": 0.9770431109936908}
+{"id": "ja-final-37", "language": "ja", "expected": "ありがとう。もう大丈夫です。さようなら。", "source": "synthetic", "condition": "quiet", "actual": "ありがとうもう大丈夫ですさようなら。", "seconds": 1.1508873339917045}
+{"id": "ja-final-38", "language": "ja", "expected": "数えるのをやめて、二足す二を計算してください。", "source": "synthetic", "condition": "noise", "actual": "数えるのをやめてにダスミを計算してください。", "seconds": 1.5341804579948075}
+{"id": "ja-final-39", "language": "ja", "expected": "音量を二倍にしてください。", "source": "synthetic", "condition": "clean", "actual": "音量を二倍にしてください。", "seconds": 1.0492104050063062}
+{"id": "ja-final-40", "language": "ja", "expected": "マイクを変更したいです。", "source": "synthetic", "condition": "quiet", "actual": "マイクを変更したいです。", "seconds": 1.035906556993723}
+{"id": "ja-final-41", "language": "ja", "expected": "日本語で返事してください。", "source": "synthetic", "condition": "noise", "actual": "日本語で返事してください。", "seconds": 1.0005629130173475}
+{"id": "ja-final-42", "language": "ja", "expected": "ブラウザーを開いてください。", "source": "synthetic", "condition": "clean", "actual": "ブラウザを開いてください。", "seconds": 0.9621986399870366}
+{"id": "ja-final-43", "language": "ja", "expected": "設定は変更せずに見せてください。", "source": "synthetic", "condition": "quiet", "actual": "設定は変更せずに見せてください。", "seconds": 1.2369000619801227}
+{"id": "ja-final-44", "language": "ja", "expected": "文章は引用符の中だけを書いてください。", "source": "synthetic", "condition": "noise", "actual": "文章は陰陽符の中だけを書いてください。", "seconds": 1.3007830980059225}
+{"id": "ja-final-45", "language": "ja", "expected": "雨が降ったら傘を持っていきます。", "source": "synthetic", "condition": "clean", "actual": "雨が降ったら傘を持って行きます。", "seconds": 1.1776145139883738}
+{"id": "ja-final-46", "language": "ja", "expected": "このメモは保存しておきたいです。", "source": "synthetic", "condition": "quiet", "actual": "このメモは保存しておきたいです。", "seconds": 1.279982261999976}
+{"id": "ja-final-47", "language": "ja", "expected": "画面の下に戻ってください。", "source": "synthetic", "condition": "noise", "actual": "画面の下に戻ってください。", "seconds": 1.0043854620016646}
+{"id": "ja-final-48", "language": "ja", "expected": "顔の大きさは変えないでください。", "source": "synthetic", "condition": "clean", "actual": "顔の大きさは変えないでください。", "seconds": 1.2254218650050461}
+{"id": "ja-final-49", "language": "ja", "expected": "今何を実行しているのか教えてください。", "source": "synthetic", "condition": "quiet", "actual": "今何を実行しているのか教えてください。", "seconds": 1.2939248000038788}
+{"id": "ja-final-50", "language": "ja", "expected": "終わったら短く知らせてください。", "source": "synthetic", "condition": "noise", "actual": "終わったら短く知らせてください。", "seconds": 1.1586572029918898}
+{"id": "ja-noise-00", "language": "ja", "expected": "", "source": "generated-noise", "condition": "silence", "actual": "", "seconds": 0.1333673629851546}
+{"id": "ja-noise-01", "language": "ja", "expected": "", "source": "generated-noise", "condition": "white", "actual": "", "seconds": 0.13047476799692959}
+{"id": "ja-noise-02", "language": "ja", "expected": "", "source": "generated-noise", "condition": "hum", "actual": "", "seconds": 0.12634524502209388}
+{"id": "ja-noise-03", "language": "ja", "expected": "", "source": "generated-noise", "condition": "clicks", "actual": "", "seconds": 0.13021201599622145}
+{"id": "ja-noise-04", "language": "ja", "expected": "", "source": "generated-noise", "condition": "pink", "actual": "", "seconds": 0.1259735319763422}
+{"id": "ja-noise-05", "language": "ja", "expected": "", "source": "generated-noise", "condition": "silence", "actual": "", "seconds": 0.12647878701682203}
+{"id": "ja-noise-06", "language": "ja", "expected": "", "source": "generated-noise", "condition": "white", "actual": "", "seconds": 0.13052436299039982}
+{"id": "ja-noise-07", "language": "ja", "expected": "", "source": "generated-noise", "condition": "hum", "actual": "", "seconds": 0.12878495900076814}
+{"id": "ja-noise-08", "language": "ja", "expected": "", "source": "generated-noise", "condition": "clicks", "actual": "", "seconds": 0.13324351000483148}
+{"id": "ja-noise-09", "language": "ja", "expected": "", "source": "generated-noise", "condition": "pink", "actual": "", "seconds": 0.12649413201143034}
+{"id": "ja-noise-10", "language": "ja", "expected": "", "source": "generated-noise", "condition": "silence", "actual": "", "seconds": 0.1284936110023409}
+{"id": "ja-noise-11", "language": "ja", "expected": "", "source": "generated-noise", "condition": "white", "actual": "", "seconds": 0.13051083500613458}
+{"id": "ja-noise-12", "language": "ja", "expected": "", "source": "generated-noise", "condition": "hum", "actual": "", "seconds": 0.13343330699717626}
+{"id": "ja-noise-13", "language": "ja", "expected": "", "source": "generated-noise", "condition": "clicks", "actual": "", "seconds": 0.125054296979215}
+{"id": "ja-noise-14", "language": "ja", "expected": "", "source": "generated-noise", "condition": "pink", "actual": "", "seconds": 0.127900002989918}
+{"id": "ja-noise-15", "language": "ja", "expected": "", "source": "generated-noise", "condition": "silence", "actual": "", "seconds": 0.1270748300012201}
+{"id": "ja-noise-16", "language": "ja", "expected": "", "source": "generated-noise", "condition": "white", "actual": "", "seconds": 0.1346435569867026}
+{"id": "ja-noise-17", "language": "ja", "expected": "", "source": "generated-noise", "condition": "hum", "actual": "", "seconds": 0.12520925400895067}
+{"id": "ja-noise-18", "language": "ja", "expected": "", "source": "generated-noise", "condition": "clicks", "actual": "", "seconds": 0.12676001898944378}
+{"id": "ja-noise-19", "language": "ja", "expected": "", "source": "generated-noise", "condition": "pink", "actual": "", "seconds": 0.12963698801468126}
+{"id": "en-final-01", "language": "en", "expected": "Open a new blank document in OmaText.", "source": "synthetic", "condition": "quiet", "actual": "Open a new blank document in OmaText.", "seconds": 1.2972927310038358}
+{"id": "en-final-02", "language": "en", "expected": "Switch to mini mode.", "source": "synthetic", "condition": "noise", "actual": "Switch to mini mode.", "seconds": 0.8114478899806272}
+{"id": "en-final-03", "language": "en", "expected": "Switch back to normal mode.", "source": "synthetic", "condition": "clean", "actual": "Switch back to normal mode.", "seconds": 0.8652715399803128}
+{"id": "en-final-04", "language": "en", "expected": "Show me our conversation history.", "source": "synthetic", "condition": "quiet", "actual": "Show me our conversation history.", "seconds": 0.9889795249910094}
+{"id": "en-final-05", "language": "en", "expected": "Close the file you just opened.", "source": "synthetic", "condition": "noise", "actual": "Close the file you just opened.", "seconds": 0.9527774770103861}
+{"id": "en-final-06", "language": "en", "expected": "Close it without saving.", "source": "synthetic", "condition": "clean", "actual": "Close it without saving.", "seconds": 0.8035819439974148}
+{"id": "en-final-07", "language": "en", "expected": "Do not close it. Leave it as it is.", "source": "synthetic", "condition": "quiet", "actual": "Do not close it. Leave it as it is.", "seconds": 1.247280153009342}
+{"id": "en-final-08", "language": "en", "expected": "Goodbye. See you later.", "source": "synthetic", "condition": "noise", "actual": "Goodbye. See you later.", "seconds": 0.9830881289963145}
+{"id": "en-final-09", "language": "en", "expected": "Translate goodbye into Japanese. Keep our conversation open.", "source": "synthetic", "condition": "clean", "actual": "Translate goodbye into Japanese. Keep our conversation open.", "seconds": 1.3081974450033158}
+{"id": "en-final-10", "language": "en", "expected": "Tell me the answer to one plus one.", "source": "synthetic", "condition": "quiet", "actual": "Tell me the answer to one plus one.", "seconds": 1.1824272219964769}
+{"id": "en-final-11", "language": "en", "expected": "Hello. It is raining today.", "source": "synthetic", "condition": "noise", "actual": "Hello. It is raining today.", "seconds": 0.9470256639760919}
+{"id": "en-final-12", "language": "en", "expected": "The forecast for tomorrow is cloudy.", "source": "synthetic", "condition": "clean", "actual": "The forecast for tomorrow is cloudy.", "seconds": 0.9800882099953014}
+{"id": "en-final-13", "language": "en", "expected": "Put one space between hello and today.", "source": "synthetic", "condition": "quiet", "actual": "Put one space between hello and today.", "seconds": 1.0401938630093355}
+{"id": "en-final-14", "language": "en", "expected": "Put a period at the end of the sentence.", "source": "synthetic", "condition": "noise", "actual": "Put a period at the end of the sentence.", "seconds": 1.1851711950148456}
+{"id": "en-final-15", "language": "en", "expected": "Add a new line without deleting that text.", "source": "synthetic", "condition": "clean", "actual": "Add a new line without deleting that text.", "seconds": 1.118774892995134}
+{"id": "en-final-16", "language": "en", "expected": "It is half past three on September twenty sixth.", "source": "synthetic", "condition": "quiet", "actual": "It is half past three on September twenty-sixth.", "seconds": 1.3146414069924504}
+{"id": "en-final-17", "language": "en", "expected": "The total is one thousand two hundred and thirty four yen.", "source": "synthetic", "condition": "noise", "actual": "The total is one thousand two hundred and thirty-four yen.", "seconds": 1.3875219959882088}
+{"id": "en-final-18", "language": "en", "expected": "The phone number is zero three, one two three four, five six seven eight.", "source": "synthetic", "condition": "clean", "actual": "The phone number is zero three one two three four five six seven eight.", "seconds": 1.6427123740140814}
+{"id": "en-final-19", "language": "en", "expected": "The temperature is twenty three point five degrees.", "source": "synthetic", "condition": "quiet", "actual": "The temperature is twenty-three point five degrees.", "seconds": 1.1478411739808507}
+{"id": "en-final-20", "language": "en", "expected": "There are two minutes and thirty seconds left.", "source": "synthetic", "condition": "noise", "actual": "There are two minutes and thirty seconds left.", "seconds": 1.163923348998651}
+{"id": "en-final-21", "language": "en", "expected": "The file name is shopping notes.", "source": "synthetic", "condition": "clean", "actual": "The file name is shopping notes.", "seconds": 0.9331033090129495}
+{"id": "en-final-22", "language": "en", "expected": "I am travelling from Tokyo to Osaka.", "source": "synthetic", "condition": "quiet", "actual": "I am traveling from Tokyo to Osaka.", "seconds": 1.0806355770037044}
+{"id": "en-final-23", "language": "en", "expected": "I have an appointment with Ms Yamada.", "source": "synthetic", "condition": "noise", "actual": "I have an appointment with Ms. Yamada.", "seconds": 1.2083297310164198}
+{"id": "en-final-24", "language": "en", "expected": "I bought coffee and bread.", "source": "synthetic", "condition": "clean", "actual": "I bought coffee and bread.", "seconds": 0.8433060910028871}
+{"id": "en-final-25", "language": "en", "expected": "It is the red button, not the blue button.", "source": "synthetic", "condition": "quiet", "actual": "It is the red button, not the blue button.", "seconds": 1.2594726719835307}
+{"id": "en-final-26", "language": "en", "expected": "Close only the window on the right.", "source": "synthetic", "condition": "noise", "actual": "Close only the window on the right.", "seconds": 1.0777628679934423}
+{"id": "en-final-27", "language": "en", "expected": "Do not close the window on the left.", "source": "synthetic", "condition": "clean", "actual": "Do not close the window on the left.", "seconds": 1.071194629999809}
+{"id": "en-final-28", "language": "en", "expected": "Switch to the application you just opened.", "source": "synthetic", "condition": "quiet", "actual": "Switch to the application you just opened.", "seconds": 1.0748065549996682}
+{"id": "en-final-29", "language": "en", "expected": "Cancel the current operation.", "source": "synthetic", "condition": "noise", "actual": "Cancel the current operation.", "seconds": 0.8102850590075832}
+{"id": "en-final-30", "language": "en", "expected": "I withdraw my previous instruction.", "source": "synthetic", "condition": "clean", "actual": "I withdraw my previous instruction.", "seconds": 0.9422127960133366}
+{"id": "en-final-31", "language": "en", "expected": "Um, please open a new file.", "source": "synthetic", "condition": "quiet", "actual": "Um, please open a new file.", "seconds": 1.0472712200134993}
+{"id": "en-final-32", "language": "en", "expected": "Write red, no, write blue.", "source": "synthetic", "condition": "noise", "actual": "Write red. No, write blue.", "seconds": 1.0377165020036045}
+{"id": "en-final-33", "language": "en", "expected": "Save it, sorry, close it without saving.", "source": "synthetic", "condition": "clean", "actual": "Save it. Sorry, close it without saving.", "seconds": 1.1302254970069043}
+{"id": "en-final-34", "language": "en", "expected": "Can you hear me?", "source": "synthetic", "condition": "quiet", "actual": "Can you hear me?", "seconds": 0.8076113449933473}
+{"id": "en-final-35", "language": "en", "expected": "Please explain it slowly once more.", "source": "synthetic", "condition": "noise", "actual": "Please explain it slowly once more.", "seconds": 0.9315169879992027}
+{"id": "en-final-36", "language": "en", "expected": "Please do not exit yet.", "source": "synthetic", "condition": "clean", "actual": "Please do not exit yet.", "seconds": 0.8666599299758673}
+{"id": "en-final-37", "language": "en", "expected": "Thank you. That is all. Goodbye.", "source": "synthetic", "condition": "quiet", "actual": "Thank you. That is all. Goodbye.", "seconds": 1.1280807059956715}
+{"id": "en-final-38", "language": "en", "expected": "Stop counting and calculate two plus two.", "source": "synthetic", "condition": "noise", "actual": "Stop counting and calculate two plus two.", "seconds": 1.085069407010451}
+{"id": "en-final-39", "language": "en", "expected": "Double the volume.", "source": "synthetic", "condition": "clean", "actual": "Double the volume.", "seconds": 0.7150985859916545}
+{"id": "en-final-40", "language": "en", "expected": "I would like to change the microphone.", "source": "synthetic", "condition": "quiet", "actual": "I would like to change the microphone.", "seconds": 1.0569573819811922}
+{"id": "en-final-41", "language": "en", "expected": "Please reply in English.", "source": "synthetic", "condition": "noise", "actual": "Please reply in English.", "seconds": 0.7825575179886073}
+{"id": "en-final-42", "language": "en", "expected": "Open the browser.", "source": "synthetic", "condition": "clean", "actual": "Open the browser.", "seconds": 0.7564945360063575}
+{"id": "en-final-43", "language": "en", "expected": "Show me the settings without changing them.", "source": "synthetic", "condition": "quiet", "actual": "Show me the settings without changing them.", "seconds": 1.0581508149916772}
+{"id": "en-final-44", "language": "en", "expected": "Write only the text inside the quotation marks.", "source": "synthetic", "condition": "noise", "actual": "Write only the text inside the quotation marks.", "seconds": 1.1965393139980733}
+{"id": "en-final-45", "language": "en", "expected": "If it rains, I will take an umbrella.", "source": "synthetic", "condition": "clean", "actual": "If it rains, I will take an umbrella.", "seconds": 1.2133114680182189}
+{"id": "en-final-46", "language": "en", "expected": "I would like to keep this note saved.", "source": "synthetic", "condition": "quiet", "actual": "I would like to keep this note saved.", "seconds": 1.1397849259956274}
+{"id": "en-final-47", "language": "en", "expected": "Move back to the bottom of the screen.", "source": "synthetic", "condition": "noise", "actual": "Move back to the bottom of the screen.", "seconds": 1.1002443580073304}
+{"id": "en-final-48", "language": "en", "expected": "Do not change the size of the face.", "source": "synthetic", "condition": "clean", "actual": "Do not change the size of the face.", "seconds": 1.0594817810051609}
+{"id": "en-final-49", "language": "en", "expected": "Tell me what you are running now.", "source": "synthetic", "condition": "quiet", "actual": "Tell me what you are running now.", "seconds": 1.0221278340031859}
+{"id": "en-final-50", "language": "en", "expected": "Let me know briefly when you are finished.", "source": "synthetic", "condition": "noise", "actual": "Let me know briefly when you are finished.", "seconds": 1.1220095439930446}
+{"id": "en-noise-00", "language": "en", "expected": "", "source": "generated-noise", "condition": "silence", "actual": "", "seconds": 0.12157087898231111}
+{"id": "en-noise-01", "language": "en", "expected": "", "source": "generated-noise", "condition": "white", "actual": "", "seconds": 0.13031746199703775}
+{"id": "en-noise-02", "language": "en", "expected": "", "source": "generated-noise", "condition": "hum", "actual": "", "seconds": 0.12980593301472254}
+{"id": "en-noise-03", "language": "en", "expected": "", "source": "generated-noise", "condition": "clicks", "actual": "", "seconds": 0.12733673601178452}
+{"id": "en-noise-04", "language": "en", "expected": "", "source": "generated-noise", "condition": "pink", "actual": "", "seconds": 0.12407950099441223}
+{"id": "en-noise-05", "language": "en", "expected": "", "source": "generated-noise", "condition": "silence", "actual": "", "seconds": 0.1256919809966348}
+{"id": "en-noise-06", "language": "en", "expected": "", "source": "generated-noise", "condition": "white", "actual": "", "seconds": 0.129580139007885}
+{"id": "en-noise-07", "language": "en", "expected": "", "source": "generated-noise", "condition": "hum", "actual": "", "seconds": 0.1267042359977495}
+{"id": "en-noise-08", "language": "en", "expected": "", "source": "generated-noise", "condition": "clicks", "actual": "", "seconds": 0.12501158600207418}
+{"id": "en-noise-09", "language": "en", "expected": "", "source": "generated-noise", "condition": "pink", "actual": "", "seconds": 0.12590691301738843}
+{"id": "en-noise-10", "language": "en", "expected": "", "source": "generated-noise", "condition": "silence", "actual": "", "seconds": 0.1272033770219423}
+{"id": "en-noise-11", "language": "en", "expected": "", "source": "generated-noise", "condition": "white", "actual": "", "seconds": 0.13097336501232348}
+{"id": "en-noise-12", "language": "en", "expected": "", "source": "generated-noise", "condition": "hum", "actual": "", "seconds": 0.11974381099571474}
+{"id": "en-noise-13", "language": "en", "expected": "", "source": "generated-noise", "condition": "clicks", "actual": "", "seconds": 0.1249044949945528}
+{"id": "en-noise-14", "language": "en", "expected": "", "source": "generated-noise", "condition": "pink", "actual": "", "seconds": 0.1427427919988986}
+{"id": "en-noise-15", "language": "en", "expected": "", "source": "generated-noise", "condition": "silence", "actual": "", "seconds": 0.12795238598482683}
+{"id": "en-noise-16", "language": "en", "expected": "", "source": "generated-noise", "condition": "white", "actual": "", "seconds": 0.12251555698458105}
+{"id": "en-noise-17", "language": "en", "expected": "", "source": "generated-noise", "condition": "hum", "actual": "", "seconds": 0.12590170599287376}
+{"id": "en-noise-18", "language": "en", "expected": "", "source": "generated-noise", "condition": "clicks", "actual": "", "seconds": 0.13992044600308873}
+{"id": "en-noise-19", "language": "en", "expected": "", "source": "generated-noise", "condition": "pink", "actual": "", "seconds": 0.12910737900529057}

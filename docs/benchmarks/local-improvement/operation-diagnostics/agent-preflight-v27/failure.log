@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/tmp/oma-evaluation-candidate-v27-source/tests/voice/evaluation/agent.py", line 214, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/tmp/oma-evaluation-candidate-v27-source/tests/voice/evaluation/agent.py", line 182, in main
+    h.start()
+    ~~~~~~~^^
+  File "/tmp/oma-evaluation-candidate-v27-source/tests/voice/run.py", line 177, in start
+    wait_setting('microphoneTarget', self.source)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/oma-evaluation-candidate-v27-source/tests/voice/run.py", line 451, in wait_setting
+    raise AssertionError('Setting did not become ready: '+key+'='+str(value))
+AssertionError: Setting did not become ready: microphoneTarget=oma_voice_test_2715352_source

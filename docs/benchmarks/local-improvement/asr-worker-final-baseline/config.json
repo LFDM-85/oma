@@ -1,0 +1,20 @@
+{
+  "model": "whisper-small",
+  "worker_sha256": "59a19be843bc91fdb5b6abe6dd95b68d47ab663856e60c95574fe4b1603a9471",
+  "corpus_sha256": "9c87e5f2d64376f58853b4b5c1ad089d96845a37ae1d574d5c696fe2062b63d9",
+  "split": "final",
+  "path": "JSON IPC, 24k PCM, scipy resample_poly",
+  "warmups": [
+    {
+      "language": "ja",
+      "seconds": 2.3294916950108018,
+      "error": null
+    },
+    {
+      "language": "en",
+      "seconds": 0.8615948029910214,
+      "error": null
+    }
+  ],
+  "peak_worker_rss_kib": 1451368
+}

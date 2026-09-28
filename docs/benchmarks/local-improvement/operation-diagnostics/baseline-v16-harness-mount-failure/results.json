@@ -1,0 +1,1288 @@
+[
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "blank",
+    "status": "failed",
+    "setup_seconds": 3.743839189002756,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 4.018806817010045,
+    "seconds": 0.27496926599997096
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dictation",
+    "status": "failed",
+    "setup_seconds": 3.931113266007742,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 4.257966089993715,
+    "seconds": 0.3268540469871368
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "lines",
+    "status": "failed",
+    "setup_seconds": 3.778613703994779,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 4.037543826008914,
+    "seconds": 0.2589308189926669
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "punctuation",
+    "status": "failed",
+    "setup_seconds": 3.7280917440075427,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 3.975916845985921,
+    "seconds": 0.24782595297438093
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "close",
+    "status": "failed",
+    "setup_seconds": 4.331589347013505,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 4.58708550198935,
+    "seconds": 0.2554967059986666
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "discard",
+    "status": "failed",
+    "setup_seconds": 4.727370845008409,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 4.98000033502467,
+    "seconds": 0.25262998699327
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "cancel-close",
+    "status": "failed",
+    "setup_seconds": 4.873102986020967,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 5.095109393005259,
+    "seconds": 0.22200709499884397
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "mini",
+    "status": "failed",
+    "setup_seconds": 3.872946529998444,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 4.117631513014203,
+    "seconds": 0.2446855250163935
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "normal",
+    "status": "failed",
+    "setup_seconds": 4.104599453014089,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 4.348024206992704,
+    "seconds": 0.243425277993083
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "quoted-goodbye",
+    "status": "failed",
+    "setup_seconds": 3.854732032981701,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 4.111058080976363,
+    "seconds": 0.25632710300851613
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "math",
+    "status": "failed",
+    "setup_seconds": 3.75233851899975,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 3.9795590849826112,
+    "seconds": 0.2272209219809156
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "remember",
+    "status": "failed",
+    "setup_seconds": 3.8224469750130083,
+    "passed": false,
+    "error": "node:internal/modules/cjs/loader:1573\n  throw err;\n  ^\n\nError: Cannot find module '/tmp/oma-evaluation-candidate-v16-source/tests/voice/evaluation/agent-turn.mjs'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1569:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1123:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1147:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1174:12)\n    at Module._load (node:internal/modules/cjs/loader:1346:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v26.7.0\n",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 4.093948854017071,
+    "seconds": 0.2715025910001714
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "recall",
+    "status": "interrupted",
+    "passed": false,
+    "error": "Evaluation interrupted"
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "goodbye",
+    "status": "not_run"
+  }
+]

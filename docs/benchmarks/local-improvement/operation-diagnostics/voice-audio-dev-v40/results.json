@@ -1,0 +1,29 @@
+[
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty-with-neighbor",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 45.61
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty-with-neighbor",
+    "repeat": 1,
+    "passed": true,
+    "status": "passed",
+    "seconds": 47.09
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty-with-neighbor",
+    "repeat": 2,
+    "passed": true,
+    "status": "passed",
+    "seconds": 39.7
+  }
+]

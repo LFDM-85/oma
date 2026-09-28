@@ -1,0 +1,76 @@
+[
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "document",
+    "repeat": 0,
+    "passed": false,
+    "status": "failed",
+    "error": "",
+    "critical_error": false
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "modes",
+    "repeat": 0,
+    "passed": false,
+    "status": "failed",
+    "error": "Timed out: reply while mini",
+    "critical_error": false
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "farewell",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 15.64
+  },
+  {
+    "provider": "local",
+    "language": "ja",
+    "case": "empty-with-neighbor",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 48.43
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "document",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 85.44
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "modes",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 47.46
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "farewell",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 12.73
+  },
+  {
+    "provider": "local",
+    "language": "en",
+    "case": "empty-with-neighbor",
+    "repeat": 0,
+    "passed": true,
+    "status": "passed",
+    "seconds": 40.42
+  }
+]

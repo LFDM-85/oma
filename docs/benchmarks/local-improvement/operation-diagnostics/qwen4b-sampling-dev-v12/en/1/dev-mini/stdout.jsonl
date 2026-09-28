@@ -1,0 +1,9 @@
+{"event":"tool_start","name":"set_view_mode","args":{"mode":"mini"}}
+{"event":"state","state":"working","taskStatus":"Switching to mini mode"}
+{"event":"state","viewMode":"mini"}
+{"event":"tool_end","name":"set_view_mode","error":false,"details":{}}
+{"event":"state","taskStatus":"","state":"thinking"}
+{"event":"state","computerUsing":false}
+{"event":"answer","text":"Done! I'm now in mini view mode - just my face is visible. You can double-click my face to toggle back to normal mode anytime.","seconds":2.7939447229999996,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":22,"output":59,"cacheRead":12054,"cacheWrite":0,"reasoning":0,"totalTokens":12135,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
+{"event":"result","facts":[]}
+{"event":"state","computerUsing":false}

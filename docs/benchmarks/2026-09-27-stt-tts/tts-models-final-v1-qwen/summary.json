@@ -1,0 +1,42 @@
+{
+  "ja": {
+    "expected": 20,
+    "observed": 20,
+    "errors": [],
+    "first_sound_seconds": {
+      "n": 20,
+      "median": 12.254774017163708,
+      "p95": 15.623900425331046,
+      "max": 17.538290834673603
+    },
+    "rtf": {
+      "n": 20,
+      "median": 2.72415720841994,
+      "p95": 2.7772044919661965,
+      "max": 2.782695680157896
+    },
+    "simulated_gap_seconds": 0,
+    "listening": "pending",
+    "omissions": "ASR readback and human listening required"
+  },
+  "en": {
+    "expected": 20,
+    "observed": 20,
+    "errors": [],
+    "first_sound_seconds": {
+      "n": 20,
+      "median": 9.568580945002031,
+      "p95": 15.028136908337318,
+      "max": 22.458870070670653
+    },
+    "rtf": {
+      "n": 20,
+      "median": 2.6752210380709585,
+      "p95": 2.838577526030743,
+      "max": 2.8487187228165567
+    },
+    "simulated_gap_seconds": 0,
+    "listening": "pending",
+    "omissions": "ASR readback and human listening required"
+  }
+}

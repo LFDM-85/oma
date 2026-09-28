@@ -1,0 +1,304 @@
+{
+  "split": "dev",
+  "final_acceptance": false,
+  "languages": {
+    "ja": {
+      "complete": false,
+      "expected": 13,
+      "successes": 2,
+      "success_rate": 0.15384615384615385,
+      "missing": [
+        {
+          "id": "dev-append",
+          "repeat": 0
+        },
+        {
+          "id": "dev-append-multiline",
+          "repeat": 0
+        },
+        {
+          "id": "dev-cancel-close",
+          "repeat": 0
+        },
+        {
+          "id": "dev-discard",
+          "repeat": 0
+        },
+        {
+          "id": "dev-goodbye",
+          "repeat": 0
+        },
+        {
+          "id": "dev-keep-editing",
+          "repeat": 0
+        },
+        {
+          "id": "dev-math",
+          "repeat": 0
+        },
+        {
+          "id": "dev-normal",
+          "repeat": 0
+        },
+        {
+          "id": "dev-remember",
+          "repeat": 0
+        },
+        {
+          "id": "dev-write",
+          "repeat": 0
+        }
+      ],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": false,
+      "successful_latency": {
+        "n": 2,
+        "median": 59.956557564015384,
+        "p95": 60.083996952016605,
+        "max": 60.083996952016605
+      },
+      "failed_duration": {
+        "n": 1,
+        "median": 52.07868705398869,
+        "p95": 52.07868705398869,
+        "max": 52.07868705398869
+      },
+      "failures": [
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-mini",
+          "status": "failed",
+          "setup_seconds": 3.8274690300168004,
+          "passed": false,
+          "error": "",
+          "critical_error": false,
+          "critical_kind": null,
+          "total_seconds": 55.90615552800591,
+          "seconds": 52.07868705398869
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-normal",
+          "status": "interrupted",
+          "setup_seconds": 3.870220718992641,
+          "passed": false,
+          "error": "Evaluation interrupted"
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-write",
+          "status": "not_run"
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-math",
+          "status": "not_run"
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-discard",
+          "status": "not_run"
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-cancel-close",
+          "status": "not_run"
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append",
+          "status": "not_run"
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-append-multiline",
+          "status": "not_run"
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-remember",
+          "status": "not_run"
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-goodbye",
+          "status": "not_run"
+        },
+        {
+          "language": "ja",
+          "repeat": 0,
+          "id": "dev-keep-editing",
+          "status": "not_run"
+        }
+      ]
+    },
+    "en": {
+      "complete": false,
+      "expected": 13,
+      "successes": 0,
+      "success_rate": 0.0,
+      "missing": [
+        {
+          "id": "dev-append",
+          "repeat": 0
+        },
+        {
+          "id": "dev-append-multiline",
+          "repeat": 0
+        },
+        {
+          "id": "dev-blank",
+          "repeat": 0
+        },
+        {
+          "id": "dev-cancel-close",
+          "repeat": 0
+        },
+        {
+          "id": "dev-dictation",
+          "repeat": 0
+        },
+        {
+          "id": "dev-discard",
+          "repeat": 0
+        },
+        {
+          "id": "dev-goodbye",
+          "repeat": 0
+        },
+        {
+          "id": "dev-keep-editing",
+          "repeat": 0
+        },
+        {
+          "id": "dev-math",
+          "repeat": 0
+        },
+        {
+          "id": "dev-mini",
+          "repeat": 0
+        },
+        {
+          "id": "dev-normal",
+          "repeat": 0
+        },
+        {
+          "id": "dev-remember",
+          "repeat": 0
+        },
+        {
+          "id": "dev-write",
+          "repeat": 0
+        }
+      ],
+      "critical_policy": "explicit-flags-and-wrong-assistant-dismissal-v2",
+      "critical_errors": 0,
+      "critical_failures": [],
+      "gate": false,
+      "successful_latency": {
+        "n": 0,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "failed_duration": {
+        "n": 0,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "failures": [
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-blank",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-dictation",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-mini",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-normal",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-write",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-math",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-discard",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-cancel-close",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-append",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-append-multiline",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-remember",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-goodbye",
+          "status": "not_run"
+        },
+        {
+          "language": "en",
+          "repeat": 0,
+          "id": "dev-keep-editing",
+          "status": "not_run"
+        }
+      ]
+    }
+  }
+}

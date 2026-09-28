@@ -1,0 +1,4 @@
+{"engine": "qwen", "model": "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice", "load_seconds": 9.839022757019848}
+{"engine": "qwen", "case": "greeting", "text": "ご指示をお待ちしています。", "file": "/tmp/oma-model-research/audio/qwen/greeting.wav", "seconds": 8.107785158994375, "first_audio_seconds": 8.10778451099759, "duration": 2.8, "rtf": 2.8956375567837056}
+{"engine": "qwen", "case": "document", "text": "こんにちは。今日の天気は雨です。保存せずにファイルを閉じました。", "file": "/tmp/oma-model-research/audio/qwen/document.wav", "seconds": 19.70989822302363, "first_audio_seconds": 19.709897318010917, "duration": 6.96, "rtf": 2.831881928595349}
+{"engine": "qwen", "case": "numbers", "text": "九月二十六日、午後三時半です。過去の会話を開きます。合計は千二百三十四円です。", "file": "/tmp/oma-model-research/audio/qwen/numbers.wav", "seconds": 36.054805916006444, "first_audio_seconds": 36.05480498200632, "duration": 12.4, "rtf": 2.9076456383876166}

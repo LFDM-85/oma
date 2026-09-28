@@ -1,245 +1,145 @@
 # O.M.A.
 
-**Omarchy Machine Assistant**, pronounced **OH-mah**.
+**Omarchy Machine Assistant**, pronounced **OH-mah（オーマ）**.
 
-A voice assistant for the Omarchy desktop with a theme-colored, low-poly face.
-Talk to it, interrupt its replies, and ask it to operate local apps through
-OpenAI Realtime and Codex. Conversation memory stays available between sessions.
+A voice assistant for the Omarchy desktop with a theme-colored low-poly face.
+GPT-Live handles spoken conversation and delegates reasoning to an OpenAI Responses
+model. Alternatively, choose Local to run Whisper, Qwen3.5 and Kokoro on this
+computer without API fees. O.M.A. runs PC tools and stores long-term memory
+locally. Both modes use the OMA, camera and installed Omarchy skills.
 
 ![O.M.A. with a fictional conversation](preview.png)
 
-## What it does
-
-- Opens with **F8**, the center-bar brain icon, or optional **Hey O.M.A.** wake detection.
-- Listens while its panel is open. No push-to-talk key is required.
-- Speaks replies, animates its face, and displays both sides of the conversation.
-- Launches apps, edits files, changes settings, and operates the desktop through Codex.
-- Remembers conversations, preferences, task checkpoints, and exact URL references locally.
-- Can inspect a connected camera when requested.
-- Follows the current theme, including face, glow, waveform, and muted subtitle colors.
-
-This is an early desktop integration, tested on **Omarchy 4.0.4 (Quattro)**.
-It requires an OpenAI API key; API usage is billed separately.
-
-## Requirements
-
-- Omarchy Quattro with its Quickshell plugin system and Hyprland Lua dispatchers.
-- Node.js **24+**, Python 3, and systemd user services.
-- Codex CLI with App Server support; tested with **0.155.1**.
-- PipeWire: `pw-record`, `pw-play`, `pw-cli`, `wpctl`, and WebRTC echo cancellation.
-- `grim`, `wtype`, `hyprctl`, `xdg-open`, and `setpriv`.
-- Optional mouse clicks: a C compiler, `wayland-scanner`, and Wayland client headers.
-- An OpenAI API key with access to the configured Realtime and Codex models.
-- Desktop Secret Service and `secret-tool` (included in standard Omarchy)
-  to save a key through Settings.
-  Alternatively, provide `OPENAI_API_KEY` in the desktop session environment.
-- Optional camera support: FFmpeg and `v4l2-ctl`.
-- Optional voice wake: Python venv/pip and the Vosk model installed by `scripts/setup-wake`.
-
 ## Install
 
-Run this in an Omarchy terminal:
+Requires Omarchy Quattro, Node.js 24+, Python 3, PipeWire with WebRTC echo
+cancellation, WirePlumber, grim, wtype, hyprctl, xdg-open and setpriv. Mouse clicks
+use a small C/Wayland helper (`scripts/build-pointer`). Camera support uses FFmpeg
+and v4l2-ctl. Optional local voice wake uses Vosk and a Japanese model.
 
 ```sh
 omarchy plugin add https://github.com/komagata/oma --enable
 ```
 
-1. Choose the center bar section if prompted, then click the brain icon.
-2. Click **SET UP**. A terminal wizard offers missing system packages, Codex,
-   mouse control, voice wake, and the F8 shortcut.
-   The first package installation runs the standard Omarchy update first,
-   including package-list synchronization and system updates. It may ask for your system password. Optional steps can be
-   skipped; an existing F8 binding is preserved.
-3. Return to O.M.A. and click **CHECK AGAIN**. Paste your OpenAI API key and click
-   **SAVE KEY**, then **START O.M.A.**
+Open Settings, install missing PC dependencies when requested, and enter an
+OpenAI project API key with GPT-Live access. One key connects both voice and the
+Responses backend. Select **Test voice** to hear a short test without
+recording your microphone, then **Start talking**.
 
-The plugin manager installs the plugin; the explicit setup wizard handles
-machine dependencies. Nothing is installed silently by the bar. The WebSocket
-library is bundled, so no npm install is needed.
+For local inference, choose **Voice engine → Local · Offline**, then **Set up
+local models**. The first setup downloads several gigabytes and requires
+x86_64 Linux, mise, a C++ build toolchain and espeak-ng. This setup was verified
+with an RTX 4060 (8 GB VRAM) and 64 GB system RAM. Model loading can make the
+first reply noticeably slower. Later conversations reuse the loaded models.
+Local mode requires no OpenAI key and never falls back to a paid API.
 
-If the setup window does not open, run:
+Settings also includes **Microphone**, **Spoken language**, and an **OpenAI API
+key** field in GPT-Live mode. Microphone selection is saved for conversation and voice wake,
+without changing the system default. Use **Refresh devices** after connecting a
+device. A saved API key stays hidden; enter a replacement and select
+**Update key** to save it to the desktop keyring.
 
-```sh
-~/.config/omarchy/plugins/io.github.komagata.oma/scripts/setup
-```
+API usage is billed separately from ChatGPT subscriptions. Voice sessions incur
+duration charges; backend usage is additional. Sessions connect when the panel
+opens and close when it closes or after a minute of inactivity with no pending
+work. The local wake listener does not keep a paid Live connection open.
 
-Setup can be rerun after a failed download or to add optional features. It
-preserves conversation history and existing keys. If a step fails, its error
-stays visible in the terminal. Optional mouse/wake setup failures do not block
-F8 or the bar icon; rerun SET UP to retry those features. For an old Node.js selected through a version
-manager, update that installation to version 24+ and rerun setup.
-
-Voice wake currently uses a Japanese Vosk model; other accents are not yet
-validated. Enable **VOICE WAKE** in Settings after setup. Camera support is
-optional and requires FFmpeg and `v4l2-ctl`.
-
-### API key
-
-On first launch without a key, the welcome page explains the requirement and
-opens the API-key field. Later, choose **SETTINGS** or right-click the bar icon.
-Keys are masked and passed to the desktop keyring over stdin, never returned to the UI.
-
-Lookup order:
-
-1. Desktop keyring: application `io.github.komagata.oma`, credential `openai-api-key`
-2. Existing gopass entry: `projects/oma/openai/api-key`
-3. `OPENAI_API_KEY` in the desktop session environment
-4. Existing gopass entry: `personal/openai/api-key`
-
-Saving changes only O.M.A.'s dedicated desktop-keyring entry and restarts its worker.
-The login keyring normally unlocks with your desktop login; no GPG identity or
-separate password-store wizard is needed. Existing gopass entries are left intact.
+Setup never updates the whole system or restarts the desktop shell. Production
+installation uses `npm ci --omit=dev --ignore-scripts --bin-links=false`.
 
 ## Use
 
-Open the panel and speak when it is ready. O.M.A. starts with
-**“Awaiting your command.”** English locales use that source line; other locales
-receive a natural translation. Replies follow the desktop locale (`LC_ALL`,
-then `LC_MESSAGES`, then `LANG`) unless you request another language.
-UI labels remain English. Input transcription also receives the locale language
-(e.g. `en` for `en-US`), independently of the spoken-response instructions.
+Open with F8, the bar icon, or optional Hey O.M.A. Speak naturally; GPT-Live manages
+continuous listening and speech. Local PipeWire echo cancellation and O.M.A.'s
+retro audio filter remain. Captions are model transcripts, not proof that audio
+was heard. Speaking over a reply does not automatically undo or cancel PC work;
+use Stop/Escape to close the session and cancel local pending operations.
+Consequential actions request confirmation through local buttons. Local mode
+also accepts explicit spoken yes/no answers. Local processing uses separate
+recognition, reasoning and synthesis stages; interrupting it cancels its current
+turn. It does not reproduce GPT-Live's full-duplex timing or Cedar voice.
 
-Try:
+Try “Remember that I prefer tiled windows”, “Open the last URL”, “What am I
+holding?”, or “Thanks, bye”. Local memory tools store durable preferences, search
+past captions and URLs, and forget matching records. Forget closes the active
+voice session so its context cannot reintroduce removed information. External
+files, old Pi sessions and backups are not erased or loaded into new Live sessions.
 
-- “What are you?”
-- “Show me this machine's specs with fastfetch.”
-- “Write a digital clock plugin in Neovim.”
-- “Change the theme to Tokyo Night.”
-- “Open the last URL.”
-- “Remember that I prefer tiled windows.”
-- “What do you remember about this project?”
-- “Forget my preference about tiled windows.”
-- “What am I holding?” (with a connected camera)
-- “Thanks. Bye!”
+## Credentials and configuration
 
-Speech is submitted after approximately **five seconds of silence**, with a
-90-second limit per turn. Voice detection adapts to local noise, preserves up to
-one second of pre-roll, and hands capture to the conversation without restarting
-the recorder. Speak during a reply or task to interrupt it. Completed actions
-are not rolled back.
+Keys are read from the O.M.A. desktop keyring, then gopass
+`projects/oma/openai/api-key`, then `OPENAI_API_KEY`, then gopass
+`personal/openai/api-key`. Saving in Settings writes only to the desktop keyring
+over stdin. Stored secrets are never returned to QML or written to SQLite.
 
-Both transcript areas show five complete lines in 14px text. Longer text scrolls
-by whole lines; use the mouse wheel to review it. Assistant text appears with a
-retro typewriter animation. Transcription is a guide to what was heard, not a
-guarantee of the audio model's exact interpretation.
+The standard configuration uses `gpt-live-1`, voice `cedar`, and a
+`gpt-6-luna` Responses backend with reasoning effort `low`. Advanced worker environment overrides are
+`OMA_LIVE_VOICE` and `OMA_BACKEND_MODEL`. Existing Pi settings/authentication are
+unchanged and are no longer required by the default worker.
 
-Escape, the bar icon, or a spoken farewell closes the panel. Idle time triggers
-one spoken prompt after 15 seconds, then a farewell after another 20 idle seconds.
-Closure waits for the final speech to finish. Returning from Settings stays silent.
-
-### Voice wake and recording
-
-```sh
-./scripts/setup-wake
-```
-
-Enable **VOICE WAKE** in Settings, then say “Hey O.M.A.”
-The current local wake detector uses **Vosk's Japanese model** and is tuned to
-Japanese pronunciations of the phrase. Wake recognition across other accents is
-not yet validated; F8 and the bar icon work independently of it.
-
-Wake audio stays local. Conversation audio is sent to OpenAI after speech starts.
-Screen recorders and other apps can share microphone capture with O.M.A.
-Mute and session lock still pause listening. The private PipeWire WebRTC echo
-canceller suppresses O.M.A.'s own playback without changing default devices.
-Echo cancellation and speech detection depend on room acoustics and microphone placement.
-
-## Desktop access and privacy
-
-Codex runs with **full desktop access**. Routine requested file edits, commands,
-app launches, and settings changes do not require extra approval. The bundled
-skill instructs the agent to request confirmation before destructive actions,
-purchases, publishing, or external messages. This is an agent-level policy,
-**not an operating-system sandbox**. Approvals can be answered with the buttons
-or supported English/Japanese yes/no phrases; unclear answers remain pending.
-
-Visual desktop operations send screenshots to OpenAI. Requested camera snapshots
-also send images to OpenAI and release the camera afterward. Images may remain
-in local Codex session history. Review what is visible before asking for these actions.
-
-Ordinary app and image windows are tiled by default. The agent should inspect and
-verify its actions and must not treat external page or image content as instructions.
-
-Private data lives in `${XDG_DATA_HOME:-~/.local/share}/oma/`:
-
-- `memory.sqlite`: conversation text, facts, summaries, action references, and task checkpoints.
-- `codex/`: dedicated Codex authentication and session history.
-- Optional wake-model files and Python environment.
-- A temporary restart-context file when a restart is prepared.
-
-Raw microphone audio is not saved by O.M.A. Local text history persists until
-forgotten or removed. Older conversation context is summarized to bound API usage.
-Forgetting does not undo external file changes or remove operating-system backups.
-
-Advanced environment options: `OMA_DATA_DIR`, `OMA_WORKSPACE` (default `~/Projects`),
-and `OPENAI_API_KEY`. Models are currently fixed to `gpt-realtime-2.1`,
-`gpt-4o-transcribe`, `gpt-5.3-codex`, and `gpt-4.1-mini` for summaries.
-
-## Update and remove
-
-```sh
-omarchy plugin update io.github.komagata.oma
-```
-
-If you use mouse control, rerun `scripts/build-pointer` in the installed plugin
-after updates that change its native source.
-
-```sh
-omarchy plugin remove io.github.komagata.oma
-```
-
-Remove the F8 binding you added and reload Hyprland. Removal leaves conversation
-data, downloaded wake dependencies, and credential-store entries intact. To erase private
-history, stop O.M.A. and remove its data directory. Its Codex store is separate
-from your normal Codex configuration.
+The local provider uses an isolated Pi configuration and sessions under
+`~/.local/share/oma/local/`, with Ollama listening only on `127.0.0.1:11435`.
+The selected engine, microphone, language and durable memory survive switching.
+Kokoro supports Japanese, English, Chinese, Spanish, French, Hindi, Italian and
+Portuguese; other installed eSpeak languages use eSpeak. Unsupported languages
+report an error. See [local voice](docs/LOCAL-VOICE.md) for implementation and
+verification details. The former configurable pipeline remains available for
+development via `OMA_VOICE_PROVIDER=pipeline`.
 
 ## Development
 
-```sh
-npm ci --ignore-scripts
-./tests/run
-./demo/run
-```
+`npm ci` installs development dependencies; `./tests/run` runs offline tests.
+`node tests/live_gpt.mjs` is an opt-in, billable synthetic Japanese voice and
+memory-tool smoke test. It uses isolated fictional memory and no microphone or
+PC action. `node tests/live_local.mjs` exercises the local model, TTS, STT and
+real speaker output with isolated memory and no microphone recording.
+`scripts/install-local` installs a production dependency set and
+reloads only the plugin; Git-managed installs use the plugin update workflow.
 
-For a separate development checkout, `./scripts/install-local` remains available
-for a non-Git-managed local installation. It refuses to overwrite a Git-managed
-plugin; use the standard update command for those installations.
+See [design](docs/DESIGN.md), [architecture decisions](docs/adr/README.md), and [verification](docs/VERIFICATION.md).
 
-The suite includes manifest validation, Node tests, shell syntax checks, and
-Qt tests when the required Qt/graphics tooling is available. GitHub Actions runs
-the portable checks. See [verification](docs/VERIFICATION.md) for scope and limits.
+## Remove
 
-`demo/run` opens a fictional conversation without API usage or real memory.
-For an isolated visual preview:
+Run `omarchy plugin remove io.github.komagata.oma`. Local memories remain in `~/.local/share/oma`.
 
-```sh
-mkdir -p artifacts
-QT_QPA_PLATFORM=offscreen QT_QPA_PLATFORMTHEME=basic QT_QUICK_BACKEND=rhi \
-  QSG_RHI_BACKEND=opengl QT_QUICK_CONTROLS_STYLE=Basic \
-  /usr/lib/qt6/bin/qml demo/Preview.qml -- --capture
-```
+### Read conversation transcripts
 
-Opt-in live checks in `tests/live*.mjs` make billed API calls with fictional data.
-The bundled [OMA Skill](skills/oma/SKILL.md) and [camera skill](skills/oma-camera/SKILL.md)
-are automatically included for every O.M.A. user, in both voice and executor instructions.
+Setup installs the `oma` command in `~/.local/bin` (keep that directory on PATH).
+For an existing installation, run `scripts/install-cli` from the plugin directory.
 
-The editable Blender source is `models/oma-face.blend`. Blender is optional:
+- `oma transcript` opens the current or most recent conversation as plain text.
+- `oma transcript --today` opens today's conversations, using the local timezone.
+- `oma transcript --follow` watches live captions in the terminal; Ctrl+C exits.
 
-```sh
-blender --background --python scripts/build_face_blender.py
-```
+Opening uses `xdg-open` and your configured default text application. No specific
+editor is required. Each entry includes a timestamp and `YOU` or `O.M.A.` label.
+Partial captions update as recognition/generation proceeds, including cached
+opening greetings. They are captions, not a word-exact record of what reached
+the speaker when interrupted. Static exports do not update inside the editor;
+run the command again or use `--follow` for live updates.
 
-The portrait uses jaw/lip shape keys and procedural head movement. Lip motion is
-amplitude/spectrum-driven rather than phoneme-aligned, and the model is intended
-for subtle frontal motion. See [architecture](docs/DESIGN.md) and the
-[demo guide](docs/DEMO-SCRIPT.md).
+Transcript tables share the private memory database. Exports are private files
+under `~/.local/share/oma/transcripts/` (or the configured data directory).
+Forgetting matching memories also deletes matching transcript rows and removes
+the generated exports. Copies you save elsewhere are independent. Old history
+predating transcript sessions has no exact conversation boundaries; `--today`
+includes that day's earlier saved messages, while new sessions have explicit
+boundaries. Without any new sessions yet, the command shows saved history.
 
-## Support and license
+### Mini mode
 
-Report reproducible bugs through [GitHub Issues](https://github.com/komagata/oma/issues).
-For sensitive reports, see [SECURITY.md](SECURITY.md). Do not attach API keys,
-private conversations, camera images, or unredacted desktop captures to public issues.
+Say “Switch to mini mode” (「ミニモードにして」) to keep only the animated face
+in a small window. Say “Return to normal mode” (「ノーマルモードにもどして」)
+or double-click the face to toggle between mini and normal modes. Audio and the current conversation continue uninterrupted;
+approvals, questions and errors temporarily use the full interface. Presentation
+mode lasts until the plugin reloads and does not change the saved transcript.
 
-Code: MIT © 2026 komagata. The startup/closing sound is adapted from OtoLogic
-under **CC BY 4.0**; see [asset credits](assets/NOTICE.md). Third-party dependencies
-retain their own licenses.
+### Alongside an application
+
+When asked to open an application, the OMA Skill identifies its window and calls
+`accompany_window`. O.M.A. joins a narrow tile on its right without switching
+normal/mini mode. Closing that specific window restores the saved floating
+position, size and mode; changing focus does not. “Come back” (「こっちに戻って」)
+uses `restore_floating` without closing the application. Idle dismissal pauses
+while accompanying an application. The current implementation uses Hyprland's
+dwindle layout and regular, non-fullscreen application windows.

@@ -1,0 +1,32 @@
+{
+  "ja": {
+    "new": "OmaTextで空の新規ファイルを開いてください。",
+    "write": "OmaTextで空の新規ファイルを開いて、次の文章を書いてください。こんにちは、今日の天気は雨です。こんにちはと今日の間は全角スペース一つだけで区切って、句読点は文章の最後の丸だけにしてください。",
+    "close": "今開いたOmaTextのファイルを閉じてください。",
+    "discard": "保存しないで閉じてください。テストなので、その文章は破棄して大丈夫です。",
+    "bye": "バイバイ。",
+    "mini": "ミニモードにして。",
+    "normal": "ノーマルモードに戻して。",
+    "question": "一足す一の答えだけ教えてください。",
+    "logs": "過去ログを見せて。",
+    "close_logs": "今開いた過去ログのウィンドウを閉じて。",
+    "quoted_bye": "バイバイという言葉を英語に訳してください。会話はまだ続けます。",
+    "long_reply": "一から三十まで、ゆっくり数えてください。",
+    "interrupt": "数えるのをやめて、二足す二の答えだけ教えてください。"
+  },
+  "en": {
+    "new": "Open a new blank document in OmaText.",
+    "write": "Open a new blank document in OmaText and type exactly: Hello. It is raining today. Put a period after Hello, then one space. End the sentence with a period. Start Hello with a capital H and It with a capital I.",
+    "close": "Close the OmaText document you just opened.",
+    "discard": "Close it without saving. This is a test, so discard the text.",
+    "bye": "Goodbye.",
+    "mini": "Switch to mini mode.",
+    "normal": "Switch back to normal mode.",
+    "question": "What is one plus one? Just the answer, please.",
+    "logs": "Show me our conversation history.",
+    "close_logs": "Close the conversation history window you just opened.",
+    "quoted_bye": "Translate the word goodbye into Japanese. Do not end our conversation.",
+    "long_reply": "Count slowly from one to thirty.",
+    "interrupt": "Stop counting. What is two plus two? Just the answer, please."
+  }
+}

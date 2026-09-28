@@ -1,0 +1,1721 @@
+[
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "blank",
+    "status": "passed",
+    "setup_seconds": 3.666500838997308,
+    "passed": true,
+    "total_seconds": 21.482748624985106,
+    "seconds": 17.81624885898782
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "dictation",
+    "status": "failed",
+    "setup_seconds": 3.7529147129971534,
+    "passed": false,
+    "error": "Document differs: ''",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 16.10712346000946,
+    "seconds": 12.354209812008776
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "lines",
+    "status": "passed",
+    "setup_seconds": 3.66799064798397,
+    "passed": true,
+    "total_seconds": 18.765874467004323,
+    "seconds": 15.097884479007917
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "punctuation",
+    "status": "failed",
+    "setup_seconds": 3.720564685005229,
+    "passed": false,
+    "error": "Document differs: ''",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 15.789539114019135,
+    "seconds": 12.068974855006672
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "close",
+    "status": "passed",
+    "setup_seconds": 4.441786299983505,
+    "passed": true,
+    "total_seconds": 10.087548865005374,
+    "seconds": 5.645763090025866
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "discard",
+    "status": "passed",
+    "setup_seconds": 4.790612920012791,
+    "passed": true,
+    "total_seconds": 42.789738818013575,
+    "seconds": 37.99912647699239
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "cancel-close",
+    "status": "passed",
+    "setup_seconds": 4.5679035740031395,
+    "passed": true,
+    "total_seconds": 15.4794424349966,
+    "seconds": 10.911539485998219
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "mini",
+    "status": "passed",
+    "setup_seconds": 3.8597292180056684,
+    "passed": true,
+    "total_seconds": 6.903667896986008,
+    "seconds": 3.0439394299755804
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "normal",
+    "status": "passed",
+    "setup_seconds": 3.909227980999276,
+    "passed": true,
+    "total_seconds": 6.9063617319916375,
+    "seconds": 2.997134216973791
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "quoted-goodbye",
+    "status": "passed",
+    "setup_seconds": 3.6478927680000197,
+    "passed": true,
+    "total_seconds": 7.173513857007492,
+    "seconds": 3.5256216090056114
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "math",
+    "status": "passed",
+    "setup_seconds": 3.7185557479970157,
+    "passed": true,
+    "total_seconds": 6.167890383017948,
+    "seconds": 2.4493351120036095
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "remember",
+    "status": "passed",
+    "setup_seconds": 3.722407325025415,
+    "passed": true,
+    "total_seconds": 7.583853498013923,
+    "seconds": 3.861446867987979
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "recall",
+    "status": "passed",
+    "setup_seconds": 3.685638168011792,
+    "passed": true,
+    "total_seconds": 8.85043930899701,
+    "seconds": 5.16480161700747
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "forget",
+    "status": "passed",
+    "setup_seconds": 3.766572756023379,
+    "passed": true,
+    "total_seconds": 7.8651198240113445,
+    "seconds": 4.098547720001079
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "write-file",
+    "status": "passed",
+    "setup_seconds": 3.753353456995683,
+    "passed": true,
+    "total_seconds": 7.851919412001735,
+    "seconds": 4.098566568980459
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "append-file",
+    "status": "passed",
+    "setup_seconds": 3.8112916919926647,
+    "passed": true,
+    "total_seconds": 8.747724117012694,
+    "seconds": 4.936433171009412
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "replace-file",
+    "status": "passed",
+    "setup_seconds": 3.718401973019354,
+    "passed": true,
+    "total_seconds": 11.956498904997716,
+    "seconds": 8.238097490975633
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "rename-file",
+    "status": "passed",
+    "setup_seconds": 3.6963656889856793,
+    "passed": true,
+    "total_seconds": 10.610199530987302,
+    "seconds": 6.9138343180238735
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "read-file",
+    "status": "passed",
+    "setup_seconds": 3.8482116399973165,
+    "passed": true,
+    "total_seconds": 6.632975412008818,
+    "seconds": 2.7847642750130035
+  },
+  {
+    "language": "ja",
+    "repeat": 0,
+    "id": "goodbye",
+    "status": "passed",
+    "setup_seconds": 3.7411968469968997,
+    "passed": true,
+    "total_seconds": 10.688225889985915,
+    "seconds": 6.9470298619999085
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "blank",
+    "status": "passed",
+    "setup_seconds": 3.7534490160178393,
+    "passed": true,
+    "total_seconds": 10.63638465400436,
+    "seconds": 6.882936552981846
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "dictation",
+    "status": "passed",
+    "setup_seconds": 3.781101953005418,
+    "passed": true,
+    "total_seconds": 12.46027694400982,
+    "seconds": 8.679175805009436
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "lines",
+    "status": "passed",
+    "setup_seconds": 3.901361931988504,
+    "passed": true,
+    "total_seconds": 20.028779746004147,
+    "seconds": 16.127418398013106
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "punctuation",
+    "status": "passed",
+    "setup_seconds": 3.892434677021811,
+    "passed": true,
+    "total_seconds": 12.335915494011715,
+    "seconds": 8.4434815949935
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "close",
+    "status": "passed",
+    "setup_seconds": 4.668103798991069,
+    "passed": true,
+    "total_seconds": 9.49335315398639,
+    "seconds": 4.825250899011735
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "discard",
+    "status": "failed",
+    "setup_seconds": 4.804790802008938,
+    "passed": false,
+    "error": "['This operation was aborted']",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 156.06074542799615,
+    "seconds": 151.25595548099955
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "cancel-close",
+    "status": "passed",
+    "setup_seconds": 5.722536972985836,
+    "passed": true,
+    "total_seconds": 16.64975069698994,
+    "seconds": 10.927214616996935
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "mini",
+    "status": "passed",
+    "setup_seconds": 3.8081862319959328,
+    "passed": true,
+    "total_seconds": 6.802077272994211,
+    "seconds": 2.993891727994196
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "normal",
+    "status": "passed",
+    "setup_seconds": 3.834312263992615,
+    "passed": true,
+    "total_seconds": 6.916317891009385,
+    "seconds": 3.082006059004925
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "quoted-goodbye",
+    "status": "passed",
+    "setup_seconds": 3.801447328994982,
+    "passed": true,
+    "total_seconds": 6.720393750001676,
+    "seconds": 2.9189473559963517
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "math",
+    "status": "passed",
+    "setup_seconds": 3.6672191329998896,
+    "passed": true,
+    "total_seconds": 5.925774433999322,
+    "seconds": 2.2585560610168613
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "remember",
+    "status": "passed",
+    "setup_seconds": 3.8181606929865666,
+    "passed": true,
+    "total_seconds": 8.37889073198312,
+    "seconds": 4.560730591008905
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "recall",
+    "status": "passed",
+    "setup_seconds": 3.7417746580031235,
+    "passed": true,
+    "total_seconds": 9.242526935006026,
+    "seconds": 5.500753119995352
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "forget",
+    "status": "passed",
+    "setup_seconds": 3.700158088991884,
+    "passed": true,
+    "total_seconds": 9.800683278997894,
+    "seconds": 6.100525798014132
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "write-file",
+    "status": "passed",
+    "setup_seconds": 3.6900949720002245,
+    "passed": true,
+    "total_seconds": 7.886932211986277,
+    "seconds": 4.1968382789928
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "append-file",
+    "status": "passed",
+    "setup_seconds": 3.82773307300522,
+    "passed": true,
+    "total_seconds": 12.0957532839966,
+    "seconds": 8.268020747986156
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "replace-file",
+    "status": "passed",
+    "setup_seconds": 3.708523826993769,
+    "passed": true,
+    "total_seconds": 11.167425006016856,
+    "seconds": 7.458901908015832
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "rename-file",
+    "status": "passed",
+    "setup_seconds": 3.8145479319791775,
+    "passed": true,
+    "total_seconds": 11.300656893989071,
+    "seconds": 7.486109576013405
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "read-file",
+    "status": "passed",
+    "setup_seconds": 3.772662909992505,
+    "passed": true,
+    "total_seconds": 6.649497631995473,
+    "seconds": 2.876835862000007
+  },
+  {
+    "language": "ja",
+    "repeat": 1,
+    "id": "goodbye",
+    "status": "failed",
+    "setup_seconds": 3.8129360190068837,
+    "passed": false,
+    "error": "",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 5.930245631025173,
+    "seconds": 2.1173101250024047
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "blank",
+    "status": "passed",
+    "setup_seconds": 3.765170950005995,
+    "passed": true,
+    "total_seconds": 11.06666491299984,
+    "seconds": 7.301494947983883
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "dictation",
+    "status": "passed",
+    "setup_seconds": 3.695919824007433,
+    "passed": true,
+    "total_seconds": 12.364988272020128,
+    "seconds": 8.6690689669922
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "lines",
+    "status": "passed",
+    "setup_seconds": 3.890529450000031,
+    "passed": true,
+    "total_seconds": 12.724497260991484,
+    "seconds": 8.833968488994287
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "punctuation",
+    "status": "passed",
+    "setup_seconds": 3.9796236590191256,
+    "passed": true,
+    "total_seconds": 19.568784814007813,
+    "seconds": 15.5891616519948
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "close",
+    "status": "passed",
+    "setup_seconds": 4.565020786016248,
+    "passed": true,
+    "total_seconds": 9.393018611008301,
+    "seconds": 4.827998230990488
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "discard",
+    "status": "passed",
+    "setup_seconds": 4.740948004997335,
+    "passed": true,
+    "total_seconds": 22.782741786999395,
+    "seconds": 18.04179442700115
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "cancel-close",
+    "status": "passed",
+    "setup_seconds": 4.788275828002952,
+    "passed": true,
+    "total_seconds": 16.332916966988705,
+    "seconds": 11.54464152600849
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "mini",
+    "status": "passed",
+    "setup_seconds": 3.9454834839852992,
+    "passed": true,
+    "total_seconds": 7.048891662998358,
+    "seconds": 3.1034089970053174
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "normal",
+    "status": "passed",
+    "setup_seconds": 3.98123756799032,
+    "passed": true,
+    "total_seconds": 7.076115116011351,
+    "seconds": 3.094878112024162
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "quoted-goodbye",
+    "status": "passed",
+    "setup_seconds": 3.9119211880024523,
+    "passed": true,
+    "total_seconds": 6.912388328986708,
+    "seconds": 3.000467726000352
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "math",
+    "status": "passed",
+    "setup_seconds": 3.653068109997548,
+    "passed": true,
+    "total_seconds": 6.4775797729962505,
+    "seconds": 2.824512263003271
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "remember",
+    "status": "passed",
+    "setup_seconds": 3.7235488719888963,
+    "passed": true,
+    "total_seconds": 7.634576287993696,
+    "seconds": 3.9110279960150365
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "recall",
+    "status": "failed",
+    "setup_seconds": 3.577054331981344,
+    "passed": false,
+    "error": "['Agent operation timed out']",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 154.40997859300114,
+    "seconds": 150.83292495200294
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "forget",
+    "status": "passed",
+    "setup_seconds": 3.737590585020371,
+    "passed": true,
+    "total_seconds": 9.474501145014074,
+    "seconds": 5.736911403975682
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "write-file",
+    "status": "passed",
+    "setup_seconds": 3.7338344099989627,
+    "passed": true,
+    "total_seconds": 7.957055412989575,
+    "seconds": 4.223221652995562
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "append-file",
+    "status": "passed",
+    "setup_seconds": 3.822703788988292,
+    "passed": true,
+    "total_seconds": 13.136661197990179,
+    "seconds": 9.313958289014408
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "replace-file",
+    "status": "passed",
+    "setup_seconds": 3.8452481190033723,
+    "passed": true,
+    "total_seconds": 11.9846890399931,
+    "seconds": 8.139441703009652
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "rename-file",
+    "status": "failed",
+    "setup_seconds": 3.788351736991899,
+    "passed": false,
+    "error": "",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 11.861601060983958,
+    "seconds": 8.07324983298895
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "read-file",
+    "status": "passed",
+    "setup_seconds": 3.7960825729824137,
+    "passed": true,
+    "total_seconds": 6.814353711990407,
+    "seconds": 3.0182719150034245
+  },
+  {
+    "language": "ja",
+    "repeat": 2,
+    "id": "goodbye",
+    "status": "passed",
+    "setup_seconds": 3.7878500469960272,
+    "passed": true,
+    "total_seconds": 8.004709071014076,
+    "seconds": 4.216859491018113
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "blank",
+    "status": "passed",
+    "setup_seconds": 3.813544586999342,
+    "passed": true,
+    "total_seconds": 10.580129490001127,
+    "seconds": 6.766585725010373
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "dictation",
+    "status": "passed",
+    "setup_seconds": 3.718883663008455,
+    "passed": true,
+    "total_seconds": 12.433474920020672,
+    "seconds": 8.714591764990473
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "lines",
+    "status": "failed",
+    "setup_seconds": 3.8144591150048655,
+    "passed": false,
+    "error": "Document differs: ''",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 29.314918647985905,
+    "seconds": 25.500460433977423
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "punctuation",
+    "status": "passed",
+    "setup_seconds": 3.7923170930007473,
+    "passed": true,
+    "total_seconds": 23.93653813097626,
+    "seconds": 20.144221825990826
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "close",
+    "status": "passed",
+    "setup_seconds": 4.514705890993355,
+    "passed": true,
+    "total_seconds": 9.802348785015056,
+    "seconds": 5.287643351010047
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "discard",
+    "status": "passed",
+    "setup_seconds": 4.740283181978157,
+    "passed": true,
+    "total_seconds": 25.464897939993534,
+    "seconds": 20.724615242012078
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "cancel-close",
+    "status": "passed",
+    "setup_seconds": 4.706384744000388,
+    "passed": true,
+    "total_seconds": 15.847456804011017,
+    "seconds": 11.141072508005891
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "mini",
+    "status": "passed",
+    "setup_seconds": 3.8895652110222727,
+    "passed": true,
+    "total_seconds": 7.0743489570159,
+    "seconds": 3.184784282988403
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "normal",
+    "status": "passed",
+    "setup_seconds": 3.992388781014597,
+    "passed": true,
+    "total_seconds": 7.218785589007894,
+    "seconds": 3.226397241000086
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "quoted-goodbye",
+    "status": "passed",
+    "setup_seconds": 3.8196732420183253,
+    "passed": true,
+    "total_seconds": 7.156080528016901,
+    "seconds": 3.3364078640006483
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "math",
+    "status": "passed",
+    "setup_seconds": 3.6784062889928464,
+    "passed": true,
+    "total_seconds": 6.224592169979587,
+    "seconds": 2.5461863570089918
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "remember",
+    "status": "passed",
+    "setup_seconds": 3.7153883590071928,
+    "passed": true,
+    "total_seconds": 7.570152760017663,
+    "seconds": 3.8547649859974626
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "recall",
+    "status": "passed",
+    "setup_seconds": 3.6871208399825264,
+    "passed": true,
+    "total_seconds": 7.855644470982952,
+    "seconds": 4.168524122011149
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "forget",
+    "status": "passed",
+    "setup_seconds": 3.8781189319852274,
+    "passed": true,
+    "total_seconds": 8.624737543985248,
+    "seconds": 4.746619092009496
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "write-file",
+    "status": "passed",
+    "setup_seconds": 3.8526359709794633,
+    "passed": true,
+    "total_seconds": 7.30318083599559,
+    "seconds": 3.450545673025772
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "append-file",
+    "status": "passed",
+    "setup_seconds": 3.7235341359919403,
+    "passed": true,
+    "total_seconds": 7.1217209979949985,
+    "seconds": 3.3981874299934134
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "replace-file",
+    "status": "passed",
+    "setup_seconds": 3.7316118699964136,
+    "passed": true,
+    "total_seconds": 9.382044969999697,
+    "seconds": 5.650434123002924
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "rename-file",
+    "status": "passed",
+    "setup_seconds": 3.803874581004493,
+    "passed": true,
+    "total_seconds": 11.059778091002954,
+    "seconds": 7.2559039240004495
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "read-file",
+    "status": "passed",
+    "setup_seconds": 3.870877595996717,
+    "passed": true,
+    "total_seconds": 6.854801922017941,
+    "seconds": 2.9839249820215628
+  },
+  {
+    "language": "ja",
+    "repeat": 3,
+    "id": "goodbye",
+    "status": "failed",
+    "setup_seconds": 3.7668114300176967,
+    "passed": false,
+    "error": "",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 5.874603976000799,
+    "seconds": 2.1077931670006365
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "blank",
+    "status": "passed",
+    "setup_seconds": 3.749353961989982,
+    "passed": true,
+    "total_seconds": 10.715909205988282,
+    "seconds": 6.966555786988465
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "dictation",
+    "status": "failed",
+    "setup_seconds": 3.788434635993326,
+    "passed": false,
+    "error": "Document differs: ''",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 12.284975044982275,
+    "seconds": 8.496540963998996
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "lines",
+    "status": "passed",
+    "setup_seconds": 3.749393327976577,
+    "passed": true,
+    "total_seconds": 25.145693651982583,
+    "seconds": 21.396300858003087
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "punctuation",
+    "status": "passed",
+    "setup_seconds": 3.8372566030011512,
+    "passed": true,
+    "total_seconds": 12.360689907014603,
+    "seconds": 8.523433777998434
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "close",
+    "status": "passed",
+    "setup_seconds": 4.5307973779854365,
+    "passed": true,
+    "total_seconds": 10.18904977600323,
+    "seconds": 5.658252863009693
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "discard",
+    "status": "passed",
+    "setup_seconds": 4.770658350986196,
+    "passed": true,
+    "total_seconds": 22.830945144989528,
+    "seconds": 18.060287708009128
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "cancel-close",
+    "status": "passed",
+    "setup_seconds": 4.9305154779867735,
+    "passed": true,
+    "total_seconds": 16.062831335992087,
+    "seconds": 11.132316511007957
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "mini",
+    "status": "passed",
+    "setup_seconds": 3.861481410014676,
+    "passed": true,
+    "total_seconds": 6.879263416019967,
+    "seconds": 3.0177824219863396
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "normal",
+    "status": "passed",
+    "setup_seconds": 3.9158779949939344,
+    "passed": true,
+    "total_seconds": 7.014962508983444,
+    "seconds": 3.0990852329996414
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "quoted-goodbye",
+    "status": "passed",
+    "setup_seconds": 3.7384546310058795,
+    "passed": true,
+    "total_seconds": 6.681270361994393,
+    "seconds": 2.9428161719988566
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "math",
+    "status": "failed",
+    "setup_seconds": 3.827330787986284,
+    "passed": false,
+    "error": "'一足す一の答えは 2 です。'",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 5.988757484999951,
+    "seconds": 2.161427515995456
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "remember",
+    "status": "passed",
+    "setup_seconds": 3.7431593450019136,
+    "passed": true,
+    "total_seconds": 7.687742221984081,
+    "seconds": 3.944583848991897
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "recall",
+    "status": "passed",
+    "setup_seconds": 3.737732623994816,
+    "passed": true,
+    "total_seconds": 7.934481244999915,
+    "seconds": 4.196749111986719
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "forget",
+    "status": "passed",
+    "setup_seconds": 3.800992253993172,
+    "passed": true,
+    "total_seconds": 8.711869413993554,
+    "seconds": 4.910877667018212
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "write-file",
+    "status": "passed",
+    "setup_seconds": 3.71349918100168,
+    "passed": true,
+    "total_seconds": 7.9932749700092245,
+    "seconds": 4.27977630298119
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "append-file",
+    "status": "passed",
+    "setup_seconds": 3.873112247994868,
+    "passed": true,
+    "total_seconds": 12.15674924699124,
+    "seconds": 8.28363767202245
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "replace-file",
+    "status": "passed",
+    "setup_seconds": 3.7127922759973444,
+    "passed": true,
+    "total_seconds": 10.527991969982395,
+    "seconds": 6.815200549986912
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "rename-file",
+    "status": "passed",
+    "setup_seconds": 3.7493376090133097,
+    "passed": true,
+    "total_seconds": 10.870666600996628,
+    "seconds": 7.121329418994719
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "read-file",
+    "status": "passed",
+    "setup_seconds": 3.7023371429822873,
+    "passed": true,
+    "total_seconds": 6.689511934993789,
+    "seconds": 2.9871753780171275
+  },
+  {
+    "language": "ja",
+    "repeat": 4,
+    "id": "goodbye",
+    "status": "failed",
+    "setup_seconds": 3.6708319120225497,
+    "passed": false,
+    "error": "",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 5.8851394960074686,
+    "seconds": 2.214308029972017
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "blank",
+    "status": "passed",
+    "setup_seconds": 3.7589245490089525,
+    "passed": true,
+    "total_seconds": 14.698956940992502,
+    "seconds": 10.94003322799108
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "dictation",
+    "status": "passed",
+    "setup_seconds": 3.720048677001614,
+    "passed": true,
+    "total_seconds": 12.023676818993408,
+    "seconds": 8.303628881985787
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "lines",
+    "status": "passed",
+    "setup_seconds": 3.779041103000054,
+    "passed": true,
+    "total_seconds": 13.040711726993322,
+    "seconds": 9.261671168991597
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "punctuation",
+    "status": "passed",
+    "setup_seconds": 3.83428480400471,
+    "passed": true,
+    "total_seconds": 18.50288471300155,
+    "seconds": 14.668600425007753
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "close",
+    "status": "passed",
+    "setup_seconds": 4.553926519001834,
+    "passed": true,
+    "total_seconds": 9.3739282739989,
+    "seconds": 4.820002338004997
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "discard",
+    "status": "failed",
+    "setup_seconds": 4.715354168001795,
+    "passed": false,
+    "error": "['The follow-up requires a save/discard/cancel choice, but the assistant entered binary approval mode']",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 13.470585156988818,
+    "seconds": 8.75523143899045
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "cancel-close",
+    "status": "passed",
+    "setup_seconds": 5.794486702012364,
+    "passed": true,
+    "total_seconds": 16.522562783997273,
+    "seconds": 10.728076656989288
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "mini",
+    "status": "passed",
+    "setup_seconds": 3.87965036300011,
+    "passed": true,
+    "total_seconds": 7.706171511003049,
+    "seconds": 3.8265216950094327
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "normal",
+    "status": "passed",
+    "setup_seconds": 3.8874309590028133,
+    "passed": true,
+    "total_seconds": 7.123386960010976,
+    "seconds": 3.2359565170190763
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "quoted-goodbye",
+    "status": "passed",
+    "setup_seconds": 3.763888453016989,
+    "passed": true,
+    "total_seconds": 8.613755390018923,
+    "seconds": 4.8498678549949545
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "math",
+    "status": "passed",
+    "setup_seconds": 3.76451633500983,
+    "passed": true,
+    "total_seconds": 5.897282511985395,
+    "seconds": 2.1327666099823546
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "remember",
+    "status": "passed",
+    "setup_seconds": 3.782297391007887,
+    "passed": true,
+    "total_seconds": 7.187922418990638,
+    "seconds": 3.405625508981757
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "recall",
+    "status": "passed",
+    "setup_seconds": 3.8246921800018754,
+    "passed": true,
+    "total_seconds": 6.843150724016596,
+    "seconds": 3.0184591120050754
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "forget",
+    "status": "passed",
+    "setup_seconds": 3.6352644310100004,
+    "passed": true,
+    "total_seconds": 10.388596116012195,
+    "seconds": 6.7533325769763906
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "write-file",
+    "status": "passed",
+    "setup_seconds": 3.7318703370110597,
+    "passed": true,
+    "total_seconds": 9.183575669012498,
+    "seconds": 5.451705780986231
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "append-file",
+    "status": "failed",
+    "setup_seconds": 3.655852033989504,
+    "passed": false,
+    "error": "File differs: 'Seed.'",
+    "critical_error": false,
+    "critical_kind": null,
+    "total_seconds": 6.944082675006939,
+    "seconds": 3.288231138023548
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "replace-file",
+    "status": "passed",
+    "setup_seconds": 3.874022979027359,
+    "passed": true,
+    "total_seconds": 12.321947157004615,
+    "seconds": 8.447924821986817
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "rename-file",
+    "status": "passed",
+    "setup_seconds": 3.605720803985605,
+    "passed": true,
+    "total_seconds": 9.601976965990616,
+    "seconds": 5.996256690006703
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "read-file",
+    "status": "passed",
+    "setup_seconds": 3.7282018949917983,
+    "passed": true,
+    "total_seconds": 6.948570849985117,
+    "seconds": 3.220369802991627
+  },
+  {
+    "language": "en",
+    "repeat": 0,
+    "id": "goodbye",
+    "status": "passed",
+    "setup_seconds": 3.751408423006069,
+    "passed": true,
+    "total_seconds": 11.96659608601476,
+    "seconds": 8.215188589005265
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 1,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 2,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 3,
+    "id": "goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "blank",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "dictation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "lines",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "punctuation",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "discard",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "cancel-close",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "mini",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "normal",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "quoted-goodbye",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "math",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "remember",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "recall",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "forget",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "write-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "append-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "replace-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "rename-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "read-file",
+    "status": "not_run"
+  },
+  {
+    "language": "en",
+    "repeat": 4,
+    "id": "goodbye",
+    "status": "not_run"
+  }
+]

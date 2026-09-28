@@ -1,0 +1,35 @@
+{
+  "source_case": "v25/en/dev-discard",
+  "images": [
+    {
+      "file": "frame-0.png",
+      "tool": "desktop_screenshot",
+      "sha256": "82eaa874a6a1062fc887a216142f0e723de26b9659ad1c37c4743b5e4a445ebe"
+    },
+    {
+      "file": "frame-1.png",
+      "tool": "desktop_click",
+      "sha256": "f372a247c4ab8fce3987f0d643a8dd0ececefde3fe43a69e567a463681e80a8b"
+    },
+    {
+      "file": "frame-2.png",
+      "tool": "desktop_click",
+      "sha256": "d70f648c183e9441d9e466e17633fa23519728003bbab1d4f9126e93f7e1cbbb"
+    },
+    {
+      "file": "frame-3.png",
+      "tool": "desktop_screenshot",
+      "sha256": "211d1772783d4c73bd08f61fcd0f2e7b4401f69314322d6a81f289572b40dd40"
+    },
+    {
+      "file": "frame-4.png",
+      "tool": "desktop_click",
+      "sha256": "d1bea4289b531aa3d3ddf882fe6cd6fd071312886e47eb3a4a70fd3f81b6b410"
+    },
+    {
+      "file": "frame-5.png",
+      "tool": "desktop_click",
+      "sha256": "d2813e7ffe02140d2e82b8de8d16033e5ad449983d3a21959ce0b34dade77b05"
+    }
+  ]
+}

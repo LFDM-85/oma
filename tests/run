@@ -4,12 +4,21 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 python3 "$root/scripts/validate_manifest.py" "$root"
 for file in "$root"/runtime/*.mjs; do node --check "$file"; done
 (cd "$root" && npm test)
-bash -n "$root/scripts/install-local" "$root/scripts/setup" "$root/scripts/setup-wake" "$root/scripts/build-pointer" "$root/demo/run"
+python3 "$root/tests/local_speech_test.py"
+python3 "$root/tests/voice_harness_test.py"
+python3 "$root/tests/voice_evaluation_test.py"
+python3 "$root/tests/stt_benchmark_test.py"
+python3 "$root/tests/reading_benchmark_test.py"
+bash -n "$root/scripts/install-local" "$root/scripts/setup" "$root/scripts/setup-local" "$root/scripts/configure-pi" "$root/scripts/setup-wake" "$root/scripts/build-pointer" "$root/demo/run"
 if command -v omarchy >/dev/null 2>&1; then omarchy plugin validate "$root"; fi
 
 if [[ -x /usr/lib/qt6/bin/qmltestrunner ]]; then
   QT_QPA_PLATFORM=offscreen QT_QPA_PLATFORMTHEME=basic QT_QUICK_BACKEND=software \
-    QT_QUICK_CONTROLS_STYLE=Basic /usr/lib/qt6/bin/qmltestrunner -input "$root/tests/qml"
-  QT_QPA_PLATFORM=offscreen QT_QPA_PLATFORMTHEME=basic QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl \
-    QT_QUICK_CONTROLS_STYLE=Basic /usr/lib/qt6/bin/qmltestrunner -input "$root/tests/qml-gpu"
+    QT_QUICK_CONTROLS_STYLE=Basic /usr/lib/qt6/bin/qmltestrunner -import "$root/tests/qml-imports" -input "$root/tests/qml"
+  # Each GPU fixture owns a fresh renderer. Sharing the offscreen renderer
+  # between CRT and Canvas fixtures makes texture readback order-dependent.
+  for fixture in "$root"/tests/qml-gpu/tst_*.qml; do
+    QT_QPA_PLATFORM=offscreen QT_QPA_PLATFORMTHEME=basic QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl \
+      QT_QUICK_CONTROLS_STYLE=Basic /usr/lib/qt6/bin/qmltestrunner -input "$fixture"
+  done
 fi
