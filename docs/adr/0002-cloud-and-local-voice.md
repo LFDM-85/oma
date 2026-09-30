@@ -1,6 +1,6 @@
 # ADR 0002: Support separate cloud and local voice paths
 
-- Status: Accepted
+- Status: Superseded by [0007](0007-gpt-live-only.md)
 - Recorded: 2026-09-28
 
 ## Context
@@ -39,8 +39,8 @@ switching must avoid orphan microphones, playback and billable sessions.
 
 ## Implementation references
 
-- [Provider selection](../../runtime/voice-provider.mjs)
+- [Provider selection](https://github.com/komagata/oma/blob/before-gpt-live-only-2026-09-29/runtime/voice-provider.mjs)
 - [Runtime entry point](../../runtime/main.mjs)
 - [Live session](../../runtime/live-session.mjs)
-- [Pipeline runtime](../../runtime/main-pipeline.mjs)
-- [Local speech worker](../../runtime/local-speech.py)
+- [Pipeline runtime](https://github.com/komagata/oma/blob/before-gpt-live-only-2026-09-29/runtime/main-pipeline.mjs)
+- [Local speech worker](https://github.com/komagata/oma/blob/before-gpt-live-only-2026-09-29/runtime/local-speech.py)

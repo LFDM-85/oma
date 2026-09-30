@@ -1,6 +1,6 @@
 // Opt-in billed smoke test: fictional audio and memory, no microphone or PC actions.
 import OpenAI from 'openai';import {LiveWS} from 'openai/resources/live/ws';
-import {loadApiKey} from '../runtime/credentials.mjs';import {Speech} from '../runtime/speech.mjs';
+import {loadApiKey} from '../runtime/credentials.mjs';import {Speech} from './fixtures/synthetic-speech.mjs';
 import {LiveSession} from '../runtime/live-session.mjs';import {liveConfig} from '../runtime/live-config.mjs';
 import {Memory} from '../runtime/memory.mjs';import {LocalTools} from '../runtime/local-tools.mjs';
 import {mkdtempSync,rmSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';import assert from 'node:assert/strict';

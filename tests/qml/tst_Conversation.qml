@@ -36,7 +36,7 @@ TestCase {
         compare(findChild(conversation,"userCaption").visible,false)
         compare(findChild(conversation,"assistantCaption").visible,false)
         compare(findChild(conversation,"settingsButton").visible,false)
-        compare(findChild(conversation,"backgroundStatus0").visible,false)
+        compare(findChild(conversation,"holoStage").visible,false)
         verify(findChild(conversation,"faceBackground").visible)
         conversation.width=144;conversation.height=184
         wait(1500)
@@ -56,17 +56,24 @@ TestCase {
     function test_shorter_window_preserves_face_size() {
         fixture.viewMode="normal"
         const face=findChild(conversation,"portrait")
+        const caption=findChild(conversation,"assistantCaption"),task=findChild(conversation,"taskStatusText")
+        function faceFits(){
+            const top=face.mapToItem(conversation,0,0).y,bottom=top+face.height
+            verify(top>=caption.mapToItem(conversation,0,caption.height).y,"The face must not cover the captions")
+            verify(bottom<=task.mapToItem(conversation,0,0).y,"The face must not cover the task bar")
+            verify(Math.abs(face.mapToItem(conversation,face.width/2,0).x-conversation.width/2)<=0.5)
+        }
         conversation.height=632
         const original=face.height
         conversation.height=576
         compare(face.height,original)
         compare(face.height,160)
         wait(50)
-        compare(face.mapToItem(conversation,face.width/2,face.height/2).y,conversation.height/2)
-        verify(Math.abs(face.mapToItem(conversation,face.width/2,face.height/2).x-conversation.width/2)<=0.5)
+        faceFits()
         conversation.height=900
         wait(50)
-        compare(face.mapToItem(conversation,face.width/2,face.height/2).y,conversation.height/2)
+        verify(face.height>160,"Taller windows give the hologram more room")
+        faceFits()
         conversation.height=576
         fixture.viewMode="mini"
         compare(face.height,original)
@@ -102,24 +109,6 @@ TestCase {
         wait(2000)
         compare(label.text,"")
     }
-    function test_status_change_keeps_scroll_position() {
-        conversation.opened=false
-        conversation.phase=15
-        conversation.displayStatus="LISTENING"
-        const rows=[0,1,2].map(i=>findChild(conversation,"backgroundStatus"+i))
-        const positions=rows.map(row=>row.x)
-        for(const status of ["THINKING","TALKING","IDLE","LISTENING"]){
-            conversation.displayStatus=status
-            rows.forEach((row,i)=>compare(row.x,positions[i],"Status changes must preserve scroll position"))
-        }
-        conversation.statusScrollX=100
-        conversation.scrollStatus(10.75)
-        rows.forEach((row,i)=>compare(row.x,89.25+i*160))
-        conversation.statusScrollX=-rows[0].width-321
-        conversation.scrollStatus(10.75)
-        rows.forEach((row,i)=>compare(row.x,rows[0].parent.width+i*160))
-        conversation.opened=true
-    }
     function test_speech_start_does_not_move_the_conversation() {
         fixture.state="idle";fixture.userText="";fixture.assistantText="";fixture.taskStatus="";fixture.level=0
         wait(50)
@@ -141,7 +130,7 @@ TestCase {
         const glass=findChild(conversation,"faceBackground")
         verify(glass!==null)
         compare(conversation.layer.enabled,false)
-        for(const name of ["userCaption","assistantCaption","userLabel","backgroundStatus0","assistantWaveform","settingsButton"]) {
+        for(const name of ["userCaption","assistantCaption","userLabel","desktopMap","stateText","assistantWaveform","taskStatusText","settingsButton"]) {
             let item=findChild(conversation,name)
             verify(item!==null)
             while(item){verify(item!==glass,name+" must not be distorted");item=item.parent}
@@ -205,13 +194,35 @@ TestCase {
         fixture.userText=""
         compare(label.visible,true)
     }
-    function test_five_user_lines_are_visible() {
-        fixture.userText = "１行目：今日は画面表示を確認しています。\n２行目：発言の冒頭も残したいです。\n３行目：途中の文章も表示します。\n４行目：この行も切れずに見えます。\n５行目：最後の行まで同時に表示します。"
-        const caption = findChild(conversation, "userCaption")
+    function test_captions_keep_three_line_areas() {
+        const user = findChild(conversation, "userCaption"), assistant = findChild(conversation, "assistantCaption")
+        compare(user.visibleLines, 3)
+        compare(assistant.visibleLines, 3)
+        const before = assistant.mapToItem(conversation, 0, 0).y
+        fixture.userText = "１行目：今日は画面表示を確認しています。\n２行目：発言の冒頭も残したいです。\n３行目：途中の文章も表示します。"
         wait(100)
-        compare(caption.visibleLines, 5)
-        compare(caption.scrollOffset, 0)
-        compare(caption.revealedText, fixture.userText)
-        grabImage(conversation).save("/tmp/oma-five-line-preview.png")
+        compare(user.scrollOffset, 0)
+        compare(user.revealedText, fixture.userText)
+        compare(assistant.mapToItem(conversation, 0, 0).y, before, "A full user caption must not push the reply down")
+        grabImage(conversation).save("/tmp/oma-three-line-preview.png")
+        fixture.userText = ""
+    }
+    function test_desktop_map_and_state_ring_follow_service() {
+        conversation.desktopWorkspace = "2"
+        conversation.desktopWindows = [
+            {x: 0, y: 0, w: .5, h: 1, title: "~/Projects", app: "alacritty", focused: false},
+            {x: .5, y: 0, w: .5, h: 1, title: "GitHub", app: "firefox", focused: true}]
+        const label = findChild(conversation, "desktopContextLabel"), target = findChild(conversation, "desktopTargetLabel")
+        compare(label.text, "DESKTOP CONTEXT · WS 2 · 2 WINDOWS")
+        compare(target.text, "FOCUS ▸ firefox")
+        fixture.taskBusy = true
+        compare(target.text, "TARGET ▸ firefox")
+        verify(findChild(conversation, "targetLink").visible)
+        compare(findChild(conversation, "stateSegmentWORK").color, conversation.accentColor)
+        fixture.taskBusy = false
+        verify(!findChild(conversation, "targetLink").visible)
+        conversation.desktopWindows = []
+        conversation.desktopWorkspace = ""
+        compare(label.text, "DESKTOP CONTEXT · UNAVAILABLE")
     }
 }

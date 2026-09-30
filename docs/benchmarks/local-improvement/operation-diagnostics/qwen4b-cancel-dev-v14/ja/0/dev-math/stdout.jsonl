@@ -1,4 +1,0 @@
-{"event":"state","computerUsing":false}
-{"event":"answer","text":"三足す五（3＋5）の答えは **8** です。","seconds":1.9905863879999997,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":998,"output":76,"cacheRead":11449,"cacheWrite":0,"reasoning":0,"totalTokens":12523,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
-{"event":"result","facts":[]}
-{"event":"state","computerUsing":false}

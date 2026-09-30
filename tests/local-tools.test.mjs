@@ -21,10 +21,8 @@ test('view modes change presentation without ending the conversation',async()=>{
  await assert.rejects(()=>t.call('set_view_mode',{mode:'other'}),/Invalid/);
 });
 
-test('both backends expose the same skill-owned new-document operation',async()=>{
+test('Live exposes the skill-owned new-document operation',async()=>{
  const {localToolDefinitions}=await import('../runtime/local-tools.mjs');
- const {PiAgent}=await import('../runtime/pi.mjs');
  const live=localToolDefinitions.find(t=>t.name==='new_text_document');
- const pi=new PiAgent({home:'/tmp',cwd:'/tmp',memory:{},emit(){}}).tools().find(t=>t.name==='new_text_document');
- assert.ok(live);assert.ok(pi);assert.deepEqual(live.parameters,pi.parameters);
+ assert.ok(live);assert.ok(live.parameters);
 });

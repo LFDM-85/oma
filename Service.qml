@@ -2,6 +2,7 @@ import QtQuick
 import qs.Commons
 import Quickshell
 import Quickshell.Io
+import Quickshell.Hyprland
 
 Item {
     id: root
@@ -11,7 +12,7 @@ Item {
     property bool setupRequired: true
     property string setupMessage: "Checking runtime dependencies…"
     property string setupLaunchError: ""
-    property bool setupBusy: modelTerminal.running || setupTerminal.running
+    property bool setupBusy: setupTerminal.running
     property var responseLanguages: []
     property string responseLanguage: ""
     property string languageError: ""
@@ -27,13 +28,6 @@ Item {
     property bool connectionTestPassed: false
     property string connectionTestError: ""
     function testConnection() { command({action: "testConnection"}) }
-    function modelSetup() { setupLaunchError = ""; modelTerminal.running = true }
-    Process {
-        id: modelTerminal
-        onStarted: if (root.shell) root.shell.hide("io.github.komagata.oma")
-        onExited: (exitCode, exitStatus) => root.setupExited(exitCode)
-        command: ["systemd-run", "--user", "--collect", "--wait", "--service-type=exec", "--property=ExitType=cgroup", "--quiet", "--", "xdg-terminal-exec", "bash", Qt.resolvedUrl("scripts/configure-pi").toString().replace(/^file:\/\//, "")]
-    }
     function setup() { setupLaunchError = ""; setupTerminal.running = true }
     function setupExited(exitCode) {
         if (exitCode !== 0) setupLaunchError = "Setup is incomplete. Open setup again to continue."
@@ -65,6 +59,16 @@ Item {
             }
         } }
     }
+    // O.M.A. is an ordinary floating window. Register its rules at runtime so a
+    // fresh install needs no edits to the user's Hyprland config; a config
+    // reload drops runtime rules, so they are registered again afterwards.
+    readonly property string windowRules: 'hl.window_rule({match={title="^O\\\\.M\\\\.A\\\\.( Mini)?$"},float=true,center=true,opacity="1.0 override 1.0 override"}) ' +
+        'hl.window_rule({match={title="^O\\\\.M\\\\.A\\\\. Mini$"},border_size=0,no_blur=true,no_shadow=true})'
+    Process { id: windowRuleProcess; command: ["hyprctl", "eval", root.windowRules]; running: true }
+    Connections {
+        target: Hyprland
+        function onRawEvent(event) { if (event.name === "configreloaded") { windowRuleProcess.running = false; windowRuleProcess.running = true } }
+    }
     property bool alive: true
     property bool panelOpened: false
     state: "starting"
@@ -77,6 +81,7 @@ Item {
     property bool listeningReady: false
     property bool approvalListening: false
     property var question: null
+    property bool voiceEffectsEnabled: true
     property bool wakeEnabled: false
     property string wakeStatus: "Starting voice wake…"
     property var backendStatus: ({})
@@ -88,11 +93,6 @@ Item {
     readonly property bool miniMode: viewMode === "mini" && !approval && !question && !error
     function setViewMode(mode) { if (mode === "mini" || mode === "normal") viewMode = mode }
     property string voiceProvider: "gpt-live"
-    property bool providerChanging: false
-    property bool localSetupBusy: false
-    property string localSetupMessage: ""
-    function setVoiceProvider(value) { providerChanging = true; command({action: "setVoiceProvider", value: value}) }
-    function localSetup() { command({action: "localSetup"}) }
     property bool modelReady: false
     property bool speechReady: false
     property bool omarchySkillLoaded: false
@@ -116,6 +116,7 @@ Item {
         else { root.error = "O.M.A. is stopped. Click Retry to start it."; root.state = "error" }
     }
     function show(greeting, silent) { if (shell) shell.summon("io.github.komagata.oma", JSON.stringify({greet: greeting !== false, silent: silent === true})) }
+    function setVoiceEffects(enabled) { command({action: "setVoiceEffects", enabled: enabled}) }
     function setWake(enabled) { command({action: "setWake", enabled: enabled}) }
     function saveKey(value) { keySaved = false; keyError = ""; command({action: "saveApiKey", key: value}) }
     function settings() { if (shell) shell.summon("io.github.komagata.oma", JSON.stringify({settings: true, greet: false})) }
@@ -124,6 +125,11 @@ Item {
     function welcome() { command({action: "greet"}) }
     function restoreWelcome() { command({action: "restoreGreet"}) }
     signal dismissRequested()
+    property bool companionVisible: false
+    function companionPanel(active, closing) { command({action: "companionPanel", active: active, closing: closing}) }
+    function companionVisibility(active) { companionVisible = active; command({action: "companionVisibility", active: active}) }
+    function companionOpened(address) { command({action: "autoAccompanyWindow", address: address}) }
+    function companionClosed(address) { command({action: "companionWindowClosed", address: address}) }
     function presentation(active) { command({action: "presentation", active: active}) }
     function press() { if (!keyConfigured) { settings(); return }; show(true); command({action: "press"}) }
     function release() { if (keyConfigured) command({action: "release"}) }
@@ -135,20 +141,21 @@ Item {
         if (!alive || line.length > 65536) return
         try {
             const d = JSON.parse(line)
-            for (const k of ["taskBusy", "backendStatus", "docked", "viewMode", "providerChanging", "localSetupBusy", "localSetupMessage"])
+            for (const k of ["taskBusy", "backendStatus", "docked", "viewMode"])
                 if (d[k] !== undefined) root[k] = d[k]
-            for (const k of ["responseLanguages", "responseLanguage", "languageError", "microphones", "microphoneTarget", "microphoneBusy", "microphoneError", "voiceProvider", "latency", "connectionTesting", "connectionTestPassed", "connectionTestError", "modelReady", "speechReady", "omarchySkillLoaded", "modelProvider", "modelName", "cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
+            for (const k of ["responseLanguages", "responseLanguage", "languageError", "microphones", "microphoneTarget", "microphoneBusy", "microphoneError", "voiceProvider", "latency", "connectionTesting", "connectionTestPassed", "connectionTestError", "modelReady", "speechReady", "omarchySkillLoaded", "modelProvider", "modelName", "cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "voiceEffectsEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
                 if (d[k] !== undefined) root[k] = d[k]
             if (d.dismiss === true) dismissRequested()
-            if (d.wakeDetected === true) show(true, true)
+            if (d.wakeDetected === true) show(true)
             root.revision++
-            if (d.keySaved === true || d.restartWorker === true) { worker.running = false; restartWorker.start() }
+            if (d.keySaved === true) { worker.running = false; restartWorker.start() }
         } catch (e) { root.error = "Invalid response from O.M.A." }
     }
     Timer { id: restartWorker; interval: 300; onTriggered: worker.running = true }
     Process {
         id: worker
         command: ["node", Qt.resolvedUrl("runtime/main.mjs").toString().replace(/^file:\/\//, "")]
+        onStarted: root.companionVisibility(root.companionVisible)
         stdinEnabled: true
         running: false
         stdout: SplitParser { onRead: data => root.update(data) }
@@ -171,9 +178,9 @@ Item {
         function accompany(address: string): void { root.command({action: "accompanyWindow", address: address}) }
         function restoreFloating(): void { root.command({action: "restoreFloating"}) }
         function viewMode(mode: string): void { root.setViewMode(mode) }
-        function voiceProvider(value: string): void { root.setVoiceProvider(value) }
         function responseLanguage(value: string): void { root.setResponseLanguage(value) }
+        function voiceEffects(enabled: bool): void { root.setVoiceEffects(enabled) }
         function microphone(value: string): void { root.setMicrophone(value) }
-        function status(): string { return JSON.stringify({modelProvider: root.modelProvider, modelName: root.modelName, taskStatus: root.taskStatus, taskBusy: root.taskBusy, backendStatus: root.backendStatus, docked: root.docked, viewMode: root.viewMode, responseLanguage: root.responseLanguage, languageError: root.languageError, microphoneTarget: root.microphoneTarget, microphoneBusy: root.microphoneBusy, microphoneError: root.microphoneError, onboardingVersion: 2, voiceProvider: root.voiceProvider, latency: root.latency, setupBusy: root.setupBusy, setupRequired: root.setupRequired, modelReady: root.modelReady, speechReady: root.speechReady, connectionTestPassed: root.connectionTestPassed, panelOpened: root.panelOpened, accentColor: String(root.accentColor), state: root.state, listeningReady: root.listeningReady, error: root.error, level: root.level, inputLevel: root.inputLevel, keyConfigured: root.keyConfigured, wakeEnabled: root.wakeEnabled, wakeStatus: root.wakeStatus, approvalListening: root.approvalListening}) }
+        function status(): string { return JSON.stringify({modelProvider: root.modelProvider, modelName: root.modelName, taskStatus: root.taskStatus, taskBusy: root.taskBusy, backendStatus: root.backendStatus, docked: root.docked, viewMode: root.viewMode, responseLanguage: root.responseLanguage, languageError: root.languageError, microphoneTarget: root.microphoneTarget, microphoneBusy: root.microphoneBusy, microphoneError: root.microphoneError, onboardingVersion: 2, voiceProvider: root.voiceProvider, latency: root.latency, setupBusy: root.setupBusy, setupRequired: root.setupRequired, modelReady: root.modelReady, speechReady: root.speechReady, connectionTestPassed: root.connectionTestPassed, panelOpened: root.panelOpened, accentColor: String(root.accentColor), state: root.state, listeningReady: root.listeningReady, error: root.error, level: root.level, inputLevel: root.inputLevel, keyConfigured: root.keyConfigured, wakeEnabled: root.wakeEnabled, voiceEffectsEnabled: root.voiceEffectsEnabled, wakeStatus: root.wakeStatus, approvalListening: root.approvalListening}) }
     }
 }

@@ -11,11 +11,9 @@ Item {
     property bool needsSetup: service && service.setupRequired === true
     property bool modelReady: service && service.modelReady === true
     property bool speechReady: service && service.speechReady === true
-    property bool liveMode: !service || service.voiceProvider !== "pipeline"
-    property bool localMode: service && service.voiceProvider === "local"
     property bool ready: !needsSetup && modelReady && speechReady
-    property bool busy: service && (service.setupBusy === true || service.keySaving === true || service.connectionTesting === true || service.providerChanging === true || service.localSetupBusy === true)
-    property string step: !started && !ready ? "welcome" : needsSetup ? "device" : !modelReady && !liveMode ? "model" : !speechReady ? "voice" : "ready"
+    property bool busy: service && (service.setupBusy === true || service.keySaving === true || service.connectionTesting === true)
+    property string step: !started && !ready ? "welcome" : needsSetup ? "device" : !modelReady || !speechReady ? "voice" : "ready"
     readonly property color primaryText: ink.mix("#ececec", ink.accent, .08)
     readonly property color secondaryText: ink.mix("#949494", ink.accent, .06)
     signal dismiss()
@@ -57,40 +55,21 @@ Item {
             width: Math.min(560, viewport.width - 8); anchors.horizontalCenter: parent.horizontalCenter
             spacing: 24
             Text { objectName: "setupHeading"; text: "Settings"; textFormat: Text.PlainText; color: root.primaryText; font.pixelSize: 26; font.weight: Font.DemiBold }
-            Ui.Dropdown {
-                id: providerSelect; objectName: "providerSelect"
-                width: parent.width; label: "Voice engine"
-                foreground: root.primaryText; accent: ink.accent; background: ink.field
-                options: [{value: "gpt-live", label: "GPT-Live · OpenAI"}, {value: "local", label: "Local · Offline"}]
-                value: root.service ? root.service.voiceProvider : "gpt-live"
-                enabled: !root.busy && !root.needsSetup
-                onChanged: value => {
-                    root.service.setVoiceProvider(value)
-                    providerSelect.value = Qt.binding(() => root.service ? root.service.voiceProvider : "gpt-live")
-                }
-            }
             Column {
-                width: parent.width; spacing: 12; visible: root.localMode
-                Copy { text: "Whisper · Qwen · Kokoro" }
-                Action { objectName: "localSetupButton"; visible: !root.ready; text: root.service && root.service.localSetupBusy ? "Installing…" : "Set up local models"; enabled: !root.busy && !root.needsSetup; onClicked: root.service.localSetup() }
-                Copy { visible: text.length > 0; text: root.service ? root.service.localSetupMessage : "" }
-            }
-            Column {
-                width: parent.width; spacing: 12; visible: !root.ready && (!root.localMode || root.needsSetup)
-                Copy { font.pixelSize: 16; color: root.primaryText; text: root.step === "welcome" ? "Get connected" : root.step === "device" ? "Prepare this computer" : root.step === "model" ? "Connect your AI" : "Connect to GPT-Live" }
-                Copy { text: root.step === "welcome" ? "Add an API key to start talking." : root.step === "device" ? "Install the required components." : root.step === "model" ? "Sign in to your AI provider." : "Enter your OpenAI API key below." }
+                width: parent.width; spacing: 12; visible: !root.ready
+                Copy { font.pixelSize: 16; color: root.primaryText; text: root.step === "welcome" ? "Get connected" : root.step === "device" ? "Prepare this computer" : "Connect to GPT-Live" }
+                Copy { text: root.step === "welcome" ? "Add an API key to start talking." : root.step === "device" ? "Install the required components." : "Enter your OpenAI API key below." }
                 Action { objectName: "beginSetupButton"; visible: root.step === "welcome"; text: "Get started"; onClicked: { root.started = true; if (root.service) root.service.checkSetup() } }
                 Copy { visible: root.step === "device"; text: root.service ? root.service.setupMessage : "" }
                 Action { objectName: "setupButton"; visible: root.step === "device"; text: root.busy ? "Opening setup…" : "Set up this computer"; enabled: !root.busy; onClicked: if (root.service) root.service.setup() }
-                Action { objectName: "modelSetupButton"; visible: root.step === "model"; text: root.busy ? "Connecting…" : "Connect AI provider"; enabled: !root.busy; onClicked: if (root.service) root.service.modelSetup() }
             }
             Section {
                 title: "OpenAI API key"
-                visible: !root.localMode && (root.step === "voice" || root.ready)
+                visible: root.step === "voice" || root.ready
                 Ui.TextField {
                     id: keyInput; objectName: "apiKeyInput"; width: parent.width; height: 44
                     enabled: !root.needsSetup && !root.busy
-                    password: true; placeholderText: root.service && root.service.keyConfigured ? "Key saved · enter a new key to replace" : "Paste your OpenAI API key"
+                    password: true; placeholderText: root.service && root.service.keyConfigured ? "*********" : "Paste your OpenAI API key"
                     foreground: root.primaryText; accent: ink.accent; selectByMouse: true
                     inputMethodHints: Qt.ImhHiddenText | Qt.ImhSensitiveData | Qt.ImhNoPredictiveText
                 }
@@ -100,10 +79,10 @@ Item {
                     Action { text: "Get a key ↗"; bordered: false; foreground: root.secondaryText; onClicked: Qt.openUrlExternally("https://platform.openai.com/api-keys") }
                 }
             }
-            Rule { visible: root.localMode || root.step === "voice" || root.ready }
+            Rule { visible: root.step === "voice" || root.ready }
             Section {
                 title: "Audio"
-                visible: (root.localMode || root.liveMode && root.step !== "welcome") && !root.needsSetup
+                visible: root.step !== "welcome" && !root.needsSetup
                 Ui.Dropdown {
                     id: microphoneSelect; objectName: "microphoneSelect"
                     width: parent.width; label: "Microphone"
@@ -128,6 +107,7 @@ Item {
                         languageSelect.value = Qt.binding(() => root.service ? root.service.responseLanguage : "")
                     }
                 }
+                Ui.Toggle { objectName: "voiceEffectsToggle"; width: parent.width; label: "Voice effects"; foreground: root.primaryText; accent: ink.accent; checked: !root.service || root.service.voiceEffectsEnabled !== false; enabled: !root.busy && !!root.service; onClicked: if (root.service) root.service.setVoiceEffects(!checked) }
                 Copy { visible: text.length > 0; text: root.service ? root.service.languageError : ""; color: ink.accent }
                 Row {
                     spacing: 10

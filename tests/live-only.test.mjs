@@ -1,0 +1,26 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {once} from 'node:events';
+import {mkdtempSync,rmSync,writeFileSync,readFileSync,openSync,closeSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {Memory} from '../runtime/memory.mjs';
+for(const selected of ['gpt-live','','local','pipeline'])test('idle startup ignores old provider '+JSON.stringify(selected)+' and never opens a paid session',async t=>{
+ const data=mkdtempSync(join(tmpdir(),'oma-live-only-'));t.after(()=>rmSync(data,{recursive:true,force:true}));
+ let memory=new Memory(join(data,'memory.sqlite'));
+ memory.set('voiceProvider','local');memory.set('wakeEnabled','false');memory.set('responseLanguage','ja');memory.set('microphoneTarget','fixture');memory.remember('favorite','blue');memory.add('user','hello');memory.close();
+ const input=join(data,'input'),out=join(data,'stdout'),err=join(data,'stderr');
+ writeFileSync(input,[{action:'setVoiceProvider',value:'local'},{action:'setResponseLanguage',value:'en'},{action:'saveApiKey',key:'fictional-never-sent'}].map(JSON.stringify).join('\n')+'\n');
+ const fds=[openSync(input,'r'),openSync(out,'w'),openSync(err,'w')];
+ const child=spawn(process.execPath,[new URL('fixtures/live-idle-worker.mjs',import.meta.url).pathname],{env:{...process.env,OMA_DATA_DIR:data,OMA_VOICE_PROVIDER:selected,OMA_LOCAL_MODE:'1',OMA_OMARCHY_SKILL:new URL('../skills/oma/SKILL.md',import.meta.url).pathname},stdio:fds});
+ t.after(()=>child.kill());const exited=once(child,'close');fds.forEach(closeSync);
+ const [code]=await exited;const stdout=readFileSync(out,'utf8'),stderr=readFileSync(err,'utf8');assert.equal(code,0,stderr);
+ assert.ok(stdout.trim(), 'No worker output: '+stderr);
+ const patches=stdout.trim().split('\n').map(line=>{try{return JSON.parse(line)}catch{throw Error('Invalid worker output: '+JSON.stringify(stdout))}});
+ assert.ok(patches.some(p=>p.voiceProvider==='gpt-live'&&p.state==='idle'),stdout);
+ assert.ok(!patches.some(p=>p.unexpectedApiConnection),'Idle initialization/settings opened a paid connection');
+ assert.ok(!patches.some(p=>p.restartWorker||p.voiceProvider==='local'||p.voiceProvider==='pipeline'));
+ memory=new Memory(join(data,'memory.sqlite'));t.after(()=>memory.close());
+ assert.equal(memory.get('voiceProvider'),'local','Retain harmless old metadata rather than migrating user data');assert.equal(memory.get('microphoneTarget'),'fixture');assert.equal(memory.get('responseLanguage'),'en');assert.equal(memory.facts()[0].value,'blue');assert.equal(memory.search('hello').length,1);
+});

@@ -1,4 +1,0 @@
-70a4fe13ea6aa1072b76f9e3aa37b0feee82355f227df713bf6c6bbdf57946d2  runtime/local-speech.py
-74f17599142d76ac2d50178fffdda3e78eaa763fc7e07a7f1b6b031c977f875e  runtime/pi.mjs
-4c993e1a994e5d63279d6637a9b8292f47af8ec86e95746578b2cc8f673a294d  runtime/local-agent.mjs
-f4eef4ad0641b3c2ca0088b87a9e97b1ea76dd36ec65f90a0832b0f05954a870  tests/voice/run.py

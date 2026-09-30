@@ -15,3 +15,14 @@ test('waits for transcript stability, cancels extended phrases and closes once',
  f.input('こんにちは\nバイバイ',2000);f.tick(2800);f.tick(4000);assert.equal(calls,1);
  f.reset();f.input('バイバイ',5000);f.reset();f.tick(6000);assert.equal(calls,1);
 });
+test('Japanese thanks with an exclamation still counts as a direct goodbye',()=>{
+ for(const text of ['ありがとう! バイバイ','ありがとう！バイバイ','ありがとう!バイバイ。'])assert.ok(directFarewell(text),text);
+ assert.equal(directFarewell('ありがとう! バイバイって何？'),false);
+});
+test('pending holds only while a detected goodbye awaits confirmation',()=>{
+ let calls=0;const f=new FarewellIntent(()=>calls++);
+ assert.equal(f.pending,false);
+ f.input('バイバイ',0);assert.equal(f.pending,true);
+ f.input('バイバイってどういう意味',300);assert.equal(f.pending,false);
+ f.input('バイバイ',400);f.tick(1200);assert.equal(calls,1);assert.equal(f.pending,false);
+});

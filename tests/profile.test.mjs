@@ -63,7 +63,7 @@ test('Live status reports the configured backend model for defaults and override
  for(const override of [undefined,'gpt-5.6-luna']){
   const env={OMA_OMARCHY_SKILL:new URL('../skills/oma/SKILL.md',import.meta.url).pathname,...(override?{OMA_BACKEND_MODEL:override}:{})};
   let emitted;
-  runInNewContext(status+';status();',{process:{env},key:null,findOmarchySkill:()=>env.OMA_OMARCHY_SKILL,languageOptions:()=>[],memory,emit:value=>{emitted=value}});
+  runInNewContext(status+';status();',{process:{env},key:null,findOmarchySkill:()=>env.OMA_OMARCHY_SKILL,languageOptions:()=>[],voiceEffectsEnabled:()=>true,memory,emit:value=>{emitted=value}});
   assert.equal(emitted.modelName,liveConfig(memory,env).delegation.responses.model);
  }
 });

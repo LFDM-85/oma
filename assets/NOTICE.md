@@ -23,7 +23,8 @@ dependency.
 
 ## Runtime and protocol dependencies
 
-The Pi SDK is MIT-licensed. npm dependencies retain their upstream licenses
+The OpenAI SDK and ws are Apache-2.0 and MIT licensed, respectively.
+npm dependencies retain their upstream licenses
 in their installed packages; exact versions are recorded in `package-lock.json`.
 The Wayland virtual-pointer protocol
 retains its upstream copyright and license in `native/wlr-virtual-pointer-unstable-v1.xml`.

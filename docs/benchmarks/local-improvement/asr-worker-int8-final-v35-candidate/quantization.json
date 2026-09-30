@@ -1,9 +1,0 @@
-{
-  "method": "dynamic Linear qint8",
-  "backend": "onednn",
-  "torch": "2.8.0+cpu",
-  "base_worker_sha256": "1cf711fa5bf5457d57ea988baf84884f2c42c8d2c8ae63ef743f46b72383192f",
-  "experimental": true,
-  "cache_format": "tensor-only weights_only=True",
-  "cache": "/tmp/oma-asr-int8-cache-v24/state.pt"
-}

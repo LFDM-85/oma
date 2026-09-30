@@ -1,5 +1,5 @@
 // Opt-in desktop regression: actions are invoked directly, without agent decisions.
-// Opening O.M.A. still starts the selected voice provider and microphone.
+// Opening O.M.A. still starts the GPT-Live and microphone.
 import {Desktop,runDesktopCommand as run} from '../runtime/desktop.mjs';
 import {newOmaTextDocument} from '../skills/oma/scripts/new-document.mjs';
 import {writeFileSync,mkdtempSync} from 'node:fs';

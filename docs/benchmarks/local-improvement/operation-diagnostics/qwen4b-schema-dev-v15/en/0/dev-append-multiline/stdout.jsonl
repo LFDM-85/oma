@@ -1,8 +1,0 @@
-{"event":"tool_start","name":"append_text_file","args":{"input":{"path":"/tmp/oma-agent-dev-4b-v15/en/0/dev-append-multiline/note.txt","text":"Done!"}}}
-{"event":"state","state":"working","taskStatus":"Appending to a file"}
-{"event":"tool_end","name":"append_text_file","error":false,"details":{}}
-{"event":"state","taskStatus":"","state":"thinking"}
-{"event":"state","computerUsing":false}
-{"event":"answer","text":"Done! has been appended to the end of note.txt. The original text and newline are preserved, with no additional newlines added.","seconds":3.733427529,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":169,"output":62,"cacheRead":12567,"cacheWrite":0,"reasoning":0,"totalTokens":12798,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
-{"event":"result","facts":[]}
-{"event":"state","computerUsing":false}

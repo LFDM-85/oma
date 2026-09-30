@@ -25,3 +25,12 @@ test('waiting input is bounded and a new opening does not replay old speech',()=
 test('farewell clips are language-specific and cannot replace opening greetings',()=>{
  const dir=mkdtempSync(join(tmpdir(),'oma-farewell-cache-'));try{const opening=new mod.GreetingCache(dir),farewell=new mod.GreetingCache(dir,{farewell:true});opening.save('ja-JP','cedar',{text:'Ready.',pcm:Buffer.alloc(48000)});assert.equal(farewell.load('ja-JP','cedar'),null);farewell.save('ja-JP','cedar',{text:'Bye.',pcm:Buffer.alloc(48000)});assert.equal(opening.load('ja-JP','cedar').text,'Ready.');assert.equal(farewell.load('ja-JP','cedar').text,'Bye.');assert.equal(farewell.load('en-US','cedar'),null);}finally{rmSync(dir,{recursive:true,force:true})}
 });
+
+test('raw and processed opening and farewell caches cannot overwrite each other',()=>{
+ const dir=mkdtempSync(join(tmpdir(),'oma-cache-modes-'));
+ try{for(const farewell of [false,true]){
+  const c=new mod.GreetingCache(dir,{farewell});const processed={text:'Processed.',pcm:Buffer.alloc(4800,1)},raw={text:'Raw.',pcm:Buffer.alloc(4800,2)};
+  c.save('en-US','cedar',processed);assert.equal(c.path('en-US','cedar'),c.path('en-US','cedar',true));assert.equal(c.load('en-US','cedar',false),null);
+  c.save('en-US','cedar',raw,false);assert.deepEqual(c.load('en-US','cedar',false),raw);assert.deepEqual(c.load('en-US','cedar',true),processed);
+ }}finally{rmSync(dir,{recursive:true,force:true})}
+});

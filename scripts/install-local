@@ -10,34 +10,7 @@ dest="${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/plugins/io.github.komagata.oma"
 [[ ! -d "$dest/.git" ]] || { echo 'Use omarchy plugin update io.github.komagata.oma for this Git-managed installation.' >&2; exit 1; }
 [[ "$root" != "$dest" ]] || { echo 'Run from the development checkout.' >&2; exit 1; }
 "$root/scripts/build-pointer"
-python3 - "$root" "$dest" <<'PY'
-import sys,shutil,pathlib,hashlib,json,tempfile
-src,dst=map(pathlib.Path,sys.argv[1:]);dst.mkdir(parents=True,exist_ok=True)
-files=sorted([src/'package.json',src/'package-lock.json',src/'.npmrc',*src.glob('*.qml'),*src.glob('runtime/*.mjs'),*src.glob('runtime/*.py'),*src.glob('scripts/*'),*src.glob('native/*'),*src.glob('docs/*.md'),src/'runtime/oma-pointer',*src.glob('assets/*'),*src.glob('skills/*/SKILL.md'),*src.glob('skills/*/scripts/*.mjs')])
-h=hashlib.sha256()
-for p in files:h.update(str(p.relative_to(src)).encode());h.update(p.read_bytes())
-relative='builds/'+h.hexdigest()[:16];build=dst/relative
-# A new URL avoids stale Qt component caches without restarting omarchy-shell.
-# Stage outside the watched plugin so a new build appears in one rename.
-if not build.exists():
- staging=pathlib.Path(tempfile.mkdtemp(prefix='oma-build-',dir=dst.parent.parent))
- try:
-  for p in files:
-   target=staging/p.relative_to(src);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,target)
-  if not (src/'node_modules/openai').exists():
-   raise SystemExit('Run npm ci --omit=dev --ignore-scripts before installing locally.')
-  import subprocess
-  subprocess.run(['npm','ci','--omit=dev','--ignore-scripts','--bin-links=false'],cwd=staging,check=True)
-  build.parent.mkdir(parents=True,exist_ok=True);staging.rename(build)
- finally:shutil.rmtree(staging,ignore_errors=True)
-for name in ['README.md','LICENSE','package.json','package-lock.json']:
- if not (dst/name).exists() or (dst/name).read_bytes()!=(src/name).read_bytes():shutil.copy2(src/name,dst/name)
-manifest=json.loads((src/'manifest.json').read_text())
-manifest['entryPoints']={k:relative+'/'+v for k,v in manifest['entryPoints'].items()}
-pending=dst/'manifest.json.pending'
-pending.write_text(json.dumps(manifest,indent=2)+'\n')
-pending.replace(dst/'manifest.json')
-PY
+python3 "$root/scripts/package-build.py" "$root" "$dest"
 "$root/scripts/install-cli"
 omarchy-shell shell rescanPlugins
 sleep 2

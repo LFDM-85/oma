@@ -4,15 +4,18 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 python3 "$root/scripts/validate_manifest.py" "$root"
 for file in "$root"/runtime/*.mjs; do node --check "$file"; done
 (cd "$root" && npm test)
-python3 "$root/tests/local_speech_test.py"
-python3 "$root/tests/voice_harness_test.py"
-python3 "$root/tests/voice_evaluation_test.py"
-python3 "$root/tests/stt_benchmark_test.py"
-python3 "$root/tests/reading_benchmark_test.py"
-bash -n "$root/scripts/install-local" "$root/scripts/setup" "$root/scripts/setup-local" "$root/scripts/configure-pi" "$root/scripts/setup-wake" "$root/scripts/build-pointer" "$root/demo/run"
+python3 "$root/tests/package_test.py"
+python3 "$root/tests/streaming_vocoder_test.py"
+bash -n "$root/scripts/install-local" "$root/scripts/setup" "$root/scripts/setup-wake" "$root/scripts/build-pointer" "$root/demo/run"
 if command -v omarchy >/dev/null 2>&1; then omarchy plugin validate "$root"; fi
 
 if [[ -x /usr/lib/qt6/bin/qmltestrunner ]]; then
+  if command -v qs >/dev/null 2>&1; then
+    python3 "$root/tests/overlay_geometry_test.py"
+    if command -v g++ >/dev/null 2>&1 && pkg-config --exists Qt6Quick Qt6Qml Qt6Gui; then
+      python3 "$root/tests/overlay_render_test.py"
+    fi
+  fi
   QT_QPA_PLATFORM=offscreen QT_QPA_PLATFORMTHEME=basic QT_QUICK_BACKEND=software \
     QT_QUICK_CONTROLS_STYLE=Basic /usr/lib/qt6/bin/qmltestrunner -import "$root/tests/qml-imports" -input "$root/tests/qml"
   # Each GPU fixture owns a fresh renderer. Sharing the offscreen renderer

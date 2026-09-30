@@ -1,1 +1,0 @@
-Development only, 1/4 passed. English modes/question/normal/farewell passed. Both long document utterances exceeded the unchanged 10-second recognition deadline; their eventual recognized text is retained in evidence. Japanese question was misrecognized and remains failed. Source and harness archives were captured before execution. Not final acceptance.

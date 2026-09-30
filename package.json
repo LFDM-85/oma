@@ -1,23 +1,20 @@
 {
   "name": "omarchy-oma",
   "version": "0.1.0",
-  "description": "O.M.A. \u2014 GPT-Live desktop voice assistant with local memory and tools",
+  "description": "O.M.A. — GPT-Live desktop voice assistant with local memory and tools",
   "scripts": {
-    "test": "node --test --test-isolation=none tests/*.test.mjs",
-    "test:voice": "python3 tests/voice/run.py"
+    "test": "node --test --test-isolation=none tests/*.test.mjs"
   },
   "keywords": [
     "omarchy",
     "voice-assistant",
     "quickshell",
-    "openai",
-    "pi"
+    "openai"
   ],
   "author": "komagata",
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "@earendil-works/pi-coding-agent": "^0.87.1",
     "openai": "7.23.0",
     "ws": "8.21.3"
   },

@@ -1,6 +1,6 @@
 # ADR 0004: Measure speech models and retain human listening judgments
 
-- Status: Accepted
+- Status: Accepted; comparison infrastructure archived by [0007](0007-gpt-live-only.md)
 - Recorded: 2026-09-28
 
 ## Context
@@ -44,6 +44,6 @@ commands and frozen inputs; model changes require regression evaluation.
 
 ## References
 
-- [Evaluation documentation](../../tests/voice/evaluation/README.md)
-- [Japanese reading methodology](../../tests/voice/evaluation/READINGS.md)
-- [Reading comparison report](../benchmarks/2026-09-27-japanese-readings/README.md)
+- [Evaluation documentation](https://github.com/komagata/oma/blob/before-gpt-live-only-2026-09-29/tests/voice/evaluation/README.md)
+- [Japanese reading methodology](https://github.com/komagata/oma/blob/before-gpt-live-only-2026-09-29/tests/voice/evaluation/READINGS.md)
+- [Reading comparison report](https://github.com/komagata/oma/blob/before-gpt-live-only-2026-09-29/docs/benchmarks/2026-09-27-japanese-readings/README.md)

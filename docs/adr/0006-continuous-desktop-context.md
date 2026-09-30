@@ -1,7 +1,7 @@
 # 0006: Observe Hyprland metadata during conversations
 
 Date: 2026-09-28
-Status: Accepted
+Status: Accepted; Pi-specific boundaries superseded by [0007](0007-gpt-live-only.md)
 
 ## Context
 

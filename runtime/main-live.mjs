@@ -9,7 +9,6 @@ import {idleInstruction} from './idle.mjs';
 import {GreetingCache,StartupGreeting} from './startup-greeting.mjs';
 import {prepareGreeting} from './prepare-greeting.mjs';
 import {StreamingVoiceEffects} from './streaming-voice-effects.mjs';
-import {switchVoiceProvider} from './voice-provider.mjs';
 import {languageOptions,validateResponseLanguage,greetingInstruction,responseLocale} from './locale.mjs';
 import OpenAI from 'openai';import {LiveWS} from 'openai/resources/live/ws';
 import {createInterface} from 'node:readline';import {homedir} from 'node:os';import {join} from 'node:path';
@@ -33,30 +32,32 @@ const audio=new Audio((level,shapes)=>{
  if(level>.04){idle?.output();lastSpoken=Date.now();lastActivity=Date.now();}
  emit({level,...shapes,state:approval?'approval':level>.04?'speaking':'idle'});
 },error=>{emit({state:'error',error});stop().catch(()=>{});},{volume:3,playbackRate:1,startupBufferMs:250,inputTarget:memory.get('microphoneTarget')||null});
-audio.outputBuffer=new StreamingVoiceEffects({deliver:pcm=>audio.enqueue(pcm),onError:fail});
+const voiceEffectsEnabled=()=>memory.get('voiceEffectsEnabled')!=='false';
+audio.outputBuffer=new StreamingVoiceEffects({enabled:voiceEffectsEnabled(),deliver:pcm=>audio.enqueue(pcm),onError:fail});
 audio.onInputLevel=rms=>{emit({inputLevel:Math.min(1,Math.sqrt(Math.max(0,rms))/130)})};
 const cue=new StartupCue();
 const greetingCache=new GreetingCache(data);
 const farewellCache=new GreetingCache(data,{farewell:true});
 const startupGreeting=new StartupGreeting({play:async(pcm,text)=>{const request=greetingRequest;await cue.finished;if(request!==greetingRequest||closing||!startupGreeting.active)return;audio.enqueue(pcm);audio.finish();emit({assistantText:text});}});
-let farewellCaption='';
 const farewellPlayback=new FarewellPlayback({audio,
- disconnect:()=>{cue.stop();idle?.show(false);greetingRequest++;startupGreeting.stop();ending=null;const old=session;session=null;farewellCaption=old?.captions.assistant||'';audio.stopRecording().catch(fail);old?.close().catch(fail);},
- caption:text=>emit({assistantText:[farewellCaption.trimEnd(),text].filter(Boolean).join('\n')}),
+ disconnect:()=>{cue.stop();idle?.show(false);greetingRequest++;startupGreeting.stop();ending=null;const old=session;session=null;audio.stopRecording().catch(fail);old?.close().catch(fail);},
+ // Replace any partial model reply so the farewell reads as one clean line.
+ caption:text=>emit({assistantText:text}),
  dismiss:()=>emit({dismiss:true})
 });
 audio.onDrained=()=>{if(farewellPlayback.active)farewellPlayback.drained();else startupGreeting.drained();};
-function cachedFarewell(){return farewellCache.load(responseLocale(memory.get('responseLanguage')),process.env.OMA_LIVE_VOICE||'cedar');}
+function cachedFarewell(){return farewellCache.load(responseLocale(memory.get('responseLanguage')),process.env.OMA_LIVE_VOICE||'cedar',voiceEffectsEnabled());}
 let preparation=null,preparationKey=null,greetingRequest=0;
 function prepare(){
  const locale=responseLocale(memory.get('responseLanguage')),voice=process.env.OMA_LIVE_VOICE||'cedar';
- const id=JSON.stringify([locale,voice]);if(preparationKey===id)return;
- preparation?.abort();preparation=new AbortController();preparationKey=id;
- Promise.all([greetingCache,farewellCache].map(cache=>prepareGreeting({key,locale,voice,cache,signal:preparation.signal}))).catch(()=>{if(preparationKey===id)preparationKey=null;});
+ const effectsEnabled=voiceEffectsEnabled();
+ const id=JSON.stringify([locale,voice,effectsEnabled]);if(preparationKey===id)return;
+ preparation?.abort();const controller=new AbortController();preparation=controller;preparationKey=id;
+ Promise.all([greetingCache,farewellCache].map(cache=>prepareGreeting({key,locale,voice,cache,effectsEnabled,signal:controller.signal}))).catch(()=>{if(preparation===controller)preparationKey=null;});
 }
 async function greet(){
  const request=++greetingRequest;
- const entry=greetingCache.load(responseLocale(memory.get('responseLanguage')),process.env.OMA_LIVE_VOICE||'cedar');
+ const entry=greetingCache.load(responseLocale(memory.get('responseLanguage')),process.env.OMA_LIVE_VOICE||'cedar',voiceEffectsEnabled());
  if(entry&&!startupGreeting.active&&!session?.captions.assistant){
   if(!await microphoneAvailable(audio.inputTarget)||request!==greetingRequest||closing)return;
   startupGreeting.begin(entry);
@@ -65,7 +66,7 @@ async function greet(){
   if(session?.started){session.captions.assistant=entry.text+'\n';session.instruct('The application has already played the opening greeting. Do not repeat it. Listen for the user request.');startupGreeting.connect(pcm=>session?.appendAudio(pcm));}
  }else if(!startupGreeting.active){await cue.finished;if(request!==greetingRequest||closing)return;await start({greeting:true});}
 }
-function status(){const ready=!!key&&!!findOmarchySkill();emit({responseLanguages:languageOptions(),responseLanguage:memory.get('responseLanguage')||'',voiceProvider:'gpt-live',modelReady:ready,speechReady:ready,keyConfigured:ready,omarchySkillLoaded:!!findOmarchySkill(),modelProvider:'OpenAI',modelName:process.env.OMA_BACKEND_MODEL||'gpt-6-luna',state:ready?'idle':'unauthenticated',error:!findOmarchySkill()?'Omarchy skill not found':'',listeningReady:false});}
+function status(){const ready=!!key&&!!findOmarchySkill();emit({voiceEffectsEnabled:voiceEffectsEnabled(),responseLanguages:languageOptions(),responseLanguage:memory.get('responseLanguage')||'',voiceProvider:'gpt-live',modelReady:ready,speechReady:ready,keyConfigured:ready,omarchySkillLoaded:!!findOmarchySkill(),modelProvider:'OpenAI',modelName:process.env.OMA_BACKEND_MODEL||'gpt-6-luna',state:ready?'idle':'unauthenticated',error:!findOmarchySkill()?'Omarchy skill not found':'',listeningReady:false});}
 const tools=new LocalTools({memory,emit,cwd:process.env.OMA_WORKSPACE||join(homedir(),'Projects'),onEnd:()=>{const entry=session?.farewellEntry;if(entry)farewellPlayback.start(entry);else ending={at:Date.now(),speechAfter:lastUserRequest,restart:false}},onRestart:()=>{ending={at:Date.now(),restart:true}},onForget:()=>{
  if(session){session.discardHistory=true;session.lastRole=null;session.captions={user:'',assistant:''};}
  setTimeout(()=>{stop().then(()=>emit({assistantText:'Memory cleared. Changes apply to your next conversation.',dismiss:true})).catch(fail)},0);
@@ -84,16 +85,16 @@ async function start({microphone=true,greeting=false}={}){
    config.instructions=config.instructions.replace('After the tool succeeds, say one brief farewell in the configured response language, then stop speaking; the application will close.','The application owns the farewell audio. Only when ending the conversation, delegate end_conversation before saying goodbye; let the application speak that farewell. For all other user requests, answer normally. The application plays its recorded farewell and closing sound.');
    config.delegation.responses.instructions=config.delegation.responses.instructions.replace('then return a short farewell for GPT-Live to speak','do not generate a spoken farewell: the application plays its recorded farewell');
   }
-  if(greetingCache.load(responseLocale(memory.get('responseLanguage')),process.env.OMA_LIVE_VOICE||'cedar'))config.instructions+=' The application may play a prerecorded opening greeting. Do not initiate an opening greeting unless explicitly instructed. Wait for the user to speak.';
-  const next=new LiveSession({desktopContext,outputEnabled:()=>!startupGreeting.playing,config,connect:()=>new LiveWS(new OpenAI({apiKey:key}),{reconnect:false}),audio,memory,emit,execute:async(...a)=>{activeToolCalls++;try{return await tools.call(...a)}finally{activeToolCalls--}},cancelTools:()=>tools.cancel()});next.farewellEntry=farewellEntry;session=next;
+  if(greetingCache.load(responseLocale(memory.get('responseLanguage')),process.env.OMA_LIVE_VOICE||'cedar',voiceEffectsEnabled()))config.instructions+=' The application may play a prerecorded opening greeting. Do not initiate an opening greeting unless explicitly instructed. Wait for the user to speak.';
+  const next=new LiveSession({desktopContext,outputEnabled:()=>!startupGreeting.playing&&!farewellIntent?.pending,config,connect:()=>new LiveWS(new OpenAI({apiKey:key}),{reconnect:false}),audio,memory,emit,execute:async(...a)=>{activeToolCalls++;try{return await tools.call(...a)}finally{activeToolCalls--}},cancelTools:()=>tools.cancel()});next.farewellEntry=farewellEntry;session=next;
   if(microphone)audio.record(pcm=>startupGreeting.active?startupGreeting.input(pcm):next.appendAudio(pcm));
-  await next.start();if(session!==next||closing)return;idle?.show(presented);
+  await next.start();if(session!==next||closing)return;prepare();idle?.show(presented);
   if(startupGreeting.active){next.instruct('The application is playing the opening greeting. Do not greet or speak until the user makes a request.');startupGreeting.connect(pcm=>next.appendAudio(pcm));}
   emit({state:'idle',listeningReady:microphone});
   if(greeting)next.instructTransient(greetingInstruction(responseLocale(memory.get('responseLanguage'))));
  })().catch(async e=>{await stop();throw e}).finally(()=>{starting=null});return starting;
 }
-async function stop(){farewellIntent?.reset();farewellPlayback.cancel();idle?.show(false);greetingRequest++;startupGreeting.stop();ending=null;const old=session;session=null;tools.cancel();await audio.stopRecording();audio.stop();await old?.close();emit({state:'idle',listeningReady:false,level:0,inputLevel:0,lipRound:0,lipWide:0});}
+async function stop(){preparation?.abort();preparation=null;preparationKey=null;farewellIntent?.reset();farewellPlayback.cancel();idle?.show(false);greetingRequest++;startupGreeting.stop();ending=null;const old=session;session=null;tools.cancel();await audio.stopRecording();audio.stop();await old?.close();emit({state:'idle',listeningReady:false,level:0,inputLevel:0,lipRound:0,lipWide:0});}
 idle=new LiveIdle({
  ready:()=>!docked&&!!session?.started&&!starting&&!testing&&!saving&&!approval&&!ending&&!session.responses.size&&!activeToolCalls&&!startupGreeting.playing,
  speak:farewell=>{const entry=farewell&&session?.farewellEntry;if(entry)farewellPlayback.start(entry);else session?.instructTransient(idleInstruction(responseLocale(memory.get('responseLanguage')),farewell)+' Speak this notice once. The application handles dismissal; do not call tools for this notice.');},
@@ -115,14 +116,27 @@ async function refreshMicrophones(){
  emit({microphones:[{value:'',label:'System default'},...choices],microphoneTarget:target});
 }
 async function command(c){
+ if(c.action==='companionPanel'){await tools.companion.setPanelState(c.active,c.closing);return;}
+ if(c.action==='companionVisibility'){tools.companion.setAutoVisible(c.active);return;}
+ if(c.action==='autoAccompanyWindow'){await tools.companion.autoOpen(c.address);return;}
+ if(c.action==='companionWindowClosed'){tools.companion.autoClose(c.address);await tools.companion.check();return;}
  if(c.action==='accompanyWindow'){await tools.companion.accompany(c.address);return;}
  if(c.action==='restoreFloating'){await tools.companion.restore();return;}
- if(c.action==='setVoiceProvider'){await switchVoiceProvider({memory,value:c.value,stop,emit});return;}
+ if(c.action==='setVoiceEffects'){
+  if(testing||starting||saving)return;
+  const enabled=c.enabled===true;
+  memory.set('voiceEffectsEnabled',enabled?'true':'false');
+  preparation?.abort();preparation=null;preparationKey=null;
+  greetingRequest++;startupGreeting.stop();audio.stop();audio.outputBuffer.setEnabled(enabled);
+  if(session)session.farewellEntry=null;
+  emit({voiceEffectsEnabled:enabled});
+  await stop();if(presented)await start();return;
+ }
  if(c.action==='setResponseLanguage'){
   if(testing||starting||saving)return;
   try{
    const value=validateResponseLanguage(c.value);
-   memory.set('responseLanguage',value);prepare();
+   memory.set('responseLanguage',value);
    emit({responseLanguage:value,languageError:''});
    // Instructions are fixed at session creation; reconnect with the saved choice.
    await stop();if(presented)await start();
@@ -143,7 +157,7 @@ async function command(c){
    if(session?.started&&presented){const active=session;audio.record(pcm=>active.appendAudio(pcm));}
   }catch(e){emit({microphoneError:e.message})}finally{microphoneBusy=false;emit({microphoneBusy:false})}return;
  }
- if(c.action==='presentation'){presented=c.active===true;if(!presented)await tools.companion.restore();if(presented)transcriptLog.begin();else transcriptLog.end();idle.show(presented);if(presented)await start();else await stop();return;}
+ if(c.action==='presentation'){presented=c.active===true;if(presented)transcriptLog.begin();else transcriptLog.end();idle.show(presented);if(presented)await start();else await stop();return;}
  if(c.action==='stop'||c.action==='cancelTask'){await stop();return;}
  if(c.action==='greet'||c.action==='restoreGreet'){await greet();return;}
  if(c.action==='press'){await start();return;}if(c.action==='release')return;
@@ -155,7 +169,7 @@ async function command(c){
  if(c.action==='connect'||c.action==='refreshConnections'){await stop();key=await loadApiKey();status();if(presented)await start();return;}
  if(c.action==='saveApiKey'){
   if(saving)return;saving=true;emit({keySaving:true,keyError:'',keySaved:false});
-  try{await saveApiKey(c.key);key=await loadApiKey();preparationKey=null;prepare();status();emit({keySaved:true})}catch(e){emit({keyError:e.message})}finally{c.key='';saving=false;emit({keySaving:false})}return;
+  try{await saveApiKey(c.key);key=await loadApiKey();preparationKey=null;status();emit({keySaved:true})}catch(e){emit({keyError:e.message})}finally{c.key='';saving=false;emit({keySaving:false})}return;
  }
  if(c.action==='testConnection'){
   if(testing)return;testing=true;emit({connectionTesting:true,connectionTestPassed:false,connectionTestError:''});
@@ -169,5 +183,3 @@ async function command(c){
 const input=createInterface({input:process.stdin});input.on('line',line=>{if(line.length>20000)return;try{command(JSON.parse(line)).catch(fail)}catch{fail(Error('Invalid command'))}});
 async function close(){if(closing)return;closing=true;preparation?.abort();clearInterval(timer);wake.close();cue.stop();await stop();await starting?.catch(()=>{});memory.close();process.exit(0);}
 input.on('close',close);process.on('SIGTERM',close);process.on('SIGINT',close);process.on('uncaughtException',e=>{fail(e);close()});status();refreshMicrophones().catch(e=>emit({microphoneError:e.message}));
-
-prepare();

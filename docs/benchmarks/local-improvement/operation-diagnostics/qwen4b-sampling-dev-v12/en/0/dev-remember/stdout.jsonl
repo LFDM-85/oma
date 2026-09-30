@@ -1,8 +1,0 @@
-{"event":"tool_start","name":"remember","args":{"key":"instrument_practiced","value":"flute"}}
-{"event":"state","state":"working","taskStatus":"Saving a preference"}
-{"event":"tool_end","name":"remember","error":false,"details":{}}
-{"event":"state","taskStatus":"","state":"thinking"}
-{"event":"state","computerUsing":false}
-{"event":"answer","text":"I've saved that you practice the flute. This information will be available for future conversations so I can tailor my suggestions accordingly.","seconds":2.76753613,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":33,"output":48,"cacheRead":12074,"cacheWrite":0,"reasoning":0,"totalTokens":12155,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
-{"event":"result","facts":[{"key":"instrument_practiced","value":"flute","at":"2026-09-26T18:46:00.201Z"}]}
-{"event":"state","computerUsing":false}

@@ -10,10 +10,30 @@ test('a clean checkout preflight explains the missing GPT-Live dependency withou
 
 test('local build includes the executable resources imported from bundled skills',()=>{
  const root=fileURLToPath(new URL('..',import.meta.url));
- const selection=readFileSync(join(root,'scripts/install-local'),'utf8').split('\n').find(line=>line.startsWith('files=sorted('));
- const files=JSON.parse(execFileSync('python3',['-c',`import pathlib,json,sys
-src=pathlib.Path(sys.argv[1])
-${selection}
-print(json.dumps([str(p.relative_to(src)) for p in files]))`,root],{encoding:'utf8'}));
+ const files=readFileSync(join(root,'scripts/runtime-files.txt'),'utf8').trim().split('\n');
  assert.ok(files.includes('skills/oma/scripts/new-document.mjs'));
+ assert.ok(!files.includes('runtime/main-pipeline.mjs'),'Removed providers must not ship');
+ assert.ok(!files.some(f=>f.startsWith('docs/')||/preview|face\.obj|face\.json/.test(f)),'Development bulk must not ship');
+});
+
+test('explicit package includes every relative runtime import and QML resource',()=>{
+ const root=fileURLToPath(new URL('..',import.meta.url));
+ const files=new Set(readFileSync(join(root,'scripts/runtime-files.txt'),'utf8').trim().split('\n'));
+ for(const name of files){
+  if(!/\.(mjs|qml)$/.test(name))continue;
+  const source=readFileSync(join(root,name),'utf8');
+  for(const match of source.matchAll(/(?:from\s*|import\(|new URL\(|Qt\.resolvedUrl\()['"]([^'"]+)['"]/g)){
+   const value=match[1];if(!value.startsWith('.')&&!name.endsWith('.qml'))continue;
+   // Template fragments are covered by explicit skill/asset assertions below.
+   if(value.endsWith('/'))continue;
+   const resolved=fileURLToPath(new URL(value,new URL(name,new URL('../',import.meta.url))));
+   const relative=resolved.slice(root.length);
+   assert.ok(files.has(relative),name+' requires '+relative);
+  }
+ }
+ for(const name of ['skills/oma/SKILL.md','skills/oma-camera/SKILL.md','runtime/streaming-vocoder.py','runtime/wake.py','runtime/wake_match.py','runtime/restart_oma.py','runtime/oma-pointer','assets/FaceMesh.js','assets/reference-face.png','assets/crt.frag.qsb','assets/startup.pcm','scripts/setup','scripts/check-setup.py','scripts/build-pointer','scripts/setup-wake','scripts/install-cli','scripts/oma'])assert.ok(files.has(name),name);
+ const dependencies=JSON.parse(readFileSync(join(root,'package.json'))).dependencies;
+ assert.deepEqual(Object.keys(dependencies).sort(),['openai','ws']);
+ const lock=JSON.parse(readFileSync(join(root,'package-lock.json')));
+ assert.deepEqual(Object.keys(lock.packages).sort(),['','node_modules/openai','node_modules/ws']);
 });

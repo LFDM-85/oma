@@ -1,6 +1,6 @@
 # ADR 0003: Separate operating guidance from executable tools
 
-- Status: Accepted
+- Status: Accepted; Local/Pi-specific behavior superseded by [0007](0007-gpt-live-only.md)
 - Recorded: 2026-09-28
 
 ## Context

@@ -1,9 +1,0 @@
-{"event":"tool_start","name":"set_view_mode","args":{"mode":"normal"}}
-{"event":"state","state":"working","taskStatus":"Restoring normal mode"}
-{"event":"state","viewMode":"normal"}
-{"event":"tool_end","name":"set_view_mode","error":false,"details":{}}
-{"event":"state","taskStatus":"","state":"thinking"}
-{"event":"state","computerUsing":false}
-{"event":"answer","text":"お疲れ様です。ノーマルモードに戻しました。","seconds":2.4328436769999997,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":22,"output":38,"cacheRead":12334,"cacheWrite":0,"reasoning":0,"totalTokens":12394,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
-{"event":"result","facts":[]}
-{"event":"state","computerUsing":false}

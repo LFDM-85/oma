@@ -1,7 +1,0 @@
-{"event":"tool_start","name":"read","args":{"path":"/tmp/oma-agent-dev-9b-v13/ja/0/dev-append-multiline/note.txt"}}
-{"event":"state","state":"working","taskStatus":"Reading a file"}
-{"event":"tool_end","name":"read","error":false}
-{"event":"state","taskStatus":"","state":"thinking"}
-{"event":"state","computerUsing":false}
-{"event":"error","error":"Stream ended without finish_reason","critical":false}
-{"event":"state","computerUsing":false}

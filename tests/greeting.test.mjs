@@ -1,6 +1,0 @@
-import test from 'node:test';import assert from 'node:assert/strict';
-import {Oma} from '../runtime/oma.mjs';
-function fixture(){const audio={pumping:false,played:0,enqueue(){this.pumping=true},finish(){},stop(){this.pumping=false},async close(){}};const instructions=[];
- const oma=new Oma({locale:'ja-JP',memory:{add(){throw Error('Notices must not create user history')}},audio,emit(){},agent:{busy:false,async notice(text){instructions.push(text);return '準備できました。'},async cancel(){},async close(){}},speech:{async speak(text,chunk){chunk(Buffer.alloc(4800))}}});return {oma,audio,instructions};}
-test('opening uses a localized notice and never overlaps another reply',async()=>{const {oma,audio,instructions}=fixture();await oma.greet();await oma.greet();assert.equal(instructions.length,1);assert.match(instructions[0],/Japanese/);audio.pumping=false;audio.onDrained();await oma.close();});
-test('wake waits for playback drain and closing prevents delayed recording',async()=>{const {oma,audio}=fixture();let presses=0;oma.press=async()=>presses++;await oma.greet(true);audio.onDrained();await new Promise(r=>setTimeout(r,160));assert.equal(presses,0);audio.pumping=false;audio.onDrained();await new Promise(r=>setTimeout(r,160));assert.equal(presses,1);await oma.close();});

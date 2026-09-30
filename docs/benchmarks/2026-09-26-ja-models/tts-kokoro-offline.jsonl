@@ -1,4 +1,0 @@
-{"engine": "kokoro", "model": "Kokoro-82M", "load_seconds": 0.002096398005960509}
-{"engine": "kokoro", "case": "greeting", "text": "ご指示をお待ちしています。", "file": "/tmp/oma-model-research/audio/kokoro/greeting.wav", "seconds": 4.2575684930197895, "first_audio_seconds": 4.257519653008785, "duration": 2.425, "rtf": 1.7556983476370267}
-{"engine": "kokoro", "case": "document", "text": "こんにちは。今日の天気は雨です。保存せずにファイルを閉じました。", "file": "/tmp/oma-model-research/audio/kokoro/document.wav", "seconds": 1.2961194769886788, "first_audio_seconds": 1.2960325199819636, "duration": 5.525, "rtf": 0.23459176054093733}
-{"engine": "kokoro", "case": "numbers", "text": "九月二十六日、午後三時半です。過去の会話を開きます。合計は千二百三十四円です。", "file": "/tmp/oma-model-research/audio/kokoro/numbers.wav", "seconds": 1.9805676770047285, "first_audio_seconds": 1.9804455599805806, "duration": 8.55, "rtf": 0.2316453423397343}

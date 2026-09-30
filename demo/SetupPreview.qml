@@ -9,7 +9,7 @@ Window {
         id: fixture
         property color accentColor: "#91ff70"
         property bool setupRequired: true
-        property string setupMessage: "Missing: Node.js 24+, Codex CLI, PipeWire recording, Keyboard control"
+        property string setupMessage: "Missing: Node.js 24+, GPT-Live SDK, PipeWire recording, Keyboard control"
         property bool keyConfigured: false
         property bool keySaving: false
         property bool keySaved: false

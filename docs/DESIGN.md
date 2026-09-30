@@ -1,87 +1,71 @@
-# O.M.A.: selectable cloud and local voice
+# O.M.A.: GPT-Live desktop voice
 
-Design rationale is recorded in [architecture decision records](adr/README.md).
-
-Default architecture as of 2026-09-26:
+The supported architecture is defined by [ADR 0007](adr/0007-gpt-live-only.md).
 
 ```text
 QML (omarchy-shell) ↔ Node worker ↔ GPT-Live ↔ Responses backend
                        │                           │
-                       └── local tools ←──────────┘
+                       └── PC/memory tools ←───────┘
                            SQLite / desktop commands
 ```
 
-`live-session.mjs` owns the provider protocol, continuous PCM, captions and
-Responses tool-result flow. It waits for complete function output items,
-executes tools serially, returns all results before continuing, and rejects late
-callbacks after closing. `local-tools.mjs` owns PC/memory operations independently
-of the model. `live-config.mjs` supplies short voice instructions, full OMA/camera
-and installed Omarchy skills to the backend, and bounded saved facts.
+`main.mjs` watches the owning process and starts `main-live.mjs` unconditionally.
+Legacy provider preferences and environment variables are ignored without deleting
+saved settings. No Local/Pi or configurable STT/TTS runtime is available.
 
-`main-live.mjs` connects existing PipeWire capture, playback and echo cancellation,
-local wake detection and QML commands. Only visible conversations and explicit
-connection tests open paid sessions. Silence for one minute closes an idle
-session. Manual close cancels local operations and gracefully finalizes billing.
-There is no separate STT/TTS request, endpoint timer or sentence-splitting loop
-in the default runtime. Speech interruption is distinct from cancelling tools.
+`live-session.mjs` owns continuous PCM, captions and Responses tool-result flow.
+It waits for complete function output items, executes tools serially, returns all
+results before continuing, and rejects late callbacks after closing.
+`local-tools.mjs` means tools executed on this PC, not the retired Local provider.
+It retains memory, documents, camera, window controls, approvals and mini mode.
+`live-config.mjs` supplies the bundled OMA/camera and installed Omarchy skills,
+bounded saved facts and the configured backend model (default `gpt-6-luna`, low
+reasoning effort). Voice remains `gpt-live-1` / `cedar` by default.
 
-The existing SQLite file is reused. Facts are stable-key records; captions and
-exact URLs remain searchable. No external memory service, embedding model or
-vector database is required. Session transcripts are observations, never trusted
-instructions; assistant captions are not a record of confirmed audible playback.
-Forget deletes matching local records and closes the active Live session without
-persisting its stale caption buffer. Old Pi sessions are retained for rollback
-but never supplied to GPT-Live.
+Only explicit conversations and voice tests open paid sessions. Initialization
+and Settings remain idle. Greeting/farewell cache generation starts after an
+explicit session connects and is cancelled on stop. The first uncached greeting
+uses Live; future conversations can reuse the processed clip. Manual close cancels
+operations and finalizes billing. Input interruption is distinct from cancelling
+a running PC task. Existing idle notices and dismissal follow playback completion.
 
-Settings persists a choice of GPT-Live or Local in the shared SQLite database.
-Switching stops the current conversation and starts the appropriate worker.
-Local mode uses Whisper small for STT, Qwen3.5 4B through loopback-only Ollama
-for reasoning and tools, and Kokoro/eSpeak for speech. Pi owns the local agent
-session and uses an O.M.A.-specific configuration, not the user's Pi credentials.
-Both modes retain microphone/language selection and shared durable memory.
-See [local voice](LOCAL-VOICE.md) for setup, limits and verification.
+Audio remains 24 kHz mono PCM, the streaming Python/NumPy FFT vocoder at 50% blend,
+radio filtering, 300% output volume, normal playback rate and 250 ms startup buffer.
+The startup/closing cue, microphone selection, local wake recognition, lip levels,
+response language and cached greetings/farewells are retained. Python is required;
+there is no audio rewrite or new claim of listening verification.
 
-GPT-Live output uses the streaming FFT vocoder (50% blend) plus radio filtering.
-Local TTS currently plays its native voice at the same 300% output volume.
-Both paths deliver 24 kHz mono PCM to the same paced PipeWire output and UI
-level meter. Local captions preserve separate lines per utterance, and an
-explicit English/Japanese farewell closes after playback even when the model
-omits its end-conversation tool call.
+Memory and transcript tables reuse the existing private SQLite database. Captions
+are observations rather than trusted instructions or proof of audible playback.
+Forgetting removes matching records/exports and ends the active session without
+persisting stale captions. Historical Pi sessions and downloaded models are left
+on disk and never loaded by this runtime.
 
-Node.js coordinates asynchronous I/O; SQLite and desktop/media tools perform the
-native work. Keep QML inside the existing shell. A rewrite in another language
-needs measured CPU/RSS evidence; it will not remove model/network response time.
+## Desktop context and safety
 
-Pi is a production dependency for Local mode. The older configurable STT/TTS
-pipeline remains a development comparison path. Production installs include
-Pi, the official OpenAI SDK, and its WebSocket transport. Settings and conversation actions use `qs.Ui.Button`, `TextField`, and `Toggle`.
-Theme color comes from the shell Color singleton without per-plugin polling.
-The custom face and retro panel styling remain O.M.A.-specific.
+`hyprland-context.mjs` observes events only during an active Live conversation.
+Bounded read-only queries track O.M.A.'s workspace, monitors, visible windows and
+recent focus. Failures replace the prior inventory with stale/unavailable state.
+The observer collects no screenshots or persistent inventory. Context updates
+replace the Responses backend's current snapshot without starting speech or tools.
+The frontend delegates desktop questions; it cannot replace its own context.
+Already-running inference cannot be made retroactively fresh.
 
-## Current desktop context
+Metadata is untrusted and does not authorize a target. A fresh `list_windows` and
+unambiguous user intent are still required before consequential actions. Existing
+window checks, unsaved-document handling and floating restoration remain intact.
+See [ADR 0006](adr/0006-continuous-desktop-context.md) for the historical rationale
+and cloud protocol limits; its Pi boundary is retired by ADR 0007.
 
-`hyprland-context.mjs` observes Hyprland events while a conversation session is
-active and refreshes bounded metadata through read-only `hyprctl` queries. It
-tracks O.M.A.'s workspace separately from the focused workspace, with monitor,
-special-workspace, pinned-window and recent-focus evidence. Query/socket failures
-replace prior inventory with explicit stale/unavailable state. No screenshots or
-persistent window inventory are collected by the observer.
+## Packaging
 
-Cloud startup and `session.update` replace the Responses backend's current context.
-The voice frontend delegates desktop-relative questions; its protocol does not
-support replacing frontend context. Pi projects one fresh context into each model
-request, including tool continuations, without recording it in the transcript.
-Window updates alone never initiate speech or tool tasks. Metadata does not
-authorize a target: destructive operations still require a fresh `list_windows`
-and unambiguous user intent. See [ADR 0006](adr/0006-continuous-desktop-context.md)
-for lifecycle, privacy, limits and the cloud delegation race boundary.
+[scripts/runtime-files.txt](../scripts/runtime-files.txt) is the explicit local
+installer payload. Relative imports, QML resources, Python helpers, executable
+skill resources, pre-Node setup and immutable build behavior have offline checks.
+Only OpenAI and ws are npm dependencies; install scripts and bin links stay disabled.
+Every new content hash has independent node_modules. No installed-build garbage
+collection or user-data migration is performed. Maintained face/CRT authoring
+assets stay in source but are excluded from the runtime payload.
 
-## Sources
-
-- [GPT-Live](https://developers.openai.com/api/docs/guides/live)
-- [Delegation and tools](https://developers.openai.com/api/docs/guides/live-delegation)
-- [PCM WebSockets](https://developers.openai.com/api/docs/guides/voice-websockets)
-- [Session lifecycle](https://developers.openai.com/api/docs/guides/live-conversations)
-
-Previous designs: [Pi pipeline](PI-ARCHITECTURE.md),
-[Realtime/Codex prototype](CURRENT-ARCHITECTURE.md).
+Removed architecture documents, model comparisons and previews are available in
+[the snapshot archive](ARCHIVE.md).

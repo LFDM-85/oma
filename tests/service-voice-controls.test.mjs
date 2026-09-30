@@ -18,9 +18,16 @@ test('sending to an open assistant does not re-summon it and steal editor focus'
 });
 test('voice test controls use the same setters as Settings',()=>{
  const qml=readFileSync(new URL('../Service.qml',import.meta.url),'utf8');
- for(const [method,setter,value] of [['voiceProvider','setVoiceProvider','local'],['responseLanguage','setResponseLanguage','en'],['microphone','setMicrophone','test-source']]){
+ for(const [method,setter,value] of [['responseLanguage','setResponseLanguage','en'],['microphone','setMicrophone','test-source']]){
   const body=qml.match(new RegExp('function '+method+'\\(value: string\\): void \\{([^}]+)\\}'))?.[1];
   assert.ok(body,'Missing '+method);let received;
   vm.runInNewContext(body,{value,root:{[setter](v){received=v}}});assert.equal(received,value);
  }
+});
+
+test('voice effects setter and IPC use backend authority rather than local toggle state',()=>{
+ const qml=readFileSync(new URL('../Service.qml',import.meta.url),'utf8');
+ const setter=qml.match(/function setVoiceEffects\(enabled\) \{ ([^\n]+) \}/)?.[1];assert.ok(setter);const sent=[];vm.runInNewContext(setter,{enabled:false,command:c=>sent.push(JSON.stringify(c))});assert.equal(sent[0],JSON.stringify({action:'setVoiceEffects',enabled:false}));
+ const ipc=qml.match(/function voiceEffects\(enabled: bool\): void \{([^}]+)\}/)?.[1];assert.ok(ipc);let value;vm.runInNewContext(ipc,{enabled:true,root:{setVoiceEffects(v){value=v}}});assert.equal(value,true);
+ assert.match(qml,/property bool voiceEffectsEnabled: true/);assert.match(qml,/"wakeEnabled", "voiceEffectsEnabled", "wakeStatus"/);assert.match(qml,/voiceEffectsEnabled: root.voiceEffectsEnabled/);
 });

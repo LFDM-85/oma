@@ -1,4 +1,0 @@
-{"event":"state","computerUsing":false}
-{"event":"answer","text":"8","seconds":1.479842662,"model":"qwen3.5:4b","provider":"oma-local","thinkingLevel":"low","usage":{"input":989,"output":50,"cacheRead":11013,"cacheWrite":0,"reasoning":0,"totalTokens":12052,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop"}
-{"event":"result","facts":[]}
-{"event":"state","computerUsing":false}

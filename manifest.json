@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "komagata",
   "license": "MIT",
-  "description": "A persistent voice assistant with a low-poly face, Pi and independent speech input/output.",
+  "description": "A GPT-Live desktop voice assistant with a low-poly face, local memory and PC tools.",
   "kinds": [
     "bar-widget",
     "panel",
@@ -18,7 +18,7 @@
   },
   "barWidget": {
     "displayName": "O.M.A.",
-    "description": "A persistent voice assistant with a low-poly face, Pi and independent speech input/output.",
+    "description": "A GPT-Live desktop voice assistant with a low-poly face, local memory and PC tools.",
     "category": "AI",
     "allowMultiple": false,
     "defaultSection": "center",

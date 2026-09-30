@@ -1,9 +1,0 @@
-// Opt-in billed paired benchmark. Synthetic speech, isolated Pi memory, no microphone or speaker.
-import {mkdtempSync,rmSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';
-import {Speech} from '../runtime/speech.mjs';import {PiAgent} from '../runtime/pi.mjs';import {Memory} from '../runtime/memory.mjs';import {Oma} from '../runtime/oma.mjs';import {loadApiKey} from '../runtime/credentials.mjs';
-const key=await loadApiKey();const speech=new Speech({key,locale:'ja-JP',env:{}});const parts=[];await speech.speak('オーマ、こんにちは。二文で短く自己紹介してください。',b=>parts.push(b));const pcm=Buffer.concat(parts);
-const dir=mkdtempSync(join(tmpdir(),'oma-latency-pairs-'));const fixtures=[];const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-try{
- for(const mode of ['sequential','overlap']){const memory=new Memory(join(dir,mode+'.sqlite'));const agent=new PiAgent({home:join(dir,mode),cwd:dir,memory,locale:'ja-JP',emit(){}});let first=0,timing={};const audio={played:0,pumping:false,record(){},async stopRecording(){},stop(){},enqueue(){first||=performance.now()},finish(){},async close(){}};const oma=new Oma({agent,speech,audio,memory,locale:'ja-JP',emit:p=>{if(p.latency)timing=p.latency;if(p.error)throw Error(p.error)}});fixtures.push({mode,oma,agent,memory,reset(){first=0;timing={}},read:()=>({first,timing})});}
- for(let trial=0;trial<3;trial++)for(const f of trial%2?[...fixtures].reverse():fixtures){f.reset();const lastSpeech=performance.now();await f.oma.press(pcm);await sleep(300);if(f.mode==='overlap')f.oma.prepareTranscription();await sleep(700);await f.oma.release();const {first,timing}=f.read();if(!first)throw Error('No audio returned');console.log(JSON.stringify({trial,mode:f.mode,lastSpeechToAudioMs:Math.round(first-lastSpeech),...timing}));}
-}finally{for(const f of fixtures){await f.oma.close();f.memory.close()}rmSync(dir,{recursive:true,force:true});}

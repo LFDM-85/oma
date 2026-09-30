@@ -1,6 +1,6 @@
 # ADR 0001: Keep presentation in the shell and runtime work in a worker
 
-- Status: Accepted
+- Status: Accepted; Local/Pi-specific behavior superseded by [0007](0007-gpt-live-only.md)
 - Recorded: 2026-09-28
 
 ## Context

@@ -3,7 +3,7 @@ import {spawn,execFileSync} from 'node:child_process';
 import {mkdtempSync,cpSync,writeFileSync,rmSync} from 'node:fs';
 import {tmpdir,homedir} from 'node:os';import {join} from 'node:path';
 import {createInterface} from 'node:readline';import assert from 'node:assert/strict';
-import {Memory} from '../runtime/memory.mjs';import {Speech} from '../runtime/speech.mjs';import {loadApiKey} from '../runtime/credentials.mjs';
+import {Memory} from '../runtime/memory.mjs';import {Speech} from './fixtures/synthetic-speech.mjs';import {loadApiKey} from '../runtime/credentials.mjs';
 const dir=mkdtempSync(join(tmpdir(),'oma-spoken-bye-'));let child,module;
 try{
  const chunks=[];await new Speech({key:await loadApiKey(),locale:'ja-JP'}).speak('ありがとう、バイバイ。',p=>chunks.push(p));
