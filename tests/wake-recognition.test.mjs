@@ -22,3 +22,27 @@ test('recognizes the observed Japanese call without accepting weak prefixes or u
  assert.equal(p.status,0,p.stderr);
  assert.deepEqual(JSON.parse(p.stdout),[true,true,true,false,false,false,false,false,false]);
 });
+const english=`import sys,json
+sys.path.insert(0,'runtime')
+from wake_match import EnglishWake
+out=[]
+for results in json.load(sys.stdin):
+    wake=EnglishWake();out.append(any([wake.accept(r) for r in results]))
+print(json.dumps(out))`;
+const timed=(text,words)=>({text,result:words.map(([word,conf,start,end])=>({word,conf,start,end}))});
+test('recognizes the English call, including a pause after the greeting, but not similar names',()=>{
+ const samples=[
+  [result('hey oma',[['hey',1],['oma',.81]])],
+  [result('hey oh mah',[['hey',1],['oh',.89],['mah',.45]])],
+  [timed('hey',[['hey',1,.5,.8]]),timed('oma',[['oma',1,1.2,1.6]])],
+  [result('hey oma',[['hey',.6],['oma',1]])],
+  [result('hey oh ma',[['hey',1],['oh',.5],['ma',.5]])],
+  [result('hey emma',[['hey',1],['emma',1]])],
+  [result('hey oh ma [unk]',[['hey',1],['oh',.6],['ma',.6],['[unk]',1]])],
+  [result('oma',[['oma',1]])],
+  [timed('hey',[['hey',1,.5,.8]]),timed('oma',[['oma',1,3,3.4]])],
+ ];
+ const p=spawnSync('python3',['-c',english],{cwd:new URL('..',import.meta.url),input:JSON.stringify(samples),encoding:'utf8'});
+ assert.equal(p.status,0,p.stderr);
+ assert.deepEqual(JSON.parse(p.stdout),[true,true,true,false,false,false,false,false,false]);
+});

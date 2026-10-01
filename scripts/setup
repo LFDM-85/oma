@@ -75,7 +75,7 @@ if ask "Enable mouse control? (optional)"; then
     echo "Mouse control was not installed. Voice and keyboard control still work; rerun SET UP to retry."
   fi
 fi
-if ask "Enable voice wake? (optional; downloads a Japanese recognition model)"; then
+if ask "Enable voice wake? (optional; downloads Japanese and English recognition models)"; then
   if install_packages python python-pip curl && "$root/scripts/setup-wake"; then
     echo "Enable voice wake in Preferences after connecting your AI."
   else

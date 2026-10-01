@@ -8,7 +8,13 @@ between conversations.
 
 ![O.M.A. with a fictional conversation](preview.png)
 
+![Real screenshots recorded in an Omarchy VM with the Neon Glow theme: O.M.A. beside Chromium, the approval dialog, and mini mode](docs/images/screenshots.png)
+
 - Spoken conversation with captions, microphone selection, and language settings.
+- A holographic interface in your theme color. Every part reports real state: the
+  desktop map shows the windows O.M.A. knows about and marks the task target, the
+  ring lights LISTEN, THINK, SPEAK, or WORK, the MIC and VOX meters show your voice
+  and O.M.A.'s, and the task bar shows running work.
 - Desktop tools guided by the bundled O.M.A. skills and your installed Omarchy skill.
 - Locally stored memories and searchable conversation transcripts.
 - A compact mini mode and a companion tile beside an application.
@@ -28,7 +34,7 @@ between conversations.
 
 Mouse control requires the optional C/Wayland helper built during setup.
 Camera support requires FFmpeg and v4l2-ctl. Optional voice wake uses local Vosk
-recognition and downloads a Japanese model during setup.
+recognition and downloads Japanese and English models during setup.
 
 ## Install and set up
 
@@ -57,15 +63,16 @@ whole system or restart the desktop shell.
 
 ## Use
 
-Open O.M.A. with the bar icon, F8 if configured, or “Hey O.M.A.” if voice wake is
-enabled. Speak naturally; GPT-Live handles continuous listening and speech.
-Try “Remember that I prefer tiled windows”, “Open the last URL”, or, with camera
-support configured, “What am I holding?”
+Open O.M.A. with the bar icon, F8 if configured, or by saying “Hey OH-mah” in
+English or “ヘイ、オーマ” in Japanese if voice wake is enabled. Speak naturally; GPT-Live handles continuous listening and speech.
+Try “Open the last URL”, “Create a new note in OmaText”, “Remember that I use
+Chromium”, or, with camera support configured, “What am I holding?”
 
 Consequential actions require the local confirmation buttons; a spoken “yes” is
 not approval. Talking over a reply does not cancel PC work. Use **Stop** or
 **Escape** to close the session and cancel pending local operations; this does
-not undo completed actions. Say “Thanks, bye” to end a conversation.
+not undo completed actions. Say “Thanks, bye” to end a conversation; O.M.A.
+answers with a short recorded farewell and its closing sound.
 
 Paid sessions connect when you open a conversation and close when it ends.
 After inactivity, O.M.A. gives a reminder and then says goodbye and dismisses
@@ -83,8 +90,9 @@ oma transcript --today  # Open today's conversations (local timezone)
 oma transcript --follow # Follow live captions in the terminal; Ctrl+C exits
 ```
 
-Plain-text exports open in your default text application via `xdg-open` and are
-stored under `~/.local/share/oma/transcripts/` by default. Run the command again
+Plain-text exports open in your default text application via `xdg-open`; a
+terminal editor such as Omarchy's default Neovim opens in a terminal through
+`omarchy-launch-editor`. Exports are stored under `~/.local/share/oma/transcripts/` by default. Run the command again
 to refresh an export, or use `--follow`. Captions are model transcripts, not an
 exact record of what you heard, especially when speech is interrupted.
 
@@ -94,6 +102,13 @@ Say “Switch to mini mode” to show only the animated face in a small window.
 Say “Return to normal mode” or double-click the face to toggle modes.
 Audio and conversation continue; approvals, questions, and errors temporarily
 show the full interface. The mode lasts until the plugin reloads.
+
+### Window
+
+O.M.A. is an ordinary window. At startup it registers its own Hyprland window
+rules (floating, centered, opaque, and a borderless mini mode), and registers
+them again after a Hyprland config reload, so your Hyprland configuration needs
+no edits.
 
 ### Alongside an application
 

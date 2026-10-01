@@ -30,7 +30,7 @@ export class WakeListener {
  async poll(){
   if(this.closed||this.polling)return;this.polling=true;
   try{
-   const python=join(this.data,'wake-venv/bin/python'),model=join(this.data,'models/vosk-model-small-ja-0.22');
+   const python=join(this.data,'wake-venv/bin/python'),model=join(this.data,'models/vosk-model-small-ja-0.22'),english=join(this.data,'models/vosk-model-small-en-us-0.15');
    const s={...this.ready(),enabled:this.enabled,available:existsSync(python)&&existsSync(model),locked:null,muted:null};
    if(s.enabled&&s.available&&s.key&&s.idle){
     try{
@@ -48,7 +48,7 @@ export class WakeListener {
    if(!listen||!this.ready().idle){this.pause();return;}
    if(this.running)return;
    this.running=true;
-   const recognizer=spawn(python,[fileURLToPath(new URL('./wake.py',import.meta.url)),model],{stdio:['pipe','pipe','ignore']});this.recognizer=recognizer;
+   const recognizer=spawn(python,[fileURLToPath(new URL('./wake.py',import.meta.url)),model,...(existsSync(english)?[english]:[])],{stdio:['pipe','pipe','ignore']});this.recognizer=recognizer;
    recognizer.on('error',()=>this.failed());recognizer.stdin.on('error',()=>{});
    recognizer.on('exit',()=>{if(this.recognizer===recognizer)this.failed()});
    createInterface({input:recognizer.stdout}).on('line',line=>{

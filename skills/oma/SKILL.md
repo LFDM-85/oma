@@ -210,7 +210,7 @@ F8 or the bar icon opens O.M.A. Speak naturally while the panel is open; GPT-Liv
 handles listening and speaking continuously. Escape closes the panel and its
 paid voice session. Settings uses one OpenAI API key, stored in the desktop
 keyring. A connection test plays a short reply without recording the microphone.
-When enabled, local wake detection opens the panel after hearing Hey O.M.A.
+When enabled, local wake detection opens the panel after hearing “Hey OH-mah” or “ヘイ、オーマ”.
 After 10 seconds without a transcribed user utterance, O.M.A. prompts once.
 After that prompt finishes, another 10 seconds without a reply triggers a farewell
 and closes the panel after playback. Noise alone does not reset the GPT-Live

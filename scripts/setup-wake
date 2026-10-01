@@ -7,7 +7,8 @@ python -m venv "$oma_data/wake-venv"
 "$oma_data/wake-venv/bin/pip" install 'vosk==0.3.45'
 archive="$(mktemp)"
 trap 'rm -f "$archive"' EXIT
-curl -fL --retry 2 --retry-delay 2 --connect-timeout 15 --max-time 600 https://alphacephei.com/vosk/models/vosk-model-small-ja-0.22.zip -o "$archive"
+for model in vosk-model-small-ja-0.22 vosk-model-small-en-us-0.15; do
+curl -fL --retry 2 --retry-delay 2 --connect-timeout 15 --max-time 600 "https://alphacephei.com/vosk/models/$model.zip" -o "$archive"
 python - "$archive" "$oma_data/models" <<'PY'
 import pathlib,sys,zipfile
 root=pathlib.Path(sys.argv[2]).resolve()
@@ -16,3 +17,4 @@ with zipfile.ZipFile(sys.argv[1]) as z:
   if not (root/entry.filename).resolve().is_relative_to(root):raise ValueError('Unsafe model path')
  z.extractall(root)
 PY
+done
