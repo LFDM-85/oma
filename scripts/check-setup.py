@@ -19,6 +19,10 @@ try:
 except (OSError, ValueError, subprocess.SubprocessError):
     missing.append("Node.js 24+")
 for command, label in [
+    ("npm", "npm"),
+    ("secret-tool", "Desktop keyring (libsecret)"),
+    ("xdg-terminal-exec", "Terminal launcher (run scripts/setup in a terminal)"),
+    ("systemd-run", "systemd setup launcher"),
     ("pw-record", "PipeWire recording"),
     ("pw-play", "PipeWire playback"), ("pw-cli", "PipeWire tools"),
     ("wpctl", "WirePlumber"), ("grim", "Screenshots"),

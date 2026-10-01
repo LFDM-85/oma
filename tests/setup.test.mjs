@@ -3,18 +3,18 @@ import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 const script=new URL('../scripts/check-setup.py',import.meta.url).pathname;
 test('setup check reports missing tools without Node or a working runtime',()=>{
- const result=JSON.parse(execFileSync('/usr/bin/python3',[script],{env:{PATH:'/nonexistent'},encoding:'utf8'}));
+ const result=JSON.parse(execFileSync('/usr/bin/python3',[script],{env:{PATH:'/nonexistent'},encoding:'utf8',stdio:['ignore','pipe','pipe']}));
  assert.equal(result.setupRequired,true);
  assert.match(result.setupMessage,/Node.js 24/);
  assert.match(result.setupMessage,/GPT-Live SDK/);
 
 });
 test('setup check never contains credentials',()=>{
- const result=execFileSync('/usr/bin/python3',[script],{env:{PATH:'/nonexistent',OPENAI_API_KEY:'secret-fixture'},encoding:'utf8'});
+ const result=execFileSync('/usr/bin/python3',[script],{env:{PATH:'/nonexistent',OPENAI_API_KEY:'secret-fixture'},encoding:'utf8',stdio:['ignore','pipe','pipe']});
  assert.ok(!result.includes('secret-fixture'));
 });
 
-import {mkdtempSync, mkdirSync, writeFileSync, symlinkSync, readFileSync, rmSync} from 'node:fs';
+import {mkdtempSync, mkdirSync, writeFileSync, symlinkSync, readFileSync, rmSync, cpSync, existsSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {spawnSync} from 'node:child_process';
@@ -29,7 +29,7 @@ for (const scenario of ['success','packageFailure','wakeFailure']) test('isolate
  for(const name of ['dirname','python3','find','grep','mkdir','install'])symlinkSync('/usr/bin/'+name,join(bin,name));
  const executable=(name,body)=>writeFileSync(join(bin,name),'#!/bin/bash\n'+body,{mode:0o755});
  executable('sudo',`echo "$*" >> "${dir}/commands"
-${failInstall?'exit 1':`for name in node pw-record pw-play pw-cli wpctl grim wtype xdg-open setpriv secret-tool; do
+${failInstall?'exit 1':`for name in node pw-record pw-play pw-cli wpctl grim wtype xdg-open setpriv secret-tool xdg-terminal-exec systemd-run npm; do
 printf '#!/bin/bash\\necho 24\\n' > "${bin}/$name"
 chmod +x "${bin}/$name"
 done`}
@@ -65,4 +65,74 @@ printf '#!/bin/bash\\necho codex-cli-test\\n' > "${bin}/codex"
   assert.match(result.stdout,/Computer setup is complete/);
   if(failWake)assert.match(result.stdout,/Voice wake was not installed/);
  }
+});
+
+// Run the real scripts in a disposable checkout/home. Package installation and
+// desktop commands are fixtures; this does not exercise a GUI or real keyring.
+const requiredCommands=['pw-record','pw-play','pw-cli','wpctl','grim','wtype','hyprctl','xdg-open','setpriv','secret-tool','xdg-terminal-exec','systemd-run','npm'];
+function setupFixture(t,{missing=[],sdk=true,packageFailure=false,npmFailure=false,omitInstalled=''}={}){
+ const dir=mkdtempSync(join(tmpdir(),'oma-first-run-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));
+ const bin=join(dir,'bin'),root=join(dir,'checkout'),home=join(dir,'home');
+ mkdirSync(bin);mkdirSync(root);mkdirSync(join(home,'.config/hypr'),{recursive:true});
+ writeFileSync(join(home,'.config/hypr/bindings.lua'),'-- existing user shortcuts\n');
+ cpSync(new URL('../scripts',import.meta.url),join(root,'scripts'),{recursive:true});
+ // NumPy is a fixture so the test is independent of system Python packages.
+ const modules=join(dir,'modules');mkdirSync(modules);writeFileSync(join(modules,'numpy.py'),'');
+ for(const name of ['dirname','python3','grep','mkdir','install','cp','date','cat'])symlinkSync('/usr/bin/'+name,join(bin,name));
+ const command=(name,body)=>writeFileSync(join(bin,name),'#!/bin/bash\n'+body,{mode:0o755});
+ const marker=join(dir,'sdk'),log=join(dir,'commands');
+ if(sdk)writeFileSync(marker,'');
+ const nodeBody=`if [[ "$1" == -p ]]; then echo 24; elif [[ "$1" == --input-type=module ]]; then [[ -f '${marker}' ]]; else exit 0; fi`;
+ command('node',nodeBody);
+ for(const name of requiredCommands){
+  if(missing.includes(name))continue;
+  command(name,name==='hyprctl'?`echo "$*" >> '${log}'; if [[ "$1" == -j ]]; then echo '[]'; fi`:name==='npm'?`echo "npm $*" >> '${log}'; ${npmFailure?'exit 17':`touch '${marker}'`}`:'exit 0');
+ }
+ symlinkSync('/usr/bin/touch',join(bin,'touch'));
+ command('find','echo /usr/lib/spa-0.2/aec/libspa-aec-webrtc.so');
+ command('pacman','exit 1');
+ command('omarchy',`echo "$*" >> '${log}'\n${packageFailure?'exit 19':`for name in ${missing.filter(n=>n!==omitInstalled).join(' ')}; do /usr/bin/printf '#!/bin/bash\\nexit 0\\n' > '${bin}/'$name; /usr/bin/chmod +x '${bin}/'$name; done`}`);
+ const env={...process.env,PATH:bin,HOME:home,PYTHONPATH:modules};
+ const probe=()=>JSON.parse(execFileSync('/usr/bin/python3',[join(root,'scripts/check-setup.py')],{env,encoding:'utf8',stdio:['ignore','pipe','pipe']}));
+ const run=(input='n\nn\ny\n\n')=>spawnSync('/bin/bash',[join(root,'scripts/setup')],{env,input,encoding:'utf8',timeout:15000});
+ return {probe,run,home,log,bin,marker,command};
+}
+for(const [command,label] of [['secret-tool','keyring'],['xdg-terminal-exec','terminal'],['systemd-run','systemd'],['npm','npm']]){
+ test('preflight requires '+command+' before allowing onboarding',t=>{
+  const f=setupFixture(t,{missing:[command]});const result=f.probe();
+  assert.equal(result.setupRequired,true);assert.match(result.setupMessage,new RegExp(label,'i'));
+ });
+}
+test('interactive setup installs missing keyring and launcher tools only after consent',t=>{
+ const f=setupFixture(t,{missing:['secret-tool','xdg-terminal-exec','systemd-run']});
+ const declined=f.run('n\n\n');assert.notEqual(declined.status,0);assert.equal(existsSync(f.log),false);
+ const accepted=f.run('y\nn\nn\nn\n\n');assert.equal(accepted.status,0,accepted.stdout+accepted.stderr);
+ const commands=readFileSync(f.log,'utf8');assert.match(commands,/pkg add.*libsecret/);assert.match(commands,/xdg-terminal-exec/);assert.match(commands,/systemd/);
+ assert.equal(f.probe().setupRequired,false);
+});
+test('setup refuses completion when package success leaves the keyring unavailable',t=>{
+ const f=setupFixture(t,{missing:['secret-tool'],omitInstalled:'secret-tool'});
+ const result=f.run('y\nn\nn\nn\n\n');assert.notEqual(result.status,0);assert.doesNotMatch(result.stdout,/Computer setup is complete/);
+ assert.match(result.stdout,/dependencies are still unavailable/);
+});
+test('failed package setup can be retried without losing existing configuration',t=>{
+ const f=setupFixture(t,{missing:['secret-tool'],packageFailure:true});
+ const before=readFileSync(join(f.home,'.config/hypr/bindings.lua'),'utf8');
+ const failed=f.run('y\n\n');assert.notEqual(failed.status,0);assert.match(failed.stdout,/Setup did not finish/);
+ assert.equal(readFileSync(join(f.home,'.config/hypr/bindings.lua'),'utf8'),before);
+ f.command('secret-tool','exit 0');const retry=f.run('n\nn\nn\n\n');assert.equal(retry.status,0,retry.stdout+retry.stderr);
+ assert.equal(readFileSync(join(f.home,'.config/hypr/bindings.lua'),'utf8'),before);
+});
+test('clean dependency setup retries a failed npm install and uses the locked SDK',t=>{
+ const f=setupFixture(t,{sdk:false,npmFailure:true});
+ const failed=f.run('y\n\n');assert.notEqual(failed.status,0);assert.equal(f.probe().setupRequired,true);
+ f.command('npm',`echo "npm $*" >> '${f.log}'; touch '${f.marker}'`);
+ const result=f.run('y\nn\nn\nn\n\n');assert.equal(result.status,0,result.stdout+result.stderr);
+ assert.match(readFileSync(f.log,'utf8'),/npm ci --omit=dev --ignore-scripts --bin-links=false/);assert.equal(f.probe().setupRequired,false);
+});
+test('re-running successful setup preserves its F8 shortcut without adding another binding',t=>{
+ const f=setupFixture(t);const first=f.run();assert.equal(first.status,0,first.stdout+first.stderr);
+ const binding=join(f.home,'.config/hypr/bindings.lua'),before=readFileSync(binding,'utf8');assert.match(before,/shell toggle io.github.komagata.oma/);
+ const second=f.run();assert.equal(second.status,0,second.stdout+second.stderr);assert.equal(readFileSync(binding,'utf8'),before);
+ assert.equal((readFileSync(f.log,'utf8').match(/reload/g)||[]).length,1);
 });

@@ -22,7 +22,8 @@ between conversations.
   charges, with additional usage for the Responses backend.
 - A working microphone and audio output. Setup checks for **Node.js 24+**, npm,
   **Python 3 with NumPy**, PipeWire with WebRTC echo cancellation, WirePlumber,
-  grim, wtype, xdg-open, setpriv, and desktop keyring support, and offers to
+  grim, wtype, xdg-open, setpriv, secret-tool for desktop keyring support,
+  xdg-terminal-exec, and systemd-run, and offers to
   install missing dependencies.
 
 Mouse control requires the optional C/Wayland helper built during setup.
@@ -35,8 +36,12 @@ recognition and downloads a Japanese model during setup.
 omarchy plugin add https://github.com/komagata/oma --enable
 ```
 
-1. Open O.M.A. from its bar icon, then open **Settings**. Select
-   **Set up this computer** if dependencies are missing.
+1. Open O.M.A. from its bar icon, then open **Settings**. On the welcome screen,
+   select **Get started**. If dependencies are missing, select
+   **Set up this computer** on the next screen.
+   If the setup terminal cannot open, run
+   `bash ~/.config/omarchy/plugins/io.github.komagata.oma/scripts/setup`
+   in your terminal, then reopen Settings.
 2. Enter your **OpenAI API key** and select **Save key**. One key connects both
    GPT-Live and the Responses backend. Saved keys stay masked; enter a replacement
    and select **Update key** to save it to the desktop keyring.

@@ -4,7 +4,7 @@ test('a clean checkout preflight explains the missing GPT-Live dependency withou
  const root=fileURLToPath(new URL('..',import.meta.url)),checkout=mkdtempSync(join(tmpdir(),'oma-plugin-checkout-'));t.after(()=>rmSync(checkout,{recursive:true,force:true}));
  for(const dir of ['scripts','runtime','skills'])cpSync(join(root,dir),join(checkout,dir),{recursive:true,filter:p=>!p.endsWith('/oma-pointer')});
  cpSync(join(root,'package.json'),join(checkout,'package.json'));
- const result=JSON.parse(execFileSync('python3',[join(checkout,'scripts/check-setup.py')],{encoding:'utf8'}));
+ const result=JSON.parse(execFileSync('python3',[join(checkout,'scripts/check-setup.py')],{encoding:'utf8',stdio:['ignore','pipe','pipe']}));
  assert.equal(result.setupRequired,true);assert.match(result.setupMessage,/GPT-Live SDK/);assert.doesNotMatch(result.setupMessage,/Codex/);
 });
 

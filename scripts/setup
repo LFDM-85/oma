@@ -38,6 +38,8 @@ wtype wtype
 xdg-open xdg-utils
 setpriv util-linux
 secret-tool libsecret
+xdg-terminal-exec xdg-terminal-exec
+systemd-run systemd
 PACKAGES
 python3 -c "import numpy" >/dev/null 2>&1 || packages+=(python-numpy)
 if command -v node >/dev/null && ! node -e 'process.exit(Number(process.versions.node.split(".")[0]) >= 24 ? 0 : 1)'; then
@@ -81,7 +83,7 @@ if ask "Enable voice wake? (optional; downloads a Japanese recognition model)"; 
   fi
 fi
 bindings="$HOME/.config/hypr/bindings.lua"
-if [[ -f "$bindings" ]] && ! grep -q 'io.github.komagata.oma open' "$bindings"; then
+if [[ -f "$bindings" ]] && ! grep -Eq 'io\.github\.komagata\.oma open|shell (open|toggle) io\.github\.komagata\.oma([[:space:]]|$)' "$bindings"; then
   if ! hyprctl -j binds | python3 -c 'import json,sys; sys.exit(1 if any(str(b.get("key","")).upper()=="F8" for b in json.load(sys.stdin)) else 0)'; then
     echo "F8 is assigned or could not be checked. Existing shortcuts were preserved; use the bar icon."
   elif ask "Use F8 to toggle O.M.A.?"; then
