@@ -6,7 +6,7 @@ A voice assistant for the Omarchy desktop with a theme-colored low-poly face.
 Talk with GPT-Live, ask it to operate your PC, and remember useful preferences
 between conversations.
 
-![O.M.A. with a fictional conversation](preview.png)
+![O.M.A. running on the Omarchy desktop](preview.png)
 
 ![Real screenshots recorded in an Omarchy VM with the Neon Glow theme: O.M.A. beside Chromium, the approval dialog, and mini mode](docs/images/screenshots.png)
 
