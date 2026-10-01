@@ -69,3 +69,13 @@ assets stay in source but are excluded from the runtime payload.
 
 Removed architecture documents, model comparisons and previews are available in
 [the snapshot archive](ARCHIVE.md).
+
+## Source layout
+
+The root [manifest](../manifest.json) loads host entry points from `qml/`:
+[Service](../qml/Service.qml), [Overlay](../qml/Overlay.qml), and
+[BarWidget](../qml/BarWidget.qml). [Conversation](../qml/views/Conversation.qml)
+and [Settings](../qml/views/Settings.qml) live in `qml/views/`; reusable visual
+components live in `qml/components/`. Explicit relative directory imports keep
+the same tree usable from Git and content-addressed builds, without custom Qt
+modules. Runtime, scripts and assets stay at the payload root.

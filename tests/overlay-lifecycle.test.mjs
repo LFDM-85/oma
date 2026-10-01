@@ -5,7 +5,7 @@ import vm from 'node:vm';
 // Quickshell's native plugin is only registered by its own executable.
 // Exercise the actual lifecycle function without creating layer-shell windows.
 test('resolving a closed overlay never cancels the incoming wake greeting',()=>{
- const qml=readFileSync(new URL('../Overlay.qml',import.meta.url),'utf8');
+ const qml=readFileSync(new URL('../qml/Overlay.qml',import.meta.url),'utf8');
  const source=qml.slice(qml.indexOf('function resolveService()'),qml.indexOf('function open('));
  const patches=[];
  const ctx={shell:{serviceFor(){return {keyConfigured:true}}},service:null,opened:false,settingsMode:false,
@@ -16,7 +16,7 @@ test('resolving a closed overlay never cancels the incoming wake greeting',()=>{
  assert.deepEqual(patches,['presentation','greeting']);
 });
 test('desktop observation keeps a docked window mapped so its tile survives',()=>{
- const qml=readFileSync(new URL('../Overlay.qml',import.meta.url),'utf8');
+ const qml=readFileSync(new URL('../qml/Overlay.qml',import.meta.url),'utf8');
  const expression=qml.match(/^        visible: (.+)$/m)[1];
  const root={opened:true,docked:true,service:{computerUsing:true}};
  assert.equal(vm.runInNewContext(expression,{root}),true);
@@ -46,7 +46,7 @@ test('panel lifecycle independently reports animation and actual hiding',async()
 });
 
 test('temporary-hide opens are bounded, validated, cancelled by target close and discarded at panel close',()=>{
- const qml=readFileSync(new URL('../Overlay.qml',import.meta.url),'utf8');
+ const qml=readFileSync(new URL('../qml/Overlay.qml',import.meta.url),'utf8');
  const source=qml.slice(qml.indexOf('function companionEvent('),qml.indexOf('onTargetScreenChanged:'));
  const sync=qml.slice(qml.indexOf('function syncAutoCompanion()'),qml.indexOf('function syncPresentation()'));
  const opens=[],closes=[];

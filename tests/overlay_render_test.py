@@ -22,15 +22,14 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def prepare(directory, surface_only=False):
     directory.mkdir(parents=True, exist_ok=True)
-    for source in ROOT.glob("*.qml"):
-        if source.name not in {"Service.qml", "BarWidget.qml", "Settings.qml"}:
-            shutil.copy(source, directory / source.name)
-    overlay = (directory / "Overlay.qml").read_text()
+    shutil.copytree(ROOT / "qml", directory / "qml", dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns("Service.qml", "BarWidget.qml", "Settings.qml"))
+    overlay = (directory / "qml/Overlay.qml").read_text()
     overlay = overlay.replace("id: root", "id: root\n    property alias testWindow: window", 1)
-    (directory / "Overlay.qml").write_text(overlay)
+    (directory / "qml/Overlay.qml").write_text(overlay)
     shutil.copytree(ROOT / "assets", directory / "assets", dirs_exist_ok=True)
     shutil.copytree(ROOT / "tests/qml-imports/qs", directory / "qs", dirs_exist_ok=True)
-    (directory / "Settings.qml").write_text("import QtQuick\nItem { property var service; property bool opened; signal dismiss(); signal back() }\n")
+    (directory / "qml/views/Settings.qml").write_text("import QtQuick\nItem { property var service; property bool opened; signal dismiss(); signal back() }\n")
     fixture = (ROOT / "tests/fixtures/overlay-render.qml").read_text()
     if surface_only:
         fixture = fixture.replace("property bool surfaceOnly: false", "property bool surfaceOnly: true")

@@ -1,6 +1,6 @@
 import QtQuick
 import QtTest
-import "../.." as Oma
+import "../../qml/views" as Oma
 TestCase {
     id: tests
     name: "ConversationOpening"

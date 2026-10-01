@@ -1,5 +1,7 @@
 pragma ComponentBehavior: Bound
 import QtQuick
+import "views"
+import "components"
 import QtQuick.Window
 import QtQuick.Controls
 import Quickshell

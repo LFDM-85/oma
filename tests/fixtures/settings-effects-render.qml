@@ -1,4 +1,5 @@
 import QtQuick
+import "../../qml/views"
 import QtQuick.Controls
 ApplicationWindow {
  id: win; width: 800; height: 900; visible: true; color: "#101315"

@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {mkdtempSync,cpSync,rmSync,readFileSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';import {execFileSync} from 'node:child_process';import {fileURLToPath} from 'node:url';
+import {mkdtempSync,cpSync,rmSync,readFileSync,statSync,readdirSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';import {execFileSync} from 'node:child_process';import {fileURLToPath} from 'node:url';
 test('a clean checkout preflight explains the missing GPT-Live dependency without starting the worker',t=>{
  const root=fileURLToPath(new URL('..',import.meta.url)),checkout=mkdtempSync(join(tmpdir(),'oma-plugin-checkout-'));t.after(()=>rmSync(checkout,{recursive:true,force:true}));
  for(const dir of ['scripts','runtime','skills'])cpSync(join(root,dir),join(checkout,dir),{recursive:true,filter:p=>!p.endsWith('/oma-pointer')});
@@ -22,13 +22,21 @@ test('explicit package includes every relative runtime import and QML resource',
  for(const name of files){
   if(!/\.(mjs|qml)$/.test(name))continue;
   const source=readFileSync(join(root,name),'utf8');
-  for(const match of source.matchAll(/(?:from\s*|import\(|new URL\(|Qt\.resolvedUrl\()['"]([^'"]+)['"]/g)){
+  for(const match of source.matchAll(/(?:from\s*|import\s+|import\(|new URL\(|Qt\.resolvedUrl\()['"]([^'"]+)['"]/g)){
    const value=match[1];if(!value.startsWith('.')&&!name.endsWith('.qml'))continue;
    // Template fragments are covered by explicit skill/asset assertions below.
-   if(value.endsWith('/'))continue;
+   if(value.endsWith('/')&&!name.endsWith('.qml'))continue;
    const resolved=fileURLToPath(new URL(value,new URL(name,new URL('../',import.meta.url))));
    const relative=resolved.slice(root.length);
-   assert.ok(files.has(relative),name+' requires '+relative);
+   if(name.endsWith('.qml')&&match[0].startsWith('import ')&&!value.endsWith('.js')){
+    assert.ok(statSync(resolved).isDirectory(),name+' imports directory '+relative);
+    const components=readdirSync(resolved).filter(f=>f.endsWith('.qml'));
+    assert.ok(components.length>0,name+' imports QML from '+relative);
+    for(const component of components)assert.ok(files.has(join(relative,component)),name+' requires '+join(relative,component));
+   }else{
+    assert.ok(files.has(relative),name+' requires '+relative);
+    if(name.endsWith('.qml'))assert.ok(statSync(resolved).isFile(),name+' requires file '+relative);
+   }
   }
  }
  for(const name of ['skills/oma/SKILL.md','skills/oma-camera/SKILL.md','runtime/streaming-vocoder.py','runtime/wake.py','runtime/wake_match.py','runtime/restart_oma.py','runtime/oma-pointer','assets/FaceMesh.js','assets/reference-face.png','assets/crt.frag.qsb','assets/startup.pcm','scripts/setup','scripts/check-setup.py','scripts/build-pointer','scripts/setup-wake','scripts/install-cli','scripts/oma'])assert.ok(files.has(name),name);

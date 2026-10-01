@@ -7,7 +7,7 @@ TestCase {
     visible: true
     width: 400; height: 150
     function createCaption() {
-        const component = Qt.createComponent("../../TypewriterText.qml")
+        const component = Qt.createComponent("../../qml/components/TypewriterText.qml")
         compare(component.status, Component.Ready, component.errorString())
         return createTemporaryObject(component, tests, {width: 350, height: 70, interval: 25})
     }

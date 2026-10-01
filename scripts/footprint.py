@@ -28,7 +28,8 @@ for entry in git('ls-tree', '-rlz', args.baseline).split(b'\0'):
         metadata, name = entry.split(b'\t', 1)
         before[name.decode()] = int(metadata.split()[-1])
 current = {name.decode() for name in git('ls-files', '--cached', '--others', '--exclude-standard', '-z').split(b'\0') if name}
-# Reproduce the old install-local glob selection over the snapshot tree.
+# Reproduce the historical install-local root QML glob over the snapshot tree.
+# Current nested QML is counted via runtime-files.txt below, not these old globs.
 patterns = ['*.qml', 'runtime/*.mjs', 'runtime/*.py', 'scripts/*', 'native/*',
             'docs/*.md', 'assets/*', 'skills/*/SKILL.md', 'skills/*/scripts/*.mjs']
 old_payload = {name: size for name, size in before.items() if name in ['package.json', 'package-lock.json', '.npmrc'] or any(name.count('/') == pattern.count('/') and fnmatch.fnmatchcase(name, pattern) for pattern in patterns)}

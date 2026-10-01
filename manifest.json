@@ -12,9 +12,9 @@
     "service"
   ],
   "entryPoints": {
-    "barWidget": "BarWidget.qml",
-    "service": "Service.qml",
-    "panel": "Overlay.qml"
+    "barWidget": "qml/BarWidget.qml",
+    "service": "qml/Service.qml",
+    "panel": "qml/Overlay.qml"
   },
   "barWidget": {
     "displayName": "O.M.A.",

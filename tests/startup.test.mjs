@@ -27,7 +27,7 @@ test('GPT-Live startup does not cut the opening cue during microphone checks',as
  assert.equal(recorded,true);assert.equal(playing,true,'Opening sound must finish independently of network/microphone startup');
 });
 test('keyboard opening requests the same greeting as the bar button',()=>{
- const service=readFileSync(new URL('../Service.qml',import.meta.url),'utf8');
+ const service=readFileSync(new URL('../qml/Service.qml',import.meta.url),'utf8');
  const press=service.match(/function press\(\) \{[^\n]+/)[0];
  const shown=[];const context={keyConfigured:true,show:(...args)=>shown.push(args),command(){},settings(){}};
  vm.createContext(context);vm.runInContext(press+'\npress()',context);

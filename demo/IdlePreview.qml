@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Window
-import ".." as Oma
+import "../qml/components" as Oma
 Window {
  width: 640; height: 400; visible: true; color: "#030a03"
  Row {

@@ -40,12 +40,12 @@ Item {
         id: setupTerminal
         onStarted: if (root.shell) root.shell.hide("io.github.komagata.oma")
         onExited: (exitCode, exitStatus) => root.setupExited(exitCode)
-        command: ["systemd-run", "--user", "--collect", "--wait", "--service-type=exec", "--property=ExitType=cgroup", "--quiet", "--", "xdg-terminal-exec", "bash", Qt.resolvedUrl("scripts/setup").toString().replace(/^file:\/\//, "")]
+        command: ["systemd-run", "--user", "--collect", "--wait", "--service-type=exec", "--property=ExitType=cgroup", "--quiet", "--", "xdg-terminal-exec", "bash", Qt.resolvedUrl("../scripts/setup").toString().replace(/^file:\/\//, "")]
     }
     Timer { interval: 2500; repeat: true; running: root.setupBusy; onTriggered: root.checkSetup() }
     Process {
         id: setupProbe
-        command: ["python3", Qt.resolvedUrl("scripts/check-setup.py").toString().replace(/^file:\/\//, "")]
+        command: ["python3", Qt.resolvedUrl("../scripts/check-setup.py").toString().replace(/^file:\/\//, "")]
         running: true
         stdout: StdioCollector { onStreamFinished: {
             try {
@@ -154,7 +154,7 @@ Item {
     Timer { id: restartWorker; interval: 300; onTriggered: worker.running = true }
     Process {
         id: worker
-        command: ["node", Qt.resolvedUrl("runtime/main.mjs").toString().replace(/^file:\/\//, "")]
+        command: ["node", Qt.resolvedUrl("../runtime/main.mjs").toString().replace(/^file:\/\//, "")]
         onStarted: root.companionVisibility(root.companionVisible)
         stdinEnabled: true
         running: false

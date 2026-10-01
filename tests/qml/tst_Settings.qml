@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtTest
-import "../.."
+import "../../qml/views"
 TestCase {
  visible: true; name: "Onboarding"; when: windowShown; width: 800; height: 900
  QtObject {

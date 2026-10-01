@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-import {readFileSync} from 'node:fs';import {join,dirname,resolve} from 'node:path';import {homedir} from 'node:os';import {pathToFileURL} from 'node:url';
+import {readFileSync} from 'node:fs';import {join,dirname,basename,resolve} from 'node:path';import {homedir} from 'node:os';import {pathToFileURL} from 'node:url';
 try{
  const root=process.env.OMA_PLUGIN_DIR||join(process.env.XDG_CONFIG_HOME||join(homedir(),'.config'),'omarchy/plugins/io.github.komagata.oma');
  const manifest=JSON.parse(readFileSync(join(root,'manifest.json'),'utf8'));
- const runtime=join(dirname(resolve(root,manifest.entryPoints.service)),'runtime/transcript-cli.mjs');
+ const serviceDir=dirname(resolve(root,manifest.entryPoints.service));
+ const payloadRoot=basename(serviceDir)==='qml'?dirname(serviceDir):serviceDir;
+ const runtime=join(payloadRoot,'runtime/transcript-cli.mjs');
  const {main}=await import(pathToFileURL(runtime));await main();
 }catch(e){console.error('O.M.A.: '+e.message);process.exitCode=1;}

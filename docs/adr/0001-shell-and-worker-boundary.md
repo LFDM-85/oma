@@ -36,7 +36,7 @@ this boundary does not itself guarantee low latency or eliminate crashes.
 
 ## Implementation references
 
-- [Service.qml](../../Service.qml)
-- [Conversation.qml](../../Conversation.qml)
+- [Service.qml](../../qml/Service.qml)
+- [Conversation.qml](../../qml/views/Conversation.qml)
 - [Runtime entry point](../../runtime/main.mjs)
 - [Design](../DESIGN.md)

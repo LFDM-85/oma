@@ -1,4 +1,5 @@
 import QtQuick
+import "qml"
 import QtQuick.Window
 import Quickshell
 

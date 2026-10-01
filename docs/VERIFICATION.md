@@ -24,7 +24,9 @@ The real Python/NumPy FFT worker is tested with synthetic PCM, including fragmen
 packets, lookahead, silence and reset. These are signal checks, not listening.
 
 `tests/package_test.py` stages into a temporary directory with a fixture npm. It
-checks the exact payload, same-hash reuse, separate dependencies for a new hash,
+checks role-based QML entry points, complete production QML payload, staged
+directory imports/resources and actual nested Qt component/image loading when Qt
+is available, same-hash reuse, separate dependencies for a new hash,
 old-build retention and recovery from npm failure. A separate actual staged
 production npm install and LiveWS/runtime import smoke are part of this migration's
 record below. Neither invokes the live installer or reloads Omarchy.

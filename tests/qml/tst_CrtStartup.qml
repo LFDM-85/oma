@@ -1,6 +1,6 @@
 import QtQuick
 import QtTest
-import "../.." as Oma
+import "../../qml/components" as Oma
 TestCase {
  name: "CrtStartup"
  when: windowShown

@@ -1,13 +1,13 @@
 import QtQuick
 import QtQuick.Effects
-import "assets/FaceMesh.js" as Geometry
+import "../../assets/FaceMesh.js" as Geometry
 
 Canvas {
     id: root
     property color accentColor: "#cacccc"
     layer.enabled: true
     layer.effect: MultiEffect { colorization: 1; colorizationColor: root.accentColor }
-    readonly property url textureUrl: Qt.resolvedUrl("assets/reference-face.png")
+    readonly property url textureUrl: Qt.resolvedUrl("../../assets/reference-face.png")
     Component.onCompleted: { loadImage(textureUrl); if (active) powerOn() }
     onImageLoaded: requestPaint()
     property real mouthOpen: 0

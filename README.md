@@ -82,7 +82,8 @@ dismissal. Opening Settings and the local wake listener do not open paid session
 ### Transcripts
 
 Setup installs the `oma` command in `~/.local/bin`; keep that directory on `PATH`.
-For an existing installation, run `scripts/install-cli` from the plugin directory.
+After updating an existing installation, rerun `scripts/install-cli` from the
+plugin directory so `~/.local/bin/oma` uses the current payload layout.
 
 ```sh
 oma transcript          # Open the current or most recent conversation
@@ -148,6 +149,13 @@ omarchy plugin update io.github.komagata.oma
 ```
 
 ## Development
+
+Production QML lives in [`qml/`](qml): `BarWidget.qml`, `Overlay.qml` and
+`Service.qml` are the host entry points; [`qml/views/`](qml/views) contains
+Conversation and Settings; [`qml/components/`](qml/components) contains shared
+visual components. The root `manifest.json` points into this tree. Directory
+imports and relative resource paths work in both Git checkouts and immutable
+`builds/<hash>/` packages; runtime, scripts and assets remain beside `qml/`.
 
 From a development checkout:
 
