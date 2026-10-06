@@ -95,3 +95,9 @@ test('vault lookups Dobby reports become at most three distinct sources for the 
  await f.conversation.receive('next');
  assert.ok(f.patches.some(p=>Array.isArray(p.vaultSources)&&p.vaultSources.length===0));
 });
+test('sources Dobby lists in status are shown even when the read finished between polls',async()=>{
+ const f=fixture();await f.conversation.receive('Where did we leave the homelab?');
+ f.client.state={request_id:f.client.active,busy:false,status:'done',reply:'Stalled on the NVMe.',vault_sources:[{kind:'note',value:'Homelab - Where we left off'},{kind:'bogus',value:'x'}]};
+ await f.conversation.poll();
+ assert.deepEqual(f.patches.filter(p=>p.vaultSources).at(-1).vaultSources,[{kind:'note',value:'Homelab - Where we left off'}]);
+});

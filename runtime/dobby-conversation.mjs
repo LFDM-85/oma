@@ -80,8 +80,12 @@ export class DobbyConversation {
    if(epoch!==this.epoch||turn!==this.turn||id!==this.client.active)return;
    if(state.request_id!==id){this.client.active=null;throw Error('O.M.A. lost contact with its request. No other client’s work was cancelled.');}
    turn.phase=state.status;turn.action=state.action||'';
-   const source=vaultSource(turn.action);
-   if(source&&turn.sources.length<3&&!turn.sources.some(s=>s.kind===source.kind&&s.value===source.value)){turn.sources.push(source);this.emit({vaultSources:[...turn.sources]});}
+   // Dobby lists the request's vault reads in status; older daemons only show
+   // the running action, which a 400 ms poll can miss.
+   const reported=Array.isArray(state.vault_sources)?state.vault_sources.filter(s=>['note','search'].includes(s?.kind)&&typeof s.value==='string'):[vaultSource(turn.action)].filter(Boolean);
+   let changed=false;
+   for(const source of reported)if(turn.sources.length<3&&!turn.sources.some(s=>s.kind===source.kind&&s.value===source.value)){turn.sources.push({kind:source.kind,value:source.value});changed=true;}
+   if(changed)this.emit({vaultSources:[...turn.sources]});
    if(state.pending){this.emit({state:'approval',taskBusy:false,taskText:state.action||'Confirmation',taskStatus:'Waiting for confirmation · you can correct the request',approval:{id,description:state.action||state.reply||'Confirm action?'}});return;}
    if(state.busy){this.emit({state:state.status==='working'?'working':'thinking',taskBusy:true,taskText:state.action||'O.M.A.',taskStatus:'Working · you can interrupt'});return;}
    this.client.active=null;turn.reply=String(state.reply||'');
