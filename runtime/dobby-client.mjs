@@ -21,6 +21,14 @@ export class DobbyClient {
   });
  }
  status(){return this.command({action:'status'});}
+ async waitUntilIdle({timeoutMs=10000,pollMs=80}={}){
+  const deadline=Date.now()+timeoutMs;
+  while(true){
+   const state=await this.status();if(!state.busy&&!state.pending)return;
+   if(Date.now()>=deadline)throw Error('O.M.A. is still stopping the interrupted request. Your update was kept; try again shortly.');
+   await new Promise(resolve=>setTimeout(resolve,pollMs));
+  }
+ }
  async submit(text,sessionId){
   if(this.active||this.submitting)throw Error('Termina o pedido atual primeiro.');
   if(typeof text!=='string'||!text.trim()||text.length>16000)throw Error('Pedido vazio ou demasiado longo.');
@@ -42,8 +50,9 @@ export class DobbyClient {
  }
  async cancel(){
   await this.submitting?.catch(()=>{});
-  const id=this.active;this.active=null;if(!id)return;
+  const id=this.active;if(!id)return;
   const current=await this.status();
   if(current.request_id===id&&(current.busy||current.pending))await this.command({action:'cancel',request_id:id});
+  if(this.active===id)this.active=null;
  }
 }

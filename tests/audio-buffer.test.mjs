@@ -62,3 +62,15 @@ test('waveform updates follow playback time instead of consuming a whole utteran
  assert.ok(times.length<20);await advance(t,1000);
  assert.equal(times.length,50);assert.ok(times.at(-1)-times[0]>=800);
 });
+test('speaker warmup sends only silence before preserving the complete first word',async t=>{
+ const f=fixture(t);f.audio.startupBufferMs=0;f.audio.leadingSilenceMs=350;
+ const word=Buffer.alloc(4800,19);f.audio.enqueue(word);f.audio.finish();await advance(t,10);
+ const silence=Buffer.alloc(16800);assert.deepEqual(Buffer.concat(f.chunks),silence);
+ await advance(t,250);assert.deepEqual(Buffer.concat(f.chunks),silence);
+ await advance(t,250);assert.deepEqual(Buffer.concat(f.chunks),Buffer.concat([silence,word]));
+});
+test('interrupting output warmup prevents the cancelled first word from being played',async t=>{
+ const f=fixture(t);f.audio.startupBufferMs=0;f.audio.leadingSilenceMs=350;
+ f.audio.enqueue(Buffer.alloc(4800,19));await advance(t,100);f.audio.stop();await advance(t,400);
+ assert.deepEqual(Buffer.concat(f.chunks),Buffer.alloc(16800));
+});

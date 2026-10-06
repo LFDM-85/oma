@@ -40,3 +40,13 @@ test('bounds the ASCII JSON wire before opening a socket',async()=>{
  const client=new DobbyClient({socketPath:'/path/never-opened'});
  await assert.rejects(client.command({action:'say',text:'漢'.repeat(6000)}),/demasiado longo/);
 });
+test('an interrupted request must finish stopping before its replacement can run',async()=>{
+ const client=new DobbyClient();let count=0;
+ client.status=async()=>({busy:++count<3,pending:false});
+ await client.waitUntilIdle({pollMs:1});assert.equal(count,3);
+});
+test('cancel preserves its request ownership when the daemon cannot be reached',async()=>{
+ const client=new DobbyClient();client.active=requestId();const owned=client.active;
+ client.status=async()=>{throw Error('unreachable')};
+ await assert.rejects(client.cancel(),/unreachable/);assert.equal(client.active,owned);
+});

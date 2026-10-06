@@ -11,6 +11,7 @@ effect; it does not reproduce the cloud Cedar voice.
 - A working [Dobby installation](https://github.com/LFDM-85/DOBBY) and daemon.
 - Dobby's local Voxtype model and Piper voice, checked with `dobby doctor`.
 - Node.js 24+, Python with NumPy, and PipeWire recording/playback.
+- `pactl` and PipeWire's WebRTC echo cancellation library for interruptions.
 - Omarchy and the regular O.M.A. plugin UI.
 
 The backend discovers Dobby's source modules from the resolved `dobby` launcher.
@@ -72,3 +73,24 @@ The offline adapter tests cover request ownership, concurrent acceptance and
 cancellation, confirmation isolation, wire size limits, original vocoder output,
 and preserving the full speech tail. Live checks require a running Dobby and
 audio devices.
+
+## Conversation and interruptions
+
+The voice assistant introduces itself as **O.M.A.**. Its name and conversation
+instructions are scoped to its own requests; the Dobby CLI keeps its identity.
+While the panel is open, microphone capture continues during planning and speech.
+PipeWire's [WebRTC echo canceller](https://docs.pipewire.org/page_module_echo_cancel.html) pairs O.M.A.'s playback with its microphone so
+its own voice is removed from the captured signal. Only this client's audio is
+routed through the temporary module; system defaults are left alone.
+
+After sustained speech begins, O.M.A. stops its playback and cancels only its own
+active request. It waits for the worker to stop, then sends the correction with
+the original intent, earlier additions and the last action checkpoint. Conflicting
+instructions require a clarification before further tools. Recognition keeps
+running during transcription, and utterances are combined in their spoken order.
+The recognizer follows Dobby's input language independently of the reply language.
+
+Cancellation does not undo actions already dispatched. The continuation must
+check their current state before repeating anything. Closing the panel stops
+capture and cancels owned work. A 350 ms silent lead-in lets the output device
+start before the first word; the speech samples themselves are preserved.

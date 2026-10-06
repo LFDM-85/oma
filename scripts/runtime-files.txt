@@ -31,6 +31,8 @@ runtime/conversation-end.mjs
 runtime/credentials.mjs
 runtime/desktop.mjs
 runtime/dobby-client.mjs
+runtime/dobby-conversation.mjs
+runtime/echo-cancel.mjs
 runtime/dobby-voice.py
 runtime/farewell-intent.mjs
 runtime/farewell-playback.mjs

@@ -109,7 +109,7 @@ Item {
             }
             Text {
                 objectName: "linkStatus"
-                text: (root.service && root.service.voiceProvider === "dobby" ? "DOBBY" : "GPT-LIVE") + " · " + (root.offline ? (root.status === "unauthenticated" ? "NO KEY" : "OFFLINE") : root.linked ? "LINKED" : root.status === "connecting" ? "CONNECTING" : "STANDBY")
+                text: "O.M.A. · " + (root.offline ? (root.status === "unauthenticated" ? "NO KEY" : "OFFLINE") : root.linked ? "LINKED" : root.status === "connecting" ? "CONNECTING" : "STANDBY")
                 textFormat: Text.PlainText
                 color: root.linked ? ink.text : ink.secondary; font.pixelSize: 9; font.letterSpacing: 2
             }

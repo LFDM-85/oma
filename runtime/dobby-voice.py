@@ -9,6 +9,8 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
+import queue
 import wave
 
 launcher = shutil.which('dobby')
@@ -24,6 +26,7 @@ except ImportError:
 os.umask(0o077)
 cfg = settings()
 children = set()
+output_lock = threading.Lock()
 
 def cleanup(*_):
     for child in list(children):
@@ -35,7 +38,8 @@ signal.signal(signal.SIGTERM, cleanup)
 signal.signal(signal.SIGINT, cleanup)
 
 def emit(**patch):
-    print(json.dumps(patch), flush=True)
+    with output_lock:
+        print(json.dumps(patch), flush=True)
 
 def run(args, input=None, **kwargs):
     if input is not None:
@@ -65,16 +69,32 @@ def transcribe(path, language=''):
     args += ['transcribe', str(path)]
     return transcript_from_output(run(args, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL).decode())
 
-def listen(target='', language=''):
+def listen(target='', language='', continuous=False):
     segmenter = Segmenter(cfg)
-    args = ['pw-record', '--rate', '16000', '--channels', '1', '--format', 's16', '--raw', '-P', '{"node.name":"oma-dobby-input","application.name":"O.M.A. via Dobby"}']
+    args = ['pw-record', '--rate', '16000', '--channels', '1', '--format', 's16', '--raw', '-P', '{"node.name":"oma-input","application.name":"O.M.A. Conversation"}']
     if target:
         args += ['--target', target]
     proc = subprocess.Popen([*args, '-'], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     children.add(proc)
-    emit(state='idle', listeningReady=True)
+    emit(listeningReady=True)
+    clips=queue.Queue(maxsize=4)
+    def recognize():
+        while True:
+            utterance, pcm=clips.get()
+            try:
+                with tempfile.TemporaryDirectory(prefix='oma-dobby-') as directory:
+                    path=Path(directory)/'input.wav'
+                    with wave.open(str(path), 'wb') as out:
+                        out.setnchannels(1);out.setsampwidth(2);out.setframerate(16000);out.writeframes(pcm)
+                    emit(transcript=transcribe(path, language), utteranceId=utterance)
+            except Exception as error:
+                emit(transcriptionError=str(error), utteranceId=utterance)
+            finally:
+                clips.task_done()
+    if continuous:
+        threading.Thread(target=recognize, daemon=True).start()
     try:
-        buffer = b''
+        buffer = b'';utterance=0;started=False
         while True:
             if not select.select([proc.stdout], [], [], .2)[0]:
                 if proc.poll() is not None:
@@ -89,8 +109,19 @@ def listen(target='', language=''):
             pcm, level = segmenter.feed(buffer)
             buffer = b''
             emit(inputLevel=min(1, level*12))
+            # Three voiced frames (300ms), including preroll, distinguish speech
+            # from a short click. Emit before transcription to stop output early.
+            if not started and (segmenter.voiced >= 3 or pcm):
+                utterance+=1;started=True
+                emit(speechStarted=True,utteranceId=utterance)
             if pcm:
-                break
+                if not continuous:break
+                try:clips.put_nowait((utterance,pcm))
+                except queue.Full:emit(transcriptionError='Please pause briefly; recognition is catching up.',utteranceId=utterance)
+                started=False
+            elif started and not segmenter.frames:
+                emit(speechDiscarded=True,utteranceId=utterance)
+                started=False
     finally:
         if proc.poll() is None:
             proc.terminate()
@@ -139,7 +170,7 @@ if __name__ == '__main__':
         mode=sys.argv[1]
         if mode=='config':
             emit(planner=cfg['planner'],model=cfg.get('claude_model') if cfg['planner']=='claude' else cfg['model'],responseLanguage=cfg.get('response_language',''),whisperModel=cfg['whisper_model'],ttsModel=str(Path(cfg['tts_model']).expanduser()),speechReady=Path(cfg['tts_binary']).expanduser().is_file() and Path(cfg['tts_model']).expanduser().is_file(),microphoneTarget='')
-        elif mode=='listen': listen(*(sys.argv[2:4]))
+        elif mode=='listen': listen(*sys.argv[2:4],continuous=len(sys.argv)>4 and sys.argv[4]=='continuous')
         elif mode=='transcribe': emit(transcript=transcribe(Path(sys.argv[2]),sys.argv[3] if len(sys.argv)>3 else ''))
         elif mode=='synthesize': synthesize(sys.stdin.read(24000), effects=len(sys.argv)<3 or sys.argv[2]!='raw')
         else: raise RuntimeError('Modo de áudio desconhecido.')
