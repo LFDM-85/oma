@@ -161,7 +161,12 @@ async function command(c){
  if(c.action==='stop'||c.action==='cancelTask'){await stop();return;}
  if(c.action==='greet'||c.action==='restoreGreet'){await greet();return;}
  if(c.action==='press'){await start();return;}if(c.action==='release')return;
- if(c.action==='text'){lastUserRequest=Date.now();idle.activity();await start();session?.text(String(c.text||''));lastActivity=Date.now();return;}
+ if(c.action==='text'){
+  let accepted=false;
+  try{lastUserRequest=Date.now();idle.activity();await start();if(session){await session.text(String(c.text||''));accepted=true}lastActivity=Date.now()}
+  finally{if(c.submissionId)emit({textSubmission:{id:c.submissionId,accepted}})}
+  return;
+ }
  if(c.action==='approve'){idle.activity();tools.approve(String(c.id),c.allow===true);return;}
  if(c.action==='setWake'){memory.set('wakeEnabled',c.enabled===true?'true':'false');wake.setEnabled(c.enabled===true);return;}
  if(c.action==='opening'||c.action==='closing'){cue.play();return;}

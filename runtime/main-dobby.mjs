@@ -100,7 +100,7 @@ async function speak(text,current){
  }finally{if(current()){speaking=false;emit({state:approval?'approval':'idle',level:0,lipRound:0,lipWide:0})}}
 }
 async function send(text){
- faulted=false;lastActivity=Date.now();await conversation.receive(text);void conversation.poll();
+ faulted=false;lastActivity=Date.now();const accepted=await conversation.receive(text);void conversation.poll();return accepted;
 }
 async function stop(){
  testing=false;faulted=false;await stopRecording();await conversation.stop();cue.stop();log.end();
@@ -110,7 +110,11 @@ async function command(c){
  if(c.action==='presentation'){presented=c.active===true;if(presented){faulted=false;log.begin();lastActivity=Date.now();void listen().catch(fail)}else await stop();return;}
  if(c.action==='connect'||c.action==='refreshConnections'){await connect();void listen().catch(fail);return;}
  if(c.action==='stop'){presented=false;await stop();return;}
- if(c.action==='text'){await send(c.text);return;}
+ if(c.action==='text'){
+  let accepted=false;
+  try{accepted=await send(c.text)}finally{if(c.submissionId)emit({textSubmission:{id:c.submissionId,accepted}})}
+  return;
+ }
  if(c.action==='testConnection'){
   if(testing||conversation.active)throw Error('Termina o pedido atual antes do teste.');
   emit({connectionTestPassed:false,connectionTestError:''});await connect();testing=true;emit({connectionTesting:true});await send('Hello. Reply with one short sentence confirming that you received this greeting. Do not use tools.');return;

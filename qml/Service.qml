@@ -109,6 +109,27 @@ Item {
     property real lipRound: 0
     property real lipWide: 0
     property int revision: 0
+    property string textDraft: ""
+    property bool textSending: false
+    property int textSerial: 0
+    property string pendingTextId: ""
+    property string submittedDraft: ""
+    readonly property bool textReady: !setupRequired && modelReady && worker.running
+    function sendText(value) {
+        const text = String(value || "").trim()
+        if (!root.textReady || root.textSending || !text) return false
+        root.pendingTextId = "text-" + (++root.textSerial)
+        root.submittedDraft = String(value)
+        root.textSending = true
+        root.command({action: "text", text: text, submissionId: root.pendingTextId})
+        return true
+    }
+    function finishTextSubmission(result) {
+        if (!result || result.id !== root.pendingTextId) return
+        if (result.accepted && root.textDraft === root.submittedDraft) root.textDraft = ""
+        root.textSending = false
+        root.pendingTextId = ""
+    }
 
     function command(data) {
         if (setupRequired) return
@@ -141,6 +162,7 @@ Item {
         if (!alive || line.length > 65536) return
         try {
             const d = JSON.parse(line)
+            if (d.textSubmission !== undefined) root.finishTextSubmission(d.textSubmission)
             for (const k of ["taskBusy", "backendStatus", "docked", "viewMode"])
                 if (d[k] !== undefined) root[k] = d[k]
             for (const k of ["responseLanguages", "responseLanguage", "languageError", "microphones", "microphoneTarget", "microphoneBusy", "microphoneError", "voiceProvider", "latency", "connectionTesting", "connectionTestPassed", "connectionTestError", "modelReady", "speechReady", "omarchySkillLoaded", "modelProvider", "modelName", "cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "voiceEffectsEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
@@ -159,7 +181,7 @@ Item {
         stdinEnabled: true
         running: false
         stdout: SplitParser { onRead: data => root.update(data) }
-        onExited: { root.keySaving = false; if (root.alive) { root.state = "offline"; root.level = 0; root.inputLevel = 0; root.error = "O.M.A. stopped. Click Retry to reconnect." } }
+        onExited: { root.keySaving = false; root.textSending = false; root.pendingTextId = ""; if (root.alive) { root.state = "offline"; root.level = 0; root.inputLevel = 0; root.error = "O.M.A. stopped. Click Retry to reconnect." } }
     }
     Component.onDestruction: { root.alive = false; worker.running = false }
     IpcHandler {

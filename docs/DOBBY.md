@@ -76,6 +76,11 @@ audio devices.
 
 ## Conversation and interruptions
 
+Type in the message box and press **Enter** or **Send** to use the same
+conversation as voice. **Shift+Enter** adds a new line. Written corrections can
+interrupt an active request too. Unsent drafts remain when the panel is closed;
+the editor clears only after acceptance, and keeps any newer draft you started.
+
 The voice assistant introduces itself as **O.M.A.**. Its name and conversation
 instructions are scoped to its own requests; the Dobby CLI keeps its identity.
 While the panel is open, microphone capture continues during planning and speech.

@@ -24,8 +24,52 @@ TestCase {
         property real lipWide: 0
         property var approval: null
         property var question: null
+        property bool textReady: true
+        property bool textSending: false
+        property string textDraft: ""
+        property string sentText: ""
+        function sendText(value) {
+            if (!textReady || textSending || !value.trim()) return false
+            sentText=value.trim();textSending=true;return true
+        }
     }
     Oma.Conversation { id: conversation; width: 600; height: 650; service: fixture }
+    function resetComposer() {
+        fixture.viewMode="normal";fixture.approval=null;fixture.question=null
+        fixture.textReady=true;fixture.textSending=false;fixture.textDraft="";fixture.sentText=""
+        conversation.width=600;conversation.height=650
+    }
+    function test_text_enter_sends_during_work_and_keeps_draft_until_accepted() {
+        resetComposer();fixture.taskBusy=true
+        const editor=findChild(conversation,"messageInput")
+        editor.forceActiveFocus();editor.text="Correct my earlier request"
+        keyClick(Qt.Key_Return)
+        compare(fixture.sentText,"Correct my earlier request")
+        compare(editor.text,"Correct my earlier request")
+        fixture.textDraft="";tryCompare(editor,"text","")
+        fixture.textSending=false;fixture.taskBusy=false
+    }
+    function test_text_shift_enter_inserts_newline_and_button_sends_full_message() {
+        resetComposer()
+        const editor=findChild(conversation,"messageInput"),button=findChild(conversation,"sendTextButton")
+        editor.forceActiveFocus();editor.text="First line";editor.cursorPosition=editor.length
+        keyClick(Qt.Key_Return,Qt.ShiftModifier);editor.insert(editor.cursorPosition,"Second line")
+        compare(editor.text,"First line\nSecond line");compare(fixture.sentText,"")
+        mouseClick(button,button.width/2,button.height/2)
+        compare(fixture.sentText,"First line\nSecond line")
+        fixture.textDraft="";fixture.textSending=false
+    }
+    function test_text_empty_or_offline_is_not_sent_and_narrow_composer_fits() {
+        resetComposer();const editor=findChild(conversation,"messageInput"),button=findChild(conversation,"sendTextButton")
+        editor.text="   ";editor.forceActiveFocus();keyClick(Qt.Key_Return);compare(fixture.sentText,"");compare(button.enabled,false)
+        fixture.textReady=false;editor.text="Keep this draft";keyClick(Qt.Key_Return);compare(fixture.sentText,"");compare(editor.text,"Keep this draft")
+        conversation.width=320;conversation.height=540
+        const composer=findChild(conversation,"textComposer")
+        verify(composer.y>=0);verify(composer.y+composer.height<=conversation.height)
+        verify(editor.width>100);verify(button.mapToItem(conversation,button.width,0).x<=conversation.width)
+        fixture.textReady=true;wait(50);grabImage(conversation).save("/tmp/oma-text-narrow.png")
+        resetComposer()
+    }
     function test_mini_mode_only_shows_face_and_restores_transcripts() {
         fixture.userText="Hello"
         const face=findChild(conversation,"faceModeToggle")

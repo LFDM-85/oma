@@ -38,6 +38,14 @@ Item {
     signal dismiss()
     signal settingsRequested()
     function close() { dismiss() }
+    function submitText() { if (root.service && root.service.sendText) root.service.sendText(messageInput.text) }
+    Connections {
+        target: root.service
+        ignoreUnknownSignals: true
+        function onTextDraftChanged() {
+            if (messageInput.text !== root.service.textDraft) messageInput.text = root.service.textDraft
+        }
+    }
     focus: opened
     Keys.onEscapePressed: close()
     Timer { interval: 40; repeat: true; running: root.opened; onTriggered: root.phase += .025 }
@@ -228,7 +236,7 @@ Item {
         readonly property real horizonY: emitterY - 58
         readonly property bool showMeters: width >= 420
         // The face grows with taller windows; only a very short docked tile shrinks it below 160.
-        readonly property real faceHeight: Math.round(Math.min(220, Math.max(Math.min(160, horizonY + 20), (horizonY - 40) * .62)))
+        readonly property real faceHeight: Math.round(Math.min(220, Math.max(Math.min(160, height - 8), (horizonY - 40) * .62)))
         // The desktop map stands on the horizon, centred behind the face.
         readonly property real mapBottom: horizonY - 12
         readonly property real mapHeight: Math.max(60, Math.min(mapBottom - 4, faceHeight * 1.55 + 16))
@@ -380,7 +388,7 @@ Item {
         id: taskBar
         visible: !root.miniMode
         x: 14; width: parent.width - 28; height: 28
-        y: footer.y - height - 6
+        y: composer.y - height - 6
         readonly property bool errorShown: !!root.service && !!root.service.error
         Rectangle {
             anchors.fill: parent
@@ -435,6 +443,59 @@ Item {
                     text: "Retry"; onClicked: if (root.service) root.service.retry()
                 }
             }
+        }
+    }
+
+    Item {
+        id: composer
+        objectName: "textComposer"
+        visible: !root.miniMode
+        x: 14; width: parent.width - 28; height: 56
+        y: footer.y - height - 6
+        z: 12
+        ScrollView {
+            width: parent.width - sendButton.width - 8; height: parent.height
+            clip: true
+            contentWidth: availableWidth
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            TextArea {
+                id: messageInput
+                objectName: "messageInput"
+                text: root.service && root.service.textDraft !== undefined ? root.service.textDraft : ""
+                onTextChanged: if (root.service && root.service.textDraft !== undefined && root.service.textDraft !== text) root.service.textDraft = text
+                placeholderText: "Write a message… Enter to send"
+                placeholderTextColor: ink.muted
+                color: ink.text
+                selectionColor: ink.accent
+                selectedTextColor: ink.surface
+                font.pixelSize: 13
+                padding: 8
+                wrapMode: TextEdit.Wrap
+                selectByMouse: true
+                enabled: !!root.service
+                KeyNavigation.priority: KeyNavigation.BeforeItem
+                KeyNavigation.tab: sendButton
+                Keys.onPressed: event => {
+                    if ((event.key === Qt.Key_Return || event.key === Qt.Key_Enter) && !(event.modifiers & Qt.ShiftModifier)) {
+                        event.accepted = true
+                        root.submitText()
+                    }
+                }
+                background: Rectangle {
+                    color: Qt.rgba(ink.surface.r, ink.surface.g, ink.surface.b, .9)
+                    border.color: messageInput.activeFocus ? ink.accent : ink.muted
+                    radius: 4
+                }
+            }
+        }
+        Action {
+            id: sendButton
+            objectName: "sendTextButton"
+            anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter
+            width: 68; height: 36
+            text: root.service && root.service.textSending ? "Sending…" : "Send"
+            enabled: messageInput.enabled && root.service.textReady === true && messageInput.text.trim().length > 0 && !root.service.textSending
+            onClicked: root.submitText()
         }
     }
 
