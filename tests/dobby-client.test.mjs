@@ -63,10 +63,21 @@ test('instructions go in their own field when Dobby advertises them, folded into
 });
 test('the sentinel state is bounded and fresh only for ten minutes',()=>{
  const {autonomyPatch}=client;
- assert.deepEqual(autonomyPatch({}),{events:[],proposals:[],fresh:false});
- assert.deepEqual(autonomyPatch({autonomy:[1]}),{events:[],proposals:[],fresh:false});
+ assert.deepEqual(autonomyPatch({}),{events:[],proposals:[],fresh:false,lastChecked:0});
+ assert.deepEqual(autonomyPatch({autonomy:[1]}),{events:[],proposals:[],fresh:false,lastChecked:0});
  const state={autonomy:{events:[{ts:1000,title:'x'},null],proposals:Array.from({length:9},(_,i)=>({id:String(i)}))}};
  const patch=autonomyPatch(state,1000*1000+60000);
  assert.equal(patch.events.length,1);assert.equal(patch.proposals.length,5);assert.equal(patch.fresh,true);
  assert.equal(autonomyPatch(state,1000*1000+601000).fresh,false);
+});
+test('daily advisor state and probe timestamp survive the client adapter',()=>{
+ const advisor={enabled:false,status:'done',report:'/local/draft.md'};
+ const patch=client.autonomyPatch({autonomy:{advisor,last_checked:123}});
+ assert.deepEqual(patch.advisor,advisor);assert.equal(patch.lastChecked,123);
+ assert.equal(client.autonomyPatch({autonomy:{advisor:[]}}).advisor,undefined);
+});
+test('report opening accepts only dated files in the local analyst directory',()=>{
+ const report='/tmp/test-state/omarchy-dobby/autonomy-reports/2026-10-06.md';
+ assert.equal(client.dailyReportPath({autonomy:{advisor:{report}}},'/tmp/test-state'),report);
+ for(const report of ['/etc/passwd','/tmp/test-state/omarchy-dobby/autonomy-reports/../notes.md','/tmp/test-state/omarchy-dobby/autonomy-reports/commands.sh',''])assert.throws(()=>client.dailyReportPath({autonomy:{advisor:{report}}},'/tmp/test-state'));
 });

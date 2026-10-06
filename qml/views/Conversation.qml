@@ -477,7 +477,8 @@ Item {
         readonly property var proposal: root.service && root.service.autonomy && root.service.autonomy.proposals && root.service.autonomy.proposals.length ? root.service.autonomy.proposals[0] : null
         readonly property var latest: root.service && root.service.autonomy && root.service.autonomy.events && root.service.autonomy.events.length ? root.service.autonomy.events[0] : null
         readonly property bool recent: !!latest && root.service.autonomy.fresh === true
-        visible: !root.miniMode && (!!proposal || recent)
+        readonly property var advisor: root.service && root.service.autonomy ? root.service.autonomy.advisor : null
+        visible: !root.miniMode && (!!proposal || recent || !!advisor)
         x: 14; width: parent.width - 28; height: 28
         y: taskBar.y - height - 4
         Rectangle {
@@ -498,6 +499,8 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width - x - answers.width - 12
                 text: autonomyBar.proposal ? autonomyBar.proposal.title + " — " + autonomyBar.proposal.action + "?"
+                    : autonomyBar.recent ? autonomyBar.latest.title + (autonomyBar.latest.action ? " — " + autonomyBar.latest.outcome : "")
+                    : autonomyBar.advisor ? (root.width < 420 ? (autonomyBar.advisor.enabled ? "diário" : "pausado") : (autonomyBar.advisor.enabled ? "O.M.A. diário · " : "O.M.A. pausado · ") + (autonomyBar.advisor.status === "running" ? "a preparar trabalho" : autonomyBar.advisor.error || autonomyBar.advisor.summary || "experiência, rendimentos e estabilidade"))
                     : autonomyBar.latest ? autonomyBar.latest.title + (autonomyBar.latest.action ? " — " + autonomyBar.latest.outcome : "") : ""
                 textFormat: Text.PlainText
                 color: ink.text
@@ -508,9 +511,10 @@ Item {
                 id: answers
                 anchors.verticalCenter: parent.verticalCenter
                 spacing: 6
-                visible: !!autonomyBar.proposal
-                Action { height: 22; text: "Approve"; onClicked: root.service.answerProposal(autonomyBar.proposal.id, true) }
-                Action { height: 22; text: "Dismiss"; onClicked: root.service.answerProposal(autonomyBar.proposal.id, false) }
+                Action { visible: !!autonomyBar.proposal; height: 22; text: "Approve"; onClicked: root.service.answerProposal(autonomyBar.proposal.id, true) }
+                Action { visible: !!autonomyBar.proposal; height: 22; text: "Dismiss"; onClicked: root.service.answerProposal(autonomyBar.proposal.id, false) }
+                Action { objectName: "dailyReportButton"; visible: !autonomyBar.proposal && !!autonomyBar.advisor; enabled: !!autonomyBar.advisor && (!!autonomyBar.advisor.report || (autonomyBar.advisor.enabled && autonomyBar.advisor.status !== "running")); width: 82; height: 22; text: autonomyBar.advisor && autonomyBar.advisor.report ? "Relatório" : "Preparar"; onClicked: root.service.autonomyControl(autonomyBar.advisor.report ? "report" : "run") }
+                Action { objectName: "dailyPauseButton"; visible: !autonomyBar.proposal && !!autonomyBar.advisor; width: 64; height: 22; text: autonomyBar.advisor && autonomyBar.advisor.enabled ? "Pausar" : "Retomar"; onClicked: root.service.autonomyControl(autonomyBar.advisor.enabled ? "pause" : "resume") }
             }
         }
     }

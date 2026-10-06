@@ -24,6 +24,9 @@ TestCase {
         property real lipWide: 0
         property var approval: null
         property var question: null
+        property var autonomy: ({events: [], proposals: []})
+        property string autonomyAction: ""
+        function autonomyControl(action) { autonomyAction=action }
         property bool textReady: true
         property bool textSending: false
         property string textDraft: ""
@@ -38,6 +41,23 @@ TestCase {
         fixture.viewMode="normal";fixture.approval=null;fixture.question=null
         fixture.textReady=true;fixture.textSending=false;fixture.textDraft="";fixture.sentText=""
         conversation.width=600;conversation.height=650
+    }
+    function test_daily_work_controls_fit_and_dispatch_the_selected_control() {
+        resetComposer();fixture.autonomyAction=""
+        fixture.autonomy=({events:[],proposals:[],advisor:{enabled:true,status:"done",report:"local.md",summary:"Prepared a service offer",error:""}})
+        wait(50)
+        const bar=findChild(conversation,"autonomyBar")
+        verify(bar.visible)
+        compare(findChild(conversation,"autonomyText").text,"O.M.A. diário · Prepared a service offer")
+        const report=findChild(conversation,"dailyReportButton"),pause=findChild(conversation,"dailyPauseButton")
+        mouseClick(report,report.width/2,report.height/2);compare(fixture.autonomyAction,"report")
+        mouseClick(pause,pause.width/2,pause.height/2);compare(fixture.autonomyAction,"pause")
+        conversation.width=320
+        verify(findChild(conversation,"autonomyText").width>0)
+        verify(bar.mapToItem(conversation,bar.width,0).x<=conversation.width)
+        wait(50);grabImage(conversation).save("/tmp/oma-daily-narrow.png")
+        fixture.autonomy=({events:[],proposals:[]})
+        resetComposer()
     }
     function test_text_enter_sends_during_work_and_keeps_draft_until_accepted() {
         resetComposer();fixture.taskBusy=true
