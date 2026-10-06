@@ -13,6 +13,7 @@ Item {
     property bool modelReady: service && service.modelReady === true
     property bool speechReady: service && service.speechReady === true
     property bool ready: !needsSetup && modelReady && speechReady
+    readonly property bool dobbyBackend: !!service && service.voiceProvider === "dobby"
     property bool busy: service && (service.setupBusy === true || service.keySaving === true || service.connectionTesting === true)
     property string step: !started && !ready ? "welcome" : needsSetup ? "device" : !modelReady || !speechReady ? "voice" : "ready"
     readonly property color primaryText: ink.mix("#ececec", ink.accent, .08)
@@ -56,6 +57,11 @@ Item {
             width: Math.min(560, viewport.width - 8); anchors.horizontalCenter: parent.horizontalCenter
             spacing: 24
             Text { objectName: "setupHeading"; text: "Settings"; textFormat: Text.PlainText; color: root.primaryText; font.pixelSize: 26; font.weight: Font.DemiBold }
+            Section {
+                title: "Dobby connection"; visible: root.dobbyBackend
+                Copy { text: root.service ? root.service.modelProvider + " · " + root.service.modelName : "" }
+                Copy { text: "Uses Dobby’s existing connections and tools. Voice recognition and playback run locally with Voxtype and Piper. Language and voice follow Dobby’s settings." }
+            }
             Column {
                 width: parent.width; spacing: 12; visible: !root.ready
                 Copy { font.pixelSize: 16; color: root.primaryText; text: root.step === "welcome" ? "Get connected" : root.step === "device" ? "Prepare this computer" : "Connect to GPT-Live" }
@@ -66,7 +72,7 @@ Item {
             }
             Section {
                 title: "OpenAI API key"
-                visible: root.step === "voice" || root.ready
+                visible: !root.dobbyBackend && (root.step === "voice" || root.ready)
                 Ui.TextField {
                     id: keyInput; objectName: "apiKeyInput"; width: parent.width; height: 44
                     enabled: !root.needsSetup && !root.busy
@@ -102,7 +108,7 @@ Item {
                     foreground: root.primaryText; accent: ink.accent; background: ink.field
                     options: root.service ? root.service.responseLanguages : []
                     value: root.service ? root.service.responseLanguage : ""
-                    enabled: !root.busy && !!root.service && options.length > 0
+                    enabled: !root.dobbyBackend && !root.busy && !!root.service && options.length > 0
                     onChanged: value => {
                         root.service.setResponseLanguage(value)
                         languageSelect.value = Qt.binding(() => root.service ? root.service.responseLanguage : "")

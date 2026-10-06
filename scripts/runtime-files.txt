@@ -30,6 +30,8 @@ runtime/caption-text.mjs
 runtime/conversation-end.mjs
 runtime/credentials.mjs
 runtime/desktop.mjs
+runtime/dobby-client.mjs
+runtime/dobby-voice.py
 runtime/farewell-intent.mjs
 runtime/farewell-playback.mjs
 runtime/hyprland-context.mjs
@@ -40,6 +42,7 @@ runtime/live-session.mjs
 runtime/local-tools.mjs
 runtime/locale.mjs
 runtime/main-live.mjs
+runtime/main-dobby.mjs
 runtime/main.mjs
 runtime/memory.mjs
 runtime/microphones.mjs

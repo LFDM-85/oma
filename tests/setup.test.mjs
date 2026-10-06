@@ -3,14 +3,14 @@ import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 const script=new URL('../scripts/check-setup.py',import.meta.url).pathname;
 test('setup check reports missing tools without Node or a working runtime',()=>{
- const result=JSON.parse(execFileSync('/usr/bin/python3',[script],{env:{PATH:'/nonexistent'},encoding:'utf8',stdio:['ignore','pipe','pipe']}));
+ const result=JSON.parse(execFileSync('/usr/bin/python3',[script],{env:{PATH:'/nonexistent',OMA_BACKEND:'gpt-live'},encoding:'utf8',stdio:['ignore','pipe','pipe']}));
  assert.equal(result.setupRequired,true);
  assert.match(result.setupMessage,/Node.js 24/);
  assert.match(result.setupMessage,/GPT-Live SDK/);
 
 });
 test('setup check never contains credentials',()=>{
- const result=execFileSync('/usr/bin/python3',[script],{env:{PATH:'/nonexistent',OPENAI_API_KEY:'secret-fixture'},encoding:'utf8',stdio:['ignore','pipe','pipe']});
+ const result=execFileSync('/usr/bin/python3',[script],{env:{PATH:'/nonexistent',OMA_BACKEND:'gpt-live',OPENAI_API_KEY:'secret-fixture'},encoding:'utf8',stdio:['ignore','pipe','pipe']});
  assert.ok(!result.includes('secret-fixture'));
 });
 

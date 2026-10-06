@@ -13,7 +13,7 @@ for(const selected of ['gpt-live','','local','pipeline'])test('idle startup igno
  const input=join(data,'input'),out=join(data,'stdout'),err=join(data,'stderr');
  writeFileSync(input,[{action:'setVoiceProvider',value:'local'},{action:'setResponseLanguage',value:'en'},{action:'saveApiKey',key:'fictional-never-sent'}].map(JSON.stringify).join('\n')+'\n');
  const fds=[openSync(input,'r'),openSync(out,'w'),openSync(err,'w')];
- const child=spawn(process.execPath,[new URL('fixtures/live-idle-worker.mjs',import.meta.url).pathname],{env:{...process.env,OMA_DATA_DIR:data,OMA_VOICE_PROVIDER:selected,OMA_LOCAL_MODE:'1',OMA_OMARCHY_SKILL:new URL('../skills/oma/SKILL.md',import.meta.url).pathname},stdio:fds});
+ const child=spawn(process.execPath,[new URL('fixtures/live-idle-worker.mjs',import.meta.url).pathname],{env:{...process.env,OMA_BACKEND:'gpt-live',OMA_DATA_DIR:data,OMA_VOICE_PROVIDER:selected,OMA_LOCAL_MODE:'1',OMA_OMARCHY_SKILL:new URL('../skills/oma/SKILL.md',import.meta.url).pathname},stdio:fds});
  t.after(()=>child.kill());const exited=once(child,'close');fds.forEach(closeSync);
  const [code]=await exited;const stdout=readFileSync(out,'utf8'),stderr=readFileSync(err,'utf8');assert.equal(code,0,stderr);
  assert.ok(stdout.trim(), 'No worker output: '+stderr);

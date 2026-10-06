@@ -1,5 +1,9 @@
 # O.M.A.
 
+This fork adds a **Dobby backend** with local speech and O.M.A.'s original
+robotic voice effects. The upstream GPT-Live backend remains available. See
+[Dobby setup](docs/DOBBY.md) for configuration and requirements.
+
 **Omarchy Machine Assistant**, pronounced **OH-mah（オーマ）**.
 
 A voice assistant for the Omarchy desktop with a theme-colored low-poly face.
@@ -39,7 +43,7 @@ recognition and downloads Japanese and English models during setup.
 ## Install and set up
 
 ```sh
-omarchy plugin add https://github.com/komagata/oma --enable
+omarchy plugin add https://github.com/LFDM-85/oma --enable
 ```
 
 1. Open O.M.A. from its bar icon, then open **Settings**. On the welcome screen,

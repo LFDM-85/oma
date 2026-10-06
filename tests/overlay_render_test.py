@@ -38,11 +38,14 @@ def prepare(directory, surface_only=False):
     plugin.mkdir(exist_ok=True)
     shutil.copy(ROOT / "tests/fixtures/overlay-render-probe.cpp", plugin)
     moc_flags = shlex.split(subprocess.check_output(["pkg-config", "--cflags", "Qt6Qml"], text=True))
-    moc = shutil.which("moc") or next((str(path) for path in (
+    moc = next((str(path) for path in (
         Path("/usr/lib/qt6/moc"), Path("/usr/lib/qt6/libexec/moc"),
-        Path("/usr/lib/qt6/bin/moc")) if path.is_file()), None)
+        Path("/usr/lib/qt6/bin/moc")) if path.is_file()), None) or shutil.which("moc")
     if not moc:
         raise RuntimeError("Qt moc is required for the native test probe")
+    version = subprocess.check_output([moc, "-v"], text=True, stderr=subprocess.STDOUT).strip()
+    if not version.startswith("moc 6."):
+        raise RuntimeError("Qt 6 moc is required for the Qt 6 native test probe: " + version)
     subprocess.run([moc, *moc_flags, str(plugin / "overlay-render-probe.cpp"),
                     "-o", str(plugin / "overlay-render-probe.moc")], check=True)
     flags = shlex.split(subprocess.check_output(
