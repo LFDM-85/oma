@@ -1,7 +1,7 @@
 {
   "name": "omarchy-oma",
   "version": "0.1.0",
-  "description": "O.M.A. — GPT-Live desktop voice assistant with local memory and tools",
+  "description": "O.M.A. — desktop voice assistant with Dobby and GPT-Live backends",
   "scripts": {
     "test": "node --test --test-isolation=none tests/*.test.mjs"
   },
@@ -24,9 +24,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/komagata/oma.git"
+    "url": "https://github.com/LFDM-85/oma.git"
   },
   "bugs": {
-    "url": "https://github.com/komagata/oma/issues"
+    "url": "https://github.com/LFDM-85/oma/issues"
   }
 }

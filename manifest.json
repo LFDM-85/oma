@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "komagata",
   "license": "MIT",
-  "description": "A GPT-Live desktop voice assistant with a low-poly face, local memory and PC tools.",
+  "description": "A desktop voice assistant with Dobby or GPT-Live, original voice effects and a low-poly face.",
   "kinds": [
     "bar-widget",
     "panel",
