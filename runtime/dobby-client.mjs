@@ -29,14 +29,17 @@ export class DobbyClient {
    await new Promise(resolve=>setTimeout(resolve,pollMs));
   }
  }
- async submit(text,sessionId){
+ async submit(text,sessionId,{instructions='',legacy=''}={}){
   if(this.active||this.submitting)throw Error('Termina o pedido atual primeiro.');
   if(typeof text!=='string'||!text.trim()||text.length>16000)throw Error('Pedido vazio ou demasiado longo.');
   this.submitting=(async()=>{
    const before=await this.status();if(before.busy||before.pending)throw Error('O Dobby está ocupado com outro pedido.');
    const id=requestId();this.active=id;
+   // Older daemons only know text: they get the whole turn folded into it.
+   const separate=!instructions||before.capabilities?.includes('instructions');
+   const message=separate?{text,...(instructions?{instructions,client:'oma'}:{})}:{text:legacy||text};
    try{
-    const reply=await this.command({action:'say',version:2,request_id:id,session_id:sessionId,text,silent:true});
+    const reply=await this.command({action:'say',version:2,request_id:id,session_id:sessionId,...message,silent:true});
     if(reply?.error||reply?.request_id!==id||reply?.status!=='accepted')throw Error(reply?.error||'O Dobby não aceitou o pedido.');
     return id;
    }catch(error){this.active=null;throw error;}

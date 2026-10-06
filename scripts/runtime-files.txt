@@ -32,8 +32,8 @@ runtime/credentials.mjs
 runtime/desktop.mjs
 runtime/dobby-client.mjs
 runtime/dobby-conversation.mjs
-runtime/echo-cancel.mjs
 runtime/dobby-voice.py
+runtime/echo-cancel.mjs
 runtime/farewell-intent.mjs
 runtime/farewell-playback.mjs
 runtime/hyprland-context.mjs
@@ -43,8 +43,8 @@ runtime/live-idle.mjs
 runtime/live-session.mjs
 runtime/local-tools.mjs
 runtime/locale.mjs
-runtime/main-live.mjs
 runtime/main-dobby.mjs
+runtime/main-live.mjs
 runtime/main.mjs
 runtime/memory.mjs
 runtime/microphones.mjs
@@ -63,6 +63,7 @@ runtime/task-label.mjs
 runtime/transcript-cli.mjs
 runtime/transcript-window.mjs
 runtime/transcript.mjs
+runtime/vault.mjs
 runtime/vocoder.mjs
 runtime/voice-effects.mjs
 runtime/wake.mjs

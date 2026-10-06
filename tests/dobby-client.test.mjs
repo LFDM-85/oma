@@ -50,3 +50,13 @@ test('cancel preserves its request ownership when the daemon cannot be reached',
  client.status=async()=>{throw Error('unreachable')};
  await assert.rejects(client.cancel(),/unreachable/);assert.equal(client.active,owned);
 });
+test('instructions go in their own field when Dobby advertises them, folded into text otherwise',async()=>{
+ for(const capabilities of [['instructions'],undefined]){
+  const client=new DobbyClient();const sent=[];
+  client.command=async m=>{sent.push(m);return m.action==='say'?{request_id:m.request_id,status:'accepted'}:{busy:false,pending:false,capabilities}};
+  await client.submit('hello',requestId(),{instructions:'Be O.M.A.',legacy:'Be O.M.A. {"user_request":"hello"}'});
+  const say=sent.find(m=>m.action==='say');
+  if(capabilities)assert.deepEqual([say.text,say.instructions,say.client],['hello','Be O.M.A.','oma']);
+  else{assert.equal(say.text,'Be O.M.A. {"user_request":"hello"}');assert.equal(say.instructions,undefined);}
+ }
+});
