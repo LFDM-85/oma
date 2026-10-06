@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {DobbyClient,requestId} from '../runtime/dobby-client.mjs';
+import * as client from '../runtime/dobby-client.mjs';
+const {DobbyClient,requestId}=client;
 
 test('refuses a new request while Dobby has a pending action',async()=>{
  const client=new DobbyClient();const calls=[];
@@ -59,4 +60,13 @@ test('instructions go in their own field when Dobby advertises them, folded into
   if(capabilities)assert.deepEqual([say.text,say.instructions,say.client],['hello','Be O.M.A.','oma']);
   else{assert.equal(say.text,'Be O.M.A. {"user_request":"hello"}');assert.equal(say.instructions,undefined);}
  }
+});
+test('the sentinel state is bounded and fresh only for ten minutes',()=>{
+ const {autonomyPatch}=client;
+ assert.deepEqual(autonomyPatch({}),{events:[],proposals:[],fresh:false});
+ assert.deepEqual(autonomyPatch({autonomy:[1]}),{events:[],proposals:[],fresh:false});
+ const state={autonomy:{events:[{ts:1000,title:'x'},null],proposals:Array.from({length:9},(_,i)=>({id:String(i)}))}};
+ const patch=autonomyPatch(state,1000*1000+60000);
+ assert.equal(patch.events.length,1);assert.equal(patch.proposals.length,5);assert.equal(patch.fresh,true);
+ assert.equal(autonomyPatch(state,1000*1000+601000).fresh,false);
 });

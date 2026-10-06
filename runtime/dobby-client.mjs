@@ -4,6 +4,13 @@ import {join} from 'node:path';
 import {homedir} from 'node:os';
 
 export const requestId=()=>randomUUID().replaceAll('-','');
+// What the panel shows of Dobby's sentinel; fresh while its latest event is under 10 minutes old.
+export function autonomyPatch(state,now=Date.now()){
+ const autonomy=state&&typeof state.autonomy==='object'&&!Array.isArray(state.autonomy)?state.autonomy:{};
+ const list=value=>Array.isArray(value)?value.filter(item=>item&&typeof item==='object').slice(0,5):[];
+ const events=list(autonomy.events),proposals=list(autonomy.proposals);
+ return {events,proposals,fresh:!!events.length&&now/1000-Number(events[0].ts||0)<600};
+}
 export class DobbyClient {
  constructor({socketPath=join(process.env.XDG_RUNTIME_DIR||join(homedir(),'.local/state'),'omarchy-dobby/control.sock')}={}){this.socketPath=socketPath;this.active=null;}
  command(message){
