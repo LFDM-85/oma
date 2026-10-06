@@ -30,7 +30,7 @@ const client=new DobbyClient();
 const sessionId=memory.get('dobbySessionId')||requestId();memory.set('dobbySessionId',sessionId);
 let presented=false,closed=false,testing=false,ready=false,faulted=false,recording=null,synth=null,meta={},captureGeneration=0,speaking=false,micCheck=false,drainResolve=null;
 let target=memory.get('microphoneTarget')||'',approval=null,lastActivity=Date.now();
-const emit=patch=>{for(const key of ['userText','assistantText'])if(patch[key]!==undefined)patch[key]=captionText(patch[key]);if(patch.approval!==undefined)approval=patch.approval;if(patch.userText&&patch.state==='thinking'){log.end();log.begin();memory.add('user',patch.userText)}if(patch.assistantText&&patch.state==='idle')memory.add('assistant',patch.assistantText);log.update(patch);process.stdout.write(JSON.stringify(patch)+'\n');};
+const emit=(patch,{literalText=false}={})=>{for(const key of ['userText','assistantText'])if(!literalText&&patch[key]!==undefined)patch[key]=captionText(patch[key]);if(patch.approval!==undefined)approval=patch.approval;if(patch.userText&&patch.state==='thinking'){log.end();log.begin();memory.add('user',patch.userText)}if(patch.assistantText&&patch.state==='idle')memory.add('assistant',patch.assistantText);log.update(patch);process.stdout.write(JSON.stringify(patch)+'\n');};
 const effectsEnabled=()=>memory.get('dobbyVoiceEffects')!=='false';
 const audio=new Audio((level,shapes)=>emit({level,...shapes}),message=>fail(Error(message)),{volume:1.3,leadingSilenceMs:350,processor:effectsEnabled()?new VoiceEffects({radio:true}):null});
 const echo=new EchoCancel();
@@ -148,6 +148,13 @@ const opener=spawn('xdg-open',[obsidianUri({kind:c.kind,value:c.value.trim()})],
   const reply=await client.command({action:c.allow===true?'autonomy_approve':'autonomy_dismiss',id:c.id});
   if(reply?.error)throw Error(reply.error);
   setTimeout(()=>void refreshAutonomy(),1500);return;
+ }
+ if(c.action==='autonomyControl'){
+  if(!['pause','resume','run','report'].includes(c.command))throw Error('Invalid autonomy control.');
+  const reply=await client.command({action:'autonomy',text:c.command});
+  if(reply?.error)throw Error(reply.error);
+  if(c.command==='report')emit({assistantText:typeof reply==='string'?reply:'No daily report yet.'},{literalText:true});
+  await refreshAutonomy();return;
  }
 }
 const input=createInterface({input:process.stdin});let commands=Promise.resolve();

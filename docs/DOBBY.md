@@ -59,6 +59,21 @@ Local captions remain available through `oma transcript`. Dobby continues to
 manage its own conversation and task records. The original GPT-Live desktop and
 camera tools are used only in GPT-Live mode; Dobby mode uses Dobby's tool set.
 
+## Daily autonomous work
+
+The Dobby backend can prepare one private daily report from active goals,
+stability observations and estimated AI costs. O.M.A.'s AUTO strip offers
+Prepare/Report and Pause/Resume; maintenance proposals still show Approve/Dismiss.
+Reports contain unverified drafts and success measures, not claims of completed
+work or earned income. The analyst has no execution tools and does not trade,
+publish or message people. Current market data and an investment risk profile
+are required for later financial research. The existing configured native
+provider login is used, without changing O.M.A.'s GPT-Live credentials.
+
+The same controls are available as `dobby autonomy status|run|report|pause|resume`.
+`dobby autonomy focus "..."` sets the user's skills, priorities and constraints.
+Attempts are limited to once per day, including failed or interrupted attempts.
+
 ## Development
 
 The adaptation branch is `feat/dobby-integration`; the same changes are included
