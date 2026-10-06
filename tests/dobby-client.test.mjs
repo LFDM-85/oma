@@ -76,3 +76,8 @@ test('daily advisor state and probe timestamp survive the client adapter',()=>{
  assert.deepEqual(patch.advisor,advisor);assert.equal(patch.lastChecked,123);
  assert.equal(client.autonomyPatch({autonomy:{advisor:[]}}).advisor,undefined);
 });
+test('report opening accepts only dated files in the local analyst directory',()=>{
+ const report='/tmp/test-state/omarchy-dobby/autonomy-reports/2026-10-06.md';
+ assert.equal(client.dailyReportPath({autonomy:{advisor:{report}}},'/tmp/test-state'),report);
+ for(const report of ['/etc/passwd','/tmp/test-state/omarchy-dobby/autonomy-reports/../notes.md','/tmp/test-state/omarchy-dobby/autonomy-reports/commands.sh',''])assert.throws(()=>client.dailyReportPath({autonomy:{advisor:{report}}},'/tmp/test-state'));
+});

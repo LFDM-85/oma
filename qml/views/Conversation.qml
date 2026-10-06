@@ -513,7 +513,7 @@ Item {
                 spacing: 6
                 Action { visible: !!autonomyBar.proposal; height: 22; text: "Approve"; onClicked: root.service.answerProposal(autonomyBar.proposal.id, true) }
                 Action { visible: !!autonomyBar.proposal; height: 22; text: "Dismiss"; onClicked: root.service.answerProposal(autonomyBar.proposal.id, false) }
-                Action { objectName: "dailyReportButton"; visible: !autonomyBar.proposal && !!autonomyBar.advisor; width: 82; height: 22; text: autonomyBar.advisor && autonomyBar.advisor.report ? "Relatório" : "Preparar"; onClicked: root.service.autonomyControl(autonomyBar.advisor.report ? "report" : "run") }
+                Action { objectName: "dailyReportButton"; visible: !autonomyBar.proposal && !!autonomyBar.advisor; enabled: !!autonomyBar.advisor && (!!autonomyBar.advisor.report || (autonomyBar.advisor.enabled && autonomyBar.advisor.status !== "running")); width: 82; height: 22; text: autonomyBar.advisor && autonomyBar.advisor.report ? "Relatório" : "Preparar"; onClicked: root.service.autonomyControl(autonomyBar.advisor.report ? "report" : "run") }
                 Action { objectName: "dailyPauseButton"; visible: !autonomyBar.proposal && !!autonomyBar.advisor; width: 64; height: 22; text: autonomyBar.advisor && autonomyBar.advisor.enabled ? "Pausar" : "Retomar"; onClicked: root.service.autonomyControl(autonomyBar.advisor.enabled ? "pause" : "resume") }
             }
         }

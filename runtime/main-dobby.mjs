@@ -4,7 +4,7 @@ import {homedir} from 'node:os';
 import {join} from 'node:path';
 import {existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
-import {DobbyClient,requestId,autonomyPatch} from './dobby-client.mjs';
+import {DobbyClient,requestId,autonomyPatch,dailyReportPath} from './dobby-client.mjs';
 import {Memory} from './memory.mjs';
 import {Audio} from './audio.mjs';
 import {VoiceEffects} from './voice-effects.mjs';
@@ -151,9 +151,13 @@ const opener=spawn('xdg-open',[obsidianUri({kind:c.kind,value:c.value.trim()})],
  }
  if(c.action==='autonomyControl'){
   if(!['pause','resume','run','report'].includes(c.command))throw Error('Invalid autonomy control.');
+  if(c.command==='report'){
+   const file=dailyReportPath(await client.status());
+   await new Promise((resolve,reject)=>{const opener=spawn('omarchy-launch-editor',[file],{detached:true,stdio:'ignore'});opener.on('error',reject);opener.on('spawn',()=>{opener.unref();resolve()})});
+   emit({assistantText:'A abrir o relatório local no editor. As propostas continuam por verificar.'});return;
+  }
   const reply=await client.command({action:'autonomy',text:c.command});
   if(reply?.error)throw Error(reply.error);
-  if(c.command==='report')emit({assistantText:typeof reply==='string'?reply:'No daily report yet.'},{literalText:true});
   await refreshAutonomy();return;
  }
 }
