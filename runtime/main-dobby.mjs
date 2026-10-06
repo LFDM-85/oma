@@ -4,7 +4,7 @@ import {homedir} from 'node:os';
 import {join} from 'node:path';
 import {existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
-import {DobbyClient,requestId} from './dobby-client.mjs';
+import {DobbyClient,requestId,autonomyPatch} from './dobby-client.mjs';
 import {Memory} from './memory.mjs';
 import {Audio} from './audio.mjs';
 import {VoiceEffects} from './voice-effects.mjs';
@@ -143,10 +143,22 @@ const opener=spawn('xdg-open',[obsidianUri({kind:c.kind,value:c.value.trim()})],
  if(c.action==='companionWindowClosed'){companion.autoClose(c.address);return;}
  if(c.action==='accompanyWindow'){await companion.accompany(c.address);return;}
  if(c.action==='restoreFloating'){await companion.restore();return;}
+ if(c.action==='answerProposal'){
+  if(typeof c.id!=='string'||!c.id||c.id.length>300)throw Error('Invalid proposal.');
+  const reply=await client.command({action:c.allow===true?'autonomy_approve':'autonomy_dismiss',id:c.id});
+  if(reply?.error)throw Error(reply.error);
+  setTimeout(()=>void refreshAutonomy(),1500);return;
+ }
 }
 const input=createInterface({input:process.stdin});let commands=Promise.resolve();
 input.on('line',line=>{if(line.length>32768)return;commands=commands.then(()=>command(JSON.parse(line))).catch(fail)});
+// Dobby's sentinel works between requests, so its state is polled on its own.
+let lastAutonomy='';
+async function refreshAutonomy(){
+ try{const patch=autonomyPatch(await client.status());const key=JSON.stringify(patch);if(key!==lastAutonomy){lastAutonomy=key;emit({autonomy:patch})}}catch{}
+}
+const autonomyTimer=setInterval(()=>void refreshAutonomy(),5000);
 const timer=setInterval(()=>{void conversation.poll();if(presented){if(!conversation.active&&!testing&&Date.now()-lastActivity>180000){presented=false;void stop().then(()=>emit({dismiss:true})).catch(fail)}else void listen().catch(fail)}},400);
-async function close(){if(closed)return;closed=true;presented=false;clearInterval(timer);wake.close();try{await stop();await companion.setPanelState(false,false)}finally{await echo.close().catch(()=>{});memory.close();process.exit(0)}}
+async function close(){if(closed)return;closed=true;presented=false;clearInterval(timer);clearInterval(autonomyTimer);wake.close();try{await stop();await companion.setPanelState(false,false)}finally{await echo.close().catch(()=>{});memory.close();process.exit(0)}}
 input.on('close',()=>void close());process.on('SIGTERM',()=>void close());process.on('SIGINT',()=>void close());
 await connect().catch(fail);wake.start();

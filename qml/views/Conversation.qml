@@ -252,7 +252,7 @@ Item {
         visible: !root.miniMode
         x: 0; width: parent.width
         y: captions.y + captions.height + 10
-        height: taskBar.y - y - 8
+        height: (autonomyBar.visible ? autonomyBar.y : taskBar.y) - y - 8
         readonly property real waveHeight: 24
         readonly property real ringY: 22
         readonly property real ringX: Math.min(150, width * .27)
@@ -466,6 +466,51 @@ Item {
                     height: 22
                     text: "Retry"; onClicked: if (root.service) root.service.retry()
                 }
+            }
+        }
+    }
+
+    // Dobby's sentinel: the first fix waiting for an answer, or what it just did alone.
+    Item {
+        id: autonomyBar
+        objectName: "autonomyBar"
+        readonly property var proposal: root.service && root.service.autonomy && root.service.autonomy.proposals && root.service.autonomy.proposals.length ? root.service.autonomy.proposals[0] : null
+        readonly property var latest: root.service && root.service.autonomy && root.service.autonomy.events && root.service.autonomy.events.length ? root.service.autonomy.events[0] : null
+        readonly property bool recent: !!latest && root.service.autonomy.fresh === true
+        visible: !root.miniMode && (!!proposal || recent)
+        x: 14; width: parent.width - 28; height: 28
+        y: taskBar.y - height - 4
+        Rectangle {
+            anchors.fill: parent
+            color: Qt.rgba(ink.surface.r, ink.surface.g, ink.surface.b, .85)
+            border.color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, autonomyBar.proposal ? .7 : .3)
+        }
+        Row {
+            anchors.fill: parent; anchors.leftMargin: 12; anchors.rightMargin: 4
+            spacing: 12
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                text: autonomyBar.proposal ? "ASK" : "AUTO"; textFormat: Text.PlainText
+                color: ink.accent; font.pixelSize: 9; font.bold: true; font.letterSpacing: 2.5
+            }
+            Text {
+                objectName: "autonomyText"
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width - x - answers.width - 12
+                text: autonomyBar.proposal ? autonomyBar.proposal.title + " — " + autonomyBar.proposal.action + "?"
+                    : autonomyBar.latest ? autonomyBar.latest.title + (autonomyBar.latest.action ? " — " + autonomyBar.latest.outcome : "") : ""
+                textFormat: Text.PlainText
+                color: ink.text
+                font.pixelSize: 12
+                elide: Text.ElideRight
+            }
+            Row {
+                id: answers
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 6
+                visible: !!autonomyBar.proposal
+                Action { height: 22; text: "Approve"; onClicked: root.service.answerProposal(autonomyBar.proposal.id, true) }
+                Action { height: 22; text: "Dismiss"; onClicked: root.service.answerProposal(autonomyBar.proposal.id, false) }
             }
         }
     }
