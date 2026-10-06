@@ -204,7 +204,31 @@ Item {
                 id: assistantColumn
                 x: 14; y: 8; width: parent.width - 28
                 spacing: 4
-                Text { text: "▸ O.M.A."; textFormat: Text.PlainText; color: ink.muted; font.pixelSize: 9; font.letterSpacing: 3 }
+                Row {
+                    width: parent.width
+                    spacing: 10
+                    Text { text: "▸ O.M.A."; textFormat: Text.PlainText; color: ink.muted; font.pixelSize: 9; font.letterSpacing: 3 }
+                    // Vault notes Dobby consulted for this answer; a click opens them in Obsidian.
+                    Repeater {
+                        objectName: "vaultSources"
+                        model: root.service && root.service.vaultSources ? root.service.vaultSources : []
+                        delegate: Text {
+                            required property var modelData
+                            text: (modelData.kind === "note" ? "◆ " : "⌕ ") + modelData.value
+                            textFormat: Text.PlainText
+                            color: root.accentColor
+                            font.pixelSize: 9
+                            font.letterSpacing: 1
+                            width: Math.min(implicitWidth, 150)
+                            elide: Text.ElideRight
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: root.service.openVaultSource(modelData)
+                            }
+                        }
+                    }
+                }
                 Item { width: parent.width; height: root.captionHeight
                 TypewriterText {
                     id: assistantCaption

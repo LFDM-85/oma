@@ -74,6 +74,7 @@ Item {
     state: "starting"
     property string userText: ""
     property string assistantText: ""
+    property var vaultSources: []
     property string error: ""
     property string taskText: ""
     property string taskStatus: ""
@@ -139,6 +140,7 @@ Item {
     function show(greeting, silent) { if (shell) shell.summon("io.github.komagata.oma", JSON.stringify({greet: greeting !== false, silent: silent === true})) }
     function setVoiceEffects(enabled) { command({action: "setVoiceEffects", enabled: enabled}) }
     function setWake(enabled) { command({action: "setWake", enabled: enabled}) }
+    function openVaultSource(source) { if (source) command({action: "openVaultSource", kind: source.kind, value: source.value}) }
     function saveKey(value) { keySaved = false; keyError = ""; command({action: "saveApiKey", key: value}) }
     function settings() { if (shell) shell.summon("io.github.komagata.oma", JSON.stringify({settings: true, greet: false})) }
     function closingCue() { command({action: "closing"}) }
@@ -165,7 +167,7 @@ Item {
             if (d.textSubmission !== undefined) root.finishTextSubmission(d.textSubmission)
             for (const k of ["taskBusy", "backendStatus", "docked", "viewMode"])
                 if (d[k] !== undefined) root[k] = d[k]
-            for (const k of ["responseLanguages", "responseLanguage", "languageError", "microphones", "microphoneTarget", "microphoneBusy", "microphoneError", "voiceProvider", "latency", "connectionTesting", "connectionTestPassed", "connectionTestError", "modelReady", "speechReady", "omarchySkillLoaded", "modelProvider", "modelName", "cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "voiceEffectsEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
+            for (const k of ["vaultSources", "responseLanguages", "responseLanguage", "languageError", "microphones", "microphoneTarget", "microphoneBusy", "microphoneError", "voiceProvider", "latency", "connectionTesting", "connectionTestPassed", "connectionTestError", "modelReady", "speechReady", "omarchySkillLoaded", "modelProvider", "modelName", "cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "voiceEffectsEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
                 if (d[k] !== undefined) root[k] = d[k]
             if (d.dismiss === true) dismissRequested()
             if (d.wakeDetected === true) show(true)

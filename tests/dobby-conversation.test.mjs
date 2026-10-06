@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {DobbyConversation,conversationRequest} from '../runtime/dobby-conversation.mjs';
+import {DobbyConversation,conversationRequest,vaultSource,obsidianUri} from '../runtime/dobby-conversation.mjs';
 import {DobbyClient,requestId} from '../runtime/dobby-client.mjs';
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
 function fixture(){
  const requests=[],patches=[],spoken=[],errors=[],calls=[];
- const client={active:null,submitting:null,state:{busy:false,pending:false},async status(){return this.state},async submit(text,session){const id=String(requests.length+1);requests.push({text,session,id});this.active=id;this.state={busy:true,request_id:id};return id},async cancel(){if(this.active)calls.push('cancel:'+this.active);this.active=null;this.state={busy:false,pending:false}},async waitUntilIdle(){calls.push('idle')}};
+ const client={active:null,submitting:null,state:{busy:false,pending:false},async status(){return this.state},async submit(text,session,turn){const id=String(requests.length+1);requests.push({text:turn?.legacy??text,turn,session,id});this.active=id;this.state={busy:true,request_id:id};return id},async cancel(){if(this.active)calls.push('cancel:'+this.active);this.active=null;this.state={busy:false,pending:false}},async waitUntilIdle(){calls.push('idle')}};
  const conversation=new DobbyConversation({client,emit:p=>patches.push(p),speak:async text=>spoken.push(text),stopSpeech:()=>{calls.push('stop-audio')},onError:e=>errors.push(e)});conversation.sessionId='oma-session';
  return {client,conversation,requests,patches,spoken,errors,calls};
 }
@@ -75,4 +75,29 @@ test('wire limits still apply to the conversation envelope before opening a sock
  const client=new DobbyClient({socketPath:'/never-opened'});client.status=async()=>({busy:false,pending:false});
  await assert.rejects(client.submit(conversationRequest('漢'.repeat(6000)),requestId()),/demasiado longo/);
  assert.equal(client.active,null);
+});
+test('the user words travel alone beside the O.M.A. instructions',async()=>{
+ const f=fixture();await f.conversation.receive('Where did we leave the homelab?');
+ const turn=f.requests[0].turn;assert.equal(turn.text,'Where did we leave the homelab?');assert.match(turn.instructions,/Your name.*O\.M\.A\./);
+ const revision=f.conversation.beginSpeech();await f.conversation.receive('Only the NVMe part',revision);
+ const next=f.requests[1].turn;assert.equal(next.text,'Only the NVMe part');assert.match(next.instructions,/Where did we leave the homelab\?/);assert.ok(next.instructions.length<=4000);
+});
+test('vault lookups Dobby reports become at most three distinct sources for the turn',async()=>{
+ assert.deepEqual(vaultSource("read 'Homelab - Where we left off' from the vault"),{kind:'note',value:'Homelab - Where we left off'});
+ assert.deepEqual(vaultSource('recall "Luís\'s NVMe" from the vault'),{kind:'search',value:"Luís's NVMe"});
+ assert.equal(vaultSource('run_shell ls'),null);
+ assert.equal(obsidianUri({kind:'note',value:'Home & co'}),'obsidian://open?file=Home%20%26%20co');
+ assert.equal(obsidianUri({kind:'search',value:'nvme'}),'obsidian://search?query=nvme');
+ const f=fixture();await f.conversation.receive('Where did we leave the homelab?');
+ for(const action of ["recall 'homelab' from the vault","read 'Home' from the vault","read 'Home' from the vault","read 'A' from the vault","read 'B' from the vault"]){f.client.state={request_id:f.client.active,busy:true,status:'acting',action};await f.conversation.poll();}
+ const last=f.patches.filter(p=>p.vaultSources).at(-1).vaultSources;
+ assert.deepEqual(last.map(s=>s.value),['homelab','Home','A']);
+ await f.conversation.receive('next');
+ assert.ok(f.patches.some(p=>Array.isArray(p.vaultSources)&&p.vaultSources.length===0));
+});
+test('sources Dobby lists in status are shown even when the read finished between polls',async()=>{
+ const f=fixture();await f.conversation.receive('Where did we leave the homelab?');
+ f.client.state={request_id:f.client.active,busy:false,status:'done',reply:'Stalled on the NVMe.',vault_sources:[{kind:'note',value:'Homelab - Where we left off'},{kind:'bogus',value:'x'}]};
+ await f.conversation.poll();
+ assert.deepEqual(f.patches.filter(p=>p.vaultSources).at(-1).vaultSources,[{kind:'note',value:'Homelab - Where we left off'}]);
 });

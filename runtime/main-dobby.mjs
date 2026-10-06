@@ -18,6 +18,7 @@ import {StartupCue} from './startup.mjs';
 import {stopChild} from './stop-child.mjs';
 import {DobbyConversation} from './dobby-conversation.mjs';
 import {EchoCancel} from './echo-cancel.mjs';
+import {obsidianUri} from './dobby-conversation.mjs';
 
 process.umask(0o077);
 const data=process.env.OMA_DATA_DIR||join(process.env.XDG_DATA_HOME||join(homedir(),'.local/share'),'oma');
@@ -125,6 +126,8 @@ async function command(c){
  if(c.action==='opening'){cue.play();return;}
  if(c.action==='closing'){cue.play();return;}
  if(['greet','restoreGreet'].includes(c.action)){emit({assistantText:'O.M.A. ready. You can speak and interrupt me.'});return;}
+ if(c.action==='openVaultSource'){if(!['note','search'].includes(c.kind)||typeof c.value!=='string'||!c.value.trim()||c.value.length>200)throw Error('Invalid vault source.');// Detached: xdg-open stays attached to Obsidian when it has to start it.
+const opener=spawn('xdg-open',[obsidianUri({kind:c.kind,value:c.value.trim()})],{detached:true,stdio:'ignore'});opener.on('error',fail);opener.unref();return;}
  if(c.action==='refreshMicrophones'){await refreshMicrophones();return;}
  if(c.action==='setMicrophone'){
   if(conversation.active)throw Error('Stop the current request before changing microphone.');

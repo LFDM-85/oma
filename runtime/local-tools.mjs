@@ -4,6 +4,7 @@ import {Desktop,desktopTools,runDesktopCommand} from './desktop.mjs';
 import {randomUUID} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
+import {Vault,preferencesNote} from './vault.mjs';
 const schema=(name,description,properties)=>({type:'function',name,description,strict:true,parameters:{type:'object',properties,required:Object.keys(properties),additionalProperties:false}});
 const string={type:'string'};
 export const localToolDefinitions=[
@@ -12,6 +13,9 @@ export const localToolDefinitions=[
  schema('remember','Save an explicit durable user preference. Do not store guesses.',{key:string,value:string}),
  schema('search_memory','Search saved preferences, past conversation and exact URLs.',{query:string}),
  schema('forget','Forget stored information matching one literal substring. Find the exact stored key or value first; do not send a list of terms. Zero removed records means no match. Ends this voice session to clear its context.',{query:string}),
+ schema('vault_search','Search the Obsidian vault, the second brain shared with Dobby, Claude Code and Codex. Returns the best matching notes with excerpts.',{query:string}),
+ schema('vault_read','Read one Obsidian vault note by its name or path, as listed in the vault map or a vault_search result.',{note:string}),
+ schema('vault_note','Append one dated line of lasting knowledge to a vault note the user asked to keep. A new name becomes a note in the vault inbox. Asks the user for approval before writing.',{note:string,text:string}),
  schema('open_url','Open an exact public HTTP(S) URL.',{url:string}),
  schema('read_file','Read a UTF-8 file, including installed skill references. Limit output to 24 KB.',{path:string}),
  schema('write_file','Write UTF-8 text to an explicitly requested file. Confirm destructive overwrites first.',{path:string,content:string}),
@@ -25,7 +29,7 @@ export const localToolDefinitions=[
  schema('restart_assistant','Restart only O.M.A. after the reply. Never restart the desktop bar.',{})
 ];
 export class LocalTools {
- constructor({memory,emit,cwd=process.cwd(),onEnd=()=>{},onRestart=()=>{},onForget=()=>{}}){Object.assign(this,{memory,emit,cwd,onEnd,onRestart,onForget});this.desktop=new Desktop({emit});this.companion=new WindowCompanion({emit});this.approvals=new Map();}
+ constructor({memory,emit,cwd=process.cwd(),onEnd=()=>{},onRestart=()=>{},onForget=()=>{},vault=new Vault()}){Object.assign(this,{memory,emit,cwd,onEnd,onRestart,onForget,vault});this.desktop=new Desktop({emit});this.companion=new WindowCompanion({emit});this.approvals=new Map();}
  begin(){this.controller=new AbortController();this.desktop.begin();}
  cancel(){this.controller?.abort();this.desktop.cancel();for(const finish of [...this.approvals.values()])finish(false);}
  approve(id,allow){this.approvals.get(id)?.(allow===true);}
@@ -39,7 +43,20 @@ export class LocalTools {
   }
   const signal=this.controller.signal;
   if(name==='new_text_document'){try{return await newOmaTextDocument({desktop:this.desktop,companion:this.companion,text:args.text})}finally{this.emit({computerUsing:false})}}
-  if(name==='remember'){return {saved:true,...this.memory.remember(args.key,args.value)};}
+  if(name==='remember'){
+   const fact=this.memory.remember(args.key,args.value);
+   // Mirrored to the shared vault, best effort: the local fact is already saved.
+   const vault=fact?.key?await this.vault.note(preferencesNote,fact.key+': '+fact.value,signal).then(()=>preferencesNote,()=>''):'';
+   return {saved:true,...fact,...(vault?{vault}:{})};
+  }
+  if(name==='vault_search')return {text:await this.vault.search(args.query,signal)};
+  if(name==='vault_read')return {text:await this.vault.read(args.note,signal)};
+  if(name==='vault_note'){
+   if(!args.note.trim()||!args.text.trim())throw Error('Both note and text are required');
+   const {approved}=await this.confirm('Write to the vault note "'+args.note.trim()+'": '+args.text.trim(),signal);
+   if(!approved)return {written:false};
+   return {written:true,result:await this.vault.note(args.note,args.text,signal)};
+  }
   if(name==='search_memory')return {lastUrl:this.memory.lastUrl(),matches:this.memory.search(args.query)};
   if(name==='forget'){const removed=this.memory.forget(args.query);this.onForget();return {forgotten:removed>0,removed};}
   if(name==='open_url'){const url=new URL(args.url);if(!['http:','https:'].includes(url.protocol)||url.username||url.password)throw Error('Only public HTTP(S) URLs supported');await runDesktopCommand('xdg-open',[url.href],{signal});this.memory.action('open_url',{url:url.href},'completed');return {opened:url.href};}
@@ -54,7 +71,10 @@ export class LocalTools {
   if(name==='restart_assistant'){this.onRestart();return {restartingAfterReply:true};}
   if(name==='confirm_action'){
    if(!args.description.trim()||args.description.length>5000)throw Error('Invalid confirmation');
-   return new Promise(resolve=>{const id=randomUUID();const finish=approved=>{signal.removeEventListener('abort',abort);this.approvals.delete(id);this.emit({approval:null});resolve({approved})};const abort=()=>finish(false);this.approvals.set(id,finish);signal.addEventListener('abort',abort,{once:true});this.emit({approval:{id,description:args.description,method:'oma/confirmAction'},state:'approval'});});
+   return this.confirm(args.description,signal);
   }
+ }
+ confirm(description,signal){
+   return new Promise(resolve=>{const id=randomUUID();const finish=approved=>{signal.removeEventListener('abort',abort);this.approvals.delete(id);this.emit({approval:null});resolve({approved})};const abort=()=>finish(false);this.approvals.set(id,finish);signal.addEventListener('abort',abort,{once:true});this.emit({approval:{id,description,method:'oma/confirmAction'},state:'approval'});});
  }
 }
