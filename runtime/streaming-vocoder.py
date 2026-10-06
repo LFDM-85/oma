@@ -2,6 +2,7 @@
 import os,sys
 import numpy as np
 rate=24000; hop=960; size=8192; margin=(size-hop)//2
+mix=.35  # Keep the natural voice dominant; retain a lighter robotic layer.
 freq=np.fft.rfftfreq(size,1/rate); centers=np.geomspace(90,10000,26)
 bands=np.array([np.maximum(0,np.minimum((freq-lo)/(mid-lo),(hi-freq)/(hi-mid))) for lo,mid,hi in zip(centers[:-2],centers[1:-1],centers[2:])])
 smooth=np.exp(-.5*(2*np.pi*freq*.008)**2)
@@ -23,8 +24,8 @@ def render():
  dry=s[margin:margin+hop]; wet=robot[margin:margin+hop]
  gains=np.linspace(wet_gain,target_wet,hop);wet_gain=target_wet
  wet*=gains
- mixed=.5*dry+.5*wet
- target_mix=min(2.,rms(s)/max(rms(.5*s+.5*robot*target_wet),1e-9))
+ mixed=(1-mix)*dry+mix*wet
+ target_mix=min(2.,rms(s)/max(rms((1-mix)*s+mix*robot*target_wet),1e-9))
  mixed*=np.linspace(mix_gain,target_mix,hop);mix_gain=target_mix
  out=np.rint(np.clip(mixed,-1,32767/32768)*32768).astype('<i2').tobytes()
  sys.stdout.buffer.write(out);sys.stdout.buffer.flush()
