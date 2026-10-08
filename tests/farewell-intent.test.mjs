@@ -26,3 +26,7 @@ test('pending holds only while a detected goodbye awaits confirmation',()=>{
  f.input('バイバイってどういう意味',300);assert.equal(f.pending,false);
  f.input('バイバイ',400);f.tick(1200);assert.equal(calls,1);assert.equal(f.pending,false);
 });
+test('Portuguese and English closing phrases end the conversation, never a request',()=>{
+ for(const text of ['Podes fechar','podes fechar agora.','Já terminei!','Obrigado, já terminei','Ok OMA, podes fechar','Adeus','Até já!','You can close now','Bye-bye','bye bye OMA','I am done','That\'s all, thanks'.replace(', thanks',''),'Fecha-te'])assert.ok(directFarewell(text),text);
+ for(const text of ['Podes fechar o Firefox?','Já terminei o relatório','Fecha a janela do Chrome','Como se diz adeus em inglês?','You can close the browser now','Até já começo'])assert.equal(directFarewell(text),false,text);
+});

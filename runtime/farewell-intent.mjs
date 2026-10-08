@@ -1,7 +1,12 @@
 // Conservative fallback for explicit utterances; other languages/intents still
 // use the OMA Skill and end_conversation tool. Never match a substring.
+// Portuguese and more English ways to end ("podes fechar", "já terminei",
+// "you can close now", "bye-bye"), optionally after thanks/ok and the name.
+const lead=/^(?:(?:ok(?:ay)?|obrigad[oa]|muito obrigad[oa]|thanks|thank you|pronto|então|right)[,.!\s]+)*(?:o\.?\s?m\.?\s?a\.?[,.!\s]+)?/u;
+const more=/^(?:(?:já |agora )?(?:podes|pode) (?:fechar|ir|desligar)(?: agora| já)?|(?:já )?(?:terminei|acabei|está feito|é tudo)(?: por agora| por hoje)?|fecha(?:-te)?(?: agora| já)?|adeus|até (?:já|logo|amanhã|mais)|tchau|xau|(?:you can|you may) (?:close|go)(?: now)?|close (?:now|yourself)|(?:i'?m|i am) (?:done|finished)(?: for now)?|that'?s all(?: for now)?|bye[ -]?bye|see you(?: later)?)(?:[,.!\s]+o\.?\s?m\.?\s?a\.?)?$/u;
 export function directFarewell(text){
  const clean=text.normalize('NFKC').trim().replace(/^(?:じゃあ?|もう)(?:いいや)?[、,\s]*/u,'').replace(/[。.!！?？]+$/u,'').toLowerCase();
+ if(more.test(clean.replace(lead,'')))return true;
  return /^(?:(?:ありがとう(?:ございました|ございます)?[、,。!！\s]*)?(?:バイバイ|ばいば[ー〜]?い|さようなら|さよなら|またね)(?:[。\s]*(?:会話を)?終了(?:して|してください))?|(?:会話を|omaを|o\.m\.a\.を)終了(?:して|してください)|(?:thanks[,.!\s]+)?(?:bye(?:[ -]?bye)?|goodbye|see you)|(?:please )?close (?:oma|o\.m\.a|this conversation))$/u.test(clean);
 }
 export class FarewellIntent {

@@ -21,6 +21,7 @@ import {streamGoogleSpeech} from './google-voice.mjs';
 import {checkFastPath, cacheResponse} from './fast-path.mjs';
 import {obsidianUri} from './dobby-conversation.mjs';
 import {forbidden} from './agy-guard.mjs';
+import {directFarewell} from './farewell-intent.mjs';
 import {readTasks, record, SystemWatch} from './tasks.mjs';
 
 process.umask(0o077);
@@ -724,6 +725,21 @@ let lastRequest = null, pendingRun = null;
 async function handleUserTurn(text, via = 'typed') {
   if (!text || !text.trim()) return false;
   text = text.trim();
+  // "Podes fechar", "já terminei", "bye-bye"…: the reverse of "Hey OMA". A
+  // short goodbye plays, then the panel closes, even in the middle of a turn.
+  if (directFarewell(text)) {
+    pendingTurns.length = 0;
+    if (speaking) await stopSpeech();
+    const lang = detectLanguage(text);
+    const bye = lang === 'pt' ? 'Até já.' : 'Bye.';
+    pushTurn('user', text, {via});
+    pushTurn('assistant', bye);
+    emit({userText: text, assistantText: bye, taskBusy: false, taskText: ''}, {literalText: true});
+    await stopRecording();
+    await speak(bye, () => !closed, lang);
+    emit({dismiss: true});
+    return true;
+  }
   if (currentTask) {
     // Never drop a request: queue it, and cut the current speech short so it starts sooner.
     if (pendingTurns.length < 3) pendingTurns.push({text, via});
