@@ -21,6 +21,7 @@ import {streamGoogleSpeech} from './google-voice.mjs';
 import {checkFastPath, cacheResponse} from './fast-path.mjs';
 import {obsidianUri} from './dobby-conversation.mjs';
 import {forbidden} from './agy-guard.mjs';
+import {readTasks, record, SystemWatch} from './tasks.mjs';
 
 process.umask(0o077);
 
@@ -578,8 +579,29 @@ function vaultContext(text) {
 const agyWorkspace = join(homedir(), '.local/share/oma/agy-workspace');
 const agyGuard = fileURLToPath(new URL('./agy-guard.mjs', import.meta.url));
 const agyHooks = JSON.stringify({
-  'oma-read-only': {PreToolUse: [{matcher: '*', hooks: [{type: 'command', command: `${process.execPath} ${agyGuard}`, timeout: 5}]}]}
+  'oma-guard': {
+    PreToolUse: [{matcher: '*', hooks: [{type: 'command', command: `${process.execPath} ${agyGuard} pre`, timeout: 5}]}],
+    PostToolUse: [{matcher: 'run_command', hooks: [{type: 'command', command: `${process.execPath} ${agyGuard} post`, timeout: 5}]}]
+  }
 }, null, 1);
+// Background tasks behind the face: the model's commands (logged by the hooks)
+// and package/update processes anywhere on the machine. A task still marked
+// running from an earlier run can no longer be followed.
+const systemWatch = new SystemWatch();
+function closeRunning(source, status) {
+  for (const t of readTasks({limit: 200})) if (t.status === 'running' && (!source || t.source === source)) record({t: 'end', id: t.id, status});
+}
+try { closeRunning('', 'interrupted'); } catch {}
+let tasksShown = '';
+setInterval(() => {
+  try {
+    systemWatch.poll();
+    const history = readTasks();
+    const key = JSON.stringify(history);
+    if (key !== tasksShown) { tasksShown = key; emit({backgroundTasks: history}); }
+  } catch {}
+}, 1000);
+
 function agyGuarded() {
   try {
     const file = join(agyWorkspace, '.agents/hooks.json');
@@ -665,6 +687,7 @@ ${userText}
 
     child.on('close', code => {
       clearTimeout(timeout);
+      try { closeRunning('oma', 'interrupted'); } catch {}
       if (code !== 0) {
         return reject(new Error(stderr.trim() || `Antigravity terminou com código ${code}.`));
       }

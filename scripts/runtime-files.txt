@@ -11,6 +11,7 @@ package.json
 qml/BarWidget.qml
 qml/Overlay.qml
 qml/Service.qml
+qml/components/BackgroundTasks.qml
 qml/components/CrtEffect.qml
 qml/components/DesktopMap.qml
 qml/components/Face.qml
@@ -21,7 +22,10 @@ qml/components/LevelMeter.qml
 qml/components/OmaPalette.qml
 qml/components/PanelBackdrop.qml
 qml/components/ScanLines.qml
+qml/components/TaskHistory.qml
+qml/components/TaskStreams.qml
 qml/components/TypewriterText.qml
+qml/components/tasks.js
 qml/views/Conversation.qml
 qml/views/Settings.qml
 runtime/agy-guard.mjs
@@ -64,6 +68,7 @@ runtime/stop-child.mjs
 runtime/streaming-vocoder.py
 runtime/streaming-voice-effects.mjs
 runtime/task-label.mjs
+runtime/tasks.mjs
 runtime/transcript-cli.mjs
 runtime/transcript-window.mjs
 runtime/transcript.mjs

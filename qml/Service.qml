@@ -75,6 +75,8 @@ Item {
     property string userText: ""
     property string assistantText: ""
     property var vaultSources: []
+    // Background work (runtime/tasks.mjs), newest first.
+    property var backgroundTasks: []
     // Dobby's sentinel: what it did alone, and fixes waiting for an answer.
     property var autonomy: ({events: [], proposals: []})
     property string error: ""
@@ -189,7 +191,7 @@ Item {
             if (d.textSubmission !== undefined) root.finishTextSubmission(d.textSubmission)
             for (const k of ["taskBusy", "backendStatus", "docked", "viewMode"])
                 if (d[k] !== undefined) root[k] = d[k]
-            for (const k of ["backend", "antigravityModel", "antigravityEffort", "ttsEngine", "desktopContextEnabled", "vaultSources", "autonomy","responseLanguages", "responseLanguage", "languageError", "microphones", "microphoneTarget", "microphoneActive", "microphoneBusy", "microphoneError", "voiceProvider", "latency", "connectionTesting", "connectionTestPassed", "connectionTestError", "modelReady", "speechReady", "omarchySkillLoaded", "modelProvider", "modelName", "cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "voiceEffectsEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "faultStage", "turns", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
+            for (const k of ["backend", "antigravityModel", "antigravityEffort", "ttsEngine", "desktopContextEnabled", "vaultSources", "backgroundTasks", "autonomy","responseLanguages", "responseLanguage", "languageError", "microphones", "microphoneTarget", "microphoneActive", "microphoneBusy", "microphoneError", "voiceProvider", "latency", "connectionTesting", "connectionTestPassed", "connectionTestError", "modelReady", "speechReady", "omarchySkillLoaded", "modelProvider", "modelName", "cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "voiceEffectsEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "faultStage", "turns", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
                 if (d[k] !== undefined) root[k] = d[k]
             if (d.dismiss === true) dismissRequested()
             if (d.wakeDetected === true) show(true)

@@ -8,6 +8,7 @@
 // a password. It stops accidents; it is not a sandbox against an attacker who
 // controls the model's input.
 import {basename} from 'node:path';
+import {record, taskLabel} from './tasks.mjs';
 
 const HOME = '/home/luismelo';
 const READ_TOOLS = new Set(['view_file', 'list_dir', 'grep_search', 'find_by_name', 'search_web', 'command_status', 'read_terminal']);
@@ -81,12 +82,27 @@ export function decide(call) {
   return {decision: 'allow'};
 }
 
+// As a hook: "pre" (PreToolUse) decides and logs the command as a task,
+// "post" (PostToolUse) closes it, so O.M.A. can show it behind the face.
 if (import.meta.url === `file://${process.argv[1]}`) {
   let input = '';
   process.stdin.on('data', c => input += c);
   process.stdin.on('end', () => {
-    let out;
-    try { out = decide(JSON.parse(input)); } catch { out = deny('A tool call the guard could not read'); }
+    let call = {}, out;
+    try { call = JSON.parse(input); } catch {}
+    if (process.argv[2] === 'post') {
+      out = {};
+      try { record({t: 'end', conv: call.conversationId || '', status: call.error ? 'failed' : 'done', error: call.error ? String(call.error).slice(0, 200) : ''}); } catch {}
+    } else {
+      try { out = decide(call); } catch { out = deny('A tool call the guard could not read'); }
+      const command = call?.toolCall?.name === 'run_command' ? String(call.toolCall.args?.CommandLine || '') : '';
+      if (command) {
+        try {
+          record({t: 'start', id: `${call.conversationId || 'agy'}:${call.stepIdx ?? Date.now()}`, conv: call.conversationId || '', label: taskLabel(command), command, source: 'oma',
+            status: out.decision === 'allow' ? 'running' : 'blocked', error: out.decision === 'allow' ? '' : String(out.reason).split(' is ')[0]});
+        } catch {}
+      }
+    }
     process.stdout.write(JSON.stringify(out));
   });
 }

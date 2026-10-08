@@ -32,6 +32,12 @@ Item {
     property var questionValues: ({})
     // Desktop context supplied by the shell: normalized window geometry of O.M.A.'s workspace.
     property var desktopWindows: []
+    // Background tasks: cards behind the face, streaks in mini mode, history panel.
+    readonly property var backgroundTasks: service && service.backgroundTasks ? service.backgroundTasks : []
+    readonly property int runningTasks: backgroundTasks.filter(t => t.status === "running").length
+    property bool tasksOpen: false
+    property real taskClock: Date.now()
+    Timer { interval: 1000; repeat: true; running: root.opened && root.backgroundTasks.length > 0; onTriggered: root.taskClock = Date.now() }
     property string desktopWorkspace: ""
     property real desktopAspect: 16 / 9
     readonly property string status: service ? service.state : "starting"
@@ -105,6 +111,15 @@ Item {
             anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter
             text: "O.M.A."; textFormat: Text.PlainText
             color: ink.accent; font.pixelSize: 12; font.bold: true; font.letterSpacing: 6
+        }
+        Text {
+            objectName: "tasksToggle"
+            visible: root.backgroundTasks.length > 0
+            x: 84; anchors.verticalCenter: parent.verticalCenter
+            text: (root.runningTasks ? "⟳ " + root.runningTasks + " " : "") + "TASKS " + (root.tasksOpen ? "▾" : "▸")
+            textFormat: Text.PlainText
+            color: root.runningTasks ? ink.accent : ink.secondary; font.pixelSize: 9; font.letterSpacing: 2
+            MouseArea { anchors.fill: parent; anchors.margins: -6; cursorShape: Qt.PointingHandCursor; onClicked: root.tasksOpen = !root.tasksOpen }
         }
         Row {
             anchors.centerIn: parent
@@ -343,6 +358,19 @@ Item {
             targeting: root.taskBusy
             accentColor: root.accentColor
             labelColor: ink.muted
+            opacity: backgroundCards.visible ? .4 : 1
+        }
+        BackgroundTasks {
+            id: backgroundCards
+            objectName: "backgroundTasks"
+            x: desktopMap.x + desktopMap.mapX + 6; y: desktopMap.y + desktopMap.mapY + 6
+            width: desktopMap.mapWidth - 12; height: desktopMap.mapHeight - 12
+            gap: portrait.width + 12
+            tasks: root.backgroundTasks
+            now: root.taskClock
+            accentColor: root.accentColor
+            labelColor: ink.text
+            onHistoryRequested: root.tasksOpen = true
         }
         HoloFloor {
             anchors.fill: parent
@@ -452,6 +480,7 @@ Item {
         layer.smooth: true
         layer.effect: CrtEffect {}
         Glow { visible: !root.miniMode; accentColor: root.accentColor; anchors.centerIn: parent; width: parent.width; height: parent.height }
+        TaskStreams { objectName: "taskStreams"; anchors.fill: parent; active: root.miniMode && root.runningTasks > 0; accentColor: root.accentColor }
         Face {
             id: portrait
             objectName: "portrait"
@@ -472,6 +501,20 @@ Item {
             enabled: !!root.service && !root.service.approval && !root.service.question
             onDoubleClicked: root.service.setViewMode(root.miniMode ? "normal" : "mini")
         }
+    }
+
+    // Background task history, over the stage and the face.
+    TaskHistory {
+        objectName: "taskHistory"
+        visible: root.tasksOpen && !root.miniMode
+        x: 12; y: stage.y; width: parent.width - 24; height: stage.height
+        tasks: root.backgroundTasks
+        now: root.taskClock
+        accentColor: root.accentColor
+        textColor: ink.text
+        mutedColor: ink.muted
+        surfaceColor: ink.surface
+        onCloseRequested: root.tasksOpen = false
     }
 
     // Task bar: running PC work, errors and retry. Space is always reserved.
