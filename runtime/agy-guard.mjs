@@ -16,6 +16,10 @@ const SKILL_SCRIPTS = new Set([
 const PLAIN = new Set(['cat', 'head', 'tail', 'ls', 'grep', 'rg', 'wc', 'sort', 'cut', 'tr', 'jq', 'column',
   'free', 'df', 'du', 'uptime', 'uname', 'date', 'whoami', 'hostname', 'id', 'lsblk', 'findmnt', 'ps', 'pgrep',
   'ss', 'getent', 'dig', 'host', 'sensors', 'lscpu', 'lsusb', 'lspci', 'which', 'file', 'stat', 'upower', 'echo']);
+// Omarchy routes that only print; everything else (theme set, toggle, restart,
+// bar, install…) goes through RUN: and the user's approval.
+const OMARCHY_READ = /^(.* )?--help$|^(commands|commands --json|commands --all|version|channel current|battery status|drive info( \S+)?|reminder show|dev status|debug --no-sudo --print|menu keybindings --print)$|^(theme|font) (current|list|extras)$|^theme bg current$|^hw (display|touchpad|touchscreen)$|^hyprland monitor (focused|laptop)$|^hyprland toggle (enabled|disabled) [\w.-]+$|^audio (output sink|sink availability)$/;
+
 // Commands with a read-only subcommand in the given argument position.
 const SUB = {
   hyprctl: /^(clients|activewindow|activeworkspace|workspaces|monitors|devices|binds|layers|version|getoption|configerrors|-j)$/,
@@ -42,7 +46,10 @@ function segmentOk(seg) {
   if (PLAIN.has(cmd)) return true;
   if (cmd === 'ping') return args.includes('-c');
   if (cmd === 'nmcli') return args.every(a => /^(-[a-z]|-t|-f|--terse|--fields|[A-Z,-]+|device|dev|d|connection|con|c|general|g|show|status|wifi|list|--rescan|no)$/.test(a));
-  if (cmd === 'omarchy') return /^(theme current|version|commands)\b/.test(args.join(' ')) || args.includes('--help');
+  if (cmd === 'omarchy' || cmd.startsWith('omarchy-')) {
+    const route = (cmd === 'omarchy' ? args : [...cmd.slice(8).split('-'), ...args]).join(' ');
+    return OMARCHY_READ.test(route);
+  }
   if (cmd === 'python3' || cmd === 'python') {
     let script;
     try { script = realpathSync(args[0] || ''); } catch { return false; }
