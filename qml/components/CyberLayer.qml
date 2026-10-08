@@ -11,6 +11,8 @@ Item {
     property bool busy: false
     property color accentColor: "#cacccc"
     property color labelColor: "#656565"
+    // Live console: real events from the panel, newest last (see Conversation).
+    property var feed: []
     readonly property color faint: Qt.rgba(accentColor.r, accentColor.g, accentColor.b, .16)
     property int tick: 0
     clip: true
@@ -79,9 +81,30 @@ Item {
         font.family: "JetBrainsMono Nerd Font"; font.pixelSize: 7; font.letterSpacing: 1
         opacity: .7
     }
-    Readout {
-        x: 46; y: root.height * .52
-        text: "SEC ▸ " + (root.busy ? "EXEC" : "WATCH") + "\nENC ▸ TLS1.3\nMEM ▸ 0x" + (root.tick >= 0 ? root.hex(6) : "")
+    Column {
+        objectName: "consoleFeed"
+        x: 44; y: root.height * .5
+        width: Math.min(190, root.width * .3)
+        spacing: 1
+        Repeater {
+            model: root.feed.slice(-6)
+            Text {
+                id: line
+                required property string modelData
+                required property int index
+                readonly property bool newest: index === Math.min(root.feed.length, 6) - 1
+                width: parent.width
+                elide: Text.ElideRight
+                // The newest line types in, with a block cursor.
+                text: newest ? modelData.slice(0, Math.min(modelData.length, typed)) + (root.tick % 2 ? "█" : " ") : modelData
+                property int typed: 0
+                NumberAnimation on typed { running: line.newest; from: 0; to: line.modelData.length; duration: Math.min(900, line.modelData.length * 25) }
+                textFormat: Text.PlainText
+                color: newest ? root.accentColor : root.labelColor
+                opacity: .45 + .55 * (index + 1) / Math.min(root.feed.length, 6)
+                font.family: "JetBrainsMono Nerd Font"; font.pixelSize: 7
+            }
+        }
     }
     Readout {
         anchors.right: parent.right; anchors.rightMargin: 46; y: root.height * .52

@@ -37,6 +37,30 @@ Item {
     readonly property int runningTasks: backgroundTasks.filter(t => t.status === "running").length
     property bool tasksOpen: false
     property real taskClock: Date.now()
+    // Console feed behind the content: what actually happens, as log lines.
+    property var consoleFeed: []
+    property var loggedTasks: ({})
+    function logLine(text) {
+        const d = new Date()
+        const stamp = [d.getHours(), d.getMinutes(), d.getSeconds()].map(n => String(n).padStart(2, "0")).join(":")
+        consoleFeed = consoleFeed.concat([stamp + " " + text]).slice(-12)
+    }
+    Connections {
+        target: root.service
+        function onStateChanged() { if (root.service && root.service.state) root.logLine("[sys] state ▸ " + String(root.service.state).toUpperCase()) }
+        function onUserTextChanged() { if (root.service && root.service.userText) root.logLine("[rx ] " + root.service.userText) }
+        function onVaultSourcesChanged() { for (const v of (root.service ? root.service.vaultSources : []) || []) root.logLine("[mem] vault ◆ " + v.value) }
+        function onBackgroundTasksChanged() {
+            const seen = Object.assign({}, root.loggedTasks)
+            for (const t of root.backgroundTasks.slice().reverse()) {
+                if (seen[t.id] === t.status) continue
+                if (seen[t.id] !== undefined || t.status === "running" || Date.now() - Date.parse(t.endedAt || t.startedAt) < 10000)
+                    root.logLine((t.status === "running" ? "[exe] $ " : "[" + t.status.slice(0, 3) + "] ") + t.label)
+                seen[t.id] = t.status
+            }
+            root.loggedTasks = seen
+        }
+    }
     Timer { interval: 1000; repeat: true; running: root.opened && root.backgroundTasks.length > 0; onTriggered: root.taskClock = Date.now() }
     property string desktopWorkspace: ""
     property real desktopAspect: 16 / 9
@@ -102,17 +126,39 @@ Item {
 
     // More see-through than the default so Hyprland's blur shows the wallpaper.
     PanelBackdrop { visible: !root.miniMode; tint: ink.surface; accent: root.accentColor; surfaceOpacity: .62; anchors.fill: parent }
-    CyberLayer { objectName: "cyberLayer"; visible: !root.miniMode; anchors.fill: parent; active: root.opened; busy: root.taskBusy; accentColor: root.accentColor; labelColor: ink.muted }
+    CyberLayer { objectName: "cyberLayer"; visible: !root.miniMode; anchors.fill: parent; active: root.opened; busy: root.taskBusy; accentColor: root.accentColor; labelColor: ink.muted; feed: root.consoleFeed }
 
     // Header: live link state and response language.
     Item {
         id: header
         visible: !root.miniMode
         x: 14; width: parent.width - 28; height: 26
-        Text {
+        // Title with an occasional RGB-split glitch.
+        Item {
+            id: glitchTitle
+            property real shift: 0
+            property bool glitching: false
             anchors.left: parent.left; anchors.verticalCenter: parent.verticalCenter
-            text: "O.M.A."; textFormat: Text.PlainText
-            color: ink.accent; font.pixelSize: 12; font.bold: true; font.letterSpacing: 6
+            width: titleText.implicitWidth; height: titleText.implicitHeight
+            Text { visible: glitchTitle.glitching; x: -glitchTitle.shift; text: "O.M.A."; textFormat: Text.PlainText; color: "#ff2e88"; opacity: .7; font: titleText.font }
+            Text { visible: glitchTitle.glitching; x: glitchTitle.shift; text: "O.M.A."; textFormat: Text.PlainText; color: "#2ef2ff"; opacity: .7; font: titleText.font }
+            Text {
+                id: titleText
+                x: glitchTitle.glitching ? (Math.random() - .5) * 2 : 0
+                text: "O.M.A."; textFormat: Text.PlainText
+                color: ink.accent; font.pixelSize: 12; font.bold: true; font.letterSpacing: 6
+            }
+            Timer {
+                interval: glitchTitle.glitching ? 60 : 3500 + Math.random() * 5000
+                repeat: true
+                running: root.opened && !root.miniMode
+                property int burst: 0
+                onTriggered: {
+                    if (!glitchTitle.glitching) { glitchTitle.glitching = true; burst = 4 + Math.floor(Math.random() * 4) }
+                    if (--burst <= 0) { glitchTitle.glitching = false; glitchTitle.shift = 0; return }
+                    glitchTitle.shift = 1 + Math.random() * 2.5
+                }
+            }
         }
         Text {
             objectName: "tasksToggle"
@@ -482,6 +528,7 @@ Item {
         layer.smooth: true
         layer.effect: CrtEffect {}
         Glow { visible: !root.miniMode; accentColor: root.accentColor; anchors.centerIn: parent; width: parent.width; height: parent.height }
+        NeuralMesh { objectName: "neuralMesh"; visible: !root.miniMode; anchors.centerIn: parent; width: parent.width; height: parent.height; active: root.opened; thinking: root.taskBusy || root.status === "thinking"; level: root.service ? root.service.level : 0; accentColor: root.accentColor }
         HoloRings { objectName: "holoRings"; anchors.centerIn: parent; width: portrait.height * 1.3; height: width; active: root.opened; busy: root.taskBusy || root.runningTasks > 0; accentColor: root.accentColor }
         TaskStreams { objectName: "taskStreams"; anchors.fill: parent; active: root.miniMode && root.runningTasks > 0; accentColor: root.accentColor }
         Face {

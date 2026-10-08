@@ -21,6 +21,7 @@ qml/components/HoloBeam.qml
 qml/components/HoloFloor.qml
 qml/components/HoloRings.qml
 qml/components/LevelMeter.qml
+qml/components/NeuralMesh.qml
 qml/components/OmaPalette.qml
 qml/components/PanelBackdrop.qml
 qml/components/ScanLines.qml
