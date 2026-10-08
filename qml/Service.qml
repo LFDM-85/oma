@@ -78,6 +78,12 @@ Item {
     // Dobby's sentinel: what it did alone, and fixes waiting for an answer.
     property var autonomy: ({events: [], proposals: []})
     property string error: ""
+    // Which link of mic → listen → model → voice failed, for the fault chain.
+    property string faultStage: ""
+    // Recent conversation turns: {role, text, via, sources, command}.
+    property var turns: []
+    // The microphone in use; differs from microphoneTarget while a saved headset is absent.
+    property var microphoneActive: undefined
     property string taskText: ""
     property string taskStatus: ""
     property var approval: null
@@ -95,13 +101,24 @@ Item {
     property string viewMode: "normal"
     readonly property bool miniMode: viewMode === "mini" && !approval && !question && !error
     function setViewMode(mode) { if (mode === "mini" || mode === "normal") viewMode = mode }
-    property string voiceProvider: "gpt-live"
+    property string backend: "antigravity"
+    property string antigravityModel: "gemini-3.8-flash"
+    property string antigravityEffort: "low"
+    property string ttsEngine: "google"
+    property bool desktopContextEnabled: true
+    function setBackend(name) { command({action: "setBackend", backend: name}) }
+    function setAntigravityModel(model) { command({action: "setAntigravityModel", model: model}) }
+    function setAntigravityEffort(effort) { command({action: "setAntigravityEffort", effort: effort}) }
+    function setTtsEngine(engine) { command({action: "setTtsEngine", engine: engine}) }
+    function setDesktopContextEnabled(enabled) { command({action: "setDesktopContextEnabled", enabled: enabled}) }
+    function newConversation() { command({action: "newConversation"}) }
+    property string voiceProvider: "antigravity"
     property bool modelReady: false
     property bool speechReady: false
     property bool omarchySkillLoaded: false
     property string modelProvider: ""
     property string modelName: ""
-    property bool keyConfigured: false
+    property bool keyConfigured: backend === "antigravity"
     property bool keySaving: false
     property string keyError: ""
     property bool keySaved: false
@@ -163,6 +180,7 @@ Item {
     function stop() { command({action: "stop"}) }
     function approve(allow) { if (approval) command({action: "approve", id: approval.id, allow: allow}) }
     function answer(answers) { if (question) command({action: "answer", id: question.id, answers: answers}) }
+    function retryLast() { command({action: "retryLast"}) }
     function retry() { if (setupRequired) { checkSetup(); return }; if (!worker.running) worker.running = true; else command({action: "connect"}) }
     function update(line) {
         if (!alive || line.length > 65536) return
@@ -171,7 +189,7 @@ Item {
             if (d.textSubmission !== undefined) root.finishTextSubmission(d.textSubmission)
             for (const k of ["taskBusy", "backendStatus", "docked", "viewMode"])
                 if (d[k] !== undefined) root[k] = d[k]
-            for (const k of ["vaultSources", "autonomy","responseLanguages", "responseLanguage", "languageError", "microphones", "microphoneTarget", "microphoneBusy", "microphoneError", "voiceProvider", "latency", "connectionTesting", "connectionTestPassed", "connectionTestError", "modelReady", "speechReady", "omarchySkillLoaded", "modelProvider", "modelName", "cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "voiceEffectsEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
+            for (const k of ["backend", "antigravityModel", "antigravityEffort", "ttsEngine", "desktopContextEnabled", "vaultSources", "autonomy","responseLanguages", "responseLanguage", "languageError", "microphones", "microphoneTarget", "microphoneActive", "microphoneBusy", "microphoneError", "voiceProvider", "latency", "connectionTesting", "connectionTestPassed", "connectionTestError", "modelReady", "speechReady", "omarchySkillLoaded", "modelProvider", "modelName", "cameraActive", "listeningReady", "approvalListening", "wakeEnabled", "voiceEffectsEnabled", "wakeStatus", "keyConfigured", "keySaving", "keyError", "keySaved", "computerUsing", "state", "userText", "assistantText", "error", "faultStage", "turns", "taskText", "taskStatus", "approval", "question", "level", "inputLevel", "lipRound", "lipWide"])
                 if (d[k] !== undefined) root[k] = d[k]
             if (d.dismiss === true) dismissRequested()
             if (d.wakeDetected === true) show(true)
@@ -209,7 +227,13 @@ Item {
         function responseLanguage(value: string): void { root.setResponseLanguage(value) }
         function voiceEffects(enabled: bool): void { root.setVoiceEffects(enabled) }
         function microphone(value: string): void { root.setMicrophone(value) }
+        function setBackend(name: string): void { root.setBackend(name) }
+        function setAntigravityModel(model: string): void { root.setAntigravityModel(model) }
+        function setAntigravityEffort(effort: string): void { root.setAntigravityEffort(effort) }
+        function setTtsEngine(engine: string): void { root.setTtsEngine(engine) }
+        function setDesktopContextEnabled(enabled: bool): void { root.setDesktopContextEnabled(enabled) }
+        function newConversation(): void { root.newConversation() }
         function dailyWork(action: string): void { if (["pause", "resume", "run", "report"].includes(action)) root.autonomyControl(action) }
-        function status(): string { return JSON.stringify({autonomy: root.autonomy, modelProvider: root.modelProvider, modelName: root.modelName, taskStatus: root.taskStatus, taskBusy: root.taskBusy, backendStatus: root.backendStatus, docked: root.docked, viewMode: root.viewMode, responseLanguage: root.responseLanguage, languageError: root.languageError, microphoneTarget: root.microphoneTarget, microphoneBusy: root.microphoneBusy, microphoneError: root.microphoneError, onboardingVersion: 2, voiceProvider: root.voiceProvider, latency: root.latency, setupBusy: root.setupBusy, setupRequired: root.setupRequired, modelReady: root.modelReady, speechReady: root.speechReady, connectionTestPassed: root.connectionTestPassed, panelOpened: root.panelOpened, accentColor: String(root.accentColor), state: root.state, listeningReady: root.listeningReady, error: root.error, level: root.level, inputLevel: root.inputLevel, keyConfigured: root.keyConfigured, wakeEnabled: root.wakeEnabled, voiceEffectsEnabled: root.voiceEffectsEnabled, wakeStatus: root.wakeStatus, approvalListening: root.approvalListening}) }
+        function status(): string { return JSON.stringify({backend: root.backend, antigravityModel: root.antigravityModel, antigravityEffort: root.antigravityEffort, ttsEngine: root.ttsEngine, desktopContextEnabled: root.desktopContextEnabled, autonomy: root.autonomy, modelProvider: root.modelProvider, modelName: root.modelName, taskStatus: root.taskStatus, taskBusy: root.taskBusy, backendStatus: root.backendStatus, docked: root.docked, viewMode: root.viewMode, responseLanguage: root.responseLanguage, languageError: root.languageError, microphoneTarget: root.microphoneTarget, microphoneBusy: root.microphoneBusy, microphoneError: root.microphoneError, onboardingVersion: 2, voiceProvider: root.voiceProvider, latency: root.latency, setupBusy: root.setupBusy, setupRequired: root.setupRequired, modelReady: root.modelReady, speechReady: root.speechReady, connectionTestPassed: root.connectionTestPassed, panelOpened: root.panelOpened, accentColor: String(root.accentColor), state: root.state, listeningReady: root.listeningReady, error: root.error, level: root.level, inputLevel: root.inputLevel, keyConfigured: root.keyConfigured, wakeEnabled: root.wakeEnabled, voiceEffectsEnabled: root.voiceEffectsEnabled, wakeStatus: root.wakeStatus, approvalListening: root.approvalListening}) }
     }
 }

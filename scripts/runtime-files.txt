@@ -24,6 +24,7 @@ qml/components/ScanLines.qml
 qml/components/TypewriterText.qml
 qml/views/Conversation.qml
 qml/views/Settings.qml
+runtime/agy-guard.mjs
 runtime/audio.mjs
 runtime/camera.mjs
 runtime/caption-text.mjs
@@ -36,6 +37,8 @@ runtime/dobby-voice.py
 runtime/echo-cancel.mjs
 runtime/farewell-intent.mjs
 runtime/farewell-playback.mjs
+runtime/fast-path.mjs
+runtime/google-voice.mjs
 runtime/hyprland-context.mjs
 runtime/idle.mjs
 runtime/live-config.mjs
@@ -43,6 +46,7 @@ runtime/live-idle.mjs
 runtime/live-session.mjs
 runtime/local-tools.mjs
 runtime/locale.mjs
+runtime/main-antigravity.mjs
 runtime/main-dobby.mjs
 runtime/main-live.mjs
 runtime/main.mjs

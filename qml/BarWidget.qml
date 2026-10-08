@@ -15,7 +15,7 @@ Ui.BarWidget {
         anchors.fill: parent
         bar: root.bar
         text: "󰧑"
-        tooltipText: root.service && !root.service.keyConfigured ? "O.M.A. · Add your OpenAI API key to begin" : "O.M.A. · F8 to open · Right-click for Settings"
+        tooltipText: root.service ? ("O.M.A. · " + (root.service.modelName ? root.service.modelName : "Voice Assistant") + " · Left-click to talk · Right-click for Settings") : "O.M.A."
         onPressed: function(mouseButton) { if (mouseButton === Qt.RightButton && root.service) root.service.settings(); else if (mouseButton === Qt.LeftButton && root.shell) root.shell.toggle(root.moduleName, JSON.stringify({greet: true})) }
     }
 }

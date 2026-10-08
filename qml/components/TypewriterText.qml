@@ -48,8 +48,14 @@ Item {
         followTail = false
         viewport.contentY = Math.max(0, Math.min(maximumScroll, viewport.contentY + count * lineHeight))
     }
+    readonly property int activeInterval: {
+        if (!text) return interval
+        if (text.length > 250) return 6
+        if (text.length > 100) return 12
+        return interval
+    }
     Timer {
-        interval: root.interval; repeat: true
+        interval: root.activeInterval; repeat: true
         running: root.animated && root.active && root.visible && root.typing
         onTriggered: root.advance()
     }

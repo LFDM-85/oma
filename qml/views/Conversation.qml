@@ -76,13 +76,20 @@ Item {
         onTriggered: root.displayStatus = root.statusBaseText
     }
     readonly property real captionHeight: 66
+    // Conversation: the live pair stays in the captions; earlier turns scroll above them.
+    readonly property var turns: service && service.turns ? service.turns : []
+    readonly property var lastUser: { for (let i = turns.length - 1; i >= 0; i--) if (turns[i].role === "user") return turns[i]; return null }
+    readonly property var lastAssistant: turns.length && turns[turns.length - 1].role === "assistant" && service && turns[turns.length - 1].text === service.assistantText ? turns[turns.length - 1] : null
+    // Earlier turns: everything except the pair still shown live in the captions.
+    readonly property var history: lastAssistant ? turns.slice(0, -2) : turns.length && turns[turns.length - 1].role === "user" && service && turns[turns.length - 1].text === service.userText ? turns.slice(0, -1) : turns
+    readonly property var faultStages: [{id: "mic", label: "MIC"}, {id: "listen", label: "LISTEN"}, {id: "model", label: "MODEL"}, {id: "voice", label: "VOICE"}]
     readonly property bool offline: ["offline", "error", "unauthenticated"].indexOf(status) >= 0
     readonly property bool linked: !!service && !offline && (service.listeningReady || ["speaking", "working", "approval"].indexOf(status) >= 0)
     readonly property bool pendingResponse: !!service && !!service.backendStatus && service.backendStatus.pending > 0
     readonly property bool taskBusy: !!service && !!service.taskBusy
     readonly property string microphoneLabel: {
         const list = service && service.microphones ? service.microphones : []
-        const target = service && service.microphoneTarget ? service.microphoneTarget : ""
+        const target = service && service.microphoneActive !== undefined ? service.microphoneActive : service && service.microphoneTarget ? service.microphoneTarget : ""
         for (const choice of list) if (choice.value === target) return choice.label
         return target || "System default"
     }
@@ -117,7 +124,7 @@ Item {
             }
             Text {
                 objectName: "linkStatus"
-                text: "O.M.A. · " + (root.offline ? (root.status === "unauthenticated" ? "NO KEY" : "OFFLINE") : root.linked ? "LINKED" : root.status === "connecting" ? "CONNECTING" : "STANDBY")
+                text: (root.service && root.service.modelName ? root.service.modelName.toUpperCase() : "O.M.A.") + " · " + (root.offline ? (root.status === "unauthenticated" ? "NO KEY" : "OFFLINE") : root.linked ? "LINKED" : root.status === "connecting" ? "CONNECTING" : "STANDBY")
                 textFormat: Text.PlainText
                 color: root.linked ? ink.text : ink.secondary; font.pixelSize: 9; font.letterSpacing: 2
             }
@@ -146,6 +153,42 @@ Item {
         visible: !root.miniMode
         x: 16; y: header.height + 10; width: parent.width - 32
         spacing: 8
+        ListView {
+            id: historyList
+            objectName: "conversationHistory"
+            width: parent.width
+            // Only the height the stage can spare; a short window shows no history.
+            readonly property real budget: Math.min(96, root.height - 640)
+            visible: count > 0 && budget >= 32
+            height: visible ? Math.min(contentHeight, budget) : 0
+            clip: true
+            spacing: 2
+            boundsBehavior: Flickable.StopAtBounds
+            model: root.history
+            onCountChanged: positionViewAtEnd()
+            onHeightChanged: positionViewAtEnd()
+            delegate: Row {
+                id: turnRow
+                required property var modelData
+                readonly property bool mine: modelData.role === "user"
+                width: historyList.width
+                height: 16
+                spacing: 8
+                opacity: .6
+                Rectangle { width: 2; height: parent.height; color: turnRow.mine ? ink.muted : ink.accent; opacity: .5 }
+                Text {
+                    width: 52; anchors.verticalCenter: parent.verticalCenter
+                    text: turnRow.mine ? (turnRow.modelData.via === "voice" ? "▸ YOU ◉" : "▸ YOU") : "▸ O.M.A."
+                    textFormat: Text.PlainText; color: ink.muted; font.pixelSize: 8; font.letterSpacing: 2
+                }
+                Text {
+                    width: parent.width - 70; anchors.verticalCenter: parent.verticalCenter
+                    text: turnRow.modelData.text; textFormat: Text.PlainText
+                    color: turnRow.mine ? ink.secondary : ink.text
+                    font.pixelSize: 11; elide: Text.ElideRight; maximumLineCount: 1
+                }
+            }
+        }
         Item {
             id: userBlock
             width: parent.width
@@ -167,18 +210,19 @@ Item {
                     onHasInputChanged: if (hasInput) hasAppeared = true
                     Component.onCompleted: if (hasInput) hasAppeared = true
                     visible: hasAppeared
-                    text: "▸ YOU"; textFormat: Text.PlainText
+                    text: "▸ YOU" + (root.lastUser ? (root.lastUser.via === "voice" ? " · SPOKEN" : " · TYPED") : ""); textFormat: Text.PlainText
                     color: ink.muted; font.pixelSize: 9; font.letterSpacing: 3
                 }
                 }
-                // Fixed to three CJK lines; the caption inside follows its own line height.
-                Item { width: parent.width; height: root.captionHeight
+                // Grows to three lines; longer messages scroll with the mouse wheel.
+                Item { width: parent.width; height: userCaption.height
                 TypewriterText {
                     id: userCaption
                     objectName: "userCaption"
                     cursorColor: root.accentColor
                     color: ink.secondary
-                    width: parent.width; height: lineHeight * 3
+                    width: parent.width
+                    height: lineHeight * Math.max(1, Math.min(3, Math.ceil(implicitHeight / lineHeight)))
                     text: root.service ? root.service.userText : ""
                     font.pixelSize: 14
                     animated: false
@@ -228,17 +272,40 @@ Item {
                             }
                         }
                     }
+                    // Read-only facts O.M.A. collected for this answer.
+                    Repeater {
+                        objectName: "commandSources"
+                        model: root.lastAssistant && root.lastAssistant.sources ? root.lastAssistant.sources : []
+                        delegate: Text {
+                            required property var modelData
+                            text: "⌁ " + modelData; textFormat: Text.PlainText
+                            color: root.accentColor; font.pixelSize: 9; font.letterSpacing: 1
+                        }
+                    }
+                    Item { width: 1; height: 1 }
+                    Text {
+                        objectName: "assistantMoreHint"
+                        visible: assistantCaption.implicitHeight > assistantCaption.height + 2
+                        text: "↕ SCROLL"
+                        textFormat: Text.PlainText
+                        color: root.accentColor; opacity: .7
+                        font.pixelSize: 9; font.letterSpacing: 2
+                    }
                 }
-                Item { width: parent.width; height: root.captionHeight
+                // Short replies keep three lines so the stage stays put; long ones grow and then scroll.
+                Item { width: parent.width; height: assistantCaption.height
                 TypewriterText {
                     id: assistantCaption
                     objectName: "assistantCaption"
+                    readonly property int maxLines: root.height >= 820 ? 10 : root.height >= 700 ? 8 : 6
                     font.pixelSize: 14
                     cursorColor: root.accentColor
                     color: ink.text
-                    width: parent.width; height: lineHeight * 3
+                    width: parent.width
+                    height: lineHeight * Math.max(3, Math.min(maxLines, Math.ceil(implicitHeight / lineHeight)))
                     text: root.service ? root.service.assistantText : ""
                     active: root.opened
+                    Behavior on height { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
                 }
                 }
             }
@@ -414,11 +481,39 @@ Item {
         x: 14; width: parent.width - 28; height: 28
         y: composer.y - height - 6
         readonly property bool errorShown: !!root.service && !!root.service.error
+        readonly property string stage: root.service ? root.service.faultStage || "" : ""
         Rectangle {
             anchors.fill: parent
             visible: statusText.text.length > 0
             color: Qt.rgba(ink.surface.r, ink.surface.g, ink.surface.b, .85)
             border.color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, .3)
+        }
+        // Fault chain along the bar's top edge: links up to the fault lit, the fault blinking.
+        Row {
+            id: faultChain
+            objectName: "faultChain"
+            visible: taskBar.errorShown
+            width: parent.width; height: 2
+            spacing: 2
+            Repeater {
+                model: root.faultStages
+                delegate: Rectangle {
+                    id: link
+                    required property var modelData
+                    required property int index
+                    readonly property int failedAt: root.faultStages.findIndex(s => s.id === taskBar.stage)
+                    readonly property bool failed: index === failedAt
+                    width: (faultChain.width - faultChain.spacing * 3) / 4; height: 2
+                    color: failed ? ink.text : ink.accent
+                    opacity: failed ? 1 : failedAt < 0 || index > failedAt ? .15 : .6
+                    SequentialAnimation on opacity {
+                        running: link.failed && root.opened
+                        loops: Animation.Infinite
+                        NumberAnimation { to: .25; duration: 600 }
+                        NumberAnimation { to: 1; duration: 600 }
+                    }
+                }
+            }
         }
         Row {
             anchors.fill: parent; anchors.leftMargin: 12; anchors.rightMargin: 8
@@ -426,7 +521,7 @@ Item {
             visible: statusText.text.length > 0
             Text {
                 anchors.verticalCenter: parent.verticalCenter
-                text: taskBar.errorShown ? "ERROR" : "TASK"; textFormat: Text.PlainText
+                text: taskBar.errorShown ? (root.faultStages.find(s => s.id === taskBar.stage) || {label: "ERROR"}).label + " ✕" : "TASK"; textFormat: Text.PlainText
                 color: ink.accent; font.pixelSize: 9; font.bold: true; font.letterSpacing: 2.5
             }
             Text {
@@ -461,10 +556,12 @@ Item {
                     color: ink.muted; font.pixelSize: 8; font.letterSpacing: 2
                 }
                 Action {
-                    visible: root.offline
+                    objectName: "retryButton"
+                    visible: root.offline || taskBar.errorShown
                     anchors.verticalCenter: parent.verticalCenter
                     height: 22
-                    text: "Retry"; onClicked: if (root.service) root.service.retry()
+                    text: "Retry"
+                    onClicked: if (root.service) { if (root.offline && !root.service.faultStage) root.service.retry(); else root.service.retryLast() }
                 }
             }
         }
@@ -582,10 +679,11 @@ Item {
         Row {
             anchors.verticalCenter: parent.verticalCenter
             spacing: 14
+            StatusItem { icon: "󰧑"; label: root.service && root.service.modelName ? root.service.modelName.toUpperCase() : "ANTIGRAVITY"; on: true }
             StatusItem { icon: ""; label: root.microphoneLabel }
             StatusItem { icon: ""; label: "CAM"; on: !!root.service && !!root.service.cameraActive }
             StatusItem { icon: ""; label: "WAKE"; on: !!root.service && !!root.service.wakeEnabled }
-            StatusItem { visible: root.width >= 420; icon: ""; label: "OMARCHY SKILL"; on: !!root.service && !!root.service.omarchySkillLoaded }
+            StatusItem { visible: root.width >= 680; icon: ""; label: "OMARCHY SKILL"; on: !!root.service && !!root.service.omarchySkillLoaded }
         }
         Item {
             id: settingsButton

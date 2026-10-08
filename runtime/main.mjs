@@ -10,4 +10,7 @@ const {homedir}=await import('node:os');
 const {join}=await import('node:path');
 let backend=process.env.OMA_BACKEND||'';
 if(!backend){try{backend=JSON.parse(readFileSync(join(homedir(),'.config/oma/backend.json'),'utf8')).backend}catch{}}
-await import(backend==='dobby'?'./main-dobby.mjs':'./main-live.mjs');
+if(backend==='dobby') await import('./main-dobby.mjs');
+else if(backend==='gpt-live') await import('./main-live.mjs');
+else await import('./main-antigravity.mjs');
+

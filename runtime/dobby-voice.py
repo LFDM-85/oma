@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """O.M.A. local audio adapter. No API credentials or daemon restarts."""
 import json
+import re
 import os
 from pathlib import Path
 import select
@@ -67,7 +68,11 @@ def transcribe(path, language=''):
     if language and language != 'auto':
         args += ['--language', language]
     args += ['transcribe', str(path)]
-    return transcript_from_output(run(args, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL).decode())
+    text = transcript_from_output(run(args, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL).decode())
+    # The small Whisper model hears European Portuguese as Spanish; nobody here speaks Spanish.
+    if language == 'auto' and re.search(r'[¿¡ñ]|\b(cu[aá]nto|qu[eé] es|est[aá]s|tengo|libro|el disco)\b', text, re.I):
+        return transcribe(path, 'pt')
+    return text
 
 def listen(target='', language='', continuous=False):
     segmenter = Segmenter(cfg)

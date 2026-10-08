@@ -47,6 +47,7 @@ Item {
     }
     readonly property bool miniMode: !settingsMode && !!service && service.miniMode
     property bool settingsMode: false
+    property bool explicitSettingsRequested: false
     property bool pendingGreeting: false
     function greetOnOpen() {
         if (opened && !settingsMode && pendingGreeting && service && service.keyConfigured) {
@@ -71,7 +72,11 @@ Item {
     function syncPresentation() { syncAutoCompanion(); if (service) { service.panelOpened = opened && !closing; service.presentation(opened && !settingsMode && !closing) } }
     function resolveService() {
         service = shell ? shell.serviceFor("io.github.komagata.oma") : null
-        if (service && !service.keyConfigured) { settingsMode = true }
+        if (service && !service.keyConfigured) {
+            settingsMode = true
+        } else if (!explicitSettingsRequested) {
+            settingsMode = false
+        }
         if (opened) {
             syncPresentation()
             greetOnOpen()
@@ -86,7 +91,8 @@ Item {
         let payload = ({})
         try { payload = JSON.parse(String(payloadJson || "{}").slice(0,16384)) || ({}) } catch (e) {}
         pendingGreeting = !wasOpen && payload.greet === true && payload.settings !== true
-        settingsMode = payload.settings === true
+        explicitSettingsRequested = payload.settings === true
+        settingsMode = explicitSettingsRequested
         resolveService()
         const monitor = Hyprland.focusedMonitor
         targetScreen = Quickshell.screens.find(s => monitor && s.name === monitor.name) || Quickshell.screens[0]
@@ -119,7 +125,10 @@ Item {
         target: root.service
         function onDismissRequested() { root.close() }
         function onKeyConfiguredChanged() {
-            if (root.opened && !root.service.keyConfigured) { root.settingsMode = true }
+            if (root.opened) {
+                if (!root.service.keyConfigured) root.settingsMode = true
+                else if (!root.explicitSettingsRequested) root.settingsMode = false
+            }
         }
     }
     Timer { interval: 500; repeat: true; running: root.opened && !root.service; onTriggered: root.resolveService() }
@@ -200,7 +209,7 @@ Item {
         // The surface format is fixed at creation, before a later switch to mini.
         // Reserve alpha even when the initial normal-mode background is opaque.
         surfaceFormat.opaque: false
-        color: root.miniMode ? "transparent" : ink.surface
+        color: "transparent"
         Item {
             id: keyboardRoot
             Keys.onEscapePressed: root.close()
@@ -215,13 +224,13 @@ Item {
                 desktopWorkspace: root.desktopWorkspace
                 desktopAspect: root.desktopAspect
                 onDismiss: root.close()
-                onSettingsRequested: root.settingsMode = true
+                onSettingsRequested: { root.explicitSettingsRequested = true; root.settingsMode = true }
             }
             Settings {
                 anchors.fill: parent; visible: root.settingsMode
                 service: root.service; opened: root.opened && visible
                 onDismiss: root.close()
-                onBack: root.settingsMode = false
+                onBack: { root.explicitSettingsRequested = false; root.settingsMode = false }
             }
         }
     }
