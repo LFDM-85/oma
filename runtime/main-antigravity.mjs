@@ -942,10 +942,19 @@ async function command(c) {
   }
 
   if (['greet', 'restoreGreet'].includes(c.action)) {
-    const greeting = currentLanguage === 'pt'
-      ? `O.M.A. com ${getModelLabel(currentModel)} pronta. Podes falar comigo.`
-      : `O.M.A. with ${getModelLabel(currentModel)} is ready. You can speak to me.`;
-    emit({assistantText: greeting});
+    // A short spoken hello, different each time. The microphone pauses while
+    // it plays so O.M.A. never hears itself, and an incoming request cuts it.
+    const options = currentLanguage === 'pt'
+      ? ['Olá Luís, diz.', 'Estou aqui.', 'Diz, Luís.', 'Olá. Em que ajudo?', 'Pronta. O que precisas?']
+      : ['Hi Luís, go ahead.', "I'm here.", 'Hey Luís, what do you need?', 'Ready when you are.'];
+    const greeting = options[Math.floor(Math.random() * options.length)];
+    emit({assistantText: greeting}, {literalText: true});
+    const quiet = () => !currentTask && !closed;
+    void (async () => {
+      await stopRecording();
+      await speak(greeting, quiet, currentLanguage);
+      if (quiet() && presented) await listen();
+    })().catch(fail);
     return;
   }
 
