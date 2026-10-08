@@ -578,9 +578,10 @@ function vaultContext(text) {
 // headless default (every tool denied).
 const agyWorkspace = join(homedir(), '.local/share/oma/agy-workspace');
 const agyGuard = fileURLToPath(new URL('./agy-guard.mjs', import.meta.url));
-const agyHooks = JSON.stringify({
+// A spoken turn runs the guard in "voice" mode: read-only, changes need approval.
+const agyHooks = voice => JSON.stringify({
   'oma-guard': {
-    PreToolUse: [{matcher: '*', hooks: [{type: 'command', command: `${process.execPath} ${agyGuard} pre`, timeout: 5}]}],
+    PreToolUse: [{matcher: '*', hooks: [{type: 'command', command: `${process.execPath} ${agyGuard} pre ${voice ? 'voice' : 'typed'}`, timeout: 5}]}],
     PostToolUse: [{matcher: 'run_command', hooks: [{type: 'command', command: `${process.execPath} ${agyGuard} post`, timeout: 5}]}]
   }
 }, null, 1);
@@ -602,18 +603,19 @@ setInterval(() => {
   } catch {}
 }, 1000);
 
-function agyGuarded() {
+function agyGuarded(voice) {
   try {
     const file = join(agyWorkspace, '.agents/hooks.json');
+    const hooks = agyHooks(voice);
     mkdirSync(dirname(file), {recursive: true});
-    writeFileSync(file, agyHooks);
-    return existsSync(agyGuard) && readFileSync(file, 'utf8') === agyHooks;
+    writeFileSync(file, hooks);
+    return existsSync(agyGuard) && readFileSync(file, 'utf8') === hooks;
   } catch {
     return false;
   }
 }
 
-async function queryAntigravity(userText, {snapshot = '', strict = false} = {}) {
+async function queryAntigravity(userText, {snapshot = '', strict = false, voice = false} = {}) {
   let contextBlock = '';
   if (contextEnabled) {
     try {
@@ -642,11 +644,13 @@ Rules:
 - Be concise: 1-3 short sentences for simple questions; at most ~6 sentences otherwise. Plain text, no tables, no headings, no code fences unless the user asks for a command.
 - Never invent shortcuts or tools. If unsure, say so.
 - You have the user's skills (proxmox-skill, opnsense-skill, omarchy, obsidian-vault, jev, homelab-*, diagnose-crash…). Read a skill's SKILL.md before using it.
-- The user has pre-approved execution: when asked to do something, do it yourself with your tools (run commands, edit files) and then say in one or two sentences what you ran and what came out. Do not ask for confirmation and never pretend something ran.
+${voice
+  ? '- This request was SPOKEN, and the microphone also hears videos and other people. You may only read and inspect (read-only commands, skill queries). Change nothing: for any change, explain it and end with the RUN: line below so O.M.A. confirms with the user.'
+  : '- The user typed this and has pre-approved execution: when asked to do something, do it yourself with your tools (run commands, edit files) and then say in one or two sentences what you ran and what came out. Do not ask for confirmation and never pretend something ran.'}
 - Commands run non-interactively: always pass --noconfirm/--yes style flags. sudo works without a password only for "sudo -n pacman -S|-Sy|-Syu|-Su …" and "sudo -n systemctl start|stop|restart|enable|disable|reload …"; use exactly those forms. Prefer "omarchy …" commands for desktop changes.
 - Some commands are blocked by a guard (disk tools, deleting system or home folders, accounts, other sudo, secrets). Never retry or work around a blocked call.${strict ? ' Your previous attempt only made blocked tool calls; answer in plain text now.' : ''}
 - If live system facts are provided, base the answer on them and say what they show.
-- Only if a needed command was blocked, end with exactly one line: RUN: <the single shell command>. O.M.A. will ask the user and open it in a terminal.
+- If a needed change was blocked or is not allowed for this request, end with exactly one line: RUN: <the single shell command>. O.M.A. will ask the user and open it in a terminal.
 
 Omarchy facts (ground truth):
 - Compositor: Hyprland, configured in Lua under ~/.config/hypr/ (bindings.lua, looknfeel.lua, monitors.lua, input.lua).
@@ -665,7 +669,7 @@ ${userText}
 
   return new Promise((resolve, reject) => {
     const args = ['--output-format', 'json', '--model', base, '--effort', effort, '--disable-slash-commands'];
-    if (agyGuarded()) args.push('--dangerously-skip-permissions');
+    if (agyGuarded(voice)) args.push('--dangerously-skip-permissions');
     args.push('-p', systemInstruction);
 
     const child = spawn(agyBin, args, {
@@ -764,10 +768,11 @@ async function handleUserTurn(text, via = 'typed') {
       const [facts, vault] = await Promise.all([systemSnapshot(text), vaultContext(text)]);
       if (vault.sources.length) emit({vaultSources: vault.sources});
       facts.block += vault.block;
-      let result = await queryAntigravity(text, {snapshot: facts.block});
+      const voice = via === 'voice';
+      let result = await queryAntigravity(text, {snapshot: facts.block, voice});
       // Only denied tool calls and no answer: ask once more, in plain text.
       if (!result.text.trim() && result.denied.length && isCurrent()) {
-        result = await queryAntigravity(text, {snapshot: facts.block, strict: true});
+        result = await queryAntigravity(text, {snapshot: facts.block, strict: true, voice});
       }
       reply = result.text.trim();
       if (!reply) {

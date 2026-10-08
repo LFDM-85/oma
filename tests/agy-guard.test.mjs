@@ -28,3 +28,14 @@ test('forbidden commands are never offered as RUN lines', () => {
   assert.ok(forbidden('sudo rm -rf /'));
   assert.equal(forbidden('omarchy update'), '');
 });
+
+test('a spoken request may only read; its changes are denied for approval', () => {
+  const spoken = CommandLine => decide({toolCall: {name: 'run_command', args: {CommandLine}}}, {voice: true}).decision;
+  for (const c of ['python3 /home/luismelo/Projects/proxmox-skill/scripts/proxmox_vm.py inventory', 'omarchy theme current', 'df -h | head -3', 'hyprctl -j clients'])
+    assert.equal(spoken(c), 'allow', c);
+  for (const c of ['omarchy theme set nord', 'sudo -n pacman -S --noconfirm htop', 'touch ~/x', 'rm ~/x', 'df -h; touch ~/x',
+    'python3 /home/luismelo/Projects/proxmox-skill/scripts/proxmox_vm.py start --node pve01 --vmid 102 --apply'])
+    assert.equal(spoken(c), 'deny', c);
+  assert.equal(decide({toolCall: {name: 'write_to_file', args: {TargetFile: '/home/luismelo/x'}}}, {voice: true}).decision, 'deny');
+  assert.equal(run('omarchy theme set nord'), 'allow');
+});

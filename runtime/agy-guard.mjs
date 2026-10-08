@@ -7,6 +7,11 @@
 // reading secrets) and limits sudo to what /etc/sudoers.d/oma allows without
 // a password. It stops accidents; it is not a sandbox against an attacker who
 // controls the model's input.
+//
+// Spoken requests are different: the microphone also hears videos and other
+// people, so a spoken turn may only read and inspect. Any change it asks for
+// comes back as a RUN: line, which O.M.A. confirms with the user first.
+import {realpathSync} from 'node:fs';
 import {basename} from 'node:path';
 import {record, taskLabel} from './tasks.mjs';
 
@@ -35,6 +40,33 @@ const SUDO_OK = [
   /^systemctl daemon-reload$/
 ];
 
+// Read-only commands a spoken request may run.
+const SKILL_SCRIPTS = new Set([
+  '/home/luismelo/Projects/proxmox-skill/scripts/proxmox_vm.py',
+  '/home/luismelo/Projects/opnsense-skill/skills/opnsense/scripts/opnsense.py'
+]);
+const PLAIN = new Set(['cat', 'head', 'tail', 'ls', 'grep', 'rg', 'wc', 'sort', 'cut', 'tr', 'jq', 'column',
+  'free', 'df', 'du', 'uptime', 'uname', 'date', 'whoami', 'hostname', 'id', 'lsblk', 'findmnt', 'ps', 'pgrep',
+  'ss', 'getent', 'dig', 'host', 'sensors', 'lscpu', 'lsusb', 'lspci', 'which', 'file', 'stat', 'upower', 'echo']);
+// Omarchy routes that only print; everything else (theme set, toggle, restart,
+// bar, install…) goes through RUN: and the user's approval.
+const OMARCHY_READ = /^(.* )?--help$|^(commands|commands --json|commands --all|version|channel current|battery status|drive info( \S+)?|reminder show|dev status|debug --no-sudo --print|menu keybindings --print)$|^(theme|font) (current|list|extras)$|^theme bg current$|^hw (display|touchpad|touchscreen)$|^hyprland monitor (focused|laptop)$|^hyprland toggle (enabled|disabled) [\w.-]+$|^audio (output sink|sink availability)$/;
+
+// Commands with a read-only subcommand in the given argument position.
+const SUB = {
+  hyprctl: /^(clients|activewindow|activeworkspace|workspaces|monitors|devices|binds|layers|version|getoption|configerrors|-j)$/,
+  systemctl: /^(status|is-active|is-enabled|is-failed|list-units|list-timers|show|--user)$/,
+  coredumpctl: /^(list|info)$/,
+  wpctl: /^(status|inspect|get-volume)$/,
+  pactl: /^(list|info|get-default-sink|get-default-source)$/,
+  resolvectl: /^(status|query)$/,
+  ip: /^(-[a-z0-9]+|addr|address|a|link|l|route|r|neigh|n)$/,
+  git: /^(-C|status|log|diff|show)$/,
+  journalctl: /^-/,
+  agentmem: /^(--agent|vault|search|read|map|list)$/,
+  jev: /^(risk|choice|score|noul|claim)$/
+};
+
 const deny = reason => ({decision: 'deny', reason: reason + ' is blocked for O.M.A. Do not retry. If the user really wants it, end your answer with one line "RUN: <command>"; O.M.A. will ask the user and run it in a terminal.'});
 const forbid = reason => ({decision: 'deny', reason: reason + ' is forbidden for O.M.A. Do not retry and do not offer a RUN line; tell the user to do it by hand.'});
 
@@ -43,6 +75,35 @@ export function forbidden(line) {
   const hit = NEVER.find(([re]) => re.test(line));
   if (hit) return hit[1];
   return line.split(/\|\||&&|[;|&\n]/).some(rmDanger) ? 'A recursive delete of a system or home folder' : '';
+}
+
+function readOnlySegment(seg) {
+  const words = seg.trim().split(/\s+/);
+  const cmd = basename(words[0] || '');
+  const args = words.slice(1);
+  // sort -o, rg --pre and git --output write files or run programs.
+  if (args.some(a => /^(-o|--output|--pre)/.test(a))) return false;
+  if (PLAIN.has(cmd)) return true;
+  if (cmd === 'ping') return args.includes('-c');
+  if (cmd === 'nmcli') return args.every(a => /^(-[a-z]|-t|-f|--terse|--fields|[A-Z,-]+|device|dev|d|connection|con|c|general|g|show|status|wifi|list|--rescan|no)$/.test(a));
+  if (cmd === 'omarchy' || cmd.startsWith('omarchy-')) {
+    const route = (cmd === 'omarchy' ? args : [...cmd.slice(8).split('-'), ...args]).join(' ');
+    return OMARCHY_READ.test(route);
+  }
+  if (cmd === 'python3' || cmd === 'python') {
+    let script;
+    try { script = realpathSync(args[0] || ''); } catch { return false; }
+    // argparse accepts abbreviations, so "--ap" would mean "--apply".
+    return SKILL_SCRIPTS.has(script) && !args.some(a => /^--a/.test(a));
+  }
+  const rule = SUB[cmd];
+  if (!rule) return false;
+  // The first positional word decides.
+  const first = args.find(a => !a.startsWith('-')) ?? args[0] ?? '';
+  if (cmd === 'journalctl') return !args.some(a => /^--(vacuum|rotate|flush|sync|relinquish|setup-keys)/.test(a));
+  if (cmd === 'agentmem') return args[0] === '--agent' ? args[2] === 'vault' && rule.test(args[3] || '') : args[0] === 'vault' && rule.test(args[1] || '');
+  if (cmd === 'ip') return rule.test(first) && !args.some(a => /^(add|del|delete|change|replace|set|flush)$/.test(a));
+  return rule.test(first);
 }
 
 function rmDanger(seg) {
@@ -61,11 +122,12 @@ function sudoOk(seg) {
   return SUDO_OK.some(r => r.test(rest));
 }
 
-export function decide(call) {
+export function decide(call, {voice = false} = {}) {
   const name = call?.toolCall?.name || '';
   const args = call?.toolCall?.args || {};
   if (SECRET.test(JSON.stringify(args))) return deny('Reading or writing secrets and credentials');
   if (READ_TOOLS.has(name)) return {decision: 'allow'};
+  if (voice && EDIT_TOOLS.has(name)) return deny('Editing files from a spoken request');
   if (EDIT_TOOLS.has(name)) {
     const file = String(args.TargetFile || args.AbsolutePath || args.FilePath || '');
     return file.startsWith(HOME + '/') ? {decision: 'allow'} : deny('Editing files outside the home folder');
@@ -75,6 +137,7 @@ export function decide(call) {
   const never = forbidden(line);
   if (never) return forbid(never);
   const segments = line.split(/\|\||&&|[;|&\n]/);
+  if (voice && (/[;&<>`\n]|\$\(|\|\|/.test(line) || !line.split('|').every(readOnlySegment))) return deny('A change from a spoken request');
   if (/\bsudo\b/.test(line)) {
     if (/`|\$\(|\b(sh|bash|zsh|eval|env|tee)\b/.test(line)) return deny('sudo with a nested shell or redirection');
     if (!segments.every(sudoOk)) return deny('sudo outside pacman -S/-Syu and systemctl start/stop/restart/enable/disable');
@@ -94,7 +157,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       out = {};
       try { record({t: 'end', conv: call.conversationId || '', status: call.error ? 'failed' : 'done', error: call.error ? String(call.error).slice(0, 200) : ''}); } catch {}
     } else {
-      try { out = decide(call); } catch { out = deny('A tool call the guard could not read'); }
+      try { out = decide(call, {voice: process.argv[3] === 'voice'}); } catch { out = deny('A tool call the guard could not read'); }
       const command = call?.toolCall?.name === 'run_command' ? String(call.toolCall.args?.CommandLine || '') : '';
       if (command) {
         try {
