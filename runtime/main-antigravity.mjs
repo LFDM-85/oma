@@ -20,6 +20,7 @@ import {HyprlandContext} from './hyprland-context.mjs';
 import {streamGoogleSpeech} from './google-voice.mjs';
 import {checkFastPath, cacheResponse} from './fast-path.mjs';
 import {obsidianUri} from './dobby-conversation.mjs';
+import {forbidden} from './agy-guard.mjs';
 
 process.umask(0o077);
 
@@ -568,8 +569,9 @@ function vaultContext(text) {
 }
 
 // agy runs with --dangerously-skip-permissions inside its own workspace, whose
-// PreToolUse hook (agy-guard.mjs) is then the only gate: it lets the skills
-// read and inspect and denies anything that changes state. A failing hook
+// PreToolUse hook (agy-guard.mjs) is then the only gate: the user pre-approved
+// execution, and the guard blocks only destructive commands, sudo outside
+// /etc/sudoers.d/oma and secrets. A failing hook
 // blocks the call; a missing one would allow everything, so the hook file is
 // rewritten and read back before every call, and without it agy keeps its
 // headless default (every tool denied).
@@ -617,10 +619,12 @@ Rules:
 - Answer EXACTLY what the user asked in the latest message. If it contains several sentences or questions, address each one, in order.
 - Be concise: 1-3 short sentences for simple questions; at most ~6 sentences otherwise. Plain text, no tables, no headings, no code fences unless the user asks for a command.
 - Never invent shortcuts or tools. If unsure, say so.
-- You have the user's skills (proxmox-skill, opnsense-skill, omarchy, obsidian-vault, jev, homelab-*, diagnose-crash…). Use them to read and inspect: read a skill's SKILL.md, then run its read-only commands (one command per call, no ';' or '&&'). Keep it short: a few tool calls, then answer.
-- Anything that changes state (skill commands with --apply, restarts, installs, edits, vault notes) is blocked for you. Never retry a blocked call.${strict ? ' Your previous attempt only made blocked tool calls; answer in plain text now from what you know.' : ''}
+- You have the user's skills (proxmox-skill, opnsense-skill, omarchy, obsidian-vault, jev, homelab-*, diagnose-crash…). Read a skill's SKILL.md before using it.
+- The user has pre-approved execution: when asked to do something, do it yourself with your tools (run commands, edit files) and then say in one or two sentences what you ran and what came out. Do not ask for confirmation and never pretend something ran.
+- Commands run non-interactively: always pass --noconfirm/--yes style flags. sudo works without a password only for "sudo -n pacman -S|-Sy|-Syu|-Su …" and "sudo -n systemctl start|stop|restart|enable|disable|reload …"; use exactly those forms. Prefer "omarchy …" commands for desktop changes.
+- Some commands are blocked by a guard (disk tools, deleting system or home folders, accounts, other sudo, secrets). Never retry or work around a blocked call.${strict ? ' Your previous attempt only made blocked tool calls; answer in plain text now.' : ''}
 - If live system facts are provided, base the answer on them and say what they show.
-- If the request needs a command that changes the system (updates, installs, restarts, settings), do not pretend it ran. Explain briefly, then end with exactly one line: RUN: <the single shell command>. O.M.A. will ask the user before opening it in a terminal.
+- Only if a needed command was blocked, end with exactly one line: RUN: <the single shell command>. O.M.A. will ask the user and open it in a terminal.
 
 Omarchy facts (ground truth):
 - Compositor: Hyprland, configured in Lua under ~/.config/hypr/ (bindings.lua, looknfeel.lua, monitors.lua, input.lua).
@@ -657,7 +661,7 @@ ${userText}
     const timeout = setTimeout(() => {
       child.kill('SIGTERM');
       reject(new Error('Tempo limite do Antigravity esgotado.'));
-    }, 90000);
+    }, 300000);
 
     child.on('close', code => {
       clearTimeout(timeout);
@@ -756,7 +760,9 @@ async function handleUserTurn(text, via = 'typed') {
     if (!isCurrent()) return true;
 
     // A system-changing command is never run here: it waits for the user's approval.
-    const run = reply.match(RUN_LINE);
+    // A forbidden command (disk wipe, rm -rf ~…) is never offered for approval.
+    const proposed = reply.match(RUN_LINE);
+    const run = proposed && !forbidden(proposed[1]) ? proposed : null;
     const shown = reply.replace(RUN_LINE, '').trim() || (lang === 'pt' ? 'Isto precisa de um comando no terminal.' : 'This needs a terminal command.');
     if (!run) cacheResponse(text, reply);
     emit({assistantText: shown, taskBusy: false, taskText: '', state: 'speaking'}, {literalText: true});
