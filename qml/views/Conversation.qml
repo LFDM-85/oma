@@ -100,7 +100,9 @@ Item {
         return target || "System default"
     }
 
-    PanelBackdrop { visible: !root.miniMode; tint: ink.surface; accent: root.accentColor; anchors.fill: parent }
+    // More see-through than the default so Hyprland's blur shows the wallpaper.
+    PanelBackdrop { visible: !root.miniMode; tint: ink.surface; accent: root.accentColor; surfaceOpacity: .62; anchors.fill: parent }
+    CyberLayer { objectName: "cyberLayer"; visible: !root.miniMode; anchors.fill: parent; active: root.opened; busy: root.taskBusy; accentColor: root.accentColor; labelColor: ink.muted }
 
     // Header: live link state and response language.
     Item {
@@ -480,6 +482,7 @@ Item {
         layer.smooth: true
         layer.effect: CrtEffect {}
         Glow { visible: !root.miniMode; accentColor: root.accentColor; anchors.centerIn: parent; width: parent.width; height: parent.height }
+        HoloRings { objectName: "holoRings"; anchors.centerIn: parent; width: portrait.height * 1.3; height: width; active: root.opened; busy: root.taskBusy || root.runningTasks > 0; accentColor: root.accentColor }
         TaskStreams { objectName: "taskStreams"; anchors.fill: parent; active: root.miniMode && root.runningTasks > 0; accentColor: root.accentColor }
         Face {
             id: portrait

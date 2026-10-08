@@ -13,11 +13,13 @@ qml/Overlay.qml
 qml/Service.qml
 qml/components/BackgroundTasks.qml
 qml/components/CrtEffect.qml
+qml/components/CyberLayer.qml
 qml/components/DesktopMap.qml
 qml/components/Face.qml
 qml/components/Glow.qml
 qml/components/HoloBeam.qml
 qml/components/HoloFloor.qml
+qml/components/HoloRings.qml
 qml/components/LevelMeter.qml
 qml/components/OmaPalette.qml
 qml/components/PanelBackdrop.qml
