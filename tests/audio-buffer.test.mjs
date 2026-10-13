@@ -75,3 +75,11 @@ test('interrupting output warmup prevents the cancelled first word from being pl
  f.audio.enqueue(Buffer.alloc(4800,19));await advance(t,100);f.audio.stop();await advance(t,400);
  const out=Buffer.concat(f.chunks);assert.equal(out.length,16800);assert.ok(isWarmup(out));
 });
+test('pauses inside speech become quiet dither, speech samples stay exact',async t=>{
+ const f=fixture(t);f.audio.startupBufferMs=0;
+ const speech=Buffer.alloc(4800,19),pause=Buffer.alloc(4800);
+ f.audio.enqueue(Buffer.concat([speech,pause,speech]));f.audio.finish();await advance(t,600);
+ const out=Buffer.concat(f.chunks);assert.equal(out.length,14400);
+ assert.deepEqual(out.subarray(0,4800),speech);assert.deepEqual(out.subarray(9600),speech);
+ assert.ok(isWarmup(out.subarray(4800,9600)),'A pause must not reach the buds as digital zero');
+});

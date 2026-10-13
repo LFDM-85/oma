@@ -41,7 +41,11 @@ export class VoiceProcessor {
  }
 }
 // About -60 dBFS: inaudible, but not digital silence.
-export function warmupNoise(samples,amplitude=32){const pcm=Buffer.alloc(samples*2);for(let i=0;i<samples;i++)pcm.writeInt16LE(Math.round((Math.random()*2-1)*amplitude),i*2);return pcm;}
+const dither=amplitude=>Math.round((Math.random()*2-1)*amplitude);
+export function warmupNoise(samples,amplitude=32){const pcm=Buffer.alloc(samples*2);for(let i=0;i<samples;i++)pcm.writeInt16LE(dither(amplitude),i*2);return pcm;}
+// TTS pauses between sentences are exact zeros; the buds gate on them and
+// clip the next word. Only near-zero samples change; speech stays bit-exact.
+export function fillSilence(pcm,amplitude=32){const out=Buffer.from(pcm);for(let i=0;i+1<out.length;i+=2)if(Math.abs(out.readInt16LE(i))<=2)out.writeInt16LE(dither(amplitude),i);return out;}
 export class Audio {
  constructor(onLevel,onError,{spawnProcess=spawn,inputTarget=null,outputTarget=null,processor=null,volume=1,playbackRate=1,startupBufferMs=0,leadingSilenceMs=0}={}){Object.assign(this,{spawnProcess,inputTarget,outputTarget,processor,volume,playbackRate,startupBufferMs,leadingSilenceMs});this.onLevel=onLevel;this.onError=onError;this.serial=0;this.queue=[];this.played=0;this.offset=0;this.finished=true;}
  takeRecording(source){
@@ -98,7 +102,7 @@ export class Audio {
    for(let at=0;at<packet.length&&serial===this.serial;at+=960){
     const block=packet.subarray(at,at+960);
     const {level,lipRound,lipWide}=shapeAudio(block,this.offset,0,1);
-    const pcm=this.processor?this.processor.process(block):block;this.offset+=pcm.length/2;
+    const pcm=fillSilence(this.processor?this.processor.process(block):block);this.offset+=pcm.length/2;
     bufferedUntil=Math.max(bufferedUntil,performance.now())+pcm.length/(48*this.playbackRate);
     if(this.player?.stdin.writable&&!this.player.stdin.write(pcm)){
      await new Promise(resolve=>{const stream=this.player.stdin;const done=()=>{stream.off('drain',done);stream.off('close',done);stream.off('error',done);resolve()};stream.once('drain',done);stream.once('close',done);stream.once('error',done)});
