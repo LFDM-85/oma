@@ -40,6 +40,12 @@ export class VoiceProcessor {
   return pcm;
  }
 }
+// About -60 dBFS: inaudible, but not digital silence.
+const dither=amplitude=>Math.round((Math.random()*2-1)*amplitude);
+export function warmupNoise(samples,amplitude=32){const pcm=Buffer.alloc(samples*2);for(let i=0;i<samples;i++)pcm.writeInt16LE(dither(amplitude),i*2);return pcm;}
+// TTS pauses between sentences are exact zeros; the buds gate on them and
+// clip the next word. Only near-zero samples change; speech stays bit-exact.
+export function fillSilence(pcm,amplitude=32){const out=Buffer.from(pcm);for(let i=0;i+1<out.length;i+=2)if(Math.abs(out.readInt16LE(i))<=2)out.writeInt16LE(dither(amplitude),i);return out;}
 export class Audio {
  constructor(onLevel,onError,{spawnProcess=spawn,inputTarget=null,outputTarget=null,processor=null,volume=1,playbackRate=1,startupBufferMs=0,leadingSilenceMs=0}={}){Object.assign(this,{spawnProcess,inputTarget,outputTarget,processor,volume,playbackRate,startupBufferMs,leadingSilenceMs});this.onLevel=onLevel;this.onError=onError;this.serial=0;this.queue=[];this.played=0;this.offset=0;this.finished=true;}
  takeRecording(source){
@@ -68,9 +74,10 @@ export class Audio {
   if(!this.player){this.player=this.spawnProcess('pw-play',[...(this.outputTarget?['--target',this.outputTarget]:[]),'--volume',String(this.volume),'--raw','--rate',String(Math.round(24000*this.playbackRate)),'--channels','1','--format','s16','--latency','120ms','-'],{stdio:['pipe','ignore','pipe']});
    this.playerDone=new Promise(resolve=>{this.player.once('close',code=>resolve(code===0));this.player.once('error',()=>resolve(false));});
    this.player.stderr.resume();this.player.stdin.on('error',()=>{});
-   // Wake the output device with silence; preserve every sample of the first word.
+   // Wake the output device before the first word; preserve every sample of it.
+   // Bluetooth buds gate digital zeros and fade in late, so the lead-in is dither.
    if(this.leadingSilenceMs>0){
-    this.player.stdin.write(Buffer.alloc(Math.round(24000*this.playbackRate*this.leadingSilenceMs/1000)*2));
+    this.player.stdin.write(warmupNoise(Math.round(24000*this.playbackRate*this.leadingSilenceMs/1000)));
     const until=performance.now()+this.leadingSilenceMs;
     while(serial===this.serial&&performance.now()<until)await new Promise(resolve=>setTimeout(resolve,Math.min(10,until-performance.now())));
     if(serial!==this.serial)return;
@@ -95,7 +102,7 @@ export class Audio {
    for(let at=0;at<packet.length&&serial===this.serial;at+=960){
     const block=packet.subarray(at,at+960);
     const {level,lipRound,lipWide}=shapeAudio(block,this.offset,0,1);
-    const pcm=this.processor?this.processor.process(block):block;this.offset+=pcm.length/2;
+    const pcm=fillSilence(this.processor?this.processor.process(block):block);this.offset+=pcm.length/2;
     bufferedUntil=Math.max(bufferedUntil,performance.now())+pcm.length/(48*this.playbackRate);
     if(this.player?.stdin.writable&&!this.player.stdin.write(pcm)){
      await new Promise(resolve=>{const stream=this.player.stdin;const done=()=>{stream.off('drain',done);stream.off('close',done);stream.off('error',done);resolve()};stream.once('drain',done);stream.once('close',done);stream.once('error',done)});

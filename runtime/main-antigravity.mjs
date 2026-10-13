@@ -386,7 +386,13 @@ async function stopSpeech() {
 async function speak(text, current, lang = currentLanguage) {
   if (!current() || closed || !text.trim()) return;
   // A muted speaker is the usual reason O.M.A. "says nothing": tell the user.
-  if ((await runReadOnly('wpctl', ['get-volume', '@DEFAULT_AUDIO_SINK@'])).includes('[MUTED]')) {
+  const [volume, sink] = await Promise.all([
+    runReadOnly('wpctl', ['get-volume', '@DEFAULT_AUDIO_SINK@']),
+    runReadOnly('pactl', ['get-default-sink'])
+  ]);
+  // Bluetooth buds need longer than a wired speaker to wake for the first word.
+  audio.leadingSilenceMs = sink.trim().startsWith('bluez_output') ? 700 : 350;
+  if (volume.includes('[MUTED]')) {
     report(currentLanguage === 'pt' || lang === 'pt' ? 'As colunas estão sem som (mute): não me vais ouvir.' : 'Speakers are muted: you will not hear me.', 'voice');
   }
   speaking = true;
@@ -638,6 +644,8 @@ async function queryAntigravity(userText, {snapshot = '', strict = false, voice 
     ? '\n\nRecent conversation (oldest first):\n' + history.map(t => `${t.role === 'user' ? 'User' : 'O.M.A.'}: ${t.body}`).join('\n')
     : '';
   const systemInstruction = `You are O.M.A. (Omarchy Machine Assistant), the desktop assistant of this Omarchy Linux machine, powered by Google Antigravity.
+
+Personality: dry, quick-witted and a little sarcastic, like a capable ship's AI that has seen too many misconfigured dotfiles. At most one short wry remark per reply, woven into the answer, never replacing it or delaying the useful part. The facts and the command still come first and stay exact. Drop the sarcasm entirely for errors, failures, security, data loss, approvals, anything destructive, and when the user sounds stressed or frustrated: then be plain and kind. Never mock the user personally; tease the situation, the machine or yourself. In Portuguese, use natural pt-PT irony, not translated English jokes.
 
 Rules:
 - Reply in ${lang === 'pt' ? 'European Portuguese (pt-PT)' : 'English'} — the language of the user's latest message.
@@ -961,8 +969,8 @@ async function command(c) {
     // A short spoken hello, different each time. The microphone pauses while
     // it plays so O.M.A. never hears itself, and an incoming request cuts it.
     const options = currentLanguage === 'pt'
-      ? ['Olá Luís, diz.', 'Estou aqui.', 'Diz, Luís.', 'Olá. Em que ajudo?', 'Pronta. O que precisas?']
-      : ['Hi Luís, go ahead.', "I'm here.", 'Hey Luís, what do you need?', 'Ready when you are.'];
+      ? ['Olá Luís, diz.', 'Estou aqui. Infelizmente para os teus dotfiles.', 'Diz, Luís.', 'Pronta. O que é que partiste hoje?', 'Sim? Estava mesmo a precisar de companhia.']
+      : ['Hi Luís, go ahead.', "I'm here. Try not to break anything.", 'Hey Luís, what needs fixing this time?', 'Ready when you are. As always.'];
     const greeting = options[Math.floor(Math.random() * options.length)];
     emit({assistantText: greeting}, {literalText: true});
     const quiet = () => !currentTask && !closed;
