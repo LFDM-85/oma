@@ -18,6 +18,7 @@ import {stopChild} from './stop-child.mjs';
 import {EchoCancel} from './echo-cancel.mjs';
 import {HyprlandContext} from './hyprland-context.mjs';
 import {streamGoogleSpeech} from './google-voice.mjs';
+import {spokenText} from './spoken-text.mjs';
 import {checkFastPath, cacheResponse} from './fast-path.mjs';
 import {obsidianUri} from './dobby-conversation.mjs';
 import {forbidden} from './agy-guard.mjs';
@@ -507,25 +508,6 @@ function recentTurns(currentText) {
   }
 }
 
-// The UI shows the whole answer; the voice only reads the first sentences so
-// playback starts fast and long replies never flood the TTS service.
-function spokenText(text, limit = 260) {
-  const plain = String(text || '')
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/`([^`]*)`/g, '$1')
-    .replace(/[*_#>]+/g, '')
-    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/\s+/g, ' ')
-    .trim();
-  if (plain.length <= limit) return plain;
-  const sentences = plain.match(/[^.!?…]+[.!?…]+(\s|$)/g) || [plain];
-  let out = '';
-  for (const s of sentences) {
-    if ((out + s).length > limit && out) break;
-    out += s;
-  }
-  return out.trim() || plain.slice(0, limit);
-}
 
 // The model runs headless and cannot use tools, so O.M.A. collects read-only
 // facts itself for the topics people ask about. Fixed commands, never user text.

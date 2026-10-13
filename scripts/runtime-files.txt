@@ -65,6 +65,7 @@ runtime/profile.mjs
 runtime/restart.mjs
 runtime/restart_oma.py
 runtime/speech-buffer.mjs
+runtime/spoken-text.mjs
 runtime/startup-greeting.mjs
 runtime/startup.mjs
 runtime/stop-child.mjs
