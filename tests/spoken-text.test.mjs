@@ -11,8 +11,16 @@ test('IP addresses and decimals never make the voice skip or start mid-sentence'
  const plain=reply.replaceAll('`','');
  assert.ok(plain.startsWith(spoken),'Spoken text is a prefix of the reply, with nothing skipped');
 });
-test('long replies stop at a sentence boundary within the limit',()=>{
- const spoken=spokenText('Primeira frase curta. '+'Segunda frase com versão 2.5 e mais texto. '.repeat(10));
- assert.ok(spoken.length<=260);assert.match(spoken,/\.$/);
+test('a normal multi-sentence reply is read in full',()=>{
+ const long='O NVMe do pve01 está a falhar. '.repeat(20).trim();
+ assert.equal(spokenText(long),long);
+});
+test('vault links are spoken as the note name, web links not at all',()=>{
+ assert.equal(spokenText('According to (file:///home/u/Vault/reference/Homelab/Homelab%20-%20Where%20we%20left%20off.md), all is stable.'),'According to Homelab - Where we left off, all is stable.');
+ assert.equal(spokenText('See https://example.com/x for details.'),'See for details.');
+});
+test('runaway replies stop at a sentence boundary within the cap',()=>{
+ const spoken=spokenText('Primeira frase curta. '+'Segunda frase com versão 2.5 e mais texto. '.repeat(40));
+ assert.ok(spoken.length<=1200);assert.match(spoken,/\.$/);
  assert.ok(spoken.startsWith('Primeira frase curta. Segunda frase com versão 2.5'));
 });

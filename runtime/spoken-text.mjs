@@ -1,11 +1,17 @@
-// The UI shows the whole answer; the voice only reads the first sentences so
-// playback starts fast and long replies never flood the TTS service.
-export function spokenText(text, limit = 260) {
+// The voice reads the whole answer; chunks are prefetched, so length no longer
+// delays the start. The cap only guards against a runaway reply.
+// A vault link is spoken as its note name; other links are not read aloud.
+const linkName = url => url.startsWith('file:') && /\.md$/i.test(url)
+  ? decodeURIComponent(url.split('/').pop()).replace(/\.md$/i, '')
+  : '';
+export function spokenText(text, limit = 1200) {
   const plain = String(text || '')
     .replace(/```[\s\S]*?```/g, ' ')
     .replace(/`([^`]*)`/g, '$1')
     .replace(/[*_#>]+/g, '')
     .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/\(?\b(?:file|https?):\/\/[^\s)]+\)?/g, url => linkName(url.replace(/^\(|\)$/g, '')))
+    .replace(/\s+([,.;:])(?=\s|$)/g, '$1')
     .replace(/\s+/g, ' ')
     .trim();
   if (plain.length <= limit) return plain;
