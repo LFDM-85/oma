@@ -50,6 +50,19 @@ export function splitTextIntoChunks(text, maxLen = 180) {
 }
 
 /**
+ * Like splitTextIntoChunks, but the first sentence goes alone so the first
+ * request returns, and the voice starts, sooner.
+ */
+export function speechChunks(text, maxLen = 180) {
+  const chunks = splitTextIntoChunks(text, maxLen);
+  const first = /^.{20,}?[.?!;:](?=\s)/.exec(chunks[0] || '');
+  if (first && first[0].length < chunks[0].length) {
+    chunks.splice(0, 1, first[0].trim(), chunks[0].slice(first[0].length).trim());
+  }
+  return chunks;
+}
+
+/**
  * Fetches an MP3 chunk from Google TTS and streams decoded s16le 24kHz PCM.
  */
 function fetchAndDecodeChunk(chunk, language = 'pt-PT', {onPcmChunk, isCurrent, abortSignal}) {
@@ -137,18 +150,31 @@ export async function streamGoogleSpeech(text, {
   isCurrent = () => true,
   abortSignal
 } = {}) {
-  const chunks = splitTextIntoChunks(text);
+  const chunks = speechChunks(text);
   if (!chunks.length) return 0;
 
-  let totalBytes = 0;
-  for (const chunk of chunks) {
-    if (abortSignal?.aborted || !isCurrent()) break;
-    const chunkBytes = await fetchAndDecodeChunk(chunk, language, {
-      onPcmChunk,
+  // Fetch the next chunk while the current one plays; hold its PCM until its
+  // turn, so chunks stay in order without a network gap between them.
+  const start = chunk => {
+    const job = {held: [], live: null};
+    job.done = fetchAndDecodeChunk(chunk, language, {
+      onPcmChunk: pcm => job.live ? job.live(pcm) : job.held.push(pcm),
       isCurrent,
       abortSignal
     });
-    totalBytes += chunkBytes;
+    job.done.catch(() => {});
+    return job;
+  };
+
+  let totalBytes = 0;
+  let next = start(chunks[0]);
+  for (let i = 0; i < chunks.length; i++) {
+    if (abortSignal?.aborted || !isCurrent()) break;
+    const job = next;
+    next = i + 1 < chunks.length ? start(chunks[i + 1]) : null;
+    for (const pcm of job.held) onPcmChunk?.(pcm);
+    job.live = pcm => onPcmChunk?.(pcm);
+    totalBytes += await job.done;
   }
 
   return totalBytes;

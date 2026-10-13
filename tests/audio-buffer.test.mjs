@@ -62,15 +62,16 @@ test('waveform updates follow playback time instead of consuming a whole utteran
  assert.ok(times.length<20);await advance(t,1000);
  assert.equal(times.length,50);assert.ok(times.at(-1)-times[0]>=800);
 });
-test('speaker warmup sends only silence before preserving the complete first word',async t=>{
+const isWarmup=pcm=>{if(!pcm.length)return false;let loud=0;for(let i=0;i<pcm.length;i+=2)loud=Math.max(loud,Math.abs(pcm.readInt16LE(i)));return loud>0&&loud<=32;};
+test('speaker warmup sends only quiet dither before preserving the complete first word',async t=>{
  const f=fixture(t);f.audio.startupBufferMs=0;f.audio.leadingSilenceMs=350;
  const word=Buffer.alloc(4800,19);f.audio.enqueue(word);f.audio.finish();await advance(t,10);
- const silence=Buffer.alloc(16800);assert.deepEqual(Buffer.concat(f.chunks),silence);
- await advance(t,250);assert.deepEqual(Buffer.concat(f.chunks),silence);
- await advance(t,250);assert.deepEqual(Buffer.concat(f.chunks),Buffer.concat([silence,word]));
+ const lead=Buffer.concat(f.chunks);assert.equal(lead.length,16800);assert.ok(isWarmup(lead),'Lead-in must be near-silent but not digital zero');
+ await advance(t,250);assert.equal(Buffer.concat(f.chunks).length,16800);
+ await advance(t,250);assert.deepEqual(Buffer.concat(f.chunks).subarray(16800),word);
 });
 test('interrupting output warmup prevents the cancelled first word from being played',async t=>{
  const f=fixture(t);f.audio.startupBufferMs=0;f.audio.leadingSilenceMs=350;
  f.audio.enqueue(Buffer.alloc(4800,19));await advance(t,100);f.audio.stop();await advance(t,400);
- assert.deepEqual(Buffer.concat(f.chunks),Buffer.alloc(16800));
+ const out=Buffer.concat(f.chunks);assert.equal(out.length,16800);assert.ok(isWarmup(out));
 });
